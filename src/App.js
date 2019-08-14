@@ -1,24 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-dashboard">
+        <p>EasyFly</p>
+        </header>
+      <div className="App-container">
+        <div className="Main-item" id="Direction">
+          <div className="Second-item">
+          <p> From</p> 
+          </div>
+          <div className="Second-item">
+          <p> Shift</p> 
+          </div>
+          <div className="Second-item">
+          <p> To</p> 
+          </div>
+        </div>
+        <div className="Main-item" id="ThereAndBack">
+        <div className="Second-item">
+          <p> One way</p> 
+          </div>
+          <div className="Second-item">
+          <p> Return</p> 
+          </div>
+        </div>
+        <div className="Main-item" id="Dates">
+        <div className="Second-item">
+          <p> Fly there</p> 
+          </div>
+          <div className="Second-item">
+          <p> Fly back</p> 
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
