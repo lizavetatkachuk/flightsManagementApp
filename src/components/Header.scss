@@ -1,0 +1,26 @@
+.header{    
+    font-style:   italic;    
+    font-size: calc(10px + 5vmin);   
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.navigation-area{
+    font-size: calc(10px + 3vmin);   
+}
+.login-area{
+    font-size: calc(10px + 3vmin);  
+}
+.main-page{
+    margin: 15px;
+    color:white;
+}
+.personal-page{
+    color:white;
+}
+.login-button{
+    color:white;
+}
