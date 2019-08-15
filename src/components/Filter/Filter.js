@@ -1,7 +1,7 @@
 import React from "react";
 import "./filter.scss";
 import { Form, Field } from "react-final-form";
-import { validate, onSubmit } from "../validators";
+import { validate, onSubmit } from "../../validators";
 class Filter extends React.Component {
   render() {
     return (
@@ -17,7 +17,7 @@ class Filter extends React.Component {
                 component="input"
                 type="radio"
                 value="price"
-              />{" "}
+              />
               Price
             </label>
             <label className="filter-pane__element">
@@ -26,7 +26,7 @@ class Filter extends React.Component {
                 component="input"
                 type="radio"
                 value="time"
-              />{" "}
+              />
               Flight time
             </label>
           </div>

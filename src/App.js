@@ -1,52 +1,30 @@
 import React from "react";
 import "./App.scss";
-import Flight from "./components/Flight";
-import Header from "./components/Header";
-import Register from "./components/Register";
-import Filter from "./components/Filter";
-import SearchForm from "./components/SearchForm";
-import Login from "./components/Login";
-const data = [
-  {
-    price: 136,
-    time: "12.00-13.00",
-    company: "Ryanair"
-  },
-  {
-    price: 136,
-    time: "12.00-13.00",
-    company: "Ryanair"
-  },
-  {
-    price: 136,
-    time: "12.00-13.00",
-    company: "Ryanair"
-  },
-  {
-    price: 136,
-    time: "12.00-13.00",
-    company: "Ryanair"
-  }
-];
+import Header from "./components/Header/Header";
+import Flight from "./components/Flight/Flight";
+import Register from "./components/Register/Register";
+import SearchForm from "./components/SearchForm/SearchForm";
+import Login from "./components/Login/Login";
+import data from "./data";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const App = () => {
   return (
-    // <div className="App">
-    //   <Header />
-    //   <SearchForm />
-    // </div>
-    // <div className="App">
-    //   <Header />
-    //   <Login />
-    // </div>
-    // <div className="App">
-    //   <Header />
-    //   <Filter />
-    //   <Flight flights={data} />
-    // </div>
-    <div className="App">
-      <Header />
-      <Register />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route path="/" exact component={SearchForm} />
+          <Route
+            path="/flights"
+            exact
+            render={props => <Flight flights={data} />}
+          />
+          {/* <Route path="/basket" component={} /> */}
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
+      </div>
+    </Router>
   );
 };
 

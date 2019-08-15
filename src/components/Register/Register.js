@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
-import { validate, onSubmit } from "../validators";
+import { validate, onSubmit } from "../../validators";
 import "./register.scss";
 class Register extends React.Component {
   render() {

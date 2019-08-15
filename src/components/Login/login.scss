@@ -13,6 +13,7 @@ flex-direction:column;
         width:55px;
         background-color:  rgba(#9c98bd,0.3);
         border-radius: 6px;
+        color:white;
     }
 }
 }
@@ -22,6 +23,7 @@ flex-direction:column;
         margin-left: 10px;
         background-color:  rgba(#9c98bd,0.3);
         border-radius: 6px;
+        color:white;
     }
 }
 .input-field{
@@ -32,4 +34,5 @@ flex-direction:column;
 }
 label{
     align-self:center;
+    font-size: 20px;
 }

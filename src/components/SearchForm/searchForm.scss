@@ -7,11 +7,11 @@
     align-items: stretch;
     justify-items: stretch;
     background-color:  rgba(#9c98bd,0.3);
-    margin{
-      left: 30px;
-      right:30px;
-    }
-   border-radius: 10px;
+    margin:40px;
+   border-radius: 15px;
+   label{    
+    font-size:30px;
+  }
    &__search-field{
     display: flex;  
     flex-wrap: wrap;
@@ -19,9 +19,15 @@
     flex-direction: row;  
     justify-content: space-between;
     padding: 20px;
+ 
    }
    &__submit{
-     
+     width:13%;
+    font-size:30px;
+    margin-left: 100px;
+    background-color:  rgba(#9c98bd,0.3);
+    border-radius: 6px;
+    color:white;
    }
   }  
   .react-datepicker{
@@ -35,6 +41,7 @@
     }
   }
   .component{
+    font-size:30px;
     display: flex;
     flex-wrap: wrap;
   }
@@ -48,4 +55,7 @@
   }
   .flight-dates{
     width: 32%;
+  }
+   .there-and-back{
+    justify-content: flex-start;
   }

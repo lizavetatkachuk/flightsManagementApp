@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
-import { validate, onSubmit } from "../validators";
+import { validate, onSubmit } from "../../validators";
 import "./login.scss";
+import { Link } from "react-router-dom";
 class Login extends React.Component {
   render() {
     return (
@@ -34,7 +35,9 @@ class Login extends React.Component {
         />
         <div className="sign-up">
           <label>Do not have an account yet?</label>
-          <button className="sign-up__button">Sign Up</button>
+          <Link to="/register" className="sign-up__button button">
+            Sign Up
+          </Link>
         </div>
       </div>
     );

@@ -1,9 +1,7 @@
 import React from "react";
 import "./flights.scss";
+import Filter from "./../Filter/Filter";
 class Flight extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   flightsInfo = this.props.flights.map((flight, i) => (
     <li className="flight" key={i}>
       {flight.company} {flight.price} {flight.time}
@@ -12,6 +10,7 @@ class Flight extends React.Component {
   render() {
     return (
       <div>
+        <Filter />
         <ul>{this.flightsInfo}</ul>
       </div>
     );

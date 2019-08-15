@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
 import "./searchForm.scss";
-import { validate, onSubmit } from "../validators";
+import { validate, onSubmit } from "../../validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import pic from "./../../static/images/arrows.svg";
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
@@ -36,11 +38,7 @@ class SearchForm extends React.Component {
                 <option>Cordoba</option>
               </Field>
               <div className="component">
-                <img
-                  src="_ionicons_svg_ios-swap.svg"
-                  className="shift-btn"
-                  alt="arrow"
-                />
+                <img src={pic} className="shift-btn" alt="arrow" />
               </div>
               <label>Flying to</label>
               <Field
@@ -56,7 +54,7 @@ class SearchForm extends React.Component {
                 <option>Cordoba</option>
               </Field>
             </div>
-            <div className="search-form__search-field">
+            <div className="search-form__search-field there-and-back">
               <label>
                 <Field
                   name="return"
@@ -92,7 +90,10 @@ class SearchForm extends React.Component {
                 />
               </div>
             </div>
-            <button className="search-form__submit"> Search Flights</button>
+            <Link to="/flights" className="search-form__submit button">
+              {" "}
+              Search Flights
+            </Link>
           </div>
         )}
       />
