@@ -1,0 +1,9 @@
+.filter-pane{
+    display:flex;
+    flex-direction: row;
+    align-items: stretch;
+    font-size:30px;
+   &__element{
+       margin: 30px;
+   }
+}

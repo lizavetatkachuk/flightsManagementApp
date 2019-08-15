@@ -1,0 +1,27 @@
+.register{
+    background-color:  rgba(#9c98bd,0.3);
+    border-radius: 10px;
+    height:auto;
+    width:75vh;
+    margin-left: 30%;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    &__form{
+        &__submit{
+            align-self: center;
+            width:85px;
+            background-color:  rgba(#9c98bd,0.3);
+            border-radius: 6px;
+        }
+    }
+    } 
+    .input-field{
+        background-color:  rgba(#b2b0cab7,0.1);
+        width: 70%;
+        height:20px;
+        border-radius: 6px;
+    }
+    label{
+        align-self:center;
+    }
