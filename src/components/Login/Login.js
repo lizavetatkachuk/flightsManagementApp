@@ -29,13 +29,15 @@ class Login extends React.Component {
                 type="text"
                 placeholder="Enter your password"
               />
-              <button className="login__form__submit">Log In</button>
+              <button className="login__form__submit" type="submit">
+                Log In
+              </button>
             </Fragment>
           )}
         />
         <div className="sign-up">
           <label>Do not have an account yet?</label>
-          <Link to="/register" className="sign-up__button button">
+          <Link to="/register" className="sign-up__button button" type="button">
             Sign Up
           </Link>
         </div>

@@ -4,15 +4,15 @@ import "./header.scss";
 class Header extends React.Component {
   render() {
     return (
-      <div className="header">
-        <div className="navigation-area">
+      <header className="header">
+        <nav className="navigation-area">
           <Link to="/" className="main-page">
             Search Flights
           </Link>
           <Link to="/basket" className="personal-page">
             My flights
           </Link>
-        </div>
+        </nav>
         <div className="title-area">
           <p className="title">EasyFly</p>
         </div>
@@ -21,7 +21,7 @@ class Header extends React.Component {
             Log In
           </Link>
         </div>
-      </div>
+      </header>
     );
   }
 }

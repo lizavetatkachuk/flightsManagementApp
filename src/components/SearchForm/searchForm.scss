@@ -1,61 +1,69 @@
+.search-form {
+  min-height: 70vh;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: stretch;
+  justify-items: stretch;
+  background-color: rgba(#9c98bd, 0.3);
+  margin: 40px;
+  border-radius: 15px;
 
-.search-form { 
-    min-height: 70vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: stretch;
-    justify-items: stretch;
-    background-color:  rgba(#9c98bd,0.3);
-    margin:40px;
-   border-radius: 15px;
-   label{    
-    font-size:30px;
+  label {
+    font-size: 30px;
   }
-   &__search-field{
-    display: flex;  
-    flex-wrap: wrap;
+
+  &__search-field {
+    display: flex;
+    flex-flow: row wrap;
     font-size: 20px;
-    flex-direction: row;  
     justify-content: space-between;
     padding: 20px;
- 
-   }
-   &__submit{
-     width:13%;
-    font-size:30px;
+
+  }
+
+  &__submit {
+    width: 13%;
+    font-size: 30px;
     margin-left: 100px;
-    background-color:  rgba(#9c98bd,0.3);
+    background-color: rgba(#9c98bd, 0.3);
     border-radius: 6px;
-    color:white;
-   }
-  }  
-  .react-datepicker{
-    &-wrapper{
-    height:55px;}
-    &__input-container{
-      padding: {
-        left: 10px;
-        top: 25px;
-      }
+    color: white;
+  }
+}
+
+.react-datepicker {
+  &-wrapper {
+    height: 55px;
+  }
+
+  &__input-container {
+    padding: {
+      left: 10px;
+      top: 25px;
     }
   }
-  .component{
-    font-size:30px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .direction{
-      height:27px;
-      width: 32%
-  }
-  .shift-btn{
-      height: 50px;
-      width:50px;
-  }
-  .flight-dates{
-    width: 32%;
-  }
-   .there-and-back{
-    justify-content: flex-start;
-  }
+}
+
+.component {
+  font-size: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.direction {
+  height: 27px;
+  width: 32%
+}
+
+.shift-btn {
+  height: 50px;
+  width: 50px;
+}
+
+.flight-dates {
+  width: 32%;
+}
+
+.there-and-back {
+  justify-content: flex-start;
+}

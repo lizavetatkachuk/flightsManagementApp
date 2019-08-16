@@ -9,7 +9,7 @@ class Filter extends React.Component {
         onSubmit={onSubmit}
         validate={validate}
         render={() => (
-          <div className="filter-pane">
+          <form className="filter-pane">
             <label className="filter-pane__element">Order by</label>
             <label className="filter-pane__element">
               <Field
@@ -29,7 +29,7 @@ class Filter extends React.Component {
               />
               Flight time
             </label>
-          </div>
+          </form>
         )}
       />
     );

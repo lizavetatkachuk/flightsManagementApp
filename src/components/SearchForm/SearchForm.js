@@ -90,7 +90,11 @@ class SearchForm extends React.Component {
                 />
               </div>
             </div>
-            <Link to="/flights" className="search-form__submit button">
+            <Link
+              to="/flights"
+              className="search-form__submit button"
+              type="submit"
+            >
               {" "}
               Search Flights
             </Link>

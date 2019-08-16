@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
 import { validate, onSubmit } from "../../validators";
-import "./register.scss";
+import "./../Login/login.scss";
 class Register extends React.Component {
   render() {
     return (
@@ -40,7 +40,9 @@ class Register extends React.Component {
                 component="input"
                 type="text"
               />
-              <button className="register__form__submit">Register</button>
+              <button className="register__form__submit" type="submit">
+                Register
+              </button>
             </Fragment>
           )}
         />

@@ -1,21 +1,25 @@
-.header{    
-    font-style:   italic;    
-    font-size: 60px;   
-    display:flex;
-    flex: wrap;
-    flex-direction: row;
+.header {
+    font-style: italic;
+    font-size: 60px;
+    display: flex;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
     margin-left: 30px;
     margin-right: 30px;
 }
-.navigation-area,.login-button-area {
-    font-size: 45px;   
+
+.navigation-area,
+.login-button-area {
+    font-size: 45px;
 }
-.main-page{
+
+.main-page {
     margin: 15px;
-    color:white;
+    color: white;
 }
-.personal-page,.login-button{
-    color:white;
+
+.personal-page,
+.login-button {
+    color: white;
 }
