@@ -5,11 +5,10 @@ import "./../Login/login.scss";
 const Register = () => (
   <div className="register">
     <Form
-      className="register__form"
       onSubmit={onSubmit}
       validate={validate}
       render={() => (
-        <Fragment>
+        <form className="register__form">
           <label>Enter your email</label>
           <Field
             className="input-field"
@@ -41,7 +40,7 @@ const Register = () => (
           <button className="register__form__submit" type="submit">
             Register
           </button>
-        </Fragment>
+        </form>
       )}
     />
   </div>

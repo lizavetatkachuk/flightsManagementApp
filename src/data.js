@@ -24,4 +24,5 @@ const data = [
     id: "848hB"
   }
 ];
-export default data;
+const cities = ["", "Minsk", "Cordoba", "Brugge"];
+export default { data, cities };

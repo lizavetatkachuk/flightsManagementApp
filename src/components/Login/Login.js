@@ -1,16 +1,16 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Form, Field } from "react-final-form";
 import { validate, onSubmit } from "../../validators";
+import Button from "./../Shared/Button/Button";
 import "./login.scss";
-import { Link } from "react-router-dom";
+
 const Login = () => (
-  <div className="login">
+  <form className="login">
     <Form
-      className="login__form"
       onSubmit={onSubmit}
       validate={validate}
       render={() => (
-        <Fragment>
+        <form className="login__form">
           <label>Login</label>
           <Field
             className="input-field"
@@ -27,19 +27,27 @@ const Login = () => (
             type="text"
             placeholder="Enter your password"
           />
-          <button className="login__form__submit" type="submit">
-            Log In
-          </button>
-        </Fragment>
+          <Button
+            props={{
+              type: "submit",
+              className: "form-submit-btn",
+              title: " Log In"
+            }}
+          />
+        </form>
       )}
     />
     <div className="sign-up">
       <label>Do not have an account yet?</label>
-      <Link to="/register" className="sign-up__button button" type="button">
-        Sign Up
-      </Link>
+      <Button
+        props={{
+          type: "button",
+          className: "register-switch-btn",
+          title: " Sign Up"
+        }}
+      />
     </div>
-  </div>
+  </form>
 );
 
 export default Login;

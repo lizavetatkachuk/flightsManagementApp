@@ -1,12 +1,14 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Form, Field } from "react-final-form";
 import "./searchForm.scss";
 import { validate, onSubmit } from "../../validators";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import Directions from "./Directions";
 import pic from "./../../static/images/arrows.svg";
+import Button from "./../Shared/Button/Button";
+import cities from "./../../data";
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
@@ -31,11 +33,7 @@ class SearchForm extends React.Component {
                 component="select"
                 type="text"
               >
-                <option />
-                <option>Amstertdam</option>
-                <option>Minsk</option>
-                <option>Berlin</option>
-                <option>Cordoba</option>
+                <Directions props={cities} />
               </Field>
               <div className="component">
                 <img src={pic} className="shift-btn" alt="arrow" />
@@ -47,11 +45,7 @@ class SearchForm extends React.Component {
                 component="select"
                 type="text"
               >
-                <option />
-                <option>Amstertdam</option>
-                <option>Minsk</option>
-                <option>Berlin</option>
-                <option>Cordoba</option>
+                <Directions props={cities} />
               </Field>
             </div>
             <div className="search-form__search-field there-and-back">
@@ -90,14 +84,13 @@ class SearchForm extends React.Component {
                 />
               </div>
             </div>
-            <Link
-              to="/flights"
-              className="search-form__submit button"
-              type="submit"
-            >
-              {" "}
-              Search Flights
-            </Link>
+            <Button
+              props={{
+                type: "submit",
+                className: "search-flights-btn",
+                title: "Search Flights"
+              }}
+            />
           </div>
         )}
       />

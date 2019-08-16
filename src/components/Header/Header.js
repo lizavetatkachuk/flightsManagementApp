@@ -4,20 +4,20 @@ import "./header.scss";
 const Header = () => (
   <header className="header">
     <nav className="navigation-area">
-      <Link to="/" className="main-page">
+      <button className="main-page" type="button">
         Search Flights
-      </Link>
-      <Link to="/basket" className="personal-page">
+      </button>
+      <button className="personal-page" type="button">
         My flights
-      </Link>
+      </button>
     </nav>
     <div className="title-area">
       <p className="title">EasyFly</p>
     </div>
     <div className="login-button-area">
-      <Link to="/login" className="login-button">
+      <button className="login-button" type="button">
         Log In
-      </Link>
+      </button>
     </div>
   </header>
 );

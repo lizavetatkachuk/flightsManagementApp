@@ -6,29 +6,16 @@
     width: 35%;
     margin: 0 auto;
     padding: 25px;
-    display: flex;
-    flex-direction: column;
 
     &__form {
-        &__submit {
-            align-self: center;
-            width: auto;
-            background-color: rgba(#9c98bd, 0.3);
-            border-radius: 6px;
-            color: white;
-        }
+        display: flex;
+        flex-direction: column;
     }
 }
 
 .sign-up {
     align-self: flex-end;
 
-    &__button {
-        margin-left: 10px;
-        background-color: rgba(#9c98bd, 0.3);
-        border-radius: 6px;
-        color: white;
-    }
 }
 
 .input-field {

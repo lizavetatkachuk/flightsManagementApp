@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.scss";
+import "./app.scss";
 import Header from "./components/Header/Header";
 import Flight from "./components/Flight/Flight";
 import Register from "./components/Register/Register";
@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const App = () => {
   return (
     <Router>
-      <div className="App">
+      <div className="app">
         <Header />
         <Switch>
           <Route path="/" exact component={SearchForm} />
