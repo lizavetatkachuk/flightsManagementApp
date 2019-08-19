@@ -34,7 +34,7 @@ const Register = props => {
               name="password"
               component="input"
               type="password"
-              validate={validatePassword}
+              validate={validatePassword(values)}
             />
             <label className="form-label">Confirm your password</label>
             <Field
@@ -42,7 +42,7 @@ const Register = props => {
               name="confirmpassword"
               component="input"
               type="password"
-              validate={validatePasswordConfirmation}
+              validate={validatePasswordConfirmation(values)}
             />
             <label className="form-label">Pick up a username</label>
             <Field
