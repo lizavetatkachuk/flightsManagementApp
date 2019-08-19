@@ -1,9 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
 import "./filter.scss";
 
 const Filter = props => {
+  const { onChange } = props;
   const onSubmit = values => {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
   };
@@ -23,12 +25,15 @@ const Filter = props => {
           </label>
           <OnChange name="filter">
             {value => {
-              props.onChange(value);
+              onChange(value);
             }}
           </OnChange>
         </form>
       )}
     />
   );
+};
+Filter.propTypes = {
+  onChange: PropTypes.func
 };
 export default Filter;

@@ -3,16 +3,15 @@ import { Form, Field } from "react-final-form";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import { withRouter } from "react-router-dom";
-import Directions from "./Directions";
 import Button from "./../Shared/Button/Button";
-import cities from "./../../data";
+import data from "./../../data";
 import pic from "./../../static/images/arrows.svg";
 import "./searchForm.scss";
 import "react-datepicker/dist/react-datepicker.css";
 
 class SearchForm extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       startDate: new Date()
     };
@@ -24,8 +23,8 @@ class SearchForm extends React.Component {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
     this.props.history.push("/flights");
   };
-  Directions = props => {
-    return props.cities.map(city => <option key={city}>{city}</option>);
+  directions = () => {
+    return data.cities.map(city => <option key={city}>{city}</option>);
   };
   render() {
     return (
@@ -41,7 +40,7 @@ class SearchForm extends React.Component {
                 component="select"
                 type="text"
               >
-                <Directions props={cities} />
+                <this.directions />
               </Field>
               <div className="component">
                 <img src={pic} className="shift-btn" alt="arrow" />
@@ -53,7 +52,7 @@ class SearchForm extends React.Component {
                 component="select"
                 type="text"
               >
-                <Directions props={cities} />
+                <this.directions />
               </Field>
             </div>
             <div className="search-form__search-field there-and-back">

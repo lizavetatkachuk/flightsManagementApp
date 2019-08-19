@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Form, Field } from "react-final-form";
 import { Link, withRouter } from "react-router-dom";
 import Button from "./../Shared/Button/Button";
@@ -43,5 +44,10 @@ const Login = props => {
       </div>
     </div>
   );
+};
+Login.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 };
 export default withRouter(Login);

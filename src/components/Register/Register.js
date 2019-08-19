@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
 import { validate } from "../../validators";
@@ -50,5 +51,10 @@ const Register = props => {
       />
     </div>
   );
+};
+Register.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 };
 export default withRouter(Register);

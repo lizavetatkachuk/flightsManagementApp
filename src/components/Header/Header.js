@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
+import Button from "./../Shared/Button/Button";
 import "./header.scss";
 
 const Header = () => (
@@ -16,8 +17,10 @@ const Header = () => (
       <p className="title">EasyFly</p>
     </div>
     <div className="header__login">
-      <NavLink to="/login" className="nav-btn" activeClassName="selected">
-        Log In
+      <NavLink to="/login" className="nav-btn">
+        <Button type="button" class="nav-btn" logged="false">
+          Log In
+        </Button>
       </NavLink>
     </div>
   </header>

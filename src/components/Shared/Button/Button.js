@@ -1,6 +1,11 @@
 import React from "react";
 import "./button.scss";
 const Button = props => {
-  return <button type={props.type}>{props.children}</button>;
+  const btnclass = props.class ? props.class : "";
+  return (
+    <button type={props.type} className={btnclass}>
+      {props.children}
+    </button>
+  );
 };
 export default Button;
