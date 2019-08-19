@@ -1,19 +1,22 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Form, Field } from "react-final-form";
 import { Link, withRouter } from "react-router-dom";
 import { validate } from "../../validators";
+import Button from "./../Shared/Button/Button";
 import "./login.scss";
 
 const Login = props => {
-  const onSubmit = () => {};
+  const onSubmit = values => {
+    console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
+    props.history.push("/login");
+  };
   return (
-    <div className="login">
+    <form className="login">
       <Form
-        className="login__form"
         onSubmit={onSubmit}
-        validate={validate}
-        render={() => (
-          <Fragment>
+        //validate={validate}
+        render={({ handleSubmit, form, submitting, pristine, values }) => (
+          <form onSubmit={handleSubmit} className="login__form">
             <label>Login</label>
             <Field
               className="input-field"
@@ -30,19 +33,27 @@ const Login = props => {
               type="text"
               placeholder="Enter your password"
             />
-            <button className="login__form__submit" type="submit">
-              Log In
-            </button>
-          </Fragment>
+            <Button
+              props={{
+                type: "submit",
+                className: "form-submit-btn",
+                title: " Log In"
+              }}
+            />
+          </form>
         )}
       />
       <div className="sign-up">
         <label>Do not have an account yet?</label>
-        <Link to="/register" className="sign-up__button button" type="button">
-          Sign Up
-        </Link>
+        <Button
+          props={{
+            type: "button",
+            className: "register-switch-btn",
+            title: " Sign Up"
+          }}
+        />
       </div>
-    </div>
+    </form>
   );
 };
 export default withRouter(Login);

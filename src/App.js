@@ -11,7 +11,7 @@ import "./app.scss";
 const App = () => {
   return (
     <Router>
-      <div className="App">
+      <div className="app">
         <Header />
         <Switch>
           <Route path="/" exact component={SearchForm} />

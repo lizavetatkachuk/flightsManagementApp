@@ -14,13 +14,14 @@
     font-size: 45px;
 }
 
-.main-page {
-    margin: 15px;
-    color: white;
-}
-
+.main-page,
 .personal-page,
 .login-button {
+    background-color: #e2cae1;
+    border: none;
+    font-style: italic;
+    font-size: 45px;
+    margin: 15px;
     color: white;
 }
 

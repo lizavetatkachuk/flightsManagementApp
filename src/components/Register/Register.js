@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
 import { validate } from "../../validators";
+import Button from "./../Shared/Button/Button";
 import "./../Login/login.scss";
 
 const Register = props => {
@@ -45,9 +46,13 @@ const Register = props => {
               component="input"
               type="text"
             />
-            <button className="register__form__submit" type="submit">
-              Register
-            </button>
+            <Button
+              props={{
+                type: "submit",
+                className: "register__form__submit",
+                title: " Register"
+              }}
+            />
           </form>
         )}
       />
