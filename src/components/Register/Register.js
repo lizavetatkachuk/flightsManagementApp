@@ -14,7 +14,6 @@ const Register = props => {
     <div className="register">
       <Form
         onSubmit={onSubmit}
-        //validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
             <label className="form-label">Enter your email</label>

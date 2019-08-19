@@ -14,7 +14,6 @@ const Login = props => {
     <div className="login">
       <Form
         onSubmit={onSubmit}
-        //validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
             <label className="form-label">Login</label>

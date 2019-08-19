@@ -28,7 +28,6 @@ class SearchForm extends React.Component {
     return (
       <Form
         onSubmit={this.onSubmit}
-        // validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form className="search-form" onSubmit={handleSubmit}>
             <div className="search-form__search-field">
