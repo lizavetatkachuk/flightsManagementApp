@@ -44,13 +44,7 @@ const Register = props => {
               component="input"
               type="text"
             />
-            <Button
-              props={{
-                type: "submit",
-                className: "register__form__submit",
-                title: " Register"
-              }}
-            />
+            <Button type="submit">Register </Button>
           </form>
         )}
       />

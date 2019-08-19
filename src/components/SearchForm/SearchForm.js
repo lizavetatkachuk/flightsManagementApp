@@ -24,6 +24,9 @@ class SearchForm extends React.Component {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
     this.props.history.push("/flights");
   };
+  Directions = props => {
+    return props.cities.map(city => <option key={city}>{city}</option>);
+  };
   render() {
     return (
       <Form
@@ -89,13 +92,7 @@ class SearchForm extends React.Component {
                 />
               </div>
             </div>
-            <Button
-              props={{
-                type: "submit",
-                className: "search-flights-btn",
-                title: "Search Flights"
-              }}
-            />
+            <Button type="submit"> Search Flights</Button>
           </form>
         )}
       />

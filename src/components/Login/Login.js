@@ -1,7 +1,6 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
 import { Link, withRouter } from "react-router-dom";
-import { validate } from "../../validators";
 import Button from "./../Shared/Button/Button";
 import "./login.scss";
 
@@ -32,26 +31,14 @@ const Login = props => {
               type="text"
               placeholder="Enter your password"
             />
-            <Button
-              props={{
-                type: "submit",
-                className: "form-submit-btn",
-                title: " Log In"
-              }}
-            />
+            <Button type="submit"> Log In</Button>
           </form>
         )}
       />
       <div className="sign-up">
         <label className="form-label">Do not have an account yet?</label>
         <Link to="/register">
-          <Button
-            props={{
-              type: "button",
-              className: "register-switch-btn",
-              title: " Sign Up"
-            }}
-          />
+          <Button type="button">Register</Button>
         </Link>
       </div>
     </div>
