@@ -16,11 +16,13 @@ class SearchForm extends React.Component {
     this.state = {
       startDate: new Date()
     };
+    const startDate = this.state.startDate;
   }
+
   handleChange = a => a;
-  onSubmit = () => {
-    console.log("hi");
-    this.props.history.push("/login");
+  onSubmit = values => {
+    console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
+    this.props.history.push("/flights");
   };
   render() {
     return (
@@ -76,14 +78,14 @@ class SearchForm extends React.Component {
               <div className="component flight-dates">
                 <p> Fly there</p>
                 <DatePicker
-                  selected={this.state.startDate}
+                  selected={this.startDate}
                   onChange={this.handleChange}
                 />
               </div>
               <div className="component flight-dates">
                 <p> Fly back</p>
                 <DatePicker
-                  selected={this.state.startDate}
+                  selected={this.startDate}
                   onChange={this.handleChange}
                 />
               </div>

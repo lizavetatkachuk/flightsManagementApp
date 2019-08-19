@@ -8,10 +8,10 @@ import "./login.scss";
 const Login = props => {
   const onSubmit = values => {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
-    props.history.push("/login");
+    props.history.push("/");
   };
   return (
-    <form className="login">
+    <div className="login">
       <Form
         onSubmit={onSubmit}
         //validate={validate}
@@ -45,15 +45,17 @@ const Login = props => {
       />
       <div className="sign-up">
         <label>Do not have an account yet?</label>
-        <Button
-          props={{
-            type: "button",
-            className: "register-switch-btn",
-            title: " Sign Up"
-          }}
-        />
+        <Link to="/register">
+          <Button
+            props={{
+              type: "button",
+              className: "register-switch-btn",
+              title: " Sign Up"
+            }}
+          />
+        </Link>
       </div>
-    </form>
+    </div>
   );
 };
 export default withRouter(Login);

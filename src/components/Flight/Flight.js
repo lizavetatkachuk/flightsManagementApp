@@ -8,9 +8,12 @@ const Flight = props => {
       {flight.company} {flight.price} {flight.time}
     </li>
   ));
+  const onChange = value => {
+    console.log(value);
+  };
   return (
     <Fragment>
-      <Filter />
+      <Filter onChange={onChange} />
       <ul>{flightsInfo}</ul>
     </Fragment>
   );

@@ -8,16 +8,15 @@ import "./../Login/login.scss";
 const Register = props => {
   const onSubmit = values => {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
-    props.history.push("/login");
+    props.history.push("/");
   };
   return (
     <div className="register">
       <Form
-        className="register__form"
         onSubmit={onSubmit}
         //validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="register__form">
             <label>Enter your email</label>
             <Field
               className="input-field"

@@ -18,7 +18,7 @@ const App = () => {
           <Route
             path="/flights"
             exact
-            render={props => <Flight flights={data} />}
+            render={props => <Flight flights={data.data} />}
           />
           {/* <Route path="/basket" component={} /> */}
           <Route path="/login" component={Login} />
