@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Field } from "react-final-form";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Directions from "./Directions";
 import Button from "./../Shared/Button/Button";
 import cities from "./../../data";
@@ -32,7 +32,7 @@ class SearchForm extends React.Component {
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form className="search-form" onSubmit={handleSubmit}>
             <div className="search-form__search-field">
-              <label>Flying From</label>
+              <label className="search-form__label">Flying From</label>
               <Field
                 className="component direction"
                 name="from"
@@ -44,7 +44,7 @@ class SearchForm extends React.Component {
               <div className="component">
                 <img src={pic} className="shift-btn" alt="arrow" />
               </div>
-              <label>Flying to</label>
+              <label className="search-form__label">Flying to</label>
               <Field
                 className="component direction"
                 name="to"
@@ -55,7 +55,7 @@ class SearchForm extends React.Component {
               </Field>
             </div>
             <div className="search-form__search-field there-and-back">
-              <label>
+              <label className="search-form__label">
                 <Field
                   name="return"
                   component="input"
@@ -64,7 +64,7 @@ class SearchForm extends React.Component {
                 />{" "}
                 One Way
               </label>
-              <label>
+              <label className="search-form__label">
                 <Field
                   name="return"
                   component="input"
