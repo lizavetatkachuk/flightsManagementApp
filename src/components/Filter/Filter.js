@@ -1,7 +1,7 @@
 import React from "react";
-import "./filter.scss";
 import { Form, Field } from "react-final-form";
 import { validate, onSubmit } from "../../validators";
+import "./filter.scss";
 
 const Filter = () => (
   <Form

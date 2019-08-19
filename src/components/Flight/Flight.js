@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-import "./flights.scss";
 import Filter from "./../Filter/Filter";
+import "./flights.scss";
+
 const Flight = props => {
   const flightsInfo = props.flights.map(flight => (
     <li className="flight" key={flight.id}>

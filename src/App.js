@@ -1,12 +1,13 @@
 import React from "react";
-import "./app.scss";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Flight from "./components/Flight/Flight";
 import Register from "./components/Register/Register";
 import SearchForm from "./components/SearchForm/SearchForm";
 import Login from "./components/Login/Login";
 import data from "./data";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./app.scss";
+
 const App = () => {
   return (
     <Router>

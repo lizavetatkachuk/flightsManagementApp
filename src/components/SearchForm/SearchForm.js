@@ -1,26 +1,30 @@
 import React, { Fragment } from "react";
 import { Form, Field } from "react-final-form";
-import "./searchForm.scss";
-import { validate, onSubmit } from "../../validators";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { validate } from "../../validators";
+import "react-datepicker/dist/react-datepicker.css";
 import pic from "./../../static/images/arrows.svg";
+import "./searchForm.scss";
+
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       startDate: new Date()
     };
-    this.handleChange = this.handleChange.bind(this);
   }
   handleChange = a => a;
+  onSubmit = () => {
+    console.log("hi");
+    this.props.history.push("/login");
+  };
   render() {
     return (
       <Form
-        onSubmit={onSubmit}
-        validate={validate}
+        onSubmit={this.onSubmit}
+        // validate={validate}
         render={() => (
           <div className="search-form">
             <div className="search-form__search-field">
@@ -90,14 +94,9 @@ class SearchForm extends React.Component {
                 />
               </div>
             </div>
-            <Link
-              to="/flights"
-              className="search-form__submit button"
-              type="submit"
-            >
-              {" "}
+            <button className="search-form__submit button" type="submit">
               Search Flights
-            </Link>
+            </button>
           </div>
         )}
       />
@@ -105,4 +104,4 @@ class SearchForm extends React.Component {
   }
 }
 
-export default SearchForm;
+export default withRouter(SearchForm);
