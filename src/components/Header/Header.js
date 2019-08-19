@@ -25,5 +25,4 @@ const Header = () => (
     </div>
   </header>
 );
-
 export default withRouter(Header);

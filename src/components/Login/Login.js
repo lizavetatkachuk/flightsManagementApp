@@ -21,7 +21,7 @@ const Login = props => {
               className="input-field"
               name="login"
               component="input"
-              type="text"
+              type="email"
               placeholder="Enter your login"
             />
             <label className="form-label">Password</label>
@@ -29,7 +29,7 @@ const Login = props => {
               className="input-field"
               name="password"
               component="input"
-              type="text"
+              type="password"
               placeholder="Enter your password"
             />
             <Button type="submit"> Log In</Button>

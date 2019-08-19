@@ -2,7 +2,10 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
-import { validate } from "../../validators";
+import {
+  validatePassword,
+  validatePasswordConfirmation
+} from "../../validators";
 import Button from "./../Shared/Button/Button";
 import "./../Login/login.scss";
 
@@ -15,6 +18,7 @@ const Register = props => {
     <div className="register">
       <Form
         onSubmit={onSubmit}
+        validate={validatePassword}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
             <label className="form-label">Enter your email</label>
@@ -22,21 +26,23 @@ const Register = props => {
               className="input-field"
               name="email"
               component="input"
-              type="text"
+              type="email"
             />
             <label className="form-label">Enter your password</label>
             <Field
               className="input-field"
               name="password"
               component="input"
-              type="text"
+              type="password"
+              validate={validatePassword}
             />
             <label className="form-label">Confirm your password</label>
             <Field
               className="input-field"
-              name="password-confirmation"
+              name="confirmpassword"
               component="input"
-              type="text"
+              type="password"
+              validate={validatePasswordConfirmation}
             />
             <label className="form-label">Pick up a username</label>
             <Field

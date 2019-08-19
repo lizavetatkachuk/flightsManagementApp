@@ -23,10 +23,10 @@ class SearchForm extends React.Component {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
     this.props.history.push("/flights");
   };
-  directions = () => {
-    return data.cities.map(city => <option key={city}>{city}</option>);
-  };
   render() {
+    const directions = () => {
+      return data.cities.map(city => <option key={city}>{city}</option>);
+    };
     return (
       <Form
         onSubmit={this.onSubmit}
@@ -40,7 +40,7 @@ class SearchForm extends React.Component {
                 component="select"
                 type="text"
               >
-                <this.directions />
+                {directions}
               </Field>
               <div className="component">
                 <img src={pic} className="shift-btn" alt="arrow" />
@@ -52,7 +52,7 @@ class SearchForm extends React.Component {
                 component="select"
                 type="text"
               >
-                <this.directions />
+                {directions}
               </Field>
             </div>
             <div className="search-form__search-field there-and-back">
