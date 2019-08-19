@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.scss";
+import "./app.scss";
 import Header from "./components/Header/Header";
 import Flight from "./components/Flight/Flight";
 import Register from "./components/Register/Register";
