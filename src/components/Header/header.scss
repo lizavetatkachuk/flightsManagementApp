@@ -7,16 +7,14 @@
     align-items: center;
     margin-left: 30px;
     margin-right: 30px;
+
+    &__nav,
+    &__login {
+        font-size: 45px;
+    }
 }
 
-.navigation-area,
-.login-button-area {
-    font-size: 45px;
-}
-
-.main-page,
-.personal-page,
-.login-button {
+.nav-btn {
     background-color: #e2cae1;
     border: none;
     font-style: italic;

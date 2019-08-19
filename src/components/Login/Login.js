@@ -17,7 +17,7 @@ const Login = props => {
         //validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
-            <label>Login</label>
+            <label className="form-label">Login</label>
             <Field
               className="input-field"
               name="login"
@@ -25,7 +25,7 @@ const Login = props => {
               type="text"
               placeholder="Enter your login"
             />
-            <label>Password</label>
+            <label className="form-label">Password</label>
             <Field
               className="input-field"
               name="password"
@@ -44,7 +44,7 @@ const Login = props => {
         )}
       />
       <div className="sign-up">
-        <label>Do not have an account yet?</label>
+        <label className="form-label">Do not have an account yet?</label>
         <Link to="/register">
           <Button
             props={{

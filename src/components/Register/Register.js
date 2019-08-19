@@ -17,28 +17,28 @@ const Register = props => {
         //validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
-            <label>Enter your email</label>
+            <label className="form-label">Enter your email</label>
             <Field
               className="input-field"
               name="email"
               component="input"
               type="text"
             />
-            <label>Enter your password</label>
+            <label className="form-label">Enter your password</label>
             <Field
               className="input-field"
               name="password"
               component="input"
               type="text"
             />
-            <label>Confirm your password</label>
+            <label className="form-label">Confirm your password</label>
             <Field
               className="input-field"
               name="password-confirmation"
               component="input"
               type="text"
             />
-            <label>Pick up a username</label>
+            <label className="form-label">Pick up a username</label>
             <Field
               className="input-field"
               name="username"
