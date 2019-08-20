@@ -40,7 +40,7 @@ class SearchForm extends React.Component {
                 component="select"
                 type="text"
               >
-                {directions}
+                {directions()}
               </Field>
               <div className="component">
                 <img src={pic} className="shift-btn" alt="arrow" />
@@ -52,7 +52,7 @@ class SearchForm extends React.Component {
                 component="select"
                 type="text"
               >
-                {directions}
+                {directions()}
               </Field>
             </div>
             <div className="search-form__search-field there-and-back">

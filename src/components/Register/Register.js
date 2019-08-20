@@ -2,11 +2,8 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
-import {
-  validatePassword,
-  validatePasswordConfirmation
-} from "../../validators";
 import Button from "./../Shared/Button/Button";
+import { mustBeEmail, validatePassword } from "./../../validators";
 import "./../Login/login.scss";
 
 const Register = props => {
@@ -18,7 +15,16 @@ const Register = props => {
     <div className="register">
       <Form
         onSubmit={onSubmit}
-        validate={validatePassword}
+        validate={values => {
+          const errors = {};
+          if (!values.email) {
+            errors.email = "Required";
+          }
+          if (!values.password) {
+            errors.password = "Required";
+          }
+          return errors;
+        }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
             <label className="form-label">Enter your email</label>
@@ -27,6 +33,15 @@ const Register = props => {
               name="email"
               component="input"
               type="email"
+              render={({ input, meta }) => (
+                <React.Fragment>
+                  {meta.error && meta.touched && (
+                    <span className="Error">{meta.error}</span>
+                  )}
+                  <input {...input} type="email" placeholder="email" />
+                </React.Fragment>
+              )}
+              validate={mustBeEmail}
             />
             <label className="form-label">Enter your password</label>
             <Field
@@ -34,7 +49,15 @@ const Register = props => {
               name="password"
               component="input"
               type="password"
-              validate={validatePassword(values)}
+              render={({ input, meta }) => (
+                <React.Fragment>
+                  {meta.error && meta.touched && (
+                    <span className="Error">{meta.error}</span>
+                  )}
+                  <input {...input} type="email" placeholder="email" />
+                </React.Fragment>
+              )}
+              validate={validatePassword}
             />
             <label className="form-label">Confirm your password</label>
             <Field
@@ -42,7 +65,14 @@ const Register = props => {
               name="confirmpassword"
               component="input"
               type="password"
-              validate={validatePasswordConfirmation(values)}
+              render={({ input, meta }) => (
+                <React.Fragment>
+                  {meta.error && meta.touched && (
+                    <span className="Error">{meta.error}</span>
+                  )}
+                  <input {...input} type="email" placeholder="email" />
+                </React.Fragment>
+              )}
             />
             <label className="form-label">Pick up a username</label>
             <Field
