@@ -23,6 +23,14 @@ const Register = props => {
           if (!values.password) {
             errors.password = "Required";
           }
+          if (!values.username) {
+            errors.username = "Required";
+          }
+          if (!values.confirmpassword) {
+            errors.confirmpassword = "Required";
+          } else if (values.password !== values.confirmpassword) {
+            errors.confirmpassword = "Passwords do not match";
+          }
           return errors;
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
@@ -31,14 +39,12 @@ const Register = props => {
             <Field
               className="input-field"
               name="email"
-              component="input"
-              type="email"
               render={({ input, meta }) => (
                 <React.Fragment>
                   {meta.error && meta.touched && (
                     <span className="Error">{meta.error}</span>
                   )}
-                  <input {...input} type="email" placeholder="email" />
+                  <input {...input} />
                 </React.Fragment>
               )}
               validate={mustBeEmail}
@@ -47,14 +53,12 @@ const Register = props => {
             <Field
               className="input-field"
               name="password"
-              component="input"
-              type="password"
               render={({ input, meta }) => (
                 <React.Fragment>
                   {meta.error && meta.touched && (
                     <span className="Error">{meta.error}</span>
                   )}
-                  <input {...input} type="email" placeholder="email" />
+                  <input {...input} type="password" />
                 </React.Fragment>
               )}
               validate={validatePassword}
@@ -63,14 +67,12 @@ const Register = props => {
             <Field
               className="input-field"
               name="confirmpassword"
-              component="input"
-              type="password"
               render={({ input, meta }) => (
                 <React.Fragment>
                   {meta.error && meta.touched && (
                     <span className="Error">{meta.error}</span>
                   )}
-                  <input {...input} type="email" placeholder="email" />
+                  <input {...input} type="password" />
                 </React.Fragment>
               )}
             />
@@ -78,8 +80,14 @@ const Register = props => {
             <Field
               className="input-field"
               name="username"
-              component="input"
-              type="text"
+              render={({ input, meta }) => (
+                <React.Fragment>
+                  {meta.error && meta.touched && (
+                    <span className="Error">{meta.error}</span>
+                  )}
+                  <input {...input} type="text" />
+                </React.Fragment>
+              )}
             />
             <Button type="submit">Register </Button>
           </form>

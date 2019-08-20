@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
-import DatePicker from "react-datepicker";
-import moment from "moment";
 import { withRouter } from "react-router-dom";
+import DatePicker from "react-datepicker";
 import Button from "./../Shared/Button/Button";
+import { Picker } from "./../Picker/Picker";
 import data from "./../../data";
 import pic from "./../../static/images/arrows.svg";
 import "./searchForm.scss";
@@ -30,66 +30,102 @@ class SearchForm extends React.Component {
     return (
       <Form
         onSubmit={this.onSubmit}
+        validate={values => {
+          const errors = {};
+          if (!values.from) {
+            errors.from = "Choose the airport";
+          }
+          if (!values.to) {
+            errors.to = "Choose the destination";
+          }
+          if (!values.return) {
+            errors.return = "Choose the flight type";
+          }
+          if (!values.there) {
+            errors.there = "Choose the dates";
+          }
+          if (!values.back) {
+            errors.back = "Choose the dates";
+          }
+          return errors;
+        }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form className="search-form" onSubmit={handleSubmit}>
             <div className="search-form__search-field">
-              <label className="search-form__label">Flying From</label>
               <Field
-                className="component direction"
                 name="from"
-                component="select"
-                type="text"
-              >
-                {directions()}
-              </Field>
+                render={({ input, meta }) => (
+                  <React.Fragment>
+                    <div className="select-area">
+                      <label className="search-form__label">Flying From</label>
+                      {meta.error && meta.touched && (
+                        <span className="error">{meta.error}</span>
+                      )}
+                    </div>
+                    <select className="component direction">
+                      {directions()}
+                    </select>
+                  </React.Fragment>
+                )}
+              />
               <div className="component">
                 <img src={pic} className="shift-btn" alt="arrow" />
               </div>
-              <label className="search-form__label">Flying to</label>
+
               <Field
-                className="component direction"
                 name="to"
-                component="select"
-                type="text"
-              >
-                {directions()}
-              </Field>
+                render={({ input, meta }) => (
+                  <React.Fragment>
+                    <div className="select-area">
+                      <label className="search-form__label">Flying To</label>
+                      {meta.error && meta.touched && (
+                        <span className="error">{meta.error}</span>
+                      )}
+                    </div>
+                    <select className="component direction">
+                      {directions()}
+                    </select>
+                  </React.Fragment>
+                )}
+              />
             </div>
             <div className="search-form__search-field there-and-back">
-              <label className="search-form__label">
-                <Field
-                  name="return"
-                  component="input"
-                  type="radio"
-                  value="one-way"
-                />{" "}
-                One Way
-              </label>
-              <label className="search-form__label">
-                <Field
-                  name="return"
-                  component="input"
-                  type="radio"
-                  value="return"
-                />{" "}
-                Return
-              </label>
+              <Field
+                name="return"
+                value="one-way"
+                render={({ input, meta }) => (
+                  <div className="select-area">
+                    <label className="search-form__label">One Way</label>
+                    <input {...input} type="radio" />
+                    {meta.error && meta.touched && (
+                      <span className="error">{meta.error}</span>
+                    )}
+                  </div>
+                )}
+              />
+
+              <Field
+                name="return"
+                render={({ input, meta }) => (
+                  <div className="select-area">
+                    <label className="search-form__label">Return</label>
+
+                    <input {...input} type="radio" />
+                  </div>
+                )}
+              />
             </div>
             <div className="search-form__search-field">
-              <div className="component flight-dates">
-                <p> Fly there</p>
-                <DatePicker
-                  selected={this.startDate}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="component flight-dates">
-                <p> Fly back</p>
-                <DatePicker
-                  selected={this.startDate}
-                  onChange={this.handleChange}
-                />
-              </div>
+              <Field
+                className="component flight-dates"
+                name="there"
+                component={Picker}
+              />
+              <Field
+                className="component flight-dates"
+                name="back"
+                component={Picker}
+              />
             </div>
             <Button type="submit"> Search Flights</Button>
           </form>
