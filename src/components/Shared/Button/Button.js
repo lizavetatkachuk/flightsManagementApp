@@ -1,10 +1,10 @@
 import React from "react";
 import "./button.scss";
 const Button = props => {
-  const { type } = props;
-  const btnclass = props.class ? props.class : "";
+  const { btntype } = props;
+  const btnclass = props.btnclass ? props.btnclass : "button";
   return (
-    <button type={type} className={btnclass}>
+    <button type={btntype} className={btnclass}>
       {props.children}
     </button>
   );

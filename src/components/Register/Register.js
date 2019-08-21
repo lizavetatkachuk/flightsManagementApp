@@ -89,7 +89,7 @@ const Register = props => {
                 </React.Fragment>
               )}
             />
-            <Button type="submit">Register </Button>
+            <Button btntype="submit">Register </Button>
           </form>
         )}
       />
@@ -97,8 +97,8 @@ const Register = props => {
   );
 };
 Register.propTypes = {
-  history: PropTypes.object,
-  location: PropTypes.object,
-  match: PropTypes.object
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
 };
 export default withRouter(Register);

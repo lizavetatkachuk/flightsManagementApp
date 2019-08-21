@@ -21,6 +21,6 @@ const Flight = props => {
   );
 };
 Flight.propTypes = {
-  flights: PropTypes.array
+  flights: PropTypes.array.isRequired
 };
 export default Flight;

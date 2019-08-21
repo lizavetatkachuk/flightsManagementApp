@@ -12,25 +12,25 @@
   &__label {
     font-size: 30px;
   }
-
-  &__search-field {
+  &__select {
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 35px;
+  }
+  &__field {
     display: flex;
     flex-flow: row;
     font-size: 20px;
     justify-content: space-between;
     padding: 20px;
   }
-  .select-area {
-    display: flex;
-    flex-flow: column;
-
-    .error {
-      font-size: 15px;
-      color: rgb(184, 84, 84);
-    }
-  }
 }
-
+.container {
+  display: flex;
+  flex-flow: column;
+  width: 32%;
+}
 .react-datepicker {
   &-wrapper {
     height: 55px;
@@ -43,19 +43,10 @@
     }
   }
 }
-
-.component {
-  font-size: 30px;
-  display: flex;
-  flex-wrap: wrap;
+.error {
+  font-size: 15px;
+  color: rgb(184, 84, 84);
 }
-
-.direction {
-  height: 35px;
-  width: 32%;
-  font-size: 20px;
-}
-
 .shift-btn {
   height: 50px;
   width: 50px;

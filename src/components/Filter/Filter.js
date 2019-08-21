@@ -34,6 +34,6 @@ const Filter = props => {
   );
 };
 Filter.propTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func.isRequired
 };
 export default Filter;

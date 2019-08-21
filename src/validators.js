@@ -13,5 +13,8 @@ const minLength = value => {
   const pattern = /^.{6,}$/;
   return !pattern.test(value) && "The password is too short";
 };
-
-export { validatePassword, mustBeEmail, minLength };
+const validateDate = value => {
+  const msg = value == "Invalid date" ? "Invalid date" : null;
+  return msg;
+};
+export { validatePassword, mustBeEmail, minLength, validateDate };

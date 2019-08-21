@@ -55,22 +55,22 @@ const Login = props => {
               )}
               validate={minLength}
             />
-            <Button type="submit"> Log In</Button>
+            <Button btntype="submit"> Log In</Button>
           </form>
         )}
       />
       <div className="sign-up">
         <label className="form-label">Do not have an account yet?</label>
         <Link to="/register">
-          <Button type="button">Register</Button>
+          <Button btntype="button">Register</Button>
         </Link>
       </div>
     </div>
   );
 };
 Login.propTypes = {
-  history: PropTypes.object,
-  location: PropTypes.object,
-  match: PropTypes.object
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
 };
 export default withRouter(Login);

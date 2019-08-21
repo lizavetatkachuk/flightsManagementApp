@@ -18,7 +18,7 @@ const Header = () => (
     </div>
     <div className="header__login">
       <NavLink to="/login" className="nav-btn">
-        <Button type="button" class="nav-btn" logged="false">
+        <Button btntype="button" btnclass="nav-btn" logged="false">
           Log In
         </Button>
       </NavLink>
