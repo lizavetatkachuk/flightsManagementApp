@@ -14,9 +14,6 @@ const SearchForm = props => {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
     props.history.push("/flights");
   };
-  const onChange = values => {
-    console.log(values);
-  };
   const directions = data.cities.map(city => (
     <option key={city}>{city}</option>
   ));
@@ -24,7 +21,6 @@ const SearchForm = props => {
   return (
     <Form
       onSubmit={onSubmit}
-      onChange={onChange}
       validate={values => {
         const errors = {};
         if (!values.from) {
@@ -44,7 +40,7 @@ const SearchForm = props => {
         }
         return errors;
       }}
-      render={({ handleSubmit, form, submitting, pristine, values }) => (
+      render={({ handleSubmit, submitting, pristine }) => (
         <form className="search-form" onSubmit={handleSubmit}>
           <div className="search-form__field">
             <Field
@@ -117,15 +113,15 @@ const SearchForm = props => {
           <div className="search-form__field">
             <Field
               className="component flight-dates"
-              name="there"
               component={Picker}
               validate={validateDate}
+              name="there"
             />
             <Field
               className="component flight-dates"
-              name="back"
               component={Picker}
               validate={validateDate}
+              name="back"
             />
           </div>
           <Button btnype="submit" disabled={submitting || pristine}>
