@@ -5,10 +5,6 @@ import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 
 export class Picker extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props);
-  }
   state = { date: new Date() };
   handleChange = date => {
     const local = moment(date)
