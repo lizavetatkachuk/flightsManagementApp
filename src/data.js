@@ -24,5 +24,10 @@ const data = [
     id: "848hB"
   }
 ];
-const cities = ["", "Minsk", "Cordoba", "Brugge"];
+const cities = [
+  { "MSQ-sky": "Minsk" },
+  { "SFO-sky": "SanFransisco" },
+  { "SXF-sky": "Berlin Shonenfield" },
+  { "BVA-sky": "Paris Beauvais" }
+];
 export default { data, cities };
