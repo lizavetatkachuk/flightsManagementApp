@@ -14,11 +14,19 @@ class SearchForm extends React.Component {
   startAirport = "BVA-sky";
   endAirport = "SXF-sky";
   startDate = "2019-08-27";
-  componentDidMount() {
+  componentDidMount() {}
+
+  onSubmit = values => {
+    console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
+    console.log(
+      `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${
+        values.from
+      }/${values.to}/${values.there}`
+    );
     axios({
       url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${
-        this.startAirport
-      }/${this.endAirport}/${this.startDate}`,
+        values.from
+      }/${values.to}/${values.there}`,
       method: "GET",
       headers: {
         "X-RapidAPI-Key": "f60505b66cmsh0caadee59caec14p132a62jsn4c89785ba2de"
@@ -28,16 +36,14 @@ class SearchForm extends React.Component {
         console.log(res.data);
       })
       .catch(err => {
-        console.log(`Hello ${err.message}`);
+        console.log(` ${err.message}`);
       });
-  }
-
-  onSubmit = values => {
-    console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
     this.props.history.push("/flights");
   };
   directions = data.cities.map(city => (
-    <option key={Object.keys(city)}>{Object.values(city)}</option>
+    <option key={Object.keys(city)} value={Object.keys(city)}>
+      {Object.values(city)}
+    </option>
   ));
   render() {
     return (
@@ -57,7 +63,7 @@ class SearchForm extends React.Component {
           if (!values.there) {
             errors.there = "Choose the dates";
           }
-          if (!values.back) {
+          if (!values.back && values.return === "return") {
             errors.back = "Choose the dates";
           }
           return errors;

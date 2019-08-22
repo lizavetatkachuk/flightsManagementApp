@@ -9,7 +9,7 @@ export class Picker extends React.Component {
   handleChange = date => {
     const local = moment(date)
       .local()
-      .format("YYYY-MM-DD HH:mm:ss");
+      .format("YYYY-MM-DD");
     this.setState({ date });
     this.props.input.onChange(local);
   };
