@@ -11,11 +11,6 @@ import pic from "./../../static/images/arrows.svg";
 import "./searchForm.scss";
 
 class SearchForm extends React.Component {
-  startAirport = "BVA-sky";
-  endAirport = "SXF-sky";
-  startDate = "2019-08-27";
-  componentDidMount() {}
-
   onSubmit = values => {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
     console.log(
@@ -24,7 +19,7 @@ class SearchForm extends React.Component {
       }/${values.to}/${values.there}`
     );
     axios({
-      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${
+      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/be-BY/${
         values.from
       }/${values.to}/${values.there}`,
       method: "GET",
@@ -34,6 +29,19 @@ class SearchForm extends React.Component {
     })
       .then(res => {
         console.log(res.data);
+
+        const temp = res.data.Quotes.map(flight => {
+          return {
+            flightId: flight.QuoteId,
+            price: flight.MinPrice,
+            company: flight.OutboundLeg.CarrierIds[0]
+          };
+        });
+        const info = {
+          airlines: res.data.Carriers,
+          flights: temp
+        };
+        console.log(info);
       })
       .catch(err => {
         console.log(` ${err.message}`);
