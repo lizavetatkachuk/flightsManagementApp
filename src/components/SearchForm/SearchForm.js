@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
 import { getFlights } from "./../../redux/actions/getFlights";
@@ -12,9 +14,6 @@ import pic from "./../../static/images/arrows.svg";
 import "./searchForm.scss";
 
 class SearchForm extends React.Component {
-  mapDispatchToProps = {
-    getFlights: getFlights
-  };
   filter = data => {
     const flights = data.Quotes.map(item => {
       const companies = item.OutboundLeg.CarrierIds.map(company => {
@@ -34,7 +33,6 @@ class SearchForm extends React.Component {
     return flights;
   };
   onSubmit = values => {
-    console.log("Hello");
     getFlights(values);
   };
   directions = data.cities.map(city => (
@@ -163,7 +161,19 @@ SearchForm.propTypes = {
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
+
+const mapDispatchToProps = {
+  getFlights: getFlights
+};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getFlights: getFlights
+    },
+    dispatch
+  );
+
 export default connect(
   null,
-  SearchForm.mapDispatchToProps
+  mapDispatchToProps
 )(withRouter(SearchForm));
