@@ -1,48 +1,46 @@
-import axios from "axios";
-import { browserHistory } from "react-router";
-import { takeEvery, call, put } from "redux-saga/effects";
-import {
-  UPDATE_FLIGHTS,
-  SAVE_SEARCH_INFO
-} from "../action-types/flightsActionTypes";
+import axios from 'axios';
+import { browserHistory } from 'react-router';
+import { takeEvery, call, put } from 'redux-saga/effects';
+import { UPDATE_FLIGHTS, SAVE_SEARCH_INFO } from '../action-types/flightsActionTypes';
 const filter = data => {
-  const flights = data.Quotes.map(item => {
-    const companies = item.OutboundLeg.CarrierIds.map(company => {
-      const name = data.Carriers.find(carrier => {
-        const result = carrier.CarrierId === company;
-        return result;
-      });
-      return name.Name;
-    });
-    const flight = {
-      price: item.MinPrice,
-      time: item.OutboundLeg.DepartureDate,
-      companies: companies
-    };
-    return flight;
-  });
-  return flights;
+	const flights = data.Quotes.map(item => {
+		const companies = item.OutboundLeg.CarrierIds.map(company => {
+			const name = data.Carriers.find(carrier => {
+				const result = carrier.CarrierId === company;
+				return result;
+			});
+			return name.Name;
+		});
+		const flight = {
+			price: item.MinPrice,
+			time: item.OutboundLeg.DepartureDate,
+			companies: companies
+		};
+		return flight;
+	});
+	return flights;
 };
 export const loginApi = values => {
-  return axios.request({
-    url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/be-BY/${
-      values.from
-    }/${values.to}/${values.there}`,
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "f60505b66cmsh0caadee59caec14p132a62jsn4c89785ba2de"
-    }
-  });
+	return axios.request({
+		url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/be-BY/${
+			values.from
+		}/${values.to}/${values.there}`,
+		method: 'GET',
+		headers: {
+			'X-RapidAPI-Key': 'f60505b66cmsh0caadee59caec14p132a62jsn4c89785ba2de'
+		}
+	});
 };
 function* loginEffectSaga(action) {
-  try {
-    let { data } = yield call(loginApi, action.payload);
-    yield put({ type: UPDATE_FLIGHTS, flights: filter(data) });
-    browserHistory.push("/flights");
-  } catch (err) {
-    console.log(err);
-  }
+	try {
+		let { data } = yield call(loginApi, action.payload);
+		yield put({ type: UPDATE_FLIGHTS, flights: filter(data) });
+		//browserHistory.push("/flights");
+		//window.location.href = '/flights';
+	} catch (err) {
+		console.log(err);
+	}
 }
 export function* loginWatcherSaga() {
-  yield takeEvery(SAVE_SEARCH_INFO, loginEffectSaga);
+	yield takeEvery(SAVE_SEARCH_INFO, loginEffectSaga);
 }

@@ -1,35 +1,37 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import Filter from "./../Filter/Filter";
-import "./flights.scss";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Filter from './../Filter/Filter';
+import './flights.scss';
 
 const Flight = props => {
-  const flights = props.flights;
-  // const flightsInfo = flights.map(flight => (
-  //   <li className="flight" key={flight.id}>
-  //     {flight.company} {flight.price} {flight.time}
-  //   </li>
-  // ));
-  // const onChange = value => {
-  //   console.log(value);
-  // };
-  console.log(props);
-  return (
-    <p>{flights.flights}</p>
-    // <Fragment>
-    //   <Filter onChange={onChange} />
-    //   <ul>{flightsInfo}</ul>
-    // </Fragment>
-  );
+	const flights = props.flights;
+	// const flightsInfo = flights.map(flight => (
+	//   <li className="flight" key={flight.id}>
+	//     {flight.company} {flight.price} {flight.time}
+	//   </li>
+	// ));
+	// const onChange = value => {
+	//   console.log(value);
+	// };
+	console.log(props);
+	return (
+		<p>{flights.flights}</p>
+		// <Fragment>
+		//   <Filter onChange={onChange} />
+		//   <ul>{flightsInfo}</ul>
+		// </Fragment>
+	);
 };
 // Flight.propTypes = {
 //   flights: PropTypes.object.isRequired
 // };
 
-const mapStateToProps = state => ({ flights: state.flights });
+const mapStateToProps = state => {
+	return { flights: state.flights };
+};
 
 export default connect(
-  mapStateToProps,
-  null
+	mapStateToProps,
+	null
 )(Flight);
