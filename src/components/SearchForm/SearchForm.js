@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
+import { getFlights } from "./../../redux/actions/getFlights";
 import Button from "./../Shared/Button/Button";
 import { Picker } from "./../Picker/Picker";
 import { validateDate } from "../../validators";
@@ -11,42 +12,30 @@ import pic from "./../../static/images/arrows.svg";
 import "./searchForm.scss";
 
 class SearchForm extends React.Component {
-  onSubmit = values => {
-    console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
-    console.log(
-      `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${
-        values.from
-      }/${values.to}/${values.there}`
-    );
-    axios({
-      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/be-BY/${
-        values.from
-      }/${values.to}/${values.there}`,
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": "f60505b66cmsh0caadee59caec14p132a62jsn4c89785ba2de"
-      }
-    })
-      .then(res => {
-        console.log(res.data);
-
-        const temp = res.data.Quotes.map(flight => {
-          return {
-            flightId: flight.QuoteId,
-            price: flight.MinPrice,
-            company: flight.OutboundLeg.CarrierIds[0]
-          };
+  mapDispatchToProps = {
+    getFlights: getFlights
+  };
+  filter = data => {
+    const flights = data.Quotes.map(item => {
+      const companies = item.OutboundLeg.CarrierIds.map(company => {
+        const name = data.Carriers.find(carrier => {
+          const result = carrier.CarrierId === company;
+          return result;
         });
-        const info = {
-          airlines: res.data.Carriers,
-          flights: temp
-        };
-        console.log(info);
-      })
-      .catch(err => {
-        console.log(` ${err.message}`);
+        return name.Name;
       });
-    this.props.history.push("/flights");
+      const flight = {
+        price: item.MinPrice,
+        time: item.OutboundLeg.DepartureDate,
+        companies: companies
+      };
+      return flight;
+    });
+    return flights;
+  };
+  onSubmit = values => {
+    console.log("Hello");
+    getFlights(values);
   };
   directions = data.cities.map(city => (
     <option key={Object.keys(city)} value={Object.keys(city)}>
@@ -174,4 +163,7 @@ SearchForm.propTypes = {
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
-export default withRouter(SearchForm);
+export default connect(
+  null,
+  SearchForm.mapDispatchToProps
+)(withRouter(SearchForm));

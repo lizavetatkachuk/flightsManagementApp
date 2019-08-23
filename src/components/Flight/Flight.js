@@ -1,9 +1,13 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Filter from "./../Filter/Filter";
 import "./flights.scss";
 
 const Flight = props => {
+  const mapStateToProps = state => ({
+    flights: state.flights
+  });
   const { flights } = props;
   const flightsInfo = flights.map(flight => (
     <li className="flight" key={flight.id}>
@@ -23,4 +27,7 @@ const Flight = props => {
 Flight.propTypes = {
   flights: PropTypes.array.isRequired
 };
-export default Flight;
+export default connect(
+  Flight.mapStateToProps,
+  null
+)(Flight);
