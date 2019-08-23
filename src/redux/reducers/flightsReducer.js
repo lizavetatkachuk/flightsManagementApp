@@ -9,7 +9,7 @@ export const flightsReducer = (state = initialState, action) => {
 		case SAVE_SEARCH_INFO:
 			return { ...state };
 		case UPDATE_FLIGHTS:
-			return { ...state, flights: action.payload };
+			return { ...state, flights: action.flights };
 		default:
 			return state;
 	}

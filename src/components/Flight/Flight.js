@@ -5,7 +5,7 @@ import Filter from './../Filter/Filter';
 import './flights.scss';
 
 const Flight = props => {
-	const flights = props.flights;
+	const { flights } = props;
 	// const flightsInfo = flights.map(flight => (
 	//   <li className="flight" key={flight.id}>
 	//     {flight.company} {flight.price} {flight.time}
@@ -14,9 +14,9 @@ const Flight = props => {
 	// const onChange = value => {
 	//   console.log(value);
 	// };
-	console.log(props);
+	console.log(flights);
 	return (
-		<p>{flights.flights}</p>
+		<p>Hello!!</p>
 		// <Fragment>
 		//   <Filter onChange={onChange} />
 		//   <ul>{flightsInfo}</ul>
