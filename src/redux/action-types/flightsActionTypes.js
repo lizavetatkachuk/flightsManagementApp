@@ -1,0 +1,2 @@
+export const SAVE_SEARCH_INFO = 'SAVE_SEARCH_INFO';
+export const UPDATE_FLIGHTS = 'UPDATE_FLIGHTS';

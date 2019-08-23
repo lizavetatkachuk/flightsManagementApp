@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
@@ -33,7 +32,7 @@ class SearchForm extends React.Component {
     return flights;
   };
   onSubmit = values => {
-    getFlights(values);
+    this.props.getFlights(values);
   };
   directions = data.cities.map(city => (
     <option key={Object.keys(city)} value={Object.keys(city)}>
@@ -162,13 +161,10 @@ SearchForm.propTypes = {
   match: PropTypes.object.isRequired
 };
 
-const mapDispatchToProps = {
-  getFlights: getFlights
-};
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getFlights: getFlights
+      getFlights
     },
     dispatch
   );

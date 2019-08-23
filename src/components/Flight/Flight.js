@@ -5,9 +5,6 @@ import Filter from "./../Filter/Filter";
 import "./flights.scss";
 
 const Flight = props => {
-  const mapStateToProps = state => ({
-    flights: state.flights
-  });
   const { flights } = props;
   const flightsInfo = flights.map(flight => (
     <li className="flight" key={flight.id}>
@@ -27,7 +24,12 @@ const Flight = props => {
 Flight.propTypes = {
   flights: PropTypes.array.isRequired
 };
+
+const mapStateToProps = state => ({
+  flights: state.flights
+});
+
 export default connect(
-  Flight.mapStateToProps,
+  mapStateToProps,
   null
 )(Flight);

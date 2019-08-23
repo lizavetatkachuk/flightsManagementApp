@@ -1,6 +1,28 @@
 import axios from "axios";
-import { browserHistory } from "react-router";
+//import { browserHistory } from 'react-router';
 import { takeEvery, call, put } from "redux-saga/effects";
+import {
+  UPDATE_FLIGHTS,
+  SAVE_SEARCH_INFO
+} from "../action-types/flightsActionTypes";
+const filter = data => {
+  const flights = data.Quotes.map(item => {
+    const companies = item.OutboundLeg.CarrierIds.map(company => {
+      const name = data.Carriers.find(carrier => {
+        const result = carrier.CarrierId === company;
+        return result;
+      });
+      return name.Name;
+    });
+    const flight = {
+      price: item.MinPrice,
+      time: item.OutboundLeg.DepartureDate,
+      companies: companies
+    };
+    return flight;
+  });
+  return flights;
+};
 export const loginApi = values => {
   return axios
     .request({
@@ -12,19 +34,18 @@ export const loginApi = values => {
         "X-RapidAPI-Key": "f60505b66cmsh0caadee59caec14p132a62jsn4c89785ba2de"
       }
     })
-    .then(res => res.data)
+    .then(res => filter(res.data))
     .catch(err => console.log(err));
 };
 function* loginEffectSaga(action) {
   try {
     let { data } = yield call(loginApi, action.payload);
-    console.log(data);
-    yield put({ type: "UPDATE_FLIGHTS", flights: data });
-    browserHistory.push("/flights");
+    yield put({ type: UPDATE_FLIGHTS, flights: data });
+    //	browserHistory.push('/flights');
   } catch (err) {
     console.log(err);
   }
 }
 export function* loginWatcherSaga() {
-  yield takeEvery("LOGIN_WATCHER", loginEffectSaga);
+  yield takeEvery(SAVE_SEARCH_INFO, loginEffectSaga);
 }
