@@ -4,14 +4,13 @@ import {
 } from "../action-types/flightsActionTypes";
 
 const initialState = {
-  flights: [],
-  searchInfo: {}
+  flights: []
 };
 
 export const flightsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_SEARCH_INFO:
-      return { ...state, searchInfo: action.payload };
+      return { ...state };
     case UPDATE_FLIGHTS:
       return { ...state, flights: action.flights };
     default:

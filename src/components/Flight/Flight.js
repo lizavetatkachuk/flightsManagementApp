@@ -5,29 +5,29 @@ import Filter from "./../Filter/Filter";
 import "./flights.scss";
 
 const Flight = props => {
-  const { flights } = props;
-  const flightsInfo = flights.map(flight => (
-    <li className="flight" key={flight.id}>
-      {flight.company} {flight.price} {flight.time}
-    </li>
-  ));
-  const onChange = value => {
-    console.log(value);
-  };
+  const flights = props.flights;
+  // const flightsInfo = flights.map(flight => (
+  //   <li className="flight" key={flight.id}>
+  //     {flight.company} {flight.price} {flight.time}
+  //   </li>
+  // ));
+  // const onChange = value => {
+  //   console.log(value);
+  // };
+  console.log(props);
   return (
-    <Fragment>
-      <Filter onChange={onChange} />
-      <ul>{flightsInfo}</ul>
-    </Fragment>
+    <p>{flights.flights}</p>
+    // <Fragment>
+    //   <Filter onChange={onChange} />
+    //   <ul>{flightsInfo}</ul>
+    // </Fragment>
   );
 };
-Flight.propTypes = {
-  flights: PropTypes.array.isRequired
-};
+// Flight.propTypes = {
+//   flights: PropTypes.object.isRequired
+// };
 
-const mapStateToProps = state => ({
-  flights: state.flights
-});
+const mapStateToProps = state => ({ flights: state.flights });
 
 export default connect(
   mapStateToProps,
