@@ -1,5 +1,4 @@
 import axios from "axios";
-import { browserHistory } from "react-router";
 import { takeEvery, call, put } from "redux-saga/effects";
 import {
   UPDATE_FLIGHTS,
