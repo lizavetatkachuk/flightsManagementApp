@@ -38,7 +38,6 @@ function* searchEffectSaga(action) {
   try {
     let { data } = yield call(flightsApi, action.payload);
     yield put({ type: UPDATE_FLIGHTS, flights: filter(data) });
-    browserHistory.push("/flights");
   } catch (err) {
     console.log(err);
   }
