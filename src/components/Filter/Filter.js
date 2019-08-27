@@ -27,7 +27,7 @@ const Filter = props => {
           </label>
           <label className="filter-pane__element">
             <Field name="filter" component="input" type="radio" value="time" />
-            Flight time
+            Time
           </label>
           <OnChange name="filter">
             {value => {

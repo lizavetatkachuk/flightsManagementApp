@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -6,15 +6,18 @@ import Filter from "./../Filter/Filter";
 import "./flights.scss";
 
 const Flight = props => {
+  const [mode, setMode] = useState("price");
   const { flights } = props.flights;
   const dynamicSort = property => {
     return function(a, b) {
       const result =
-        a.property < b.property ? -1 : a.property > b.property ? 1 : 0;
+        a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+      console.log(a[property] + "   " + b[property]);
+      console.log(result);
       return result;
     };
   };
-  flights.sort(dynamicSort("price"));
+  flights.sort(dynamicSort(mode));
   const flightsInfo = flights.map(flight => {
     return (
       <Link to={`/flights/${flight.id}`} className="flight">
@@ -25,7 +28,7 @@ const Flight = props => {
     );
   });
   const onChange = value => {
-    console.log(value);
+    setMode(value);
   };
   return (
     <Fragment>
