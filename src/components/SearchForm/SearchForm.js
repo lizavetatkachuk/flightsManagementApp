@@ -13,19 +13,20 @@ import pic from "./../../static/images/arrows.svg";
 import "./searchForm.scss";
 
 class SearchForm extends React.Component {
-  onSubmit = values => {
-    this.props.getFlights(values);
-    this.props.history.push("/flights");
-  };
-  directions = data.cities.map(city => (
-    <option key={Object.keys(city)} value={Object.keys(city)}>
-      {Object.values(city)}
-    </option>
-  ));
   render() {
+    const { history, getFlights } = this.props;
+    const onSubmit = values => {
+      getFlights(values);
+      history.push("/flights");
+    };
+    const directions = data.cities.map(city => (
+      <option key={Object.keys(city)} value={Object.keys(city)}>
+        {Object.values(city)}
+      </option>
+    ));
     return (
       <Form
-        onSubmit={this.onSubmit}
+        onSubmit={onSubmit}
         validate={values => {
           const errors = {};
           if (!values.from) {
@@ -55,7 +56,7 @@ class SearchForm extends React.Component {
                     <div className="container">
                       <label className="search-form__label">Flying From</label>
                       <select className="search-form__select " {...input}>
-                        {this.directions}
+                        {directions}
                       </select>
                       {meta.error && meta.touched && (
                         <span className="error">{meta.error}</span>
@@ -76,7 +77,7 @@ class SearchForm extends React.Component {
                       <label className="search-form__label">Flying To</label>
 
                       <select className="search-form__select" {...input}>
-                        {this.directions}
+                        {directions}
                       </select>
                       {meta.error && meta.touched && (
                         <span className="error">{meta.error}</span>

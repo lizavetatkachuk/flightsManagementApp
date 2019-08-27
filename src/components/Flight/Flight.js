@@ -7,7 +7,7 @@ import "./flights.scss";
 
 const Flight = props => {
   const [mode, setMode] = useState("price");
-  const { flights } = props.flights;
+  const { flights } = props;
   const dynamicSort = property => {
     return function(a, b) {
       const result =
@@ -42,7 +42,7 @@ Flight.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { flights: state.flights };
+  return { flights: state.flights.flights };
 };
 
 export default connect(
