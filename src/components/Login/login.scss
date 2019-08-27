@@ -1,7 +1,7 @@
 @import "../Shared/index.scss";
 .login,
 .register {
-  background-color: rgb($form-color, 0.3);
+  background-color: $form-color;
   border-radius: 10px;
   height: auto;
   width: 35%;
@@ -19,7 +19,7 @@
 }
 
 .input-field {
-  background-color: rgba($form-color, 0.1);
+  background-color: $form-color;
   width: 70%;
   height: 20px;
   border-radius: 6px;

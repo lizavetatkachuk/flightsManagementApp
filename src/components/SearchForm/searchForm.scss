@@ -1,10 +1,11 @@
+@import "../Shared/index.scss";
 .search-form {
   min-height: 70vh;
   display: flex;
   flex-flow: column wrap;
   align-items: stretch;
   justify-items: stretch;
-  background-color: rgba(#9c98bd, 0.3);
+  background-color: $form-color;
   margin: 0 auto;
   width: 80%;
   border-radius: 15px;

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { browserHistory } from "react-router";
 import { takeEvery, call, put } from "redux-saga/effects";
 import {
   UPDATE_FLIGHTS,
@@ -29,9 +28,7 @@ const filter = data => {
 };
 export const flightsApi = values => {
   return axios.request({
-    url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/be-BY/${
-      values.from
-    }/${values.to}/${values.there}`,
+    url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/be-BY/${values.from}/${values.to}/${values.there}`,
     method: "GET",
     headers: {
       "X-RapidAPI-Key": "f60505b66cmsh0caadee59caec14p132a62jsn4c89785ba2de"
@@ -42,7 +39,6 @@ function* searchEffectSaga(action) {
   try {
     let { data } = yield call(flightsApi, action.payload);
     yield put({ type: UPDATE_FLIGHTS, flights: filter(data) });
-    browserHistory.push("/flights");
   } catch (err) {
     console.log(err);
   }
