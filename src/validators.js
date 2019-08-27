@@ -14,7 +14,7 @@ const minLength = value => {
   return !pattern.test(value) && "The password is too short";
 };
 const validateDate = value => {
-  const msg = value == "Invalid date" ? "Invalid date" : null;
+  const msg = value === "Invalid date" ? "Invalid date" : null;
   return msg;
 };
 export { validatePassword, mustBeEmail, minLength, validateDate };

@@ -1,10 +1,10 @@
 import {
   UPDATE_FLIGHTS,
-  SAVE_SEARCH_INFO
+  GET_FLIGHTS
 } from "../action-types/flightsActionTypes";
 
 export const getFlights = values => ({
-  type: SAVE_SEARCH_INFO,
+  type: GET_FLIGHTS,
   payload: { ...values }
 });
 

@@ -5,7 +5,7 @@ import Flight from "./components/Flight/Flight";
 import Register from "./components/Register/Register";
 import SearchForm from "./components/SearchForm/SearchForm";
 import Login from "./components/Login/Login";
-import data from "./data";
+import Details from "./components/Details/Details";
 import "./app.scss";
 
 const App = () => {
@@ -15,11 +15,8 @@ const App = () => {
         <Header />
         <Switch>
           <Route path="/" exact component={SearchForm} />
-          <Route
-            path="/flights"
-            exact
-            render={props => <Flight flights={data.data} />}
-          />
+          <Route path="/flights" exact component={Flight} />
+          <Route path="/flights/:id" component={Details} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </Switch>

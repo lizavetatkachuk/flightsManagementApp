@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Filter from "./../Filter/Filter";
 import "./flights.scss";
@@ -7,9 +8,11 @@ import "./flights.scss";
 const Flight = props => {
   const { flights } = props;
   const flightsInfo = flights.flights.map(flight => (
-    <li className="flight" key={flight.id}>
-      {flight.companies[0]} {flight.price}$ departs at {flight.time}
-    </li>
+    <Link to={`/flights/${flight.id}`} className="flight">
+      <li className="flight__item" key={flight.id}>
+        {flight.companies[0]} {flight.price}$ departs at {flight.time}
+      </li>
+    </Link>
   ));
   const onChange = value => {
     console.log(value);

@@ -1,9 +1,7 @@
 import axios from "axios";
 import { takeEvery, call, put } from "redux-saga/effects";
-import {
-  UPDATE_FLIGHTS,
-  SAVE_SEARCH_INFO
-} from "../action-types/flightsActionTypes";
+import { updateFlights } from "../actions/getFlights";
+import { GET_FLIGHTS } from "../action-types/flightsActionTypes";
 
 const filter = data => {
   const flights = data.Quotes.map(item => {
@@ -22,8 +20,6 @@ const filter = data => {
     };
     return flight;
   });
-
-  console.log(flights);
   return flights;
 };
 export const flightsApi = values => {
@@ -38,11 +34,11 @@ export const flightsApi = values => {
 function* searchEffectSaga(action) {
   try {
     let { data } = yield call(flightsApi, action.payload);
-    yield put({ type: UPDATE_FLIGHTS, flights: filter(data) });
+    yield put(updateFlights(filter(data)));
   } catch (err) {
     console.log(err);
   }
 }
 export function* searchWatcherSaga() {
-  yield takeEvery(SAVE_SEARCH_INFO, searchEffectSaga);
+  yield takeEvery(GET_FLIGHTS, searchEffectSaga);
 }
