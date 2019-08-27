@@ -7,7 +7,7 @@ import "./details.scss";
 const Details = props => {
   const { flights } = props.flights;
   const flightDetail = flights.find(flight => {
-    const result = flight.id == props.match.params.id;
+    const result = flight.id === Number(props.match.params.id);
     return result;
   });
   return <p>Hello</p>;

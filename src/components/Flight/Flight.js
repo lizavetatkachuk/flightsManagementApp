@@ -6,18 +6,27 @@ import Filter from "./../Filter/Filter";
 import "./flights.scss";
 
 const Flight = props => {
-  const { flights } = props;
-  const flightsInfo = flights.flights.map(flight => (
-    <Link to={`/flights/${flight.id}`} className="flight">
-      <li className="flight__item" key={flight.id}>
-        {flight.companies[0]} {flight.price}$ departs at {flight.time}
-      </li>
-    </Link>
-  ));
+  const { flights } = props.flights;
+  const dynamicSort = property => {
+    return function(a, b) {
+      const result =
+        a.property < b.property ? -1 : a.property > b.property ? 1 : 0;
+      return result;
+    };
+  };
+  flights.sort(dynamicSort("price"));
+  const flightsInfo = flights.map(flight => {
+    return (
+      <Link to={`/flights/${flight.id}`} className="flight">
+        <li className="flight__item" key={flight.id}>
+          {flight.companies[0]} {flight.price}$ departs at {flight.time}
+        </li>
+      </Link>
+    );
+  });
   const onChange = value => {
     console.log(value);
   };
-  console.log(flights);
   return (
     <Fragment>
       <Filter onChange={onChange} />
