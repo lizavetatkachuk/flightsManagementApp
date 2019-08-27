@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 import Button from "./../Shared/Button/Button";
 import "./header.scss";
 
@@ -13,9 +13,9 @@ const Header = () => (
         My flights
       </NavLink>
     </nav>
-    <div className="title-area">
-      <p className="title">EasyFly</p>
-    </div>
+    <Link to="/" className="header__title">
+      <p className="title">Search Flights</p>
+    </Link>
     <div className="header__login">
       <NavLink to="/login" className="nav-btn">
         <Button btntype="button" btnclass="nav-btn" logged="false">

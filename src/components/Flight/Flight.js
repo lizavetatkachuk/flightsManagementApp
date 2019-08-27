@@ -1,20 +1,35 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Filter from "./../Filter/Filter";
 import "./flights.scss";
 
 const Flight = props => {
+  const [mode, setMode] = useState("price");
   const { flights } = props;
-  const flightsInfo = flights.flights.map(flight => (
-    <li className="flight" key={flight.id}>
-      {flight.companies[0]} {flight.price}$ departs at {flight.time}
-    </li>
-  ));
-  const onChange = value => {
-    console.log(value);
+  const dynamicSort = property => {
+    return function(a, b) {
+      const result =
+        a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+      console.log(a[property] + "   " + b[property]);
+      console.log(result);
+      return result;
+    };
   };
-  console.log(flights);
+  flights.sort(dynamicSort(mode));
+  const flightsInfo = flights.map(flight => {
+    return (
+      <Link to={`/flights/${flight.id}`} className="flight">
+        <li className="flight__item" key={flight.id}>
+          {flight.companies[0]} {flight.price}$ departs at {flight.time}
+        </li>
+      </Link>
+    );
+  });
+  const onChange = value => {
+    setMode(value);
+  };
   return (
     <Fragment>
       <Filter onChange={onChange} />
@@ -27,7 +42,7 @@ Flight.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { flights: state.flights };
+  return { flights: state.flights.flights };
 };
 
 export default connect(

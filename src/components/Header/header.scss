@@ -1,28 +1,33 @@
+@import "../Shared/index.scss";
+$font-color: wheat;
 .header {
-    font-style: italic;
-    font-size: 60px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 30px;
-    margin-right: 30px;
-
-    &__nav,
-    &__login {
-        font-size: 45px;
-    }
+  font-style: italic;
+  font-size: 60px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 30px;
+  margin-right: 30px;
+  &__nav,
+  &__login {
+    font-size: 45px;
+  }
+  &__title {
+    text-decoration: none;
+    color: $font-color;
+  }
 }
 
 .nav-btn {
-    background-color: #e2cae1;
-    border: none;
-    font-style: italic;
-    font-size: 45px;
-    margin: 15px;
-    color: white;
+  background-color: $base-color;
+  border: none;
+  font-style: italic;
+  font-size: 45px;
+  margin: 15px;
+  color: $font-color;
 }
 
 .selected {
-    color: rgb(138, 208, 236)
+  color: rgb(46, 27, 90);
 }

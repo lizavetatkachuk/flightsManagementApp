@@ -1,10 +1,12 @@
-.flight{
+.flight {
+  color: white;
+  &__item {
     font-size: 25px;
     margin-left: 25%;
-    margin-right:15%;
+    margin-right: 15%;
     margin-bottom: 20px;
     height: 55px;
-    background-color: rgba(azure,0.3);
+    background-color: rgba(rgb(106, 153, 87), 0.7);
     border-radius: 8px;
-
+  }
 }

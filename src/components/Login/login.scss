@@ -1,31 +1,31 @@
+@import "../Shared/index.scss";
 .login,
 .register {
-    background-color: rgba(#9c98bd, 0.3);
-    border-radius: 10px;
-    height: auto;
-    width: 35%;
-    margin: 0 auto;
-    padding: 25px;
+  background-color: $form-color;
+  border-radius: 10px;
+  height: auto;
+  width: 35%;
+  margin: 0 auto;
+  padding: 25px;
 
-    &__form {
-        display: flex;
-        flex-direction: column;
-    }
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .sign-up {
-    align-self: flex-end;
-
+  align-self: flex-end;
 }
 
 .input-field {
-    background-color: rgba(#b2b0cab7, 0.1);
-    width: 70%;
-    height: 20px;
-    border-radius: 6px;
+  background-color: $form-color;
+  width: 70%;
+  height: 20px;
+  border-radius: 6px;
 }
 
 .form-label {
-    align-self: center;
-    font-size: 20px;
+  align-self: center;
+  font-size: 20px;
 }
