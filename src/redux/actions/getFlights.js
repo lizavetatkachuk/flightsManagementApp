@@ -10,5 +10,5 @@ export const getFlights = values => ({
 
 export const updateFlights = values => ({
   type: UPDATE_FLIGHTS,
-  payload: { ...values }
+  payload: [...values]
 });
