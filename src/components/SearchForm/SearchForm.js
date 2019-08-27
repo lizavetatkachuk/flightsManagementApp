@@ -151,10 +151,7 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
-const mapStateToProps = state => {
-  return { flights: state.flights };
-};
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(withRouter(SearchForm));

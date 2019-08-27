@@ -5,6 +5,7 @@ import {
   UPDATE_FLIGHTS,
   SAVE_SEARCH_INFO
 } from "../action-types/flightsActionTypes";
+
 const filter = data => {
   const flights = data.Quotes.map(item => {
     const companies = item.OutboundLeg.CarrierIds.map(company => {
