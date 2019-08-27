@@ -5,6 +5,7 @@ import {
   UPDATE_FLIGHTS,
   SAVE_SEARCH_INFO
 } from "../action-types/flightsActionTypes";
+
 const filter = data => {
   const flights = data.Quotes.map(item => {
     const companies = item.OutboundLeg.CarrierIds.map(company => {
@@ -15,12 +16,15 @@ const filter = data => {
       return name.Name;
     });
     const flight = {
+      id: item.QuoteId,
       price: item.MinPrice,
-      time: item.OutboundLeg.DepartureDate,
+      time: item.QuoteDateTime,
       companies: companies
     };
     return flight;
   });
+
+  console.log(flights);
   return flights;
 };
 export const flightsApi = values => {
