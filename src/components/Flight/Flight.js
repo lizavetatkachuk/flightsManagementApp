@@ -6,21 +6,20 @@ import "./flights.scss";
 
 const Flight = props => {
   const { flights } = props;
-  // const flightsInfo = flights.map(flight => (
-  //   <li className="flight" key={flight.id}>
-  //     {flight.company} {flight.price} {flight.time}
-  //   </li>
-  // ));
-  // const onChange = value => {
-  //   console.log(value);
-  // };
+  const flightsInfo = flights.flights.map(flight => (
+    <li className="flight" key={flight.id}>
+      {flight.companies[0]} {flight.price}$ departs at {flight.time}
+    </li>
+  ));
+  const onChange = value => {
+    console.log(value);
+  };
   console.log(flights);
   return (
-    <p />
-    // <Fragment>
-    //   <Filter onChange={onChange} />
-    //   <ul>{flightsInfo}</ul>
-    // </Fragment>
+    <Fragment>
+      <Filter onChange={onChange} />
+      <ul>{flightsInfo}</ul>
+    </Fragment>
   );
 };
 Flight.propTypes = {

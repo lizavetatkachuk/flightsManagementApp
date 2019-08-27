@@ -13,26 +13,9 @@ import pic from "./../../static/images/arrows.svg";
 import "./searchForm.scss";
 
 class SearchForm extends React.Component {
-  filter = data => {
-    const flights = data.Quotes.map(item => {
-      const companies = item.OutboundLeg.CarrierIds.map(company => {
-        const name = data.Carriers.find(carrier => {
-          const result = carrier.CarrierId === company;
-          return result;
-        });
-        return name.Name;
-      });
-      const flight = {
-        price: item.MinPrice,
-        time: item.OutboundLeg.DepartureDate,
-        companies: companies
-      };
-      return flight;
-    });
-    return flights;
-  };
   onSubmit = values => {
     this.props.getFlights(values);
+    this.props.history.push("/flights");
   };
   directions = data.cities.map(city => (
     <option key={Object.keys(city)} value={Object.keys(city)}>
@@ -168,8 +151,10 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
-
+const mapStateToProps = state => {
+  return { flights: state.flights };
+};
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(SearchForm));

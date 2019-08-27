@@ -23,7 +23,7 @@ const filter = data => {
   });
   return flights;
 };
-export const loginApi = values => {
+export const flightsApi = values => {
   return axios.request({
     url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/be-BY/${
       values.from
@@ -34,15 +34,15 @@ export const loginApi = values => {
     }
   });
 };
-function* loginEffectSaga(action) {
+function* searchEffectSaga(action) {
   try {
-    let { data } = yield call(loginApi, action.payload);
+    let { data } = yield call(flightsApi, action.payload);
     yield put({ type: UPDATE_FLIGHTS, flights: filter(data) });
     browserHistory.push("/flights");
   } catch (err) {
     console.log(err);
   }
 }
-export function* loginWatcherSaga() {
-  yield takeEvery(SAVE_SEARCH_INFO, loginEffectSaga);
+export function* searchWatcherSaga() {
+  yield takeEvery(SAVE_SEARCH_INFO, searchEffectSaga);
 }
