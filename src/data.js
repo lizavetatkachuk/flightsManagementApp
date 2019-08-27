@@ -1,29 +1,34 @@
-const data = [
-  {
-    price: 136,
-    time: "12.00-13.00",
-    company: "Ryanair",
-    id: "386Gn7"
-  },
-  {
-    price: 136,
-    time: "12.00-13.00",
-    company: "Ryanair",
-    id: "289hG"
-  },
-  {
-    price: 136,
-    time: "12.00-13.00",
-    company: "Ryanair",
-    id: "th7df"
-  },
-  {
-    price: 136,
-    time: "12.00-13.00",
-    company: "Ryanair",
-    id: "848hB"
-  }
-];
+const plane = {
+  business: [
+    ["A", "B", "E", "F"],
+    ["A", "B", "E", "F"],
+    ["A", "B", "E", "F"],
+    ["A", "B", "E", "F"],
+    ["A", "B", "E", "F"]
+  ],
+  economy: [
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"]
+  ]
+};
 const cities = [
   { "MSQ-sky": "Minsk" },
   { "ATL-sky": "Atlanta" },
@@ -38,4 +43,4 @@ const cities = [
   { "SXF-sky": "Berlin Shonenfield" },
   { "BVA-sky": "Paris Beauvais" }
 ];
-export default { data, cities };
+export default { plane, cities };
