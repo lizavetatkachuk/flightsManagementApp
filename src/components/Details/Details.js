@@ -12,14 +12,18 @@ import "./details.scss";
 const Details = props => {
   const [donation, setDonation] = useState(true);
   const [luggage, setLuggage] = useState(0);
+  const [seat, setSeat] = useState("");
+  const [seatClass, setClass] = useState("");
   const { flights } = props;
   const onClick = value => {
-    console.log(value);
+    setSeat(value.seat);
+    setClass(value.seatClass);
   };
   const flightDetail = flights.find(flight => {
     const result = flight.id === Number(props.match.params.id);
     return result;
   }) || { price: 0 };
+  const addition = seatClass === "business" ? 20 : null;
   return (
     <div className="details">
       <div className="details__seat">
@@ -57,9 +61,15 @@ const Details = props => {
       <div className="details__cost">
         <p className="details__label">Total cost is </p>
         <div>
+          <p className="details__cost__label">Seat Chosen: {seat}</p>
           <p className="details__cost__label">
             Ticket: {flightDetail["price"]} $
           </p>
+          {addition ? (
+            <p className="details__cost__label">
+              Extra fee for business class: 20$
+            </p>
+          ) : null}
         </div>
         <div>
           <p className="details__cost__label">Luggage: {luggage} $</p>
@@ -74,13 +84,13 @@ const Details = props => {
               setDonation(!donation);
             }}
           />
-          <label for="scales" className="details__cost__label">
+          <label className="details__cost__label">
             Donate 1$ to reduce your carbon footprint
           </label>
         </div>
         <div>
           <p className="details__cost__label">
-            Total : {luggage + flightDetail["price"] + donation}$
+            Total : {luggage + flightDetail["price"] + donation + addition}$
           </p>
         </div>
       </div>
@@ -91,7 +101,7 @@ const Details = props => {
   );
 };
 Details.propTypes = {
-  flights: PropTypes.object.isRequired,
+  flights: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired

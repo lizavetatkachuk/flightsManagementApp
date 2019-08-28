@@ -4,6 +4,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
+  min-height: 100vh;
   &__luggage,
   &__cost {
     width: 20%;

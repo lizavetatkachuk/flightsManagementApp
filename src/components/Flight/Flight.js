@@ -20,7 +20,7 @@ const Flight = props => {
   flights.sort(dynamicSort(mode));
   const flightsInfo = flights.map(flight => {
     return (
-      <Link to={`/flights/${flight.id}`} className="flight">
+      <Link to={`/flights/${flight.id}`} className="flight" key={flight.id}>
         <li className="flight__item" key={flight.id}>
           {flight.companies[0]} {flight.price}$ departs at {flight.time}
         </li>
@@ -38,7 +38,7 @@ const Flight = props => {
   );
 };
 Flight.propTypes = {
-  flights: PropTypes.object.isRequired,
+  flights: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired

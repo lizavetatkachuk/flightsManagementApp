@@ -16,7 +16,7 @@ export const Plane = props => {
           <div
             className="seat business"
             key={seatNum}
-            onClick={onClick("business")}
+            onClick={() => onClick({ seatClass: "business", seat: seatNum })}
           >
             {seatNum}
           </div>
@@ -29,23 +29,26 @@ export const Plane = props => {
       })
       .map(seat => {
         const seatNum = `${i + 1}${seat}`;
-        console.log(seatNum);
 
         return (
           <div
             className="seat business"
             key={seatNum}
-            onClick={onClick("business")}
+            onClick={() => onClick({ seatClass: "business", seat: seatNum })}
           >
             {seatNum}
           </div>
         );
       });
-
+    const classKey = `businessClass${i}`;
     return (
-      <div className="row">
-        <div className="seats">{leftSide}</div>
-        <div className="seats">{rightSide}</div>
+      <div className="row" key={classKey}>
+        <div className="seats" key="businessLeft">
+          {leftSide}
+        </div>
+        <div className="seats" key="businessRight">
+          {rightSide}
+        </div>
       </div>
     );
   });
@@ -58,7 +61,11 @@ export const Plane = props => {
       .map(seat => {
         const seatNum = `${data.plane.business.length + i + 1}${seat}`;
         return (
-          <div className="seat " key={seatNum} onClick={onClick("economy")}>
+          <div
+            className="seat "
+            key={seatNum}
+            onClick={() => onClick({ seatClass: "economy", seat: seatNum })}
+          >
             {seatNum}
           </div>
         );
@@ -70,19 +77,26 @@ export const Plane = props => {
       })
       .map(seat => {
         const seatNum = `${data.plane.business.length + i + 1}${seat}`;
-        console.log(seatNum);
 
         return (
-          <div className="seat " key={seatNum} onClick={onClick("economy")}>
+          <div
+            className="seat "
+            key={seatNum}
+            onClick={() => onClick({ seatClass: "economy", seat: seatNum })}
+          >
             {seatNum}
           </div>
         );
       });
-
+    const classKey = `economyClass${i}`;
     return (
-      <div className="row">
-        <div className="seats">{leftSide}</div>
-        <div className="seats">{rightSide}</div>
+      <div className="row" key={classKey}>
+        <div className="seats" key="economyLeft">
+          {leftSide}
+        </div>
+        <div className="seats" key="economyRight">
+          {rightSide}
+        </div>
       </div>
     );
   });

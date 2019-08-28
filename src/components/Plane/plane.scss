@@ -1,6 +1,7 @@
 @import "../Shared/index.scss";
+
 .plane {
-  height: 100%;
+  height: 60%;
   width: 80%;
   margin: auto;
 }
@@ -20,14 +21,19 @@
   background-color: $wheat-color;
   color: rgb(97, 34, 116);
   width: 22%;
+  height: 60%;
+  border-radius: 4px;
 }
 .row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 6%;
 }
 .business {
   background-color: rgb(250, 233, 78);
-  width: 30%;
+  width: 27%;
+  height: 78%;
   margin: 4px;
+  border-radius: 5px;
 }
