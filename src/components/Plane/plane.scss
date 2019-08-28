@@ -1,3 +1,4 @@
+@import "../Shared/index.scss";
 .seats {
   display: flex;
   flex-direction: row;
@@ -10,7 +11,7 @@
   width: auto;
   flex: 0 0 14.28571428571429%;
   padding: 5px;
-  background-color: wheat;
+  background-color: $wheat-color;
   color: rgb(97, 34, 116);
   position: relative;
   &:nth-child(3) {

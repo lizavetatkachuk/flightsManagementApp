@@ -1,0 +1,28 @@
+@import "../Shared/index.scss";
+.details {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  &__luggage,
+  &__cost {
+    display: flex;
+    flex-direction: column;
+    &__icon {
+      width: 35%;
+      height: auto;
+      padding: 22px;
+    }
+    &__label {
+      color: rgb(24, 45, 92);
+      font-size: 19px;
+      font-weight: bold;
+    }
+  }
+  &__label {
+    color: rgb(24, 45, 92);
+    font-size: 25px;
+    font-style: italic;
+    font-weight: bold;
+  }
+}

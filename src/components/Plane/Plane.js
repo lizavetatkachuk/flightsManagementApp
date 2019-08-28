@@ -8,7 +8,7 @@ export const Plane = () => {
     const row = item.map(seat => {
       const seatNum = `${i + 1}${seat}`;
       return (
-        <li className="seat" key={seatNum}>
+        <li className="seat business" key={seatNum}>
           {seatNum}
         </li>
       );
