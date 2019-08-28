@@ -1,27 +1,33 @@
-@import "../Shared/index.scss";
+@import '../Shared/index.scss';
 .seats {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
 }
 
 .seat {
-  display: flex;
-  width: auto;
-  flex: 0 0 14.28571428571429%;
-  padding: 5px;
-  background-color: $wheat-color;
-  color: rgb(97, 34, 116);
-  position: relative;
-  &:nth-child(3) {
-    margin-right: 14.28571428571429%;
-  }
+	display: flex;
+	width: auto;
+	flex: 0 0 14.28571428571429%;
+	padding: 5px;
+	background-color: $wheat-color;
+	color: rgb(97, 34, 116);
+	position: relative;
+	&:nth-child(3) {
+		margin-right: 14.28571428571429%;
+	}
 }
 .row {
-  list-style-type: none;
+	list-style-type: none;
 }
 .plane {
-  margin: 20px auto;
-  max-width: 300px;
+	margin: 20px auto;
+	max-width: 300px;
+}
+
+.business {
+	&:nth-child(2) {
+		margin-right: 45.28571428571429%;
+	}
 }
