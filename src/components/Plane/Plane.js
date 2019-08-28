@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import data from "../../data";
 import "./plane.scss";
 
-export const Plane = () => {
+export const Plane = props => {
+  const { onClick } = props;
   const business = data.plane.business.map((item, i) => {
     const leftSide = item
       .filter((seat, index) => {
@@ -12,7 +13,11 @@ export const Plane = () => {
       .map(seat => {
         const seatNum = `${i + 1}${seat}`;
         return (
-          <div className="seat business" key={seatNum}>
+          <div
+            className="seat business"
+            key={seatNum}
+            onClick={onClick("business")}
+          >
             {seatNum}
           </div>
         );
@@ -27,7 +32,11 @@ export const Plane = () => {
         console.log(seatNum);
 
         return (
-          <div className="seat business" key={seatNum}>
+          <div
+            className="seat business"
+            key={seatNum}
+            onClick={onClick("business")}
+          >
             {seatNum}
           </div>
         );
@@ -49,7 +58,7 @@ export const Plane = () => {
       .map(seat => {
         const seatNum = `${data.plane.business.length + i + 1}${seat}`;
         return (
-          <div className="seat " key={seatNum}>
+          <div className="seat " key={seatNum} onClick={onClick("economy")}>
             {seatNum}
           </div>
         );
@@ -64,7 +73,7 @@ export const Plane = () => {
         console.log(seatNum);
 
         return (
-          <div className="seat " key={seatNum}>
+          <div className="seat " key={seatNum} onClick={onClick("economy")}>
             {seatNum}
           </div>
         );
@@ -79,5 +88,8 @@ export const Plane = () => {
   });
   const plane = [...business, ...economy];
   return <div className="plane">{plane}</div>;
+};
+Plane.propTypes = {
+  onClick: PropTypes.func
 };
 export default Plane;

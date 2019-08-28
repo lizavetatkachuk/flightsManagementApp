@@ -13,7 +13,9 @@ const Details = props => {
   const [donation, setDonation] = useState(true);
   const [luggage, setLuggage] = useState(0);
   const { flights } = props;
-  // const handleClick = value => setLuggage(value);
+  const onClick = value => {
+    console.log(value);
+  };
   const flightDetail = flights.find(flight => {
     const result = flight.id === Number(props.match.params.id);
     return result;
@@ -22,7 +24,7 @@ const Details = props => {
     <div className="details">
       <div className="details__seat">
         <p className="details__label">Choose your seat</p>
-        <Plane></Plane>
+        <Plane onClick={onClick}></Plane>
       </div>
       <div className="details__luggage">
         <p className="details__label">Choose your luggage</p>
