@@ -38,7 +38,10 @@ const Flight = props => {
   );
 };
 Flight.propTypes = {
-  flights: PropTypes.object.isRequired
+  flights: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {

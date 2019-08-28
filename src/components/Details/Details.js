@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -10,11 +10,14 @@ import bagpack from "./../../static/images/bagpack.svg";
 import "./details.scss";
 
 const Details = props => {
-  const { flights } = props.flights;
+  const [donation, setDonation] = useState(true);
+  const [luggage, setLuggage] = useState(0);
+  const { flights } = props;
+  // const handleClick = value => setLuggage(value);
   const flightDetail = flights.find(flight => {
     const result = flight.id === Number(props.match.params.id);
     return result;
-  });
+  }) || { price: 0 };
   return (
     <div className="details">
       <div className="details__seat">
@@ -23,33 +26,60 @@ const Details = props => {
       </div>
       <div className="details__luggage">
         <p className="details__label">Choose your luggage</p>
-        <img src={bagpack} alt="bagpack" className="details__luggage__icon" />
+        <p className="details__luggage__label">One small cabin bag(20*25*30)</p>
+        <img
+          src={bagpack}
+          alt="bagpack"
+          className="details__luggage__icon"
+          onClick={() => setLuggage(8)}
+        />
+        <p className="details__luggage__label">
+          One medium check in bag(35*50*40)
+        </p>
         <img
           src={suitcase}
           alt="oneSuitcase"
           className="details__luggage__icon"
+          onClick={() => setLuggage(20)}
         />
+        <p className="details__luggage__label">
+          Two check in bags (20*25*30) and (35*50*40)
+        </p>
         <img
           src={twoSuitcases}
           alt="twoSuitcases"
           className="details__luggage__icon"
+          onClick={() => setLuggage(25)}
         />
       </div>
       <div className="details__cost">
-        <p className="details__label">Total cost is</p>
-        <div>
-          <p className="details__cost__label">Ticket: $</p>
-        </div>
-        <div>
-          <p className="details__cost__label">Luggage: $</p>
-        </div>
+        <p className="details__label">Total cost is </p>
         <div>
           <p className="details__cost__label">
-            Donate 1$ to reduce your carbon footprint
+            Ticket: {flightDetail["price"]} $
           </p>
         </div>
         <div>
-          <p className="details__cost__label">Total : $</p>
+          <p className="details__cost__label">Luggage: {luggage} $</p>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="scales"
+            name="scales"
+            checked={donation}
+            onChange={() => {
+              setDonation(!donation);
+            }}
+          />
+          <label for="scales" className="details__cost__label">
+            Donate 1$ to reduce your carbon footprint
+          </label>
+        </div>
+        <div>
+          <p className="details__cost__label">
+            Total : {luggage + flightDetail["price"] + donation}$
+          </p>
         </div>
       </div>
       <Button className="submit-order-btn" type="submit">
@@ -59,11 +89,14 @@ const Details = props => {
   );
 };
 Details.propTypes = {
-  flights: PropTypes.object.isRequired
+  flights: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
-  return { flights: state.flights };
+  return { flights: state.flights.flights };
 };
 
 export default connect(
