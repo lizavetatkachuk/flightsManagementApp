@@ -1,6 +1,7 @@
 import axios from "axios";
 import { takeEvery, call, put } from "redux-saga/effects";
 import { REGISTER } from "../action-types/flightsActionTypes";
+import { updateRegister } from "../actions/registration";
 
 const api = axios.create({
   baseURL: "/"
@@ -16,8 +17,8 @@ export const postRegistration = values => {
 };
 function* registerEffectSaga(action) {
   try {
-    let { data } = yield call(postRegistration, action.payload);
-    console.log(data);
+    let message = yield call(postRegistration, action.payload);
+    yield put(updateRegister(message.data));
   } catch (err) {
     console.log(err);
   }

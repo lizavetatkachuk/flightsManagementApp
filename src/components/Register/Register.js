@@ -1,20 +1,28 @@
 import React from "react";
-import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
+import bcrypt from "bcryptjs";
 import { register } from "./../../redux/actions/registration";
 import Button from "./../Shared/Button/Button";
 import { mustBeEmail, validatePassword } from "./../../validators";
 import "./../Login/login.scss";
 
 const Register = props => {
-  const { history, register } = props;
+  const { history, register, data } = props;
+  console.log(data);
   const onSubmit = values => {
-    register(values);
-    history.push("/login");
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(values.password, salt, function(err, hash) {
+        register({ ...values, password: hash });
+        if (data.registered === "Registered sucsessfully") {
+          console.log(data.registered === "Registered sucsessfully");
+          history.push("/login");
+        }
+      });
+    });
   };
   return (
     <div className="register">
@@ -40,6 +48,9 @@ const Register = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
+            {data.registered ? (
+              <p className="Error">Username and email must be unique</p>
+            ) : null}
             <label className="form-label">Enter your email</label>
             <Field
               className="input-field"
@@ -108,12 +119,15 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+const mapStateToProps = state => {
+  return { data: state.registered };
+};
 Register.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(Register));

@@ -1,15 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { Link, withRouter } from "react-router-dom";
+import { logIn } from "./../../redux/actions/authorisation";
 import Button from "./../Shared/Button/Button";
 import { mustBeEmail, minLength } from "./../../validators";
 import "./login.scss";
 
 const Login = props => {
   const onSubmit = values => {
-    console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
-    props.history.push("/");
+    const { history, logIn } = props;
+    logIn(values);
+    history.push("/");
   };
   return (
     <div className="login">
@@ -30,7 +34,7 @@ const Login = props => {
             <label className="form-label">Login</label>
             <Field
               className="input-field"
-              name="login"
+              name="email"
               render={({ input, meta }) => (
                 <React.Fragment>
                   {meta.error && meta.touched && (
@@ -68,9 +72,22 @@ const Login = props => {
     </div>
   );
 };
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      logIn
+    },
+    dispatch
+  );
+const mapStateToProps = state => {
+  return { data: state.user };
+};
 Login.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
-export default withRouter(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Login));
