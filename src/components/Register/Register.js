@@ -1,15 +1,20 @@
 import React from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
+import { register } from "./../../redux/actions/registration";
 import Button from "./../Shared/Button/Button";
 import { mustBeEmail, validatePassword } from "./../../validators";
 import "./../Login/login.scss";
 
 const Register = props => {
+  const { history, register } = props;
   const onSubmit = values => {
-    console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
-    props.history.push("/");
+    register(values);
+    history.push("/login");
   };
   return (
     <div className="register">
@@ -23,8 +28,8 @@ const Register = props => {
           if (!values.password) {
             errors.password = "Required";
           }
-          if (!values.username) {
-            errors.username = "Required";
+          if (!values.name) {
+            errors.name = "Required";
           }
           if (!values.confirmpassword) {
             errors.confirmpassword = "Required";
@@ -79,7 +84,7 @@ const Register = props => {
             <label className="form-label">Pick up a username</label>
             <Field
               className="input-field"
-              name="username"
+              name="name"
               render={({ input, meta }) => (
                 <React.Fragment>
                   {meta.error && meta.touched && (
@@ -96,9 +101,19 @@ const Register = props => {
     </div>
   );
 };
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      register
+    },
+    dispatch
+  );
 Register.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
-export default withRouter(Register);
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(Register));

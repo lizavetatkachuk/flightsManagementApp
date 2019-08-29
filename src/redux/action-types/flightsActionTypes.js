@@ -1,2 +1,3 @@
 export const GET_FLIGHTS = "SAVE_SEARCH_INFO";
 export const UPDATE_FLIGHTS = "UPDATE_FLIGHTS";
+export const REGISTER = "REGISTER";
