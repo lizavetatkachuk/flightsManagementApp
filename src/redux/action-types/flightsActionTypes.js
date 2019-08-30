@@ -1,7 +1,10 @@
-export const GET_FLIGHTS = "SAVE_SEARCH_INFO";
+export const GET_FLIGHTS = "GET_FLIGHTS";
+export const FLIGHTS_FAILED = "FLIGHTS_FAILED";
 export const UPDATE_FLIGHTS = "UPDATE_FLIGHTS";
 export const REGISTER = "REGISTER";
+export const REGISTER_FAILED = "REGISTER_FAILED";
 export const UPDATE_REGISTER = "UPDATE_REGISTER";
 export const LOGIN = "LOGIN";
+export const LOGIN_FAILED = "LOGIN_FAILED";
 export const LOGOUT = "LOGOUT";
 export const SET_USER = "SET_USER";

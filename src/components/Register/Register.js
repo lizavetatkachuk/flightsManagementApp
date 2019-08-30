@@ -12,15 +12,10 @@ import "./../Login/login.scss";
 
 const Register = props => {
   const { history, register, data } = props;
-  console.log(data);
   const onSubmit = values => {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(values.password, salt, function(err, hash) {
-        register({ ...values, password: hash });
-        if (data.registered === "Registered sucsessfully") {
-          console.log(data.registered === "Registered sucsessfully");
-          history.push("/login");
-        }
+        register({ ...values, password: hash, history });
       });
     });
   };
@@ -49,7 +44,7 @@ const Register = props => {
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
             {data.registered ? (
-              <p className="Error">Username and email must be unique</p>
+              <p className="Error">This email is already in use</p>
             ) : null}
             <label className="form-label">Enter your email</label>
             <Field

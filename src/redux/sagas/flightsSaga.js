@@ -1,7 +1,7 @@
 import axios from "axios";
 import { takeEvery, call, put } from "redux-saga/effects";
 
-import { updateFlights } from "../actions/getFlights";
+import { updateFlights, failFlights } from "../actions/getFlights";
 import { GET_FLIGHTS } from "../action-types/flightsActionTypes";
 
 const filter = data => {
@@ -37,7 +37,7 @@ function* searchEffectSaga(action) {
     let { data } = yield call(flightsApi, action.payload);
     yield put(updateFlights(filter(data)));
   } catch (err) {
-    console.log(err);
+    yield put(failFlights(err.data));
   }
 }
 export function* searchWatcherSaga() {

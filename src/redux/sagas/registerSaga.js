@@ -1,12 +1,12 @@
 import axios from "axios";
 import { takeEvery, call, put } from "redux-saga/effects";
 import { REGISTER } from "../action-types/flightsActionTypes";
-import { updateRegister } from "../actions/registration";
+import { updateRegister, failRegister } from "../actions/registration";
 
 const api = axios.create({
   baseURL: "/"
 });
-export const postRegistration = values => {
+export const requestSignUp = values => {
   const { email, password, name } = values;
   return api.post("auth/register", {
     email,
@@ -17,10 +17,12 @@ export const postRegistration = values => {
 };
 function* registerEffectSaga(action) {
   try {
-    let message = yield call(postRegistration, action.payload);
-    yield put(updateRegister(message.data));
+    let message = yield call(requestSignUp, action.payload);
+    const { history } = action.payload;
+    yield put(updateRegister(message));
+    history.push("/login");
   } catch (err) {
-    console.log(err);
+    yield put(failRegister("Email already in use"));
   }
 }
 export function* registrationWatcherSaga() {

@@ -14,7 +14,7 @@ import "./searchForm.scss";
 
 class SearchForm extends React.Component {
   render() {
-    const { history, getFlights } = this.props;
+    const { getFlights, history } = this.props;
     const onSubmit = values => {
       getFlights(values);
       history.push("/flights");
@@ -152,6 +152,7 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+
 export default connect(
   null,
   mapDispatchToProps

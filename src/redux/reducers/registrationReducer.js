@@ -1,4 +1,8 @@
-import { REGISTER, UPDATE_REGISTER } from "../action-types/flightsActionTypes";
+import {
+  REGISTER,
+  UPDATE_REGISTER,
+  REGISTER_FAILED
+} from "../action-types/flightsActionTypes";
 
 const initialState = {
   registered: null
@@ -8,6 +12,8 @@ export const registrationReducer = (state = initialState, action) => {
     case REGISTER:
       return { ...state };
     case UPDATE_REGISTER:
+      return { ...state, registered: action.payload };
+    case REGISTER_FAILED:
       return { ...state, registered: action.payload };
     default:
       return state;

@@ -10,10 +10,9 @@ import { mustBeEmail, minLength } from "./../../validators";
 import "./login.scss";
 
 const Login = props => {
+  const { history, logIn, data } = props;
   const onSubmit = values => {
-    const { history, logIn } = props;
-    logIn(values);
-    history.push("/");
+    logIn({ ...values, history });
   };
   return (
     <div className="login">
@@ -31,6 +30,7 @@ const Login = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
+            {data.message ? <p className="Error">{data.message}</p> : null}
             <label className="form-label">Login</label>
             <Field
               className="input-field"

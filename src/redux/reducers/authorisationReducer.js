@@ -1,7 +1,13 @@
-import { LOGIN, LOGOUT, SET_USER } from "../action-types/flightsActionTypes";
+import {
+  LOGIN,
+  LOGOUT,
+  SET_USER,
+  LOGIN_FAILED
+} from "../action-types/flightsActionTypes";
 
 const initialState = {
-  user: {}
+  token: null,
+  message: null
 };
 
 export const authorisationReducer = (state = initialState, action) => {
@@ -9,9 +15,11 @@ export const authorisationReducer = (state = initialState, action) => {
     case LOGIN:
       return { ...state };
     case LOGOUT:
-      return { ...state, user: {} };
+      return { ...state, token: null };
     case SET_USER:
-      return { ...state, user: action.payload };
+      return { ...state, token: action.payload };
+    case LOGIN_FAILED:
+      return { ...state, message: action.payload };
     default:
       return state;
   }
