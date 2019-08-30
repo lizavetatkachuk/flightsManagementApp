@@ -6,6 +6,8 @@ import Register from "./components/Register/Register";
 import SearchForm from "./components/SearchForm/SearchForm";
 import Login from "./components/Login/Login";
 import Details from "./components/Details/Details";
+import Order from "./components/Orders/Order";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./app.scss";
 
 const App = () => {
@@ -19,6 +21,7 @@ const App = () => {
           <Route path="/flights/:id" component={Details} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <PrivateRoute path="/orders" component={Order} />
         </Switch>
       </div>
     </Router>

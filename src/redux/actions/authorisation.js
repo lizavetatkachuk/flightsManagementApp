@@ -9,7 +9,7 @@ export const logIn = values => ({
   type: LOGIN,
   payload: { ...values }
 });
-export const logOut = user => ({
+export const logOut = () => ({
   type: LOGOUT
 });
 export const setUser = user => ({
