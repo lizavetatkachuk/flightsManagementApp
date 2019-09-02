@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./button.scss";
 const Button = props => {
-  const { btntype, btnclass } = props;
+  const { btntype, btnclass, disabled } = props;
   const buttonclass = btnclass ? btnclass : "button";
   return (
-    <button type={btntype} className={buttonclass}>
+    <button type={btntype} className={buttonclass} disabled={disabled}>
       {props.children}
     </button>
   );

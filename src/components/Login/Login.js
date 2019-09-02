@@ -55,7 +55,10 @@ const Login = props => {
               )}
               validate={minLength}
             />
-            <Button btntype="submit"> Log In</Button>
+            <Button btntype="submit" disabled={submitting || pristine}>
+              {" "}
+              Log In
+            </Button>
           </form>
         )}
       />
