@@ -100,7 +100,9 @@ const Register = props => {
                 </React.Fragment>
               )}
             />
-            <Button btntype="submit">Register </Button>
+            <Button btntype="submit" disabled={submitting || pristine}>
+              Register{" "}
+            </Button>
           </form>
         )}
       />
