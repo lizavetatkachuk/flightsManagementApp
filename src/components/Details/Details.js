@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from "axios";
+import { getToken } from "./../../helpers/authHelper";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
 import suitcase from "./../../static/images/suitcase.svg";
@@ -10,6 +12,9 @@ import bagpack from "./../../static/images/bagpack.svg";
 import "./details.scss";
 
 const Details = props => {
+  const api = axios.create({
+    baseURL: "/"
+  });
   const [donation, setDonation] = useState(true);
   const [luggage, setLuggage] = useState(0);
   const [seat, setSeat] = useState("");
@@ -18,6 +23,30 @@ const Details = props => {
   const onClick = value => {
     setSeat(value.seat);
     setClass(value.seatClass);
+  };
+  const handleClick = () => {
+    const { from, to, price, time } = flightDetail;
+    const flight = {
+      from,
+      to,
+      price,
+      time,
+      company: flightDetail.companies[0],
+      seat,
+      donation,
+      luggage
+    };
+    api.post(
+      "/flight",
+      {
+        ...flight
+      },
+      {
+        headers: {
+          Authorisation: getToken()
+        }
+      }
+    );
   };
   const flightDetail = flights.find(flight => {
     const result = flight.id === Number(props.match.params.id);
@@ -94,7 +123,7 @@ const Details = props => {
           </p>
         </div>
       </div>
-      <Button className="submit-order-btn" type="submit">
+      <Button className="submit-order-btn" type="submit" onClick={handleClick}>
         Book the ticket
       </Button>
     </div>
@@ -110,7 +139,6 @@ Details.propTypes = {
 const mapStateToProps = state => {
   return { flights: state.flights.flights };
 };
-
 export default connect(
   mapStateToProps,
   null

@@ -17,6 +17,7 @@ export const requestLogin = values => {
 function* loginEffectSaga(action) {
   try {
     let res = yield call(requestLogin, action.payload);
+    console.log(res);
     const { history } = action.payload;
     yield put(setUser(res.data));
     setToken(res.data.token);

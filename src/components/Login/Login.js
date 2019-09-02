@@ -30,7 +30,7 @@ const Login = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
-            {auth.message ? <p className="Error">{auth.message}</p> : null}
+            {auth.message ? <p className="Error"></p> : null}
             <label className="form-label">Login</label>
             <Field
               className="input-field"

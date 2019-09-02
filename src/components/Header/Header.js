@@ -16,7 +16,7 @@ const Header = props => {
         <NavLink exact to="/" className="nav-btn" activeClassName="selected">
           Search Flights
         </NavLink>
-        <NavLink to="/basket" className="nav-btn" activeClassName="selected">
+        <NavLink to="/orders" className="nav-btn" activeClassName="selected">
           My flights
         </NavLink>
       </nav>

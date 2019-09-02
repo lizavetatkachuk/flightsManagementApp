@@ -1,10 +1,10 @@
 import axios from "axios";
 import { takeEvery, call, put } from "redux-saga/effects";
 
-import { updateFlights, failFlights } from "../actions/getFlights";
+import { updateFlights, failFlights } from "../actions/flights";
 import { GET_FLIGHTS } from "../action-types/flightsActionTypes";
 
-const filter = data => {
+const filter = (data, values) => {
   const flights = data.Quotes.map(item => {
     const companies = item.OutboundLeg.CarrierIds.map(company => {
       const name = data.Carriers.find(carrier => {
@@ -14,6 +14,8 @@ const filter = data => {
       return name.Name;
     });
     const flight = {
+      from: values.from,
+      to: values.to,
       id: item.QuoteId,
       price: item.MinPrice,
       time: item.QuoteDateTime,
@@ -23,7 +25,7 @@ const filter = data => {
   });
   return flights;
 };
-export const flightsApi = values => {
+const flightsApi = values => {
   return axios.request({
     url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/be-BY/${values.from}/${values.to}/${values.there}`,
     method: "GET",
@@ -35,7 +37,7 @@ export const flightsApi = values => {
 function* searchEffectSaga(action) {
   try {
     let { data } = yield call(flightsApi, action.payload);
-    yield put(updateFlights(filter(data)));
+    yield put(updateFlights(filter(data, action.payload)));
   } catch (err) {
     yield put(failFlights(err.data));
   }

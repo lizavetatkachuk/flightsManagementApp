@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
-import { getFlights } from "./../../redux/actions/getFlights";
+import { getFlights } from "./../../redux/actions/flights";
 import Button from "./../Shared/Button/Button";
 import { Picker } from "./../Picker/Picker";
 import { validateDate } from "../../validators";
@@ -140,6 +140,7 @@ class SearchForm extends React.Component {
   }
 }
 SearchForm.propTypes = {
+  getFlights: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
