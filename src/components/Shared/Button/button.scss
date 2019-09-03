@@ -1,13 +1,26 @@
+@import "../index.scss";
 .button {
   align-self: center;
   width: auto;
   background-color: rgba(#9c98bd, 0.3);
   border-radius: 6px;
-  color: white;
+  color: $base-color;
   font-size: 18px;
   margin: 5px;
 }
 
 .search-flights-btn {
-  font-size: 22px;
+  border-radius: 6px;
+  margin: auto;
+  width: 20%;
+  background-color: $form-color;
+  font-size: 30px;
+  color: $base-color;
+}
+.submit-order-btn {
+  align-self: flex-start;
+  border-radius: 6px;
+  background-color: rgba($font-color, 0.8);
+  font-size: 20px;
+  color: $base-color;
 }

@@ -33,28 +33,26 @@ const Login = props => {
             {auth.message ? <p className="Error"></p> : null}
             <label className="form-label">Login</label>
             <Field
-              className="input-field"
               name="email"
               render={({ input, meta }) => (
                 <React.Fragment>
                   {meta.error && meta.touched && (
                     <span className="Error">{meta.error}</span>
                   )}
-                  <input {...input} />
+                  <input className="input-field" {...input} />
                 </React.Fragment>
               )}
               validate={mustBeEmail}
             />
             <label className="form-label">Password</label>
             <Field
-              className="input-field"
               name="password"
               render={({ input, meta }) => (
                 <React.Fragment>
                   {meta.error && meta.touched && (
                     <span className="Error">{meta.error}</span>
                   )}
-                  <input {...input} type="password" />
+                  <input className="input-field" {...input} type="password" />
                 </React.Fragment>
               )}
               validate={minLength}

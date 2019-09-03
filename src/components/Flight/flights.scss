@@ -1,18 +1,22 @@
+@import "./../Shared/index.scss";
 .flight {
-  color: white;
+  color: $base-color;
   &__item {
     font-size: 25px;
     margin-left: 25%;
     margin-right: 15%;
     margin-bottom: 20px;
     height: 55px;
-    background-color: rgba(rgb(106, 153, 87), 0.7);
+    background-color: rgba($font-color, 0.7);
     border-radius: 8px;
   }
 }
 .server-msg {
   font-size: 25px;
-  color: rgb(40, 99, 16);
+  color: $red-color;
   text-align: center;
   font-weight: bold;
+}
+.company {
+  text-align: center;
 }

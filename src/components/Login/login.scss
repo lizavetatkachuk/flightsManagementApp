@@ -6,6 +6,7 @@
   height: auto;
   width: 35%;
   margin: 0 auto;
+  margin-top: 5%;
   padding: 25px;
 
   &__form {
@@ -19,10 +20,10 @@
 }
 
 .input-field {
-  background-color: $form-color;
   width: 70%;
   height: 20px;
-  border-radius: 6px;
+  border-radius: 5px;
+  padding-left: 6px;
   outline: none;
 }
 

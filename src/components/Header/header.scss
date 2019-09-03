@@ -1,19 +1,19 @@
 @import "../Shared/index.scss";
 .header {
   height: 70px;
-  font-style: italic;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   text-decoration: none;
-  background: linear-gradient(180deg, rgba(16, 10, 110, 1) 0%, rgba(52, 52, 194, 1) 69%, rgb(157, 172, 182) 100%);
+  background: linear-gradient(180deg, #232079 0%, #7881a5 69%, #95a6b1 100%);
   &__nav,
   &__login {
     font-size: 30px;
   }
   &__title {
+    font-style: italic;
     align-items: flex-start;
     font-size: 50px;
     text-decoration: none;
@@ -26,7 +26,7 @@
   background-color: transparent;
   text-decoration: none;
   border: none;
-  font-style: italic;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   margin: 15px;
   color: $font-color;

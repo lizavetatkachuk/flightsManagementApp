@@ -129,7 +129,11 @@ class SearchForm extends React.Component {
                 name="back"
               />
             </div>
-            <Button btnype="submit" disabled={submitting || pristine}>
+            <Button
+              btnype="submit"
+              btnclass="search-flights-btn"
+              disabled={submitting || pristine}
+            >
               Search Flights
             </Button>
           </form>

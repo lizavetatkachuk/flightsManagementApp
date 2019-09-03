@@ -5,7 +5,8 @@
   flex-flow: column wrap;
   justify-items: stretch;
   justify-content: space-evenly;
-  background-color: rgba($blue-color, 0.7);
+  background-color: $form-color;
+  color: $base-color;
   margin: 0 auto;
   margin-top: 5%;
   width: 80%;
@@ -13,8 +14,10 @@
 
   &__label {
     font-size: 30px;
+    margin: 10px;
   }
   &__select {
+    outline: none;
     font-size: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -35,23 +38,15 @@
   flex-flow: column;
   justify-content: space-between;
   width: 32%;
+  position: relative;
 }
 .radio {
-  background-color: $font-color;
   height: 15px;
   width: 15px;
-  :checked {
-    background: rgb(247, 4, 4);
-  }
 }
 .react-datepicker {
   &-wrapper {
     height: 55px;
-  }
-  input {
-    font-family: $font;
-    font-size: 15px;
-    border-radius: 5px;
   }
 
   &__input-container {
@@ -59,17 +54,32 @@
       left: 10px;
       top: 25px;
     }
+    input {
+      font-family: $font;
+      font-size: 15px;
+      border-radius: 5px;
+      outline: none;
+    }
     font-family: $font;
     font-size: 18px;
   }
 }
+.react-datepicker-ignore-onclickoutside {
+  font-family: $font;
+  font-size: 15px;
+  border-radius: 5px;
+  outline: none;
+}
+
 .error {
   font-size: 21px;
   color: $red-color;
+  position: absolute;
+  bottom: -30px;
 }
 .shift-btn {
-  height: 50px;
-  width: 50px;
+  height: 58px;
+  width: 58px;
 }
 
 .flight-dates {

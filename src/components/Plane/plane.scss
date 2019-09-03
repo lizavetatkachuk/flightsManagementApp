@@ -18,30 +18,40 @@
 .seat {
   display: flex;
   justify-content: center;
-  color: rgb(97, 34, 116);
+  color: $dark-color;
+  box-shadow: 3ыpx 3px grey;
+  vertical-align: middle;
 }
 .row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 6%;
+  height: 7%;
 }
 .business {
-  background-color: rgb(250, 233, 78);
+  margin: 6px;
+  background-color: $font-color;
   width: 27%;
-  height: 78%;
+  height: 55%;
+  padding-top: 6px;
+  padding-bottom: 2px;
   margin: 4px;
   border-radius: 5px;
   &--selected {
-    background-color: blue;
+    background-color: $base-color;
+    color: $font-color;
   }
 }
 .economy {
-  background-color: $wheat-color;
+  margin-top: 3px;
+  background-color: #de4c3c;
   width: 22%;
-  height: 60%;
+  height: 48%;
+  padding-top: 4px;
+  padding-bottom: 2px;
   border-radius: 4px;
   &--selected {
-    background-color: blue;
+    background-color: $base-color;
+    color: $font-color;
   }
 }

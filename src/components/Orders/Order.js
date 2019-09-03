@@ -1,5 +1,6 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, Fragment } from "react";
 import { api } from "./../../helpers/apiHeler";
+import "./../Flight/flights.scss";
 
 const Order = () => {
   const [{ orders }, setState] = useReducer((s, a) => ({ ...s, ...a }), {
@@ -20,8 +21,22 @@ const Order = () => {
   useEffect(() => {
     fetchOrders();
   }, []);
-
+  const ordersInfo = orders.map(order => {
+    return (
+      <li className="flight__item" key={order._id}>
+        <div>
+          Flying from {order.from} to {order.to} {order.price}$ departs at{" "}
+          {order.time}
+        </div>
+        <div className="company">Airlines : {order.company}</div>
+      </li>
+    );
+  });
   console.log(orders);
-  return <h1>Hello</h1>;
+  return (
+    <Fragment>
+      <ul>{ordersInfo}</ul>
+    </Fragment>
+  );
 };
 export default Order;

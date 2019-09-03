@@ -111,15 +111,15 @@ const Details = props => {
             Total : {luggage + flightDetail["price"] + donation + addition}$
           </p>
         </div>
+        <Button
+          btnclass="submit-order-btn"
+          type="submit"
+          onClick={handleClick}
+          disabled={validated}
+        >
+          Book the ticket
+        </Button>
       </div>
-      <Button
-        className="submit-order-btn"
-        type="submit"
-        onClick={handleClick}
-        disabled={validated}
-      >
-        Book the ticket
-      </Button>
     </div>
   );
 };
