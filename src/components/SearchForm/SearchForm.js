@@ -95,7 +95,7 @@ class SearchForm extends React.Component {
                 render={({ input, meta }) => (
                   <div className="container">
                     <label className="search-form__label">One Way</label>
-                    <input {...input} />
+                    <input className="radio" {...input} />
                     {meta.error && meta.touched && (
                       <span className="error">{meta.error}</span>
                     )}
@@ -110,8 +110,7 @@ class SearchForm extends React.Component {
                 render={({ input, meta }) => (
                   <div className="container">
                     <label className="search-form__label">Return</label>
-
-                    <input {...input} />
+                    <input className="radio" {...input} />
                   </div>
                 )}
               />

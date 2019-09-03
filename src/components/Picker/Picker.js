@@ -22,13 +22,13 @@ export class Picker extends React.Component {
     return (
       <div className="container">
         <label className="search-form__label">{title}</label>
-        {error && touched && <span className="error">{error}</span>}
         <DatePicker
           selected={date}
           onChange={date => this.handleChange(date)}
           errorText={touched && error}
           dateFormat="MMMM d, yyyy"
         />
+        {error && touched && <span className="error">{error}</span>}
       </div>
     );
   }

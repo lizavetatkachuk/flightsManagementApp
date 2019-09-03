@@ -21,7 +21,7 @@ const Header = props => {
         </NavLink>
       </nav>
       <Link to="/" className="header__title">
-        <p className="title">Search Flights</p>
+        Search Flights
       </Link>
       <div className="header__login">
         {res ? (

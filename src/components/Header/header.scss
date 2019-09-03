@@ -1,34 +1,39 @@
 @import "../Shared/index.scss";
-$font-color: wheat;
 .header {
+  height: 70px;
   font-style: italic;
-  font-size: 60px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  margin-left: 30px;
-  margin-right: 30px;
+  padding: 20px;
+  text-decoration: none;
+  background: linear-gradient(180deg, rgba(16, 10, 110, 1) 0%, rgba(52, 52, 194, 1) 69%, rgb(157, 172, 182) 100%);
   &__nav,
   &__login {
-    font-size: 45px;
+    font-size: 30px;
   }
   &__title {
+    align-items: flex-start;
+    font-size: 50px;
     text-decoration: none;
     color: $font-color;
+    margin-top: 0;
   }
 }
 
 .nav-btn {
-  background-color: $base-color;
+  background-color: transparent;
+  text-decoration: none;
   border: none;
   font-style: italic;
-  font-size: 45px;
+  font-size: 30px;
   margin: 15px;
   color: $font-color;
   outline: none;
 }
 
 .selected {
-  color: rgb(46, 27, 90);
+  color: $font-color;
+  text-decoration: underline;
 }
