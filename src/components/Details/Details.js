@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
 import suitcase from "./../../static/images/suitcase.svg";
@@ -18,6 +19,23 @@ const Details = props => {
   const onClick = value => {
     setSeat(value.seat);
     setClass(value.seatClass);
+  };
+  const validated = seat ? false : true;
+  const handleClick = () => {
+    const { from, to, price, time } = flightDetail;
+    const flight = {
+      from,
+      to,
+      price,
+      time,
+      company: flightDetail.companies[0],
+      seat,
+      donation,
+      luggage
+    };
+    api.post("/flight", {
+      ...flight
+    });
   };
   const flightDetail = flights.find(flight => {
     const result = flight.id === Number(props.match.params.id);
@@ -94,7 +112,12 @@ const Details = props => {
           </p>
         </div>
       </div>
-      <Button className="submit-order-btn" type="submit">
+      <Button
+        className="submit-order-btn"
+        type="submit"
+        onClick={handleClick}
+        disabled={validated}
+      >
         Book the ticket
       </Button>
     </div>
@@ -110,7 +133,6 @@ Details.propTypes = {
 const mapStateToProps = state => {
   return { flights: state.flights.flights };
 };
-
 export default connect(
   mapStateToProps,
   null

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
-import { getFlights } from "./../../redux/actions/getFlights";
+import { getFlights } from "./../../redux/actions/flights";
 import Button from "./../Shared/Button/Button";
 import { Picker } from "./../Picker/Picker";
 import { validateDate } from "../../validators";
@@ -14,7 +14,7 @@ import "./searchForm.scss";
 
 class SearchForm extends React.Component {
   render() {
-    const { history, getFlights } = this.props;
+    const { getFlights, history } = this.props;
     const onSubmit = values => {
       getFlights(values);
       history.push("/flights");
@@ -95,7 +95,7 @@ class SearchForm extends React.Component {
                 render={({ input, meta }) => (
                   <div className="container">
                     <label className="search-form__label">One Way</label>
-                    <input {...input} />
+                    <input className="radio" {...input} />
                     {meta.error && meta.touched && (
                       <span className="error">{meta.error}</span>
                     )}
@@ -110,8 +110,7 @@ class SearchForm extends React.Component {
                 render={({ input, meta }) => (
                   <div className="container">
                     <label className="search-form__label">Return</label>
-
-                    <input {...input} />
+                    <input className="radio" {...input} />
                   </div>
                 )}
               />
@@ -140,6 +139,7 @@ class SearchForm extends React.Component {
   }
 }
 SearchForm.propTypes = {
+  getFlights: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
@@ -152,6 +152,7 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+
 export default connect(
   null,
   mapDispatchToProps

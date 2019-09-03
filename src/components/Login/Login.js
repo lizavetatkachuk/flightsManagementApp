@@ -1,15 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { Link, withRouter } from "react-router-dom";
+import { logIn } from "./../../redux/actions/authorisation";
 import Button from "./../Shared/Button/Button";
 import { mustBeEmail, minLength } from "./../../validators";
 import "./login.scss";
 
 const Login = props => {
+  const { history, logIn, auth } = props;
   const onSubmit = values => {
-    console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
-    props.history.push("/");
+    logIn({ ...values, history });
   };
   return (
     <div className="login">
@@ -27,10 +30,11 @@ const Login = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
+            {auth.message ? <p className="Error"></p> : null}
             <label className="form-label">Login</label>
             <Field
               className="input-field"
-              name="login"
+              name="email"
               render={({ input, meta }) => (
                 <React.Fragment>
                   {meta.error && meta.touched && (
@@ -71,9 +75,22 @@ const Login = props => {
     </div>
   );
 };
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      logIn
+    },
+    dispatch
+  );
+const mapStateToProps = state => {
+  return { ...state };
+};
 Login.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
-export default withRouter(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Login));
