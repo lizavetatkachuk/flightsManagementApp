@@ -53,7 +53,7 @@ class SearchForm extends React.Component {
                 name="from"
                 render={({ input, meta }) => (
                   <React.Fragment>
-                    <div className="container">
+                    <div className="container--vertical">
                       <label className="search-form__label">Flying From</label>
                       <select className="search-form__select " {...input}>
                         {directions}
@@ -65,7 +65,7 @@ class SearchForm extends React.Component {
                   </React.Fragment>
                 )}
               />
-              <div className="search-form__select">
+              <div>
                 <img src={pic} className="shift-btn" alt="arrow" />
               </div>
 
@@ -73,7 +73,7 @@ class SearchForm extends React.Component {
                 name="to"
                 render={({ input, meta }) => (
                   <React.Fragment>
-                    <div className="container">
+                    <div className="container--vertical">
                       <label className="search-form__label">Flying To</label>
 
                       <select className="search-form__select" {...input}>
@@ -117,13 +117,13 @@ class SearchForm extends React.Component {
             </div>
             <div className="search-form__field">
               <Field
-                className="component flight-dates"
+                className="flight-dates"
                 component={Picker}
                 validate={validateDate}
                 name="there"
               />
               <Field
-                className="component flight-dates"
+                className="flight-dates"
                 component={Picker}
                 validate={validateDate}
                 name="back"

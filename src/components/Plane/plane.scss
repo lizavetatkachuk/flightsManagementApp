@@ -2,7 +2,7 @@
 
 .plane {
   height: 60%;
-  width: 80%;
+  width: 90%;
   margin: auto;
 }
 
@@ -16,11 +16,12 @@
 }
 
 .seat {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   color: $dark-color;
-  box-shadow: 3ыpx 3px grey;
-  vertical-align: middle;
+  box-shadow: 3px 3px 3px grey;
+  align-items: center;
 }
 .row {
   display: flex;
@@ -43,11 +44,12 @@
   }
 }
 .economy {
+  font-size: 13px;
   margin-top: 3px;
-  background-color: #de4c3c;
+  background-color: #4398d1;
   width: 22%;
   height: 48%;
-  padding-top: 4px;
+  padding-top: 3px;
   padding-bottom: 2px;
   border-radius: 4px;
   &--selected {

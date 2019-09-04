@@ -1,5 +1,7 @@
 @import "../index.scss";
 .button {
+  outline: none;
+  cursor: pointer;
   align-self: center;
   width: auto;
   background-color: rgba(#9c98bd, 0.3);
@@ -10,17 +12,23 @@
 }
 
 .search-flights-btn {
+  outline: none;
+  cursor: pointer;
   border-radius: 6px;
   margin: auto;
   width: 20%;
   background-color: $form-color;
-  font-size: 30px;
+  font-size: 28px;
+  padding: 5px;
   color: $base-color;
 }
 .submit-order-btn {
+  outline: none;
+  cursor: pointer;
   align-self: flex-start;
   border-radius: 6px;
   background-color: rgba($font-color, 0.8);
   font-size: 20px;
   color: $base-color;
+  margin: 10px;
 }

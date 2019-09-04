@@ -14,7 +14,8 @@
 
   &__label {
     font-size: 30px;
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   &__select {
     outline: none;
@@ -23,10 +24,11 @@
     flex-wrap: wrap;
     height: 35px;
     border-radius: 5px;
+    background-color: rgba(#f7f3f3, 0.75);
   }
   &__field {
     display: flex;
-    flex-flow: row;
+    flex-flow: row wrap;
     font-size: 20px;
     justify-content: space-between;
     justify-self: flex-start;
@@ -35,10 +37,16 @@
 }
 .container {
   display: flex;
-  flex-flow: column;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
   width: 32%;
   position: relative;
+  &--vertical {
+    display: flex;
+    flex-flow: column wrap;
+    width: 32%;
+  }
 }
 .radio {
   height: 15px;
@@ -46,27 +54,26 @@
 }
 .react-datepicker {
   &-wrapper {
-    height: 55px;
+    width: 100%;
   }
+  width: 100%;
 
   &__input-container {
-    padding: {
-      left: 10px;
-      top: 25px;
-    }
     input {
+      height: 33px;
       font-family: $font;
-      font-size: 15px;
-      border-radius: 5px;
+      font-size: 20px;
       outline: none;
+      width: 123%;
+      background-color: rgba(#f7f3f3, 0.75);
+      border: none;
+      border-radius: 5px;
     }
-    font-family: $font;
-    font-size: 18px;
   }
 }
 .react-datepicker-ignore-onclickoutside {
   font-family: $font;
-  font-size: 15px;
+  font-size: 20px;
   border-radius: 5px;
   outline: none;
 }

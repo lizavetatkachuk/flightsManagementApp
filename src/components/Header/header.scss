@@ -15,6 +15,7 @@
   &__title {
     font-style: italic;
     align-items: flex-start;
+    width: 30%;
     font-size: 50px;
     text-decoration: none;
     color: $font-color;
@@ -23,6 +24,7 @@
 }
 
 .nav-btn {
+  cursor: pointer;
   background-color: transparent;
   text-decoration: none;
   border: none;
@@ -35,5 +37,5 @@
 
 .selected {
   color: $font-color;
-  text-decoration: underline;
+  border-bottom: 2px solid $font-color;
 }

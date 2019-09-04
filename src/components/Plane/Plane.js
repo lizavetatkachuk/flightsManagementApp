@@ -4,10 +4,21 @@ import data from "../../data";
 import "./plane.scss";
 
 export const Plane = props => {
-  const { onClick } = props;
-  const [selected, setSelected] = useState("");
+  const { onClick, people } = props;
+  const [selected, setSelected] = useState([]);
   const businessClass = "business";
   const economyClass = "economy";
+  const handleChange = seat => {
+    if (selected.includes(seat)) {
+      const newSelected = selected.filter(item => item !== seat);
+      setSelected(newSelected);
+    } else {
+      if (selected.length < people) {
+        const newSelected = [...selected, seat];
+        setSelected(newSelected);
+      }
+    }
+  };
   const business = data.plane.business.map((item, i) => {
     const leftSide = item
       .filter((seat, index) => {
@@ -15,17 +26,16 @@ export const Plane = props => {
       })
       .map(seat => {
         const seatNum = `${i + 1}${seat}`;
-        const seatClass =
-          selected === seatNum
-            ? `seat ${businessClass} ${businessClass}--selected`
-            : `seat ${businessClass}`;
+        const seatClass = selected.includes(seatNum)
+          ? `seat ${businessClass} ${businessClass}--selected`
+          : `seat ${businessClass}`;
         return (
           <div
             className={seatClass}
             key={seatNum}
             onClick={() => {
               onClick({ seatClass: businessClass, seat: seatNum });
-              setSelected(seatNum);
+              handleChange(seatNum);
             }}
           >
             {seatNum}
@@ -39,17 +49,16 @@ export const Plane = props => {
       })
       .map(seat => {
         const seatNum = `${i + 1}${seat}`;
-        const seatClass =
-          selected === seatNum
-            ? `seat ${businessClass} ${businessClass}--selected`
-            : `seat ${businessClass}`;
+        const seatClass = selected.includes(seatNum)
+          ? `seat ${businessClass} ${businessClass}--selected`
+          : `seat ${businessClass}`;
         return (
           <div
             className={seatClass}
             key={seatNum}
             onClick={() => {
               onClick({ seatClass: businessClass, seat: seatNum });
-              setSelected(seatNum);
+              handleChange(seatNum);
             }}
           >
             {seatNum}
@@ -76,17 +85,16 @@ export const Plane = props => {
       })
       .map(seat => {
         const seatNum = `${data.plane.business.length + i + 1}${seat}`;
-        const seatClass =
-          selected === seatNum
-            ? `seat ${economyClass} ${economyClass}--selected`
-            : `seat ${economyClass}`;
+        const seatClass = selected.includes(seatNum)
+          ? `seat ${economyClass} ${economyClass}--selected`
+          : `seat ${economyClass}`;
         return (
           <div
             className={seatClass}
             key={seatNum}
             onClick={() => {
               onClick({ seatClass: economyClass, seat: seatNum });
-              setSelected(seatNum);
+              handleChange(seatNum);
             }}
           >
             {seatNum}
@@ -100,17 +108,16 @@ export const Plane = props => {
       })
       .map(seat => {
         const seatNum = `${data.plane.business.length + i + 1}${seat}`;
-        const seatClass =
-          selected === seatNum
-            ? `seat ${economyClass} ${economyClass}--selected`
-            : `seat ${economyClass}`;
+        const seatClass = selected.includes(seatNum)
+          ? `seat ${economyClass} ${economyClass}--selected`
+          : `seat ${economyClass}`;
         return (
           <div
             className={seatClass}
             key={seatNum}
             onClick={() => {
               onClick({ seatClass: economyClass, seat: seatNum });
-              setSelected(seatNum);
+              handleChange(seatNum);
             }}
           >
             {seatNum}

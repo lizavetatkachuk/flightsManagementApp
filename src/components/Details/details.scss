@@ -10,31 +10,68 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   min-height: 100vh;
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    &__row {
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
   &__luggage,
   &__cost {
-    width: 20%;
     display: flex;
-    flex-direction: column;
+    flex-flow: row wrap;
+
+    justify-content: space-around;
+    width: 100%;
     &__icon {
       width: 35%;
       height: auto;
       padding: 22px;
+      cursor: pointer;
     }
     &__label {
       color: $base-color;
-      font-size: 19px;
+      font-size: 16px;
       font-weight: bold;
     }
+    .details__label {
+      width: 100%;
+    }
   }
-  &__seat {
-    width: 40%;
+  &__people {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    .details__label {
+      width: 100%;
+    }
+    &__input {
+      width: 40px;
+      text-align: center;
+      background-color: rgba($base-color, 0.2);
+      outline: none;
+      border-radius: 6px;
+    }
+    font-size: 15px;
+  }
+  &__plane {
+    width: 35%;
+    margin: 20px;
   }
   &__label {
     color: $base-color;
     font-size: 25px;
     font-style: italic;
     font-weight: bold;
+    text-align: center;
   }
+}
+.bag {
+  width: 30%;
 }
