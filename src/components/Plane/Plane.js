@@ -5,6 +5,7 @@ import "./plane.scss";
 
 export const Plane = props => {
   const { onClick, people } = props;
+  const { booked } = props || [];
   const [selected, setSelected] = useState([]);
   const businessClass = "business";
   const economyClass = "economy";
@@ -31,17 +32,25 @@ export const Plane = props => {
         const seatClass = selected.includes(seatNum)
           ? `seat ${businessClass} ${businessClass}--selected`
           : `seat ${businessClass}`;
-        return (
-          <div
-            className={seatClass}
-            key={seatNum}
-            onClick={() => {
-              handleChange(seatNum, seatClass);
-            }}
-          >
-            {seatNum}
-          </div>
-        );
+        if (booked.includes(seatNum)) {
+          return (
+            <div className={`${seatClass} booked`} key={seatNum}>
+              {seatNum}
+            </div>
+          );
+        } else {
+          return (
+            <div
+              className={seatClass}
+              key={seatNum}
+              onClick={() => {
+                handleChange(seatNum, seatClass);
+              }}
+            >
+              {seatNum}
+            </div>
+          );
+        }
       });
 
     const rightSide = item
@@ -53,17 +62,25 @@ export const Plane = props => {
         const seatClass = selected.includes(seatNum)
           ? `seat ${businessClass} ${businessClass}--selected`
           : `seat ${businessClass}`;
-        return (
-          <div
-            className={seatClass}
-            key={seatNum}
-            onClick={() => {
-              handleChange(seatNum, seatClass);
-            }}
-          >
-            {seatNum}
-          </div>
-        );
+        if (booked.includes(seatNum)) {
+          return (
+            <div className={`${seatClass} booked`} key={seatNum}>
+              {seatNum}
+            </div>
+          );
+        } else {
+          return (
+            <div
+              className={seatClass}
+              key={seatNum}
+              onClick={() => {
+                handleChange(seatNum, seatClass);
+              }}
+            >
+              {seatNum}
+            </div>
+          );
+        }
       });
     const classKey = `businessClass${i}`;
     return (
@@ -88,17 +105,25 @@ export const Plane = props => {
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
-        return (
-          <div
-            className={seatClass}
-            key={seatNum}
-            onClick={() => {
-              handleChange(seatNum, seatClass);
-            }}
-          >
-            {seatNum}
-          </div>
-        );
+        if (booked.includes(seatNum)) {
+          return (
+            <div className={`${seatClass} booked`} key={seatNum}>
+              {seatNum}
+            </div>
+          );
+        } else {
+          return (
+            <div
+              className={seatClass}
+              key={seatNum}
+              onClick={() => {
+                handleChange(seatNum, seatClass);
+              }}
+            >
+              {seatNum}
+            </div>
+          );
+        }
       });
 
     const rightSide = item
@@ -110,17 +135,25 @@ export const Plane = props => {
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
-        return (
-          <div
-            className={seatClass}
-            key={seatNum}
-            onClick={() => {
-              handleChange(seatNum, seatClass);
-            }}
-          >
-            {seatNum}
-          </div>
-        );
+        if (booked.includes(seatNum)) {
+          return (
+            <div className={`${seatClass} booked`} key={seatNum}>
+              {seatNum}
+            </div>
+          );
+        } else {
+          return (
+            <div
+              className={seatClass}
+              key={seatNum}
+              onClick={() => {
+                handleChange(seatNum, seatClass);
+              }}
+            >
+              {seatNum}
+            </div>
+          );
+        }
       });
     const classKey = `economyClass${i}`;
     return (

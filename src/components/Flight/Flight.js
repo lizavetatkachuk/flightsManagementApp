@@ -18,9 +18,9 @@ const Flight = props => {
   flights.flights.sort(dynamicSort(mode));
   const flightsInfo = flights.flights.map(flight => {
     return (
-      <Link to={`/flights/${flight.id}`} className="flight" key={flight.id}>
-        <li className="flight__item" key={flight.id}>
-          {flight.companies[0]} {flight.price}$ departs at {flight.time}
+      <Link to={`/flights/${flight._id}`} className="flight" key={flight._id}>
+        <li className="flight__item" key={flight._id}>
+          {flight.company} {flight.price}$ departs at {flight.time}
         </li>
       </Link>
     );

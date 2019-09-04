@@ -29,14 +29,14 @@
     justify-content: space-around;
     width: 100%;
     &__icon {
-      width: 35%;
+      width: 29%;
       height: auto;
       padding: 22px;
       cursor: pointer;
     }
     &__label {
       color: $base-color;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
     }
     .details__label {
@@ -75,6 +75,11 @@
     text-align: center;
   }
 }
+.list {
+  width: 100%;
+  align-items: baseline;
+  height: 80%;
+}
 .bag {
-  width: 30%;
+  width: 25%;
 }

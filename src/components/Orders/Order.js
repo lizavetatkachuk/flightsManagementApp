@@ -32,7 +32,6 @@ const Order = () => {
       </li>
     );
   });
-  console.log(orders);
   return (
     <Fragment>
       <ul>{ordersInfo}</ul>

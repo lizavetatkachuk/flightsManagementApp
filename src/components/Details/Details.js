@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
-import data from "./../../data";
 import suitcase from "./../../static/images/suitcase.svg";
 import twoSuitcases from "./../../static/images/suitcases.svg";
 import bagpack from "./../../static/images/bagpack.svg";
@@ -18,7 +17,40 @@ const Details = props => {
   const [seats, setSeats] = useState([]);
   const [seatClass, setClass] = useState("");
   const { flights } = props;
-  const mappedSeats = seats.map(seat => <li>{seat}</li>);
+  const addition = seatClass === "business" ? 20 : null;
+  const mappedSeats = seats.map(seat => {
+    return (
+      <li key={seat} className="list">
+        <div>
+          <p>Seat {seat}</p>
+        </div>
+        <div>
+          {addition ? (
+            <p className="details__cost__label">
+              Extra fee for business class: 20$
+            </p>
+          ) : null}
+        </div>
+        <div>
+          <p className="details__cost__label">Luggage: {luggage} $</p>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="scales"
+            name="scales"
+            checked={donation}
+            onChange={() => {
+              setDonation(!donation);
+            }}
+          />
+          <label className="details__cost__label">
+            Donate 1$ to reduce your carbon footprint
+          </label>
+        </div>
+      </li>
+    );
+  });
   const onClick = value => {
     if (seats.includes(value.seat)) {
       const newSeats = seats.filter(item => item !== value.seat);
@@ -39,32 +71,35 @@ const Details = props => {
   };
   const validated = seats ? false : true;
   const handleClick = () => {
-    const { from, to, price, time } = flightDetail;
-    const flight = {
+    const { from, to, price, time, company, _id } = flightDetail;
+    const order = {
+      flight: _id,
       from,
       to,
       price,
       time,
-      company: flightDetail.companies[0],
+      company,
       seats,
       donation,
       luggage
     };
-    console.log(flight);
-    api.post("/flight", {
-      ...flight
+    api.post("/order", {
+      ...order
     });
   };
   const flightDetail = flights.find(flight => {
-    const result = flight.id === Number(props.match.params.id);
+    const result = flight._id === props.match.params.id;
     return result;
-  }) || { price: 0 };
-  const addition = seatClass === "business" ? 20 : null;
+  }) || { booked: [] };
   return (
     <div className="details">
       <div className="details__plane">
         <p className="details__label">Choose your seat</p>
-        <Plane onClick={onClick} people={people}></Plane>
+        <Plane
+          onClick={onClick}
+          people={people}
+          booked={flightDetail.booked}
+        ></Plane>
       </div>
       <div className="details__container">
         <div className="details__container__row">
@@ -110,6 +145,7 @@ const Details = props => {
             <p className="details__label">Choose the number of seats</p>
             <Button onClick={decrement}>-</Button>
             <input
+              readOnly={true}
               type="text"
               value={people}
               className="details__people__input"
@@ -120,40 +156,13 @@ const Details = props => {
         <div className="details__container__row">
           <div className="details__cost">
             <p className="details__label">Total cost is </p>
+            <p className="details__cost__label">
+              You have chosen: {mappedSeats}
+            </p>
             <div>
-              <p className="details__cost__label">
-                Seats Chosen: {mappedSeats}
-              </p>
-              <p className="details__cost__label">
-                Ticket: {flightDetail["price"]} $
-              </p>
-              {addition ? (
-                <p className="details__cost__label">
-                  Extra fee for business class: 20$
-                </p>
-              ) : null}
-            </div>
-            <div>
-              <p className="details__cost__label">Luggage: {luggage} $</p>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="scales"
-                name="scales"
-                checked={donation}
-                onChange={() => {
-                  setDonation(!donation);
-                }}
-              />
-              <label className="details__cost__label">
-                Donate 1$ to reduce your carbon footprint
-              </label>
-            </div>
-            <div>
-              <p className="details__cost__label">
+              {/* <p className="details__cost__label">
                 Total : {luggage + flightDetail["price"] + donation + addition}$
-              </p>
+              </p> */}
             </div>
             <Button
               btnclass="submit-order-btn"
@@ -161,7 +170,7 @@ const Details = props => {
               onClick={handleClick}
               disabled={validated}
             >
-              Book the ticket
+              Book the tickets
             </Button>
           </div>
         </div>

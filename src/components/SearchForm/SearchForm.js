@@ -20,7 +20,7 @@ class SearchForm extends React.Component {
       history.push("/flights");
     };
     const directions = data.cities.map(city => (
-      <option key={Object.keys(city)} value={Object.keys(city)}>
+      <option key={Object.keys(city)} value={Object.values(city)}>
         {Object.values(city)}
       </option>
     ));
