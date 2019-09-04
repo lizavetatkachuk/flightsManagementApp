@@ -75,7 +75,6 @@ class SearchForm extends React.Component {
                   <React.Fragment>
                     <div className="container--vertical">
                       <label className="search-form__label">Flying To</label>
-
                       <select className="search-form__select" {...input}>
                         {directions}
                       </select>

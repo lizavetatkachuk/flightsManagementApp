@@ -12,10 +12,12 @@ export const Plane = props => {
     if (selected.includes(seat)) {
       const newSelected = selected.filter(item => item !== seat);
       setSelected(newSelected);
+      onClick({ seatClass: businessClass, seat });
     } else {
       if (selected.length < people) {
         const newSelected = [...selected, seat];
         setSelected(newSelected);
+        onClick({ seatClass: businessClass, seat });
       }
     }
   };
@@ -34,8 +36,7 @@ export const Plane = props => {
             className={seatClass}
             key={seatNum}
             onClick={() => {
-              onClick({ seatClass: businessClass, seat: seatNum });
-              handleChange(seatNum);
+              handleChange(seatNum, seatClass);
             }}
           >
             {seatNum}
@@ -57,8 +58,7 @@ export const Plane = props => {
             className={seatClass}
             key={seatNum}
             onClick={() => {
-              onClick({ seatClass: businessClass, seat: seatNum });
-              handleChange(seatNum);
+              handleChange(seatNum, seatClass);
             }}
           >
             {seatNum}
@@ -93,8 +93,7 @@ export const Plane = props => {
             className={seatClass}
             key={seatNum}
             onClick={() => {
-              onClick({ seatClass: economyClass, seat: seatNum });
-              handleChange(seatNum);
+              handleChange(seatNum, seatClass);
             }}
           >
             {seatNum}
@@ -116,8 +115,7 @@ export const Plane = props => {
             className={seatClass}
             key={seatNum}
             onClick={() => {
-              onClick({ seatClass: economyClass, seat: seatNum });
-              handleChange(seatNum);
+              handleChange(seatNum, seatClass);
             }}
           >
             {seatNum}

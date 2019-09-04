@@ -108,17 +108,13 @@ const Details = props => {
         <div className="details__container__row">
           <div className="details__people">
             <p className="details__label">Choose the number of seats</p>
-            <Button class="minus" onClick={decrement}>
-              -
-            </Button>
+            <Button onClick={decrement}>-</Button>
             <input
               type="text"
               value={people}
               className="details__people__input"
             />
-            <Button class="plus" onClick={increment}>
-              +
-            </Button>
+            <Button onClick={increment}>+</Button>
           </div>
         </div>
         <div className="details__container__row">
