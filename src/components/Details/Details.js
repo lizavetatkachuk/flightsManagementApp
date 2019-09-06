@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
+import { getToken } from "./../../helpers/authHelper";
 import suitcase from "./../../static/images/suitcase.svg";
 import twoSuitcases from "./../../static/images/suitcases.svg";
 import bagpack from "./../../static/images/bagpack.svg";
@@ -16,8 +17,8 @@ const Details = props => {
   const [people, setPeople] = useState(1);
   const [seats, setSeats] = useState([]);
   const [seatClass, setClass] = useState("");
-  const { flights } = props;
-  const addition = seatClass === "business" ? 20 : null;
+  const { flights, history } = props;
+  const token = getToken();
   const mappedSeats = seats.map(seat => {
     return (
       <li key={seat} className="list">
@@ -25,7 +26,7 @@ const Details = props => {
           <p>Seat {seat}</p>
         </div>
         <div>
-          {addition ? (
+          {seatClass === "business" ? (
             <p className="details__cost__label">
               Extra fee for business class: 20$
             </p>
@@ -71,21 +72,23 @@ const Details = props => {
   };
   const validated = seats ? false : true;
   const handleClick = () => {
-    const { from, to, price, time, company, _id } = flightDetail;
-    const order = {
-      flight: _id,
-      from,
-      to,
-      price,
-      time,
-      company,
-      seats,
-      donation,
-      luggage
-    };
-    api.post("/order", {
-      ...order
-    });
+    if (!!token) {
+      const { from, to, price, time, company, _id } = flightDetail;
+      const order = {
+        flight: _id,
+        from,
+        to,
+        price,
+        time,
+        company,
+        seats,
+        donation,
+        luggage
+      };
+      api.post("/order", {
+        ...order
+      });
+    } else history.push("/login");
   };
   const flightDetail = flights.find(flight => {
     const result = flight._id === props.match.params.id;
@@ -159,11 +162,7 @@ const Details = props => {
             <p className="details__cost__label">
               You have chosen: {mappedSeats}
             </p>
-            <div>
-              {/* <p className="details__cost__label">
-                Total : {luggage + flightDetail["price"] + donation + addition}$
-              </p> */}
-            </div>
+            <div></div>
             <Button
               btnclass="submit-order-btn"
               type="submit"

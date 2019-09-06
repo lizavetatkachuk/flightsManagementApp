@@ -7,6 +7,7 @@ import SearchForm from "./components/SearchForm/SearchForm";
 import Login from "./components/Login/Login";
 import Details from "./components/Details/Details";
 import Order from "./components/Orders/Order";
+import AdminPane from "./components/AdminPane/AdminPane.tsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./app.scss";
 
@@ -21,7 +22,8 @@ const App = () => {
           <Route path="/flights/:id" component={Details} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <PrivateRoute path="/orders" component={Order} />
+          <PrivateRoute userRole="client" path="/orders" component={Order} />
+          <PrivateRoute userRole="admin" path="/admin" component={AdminPane} />
         </Switch>
       </div>
     </Router>

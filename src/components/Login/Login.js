@@ -6,6 +6,7 @@ import { Form, Field } from "react-final-form";
 import { Link, withRouter } from "react-router-dom";
 import { logIn } from "./../../redux/actions/authorisation";
 import Button from "./../Shared/Button/Button";
+import bcrypt from "bcryptjs";
 import { mustBeEmail, minLength } from "./../../validators";
 import "./login.scss";
 

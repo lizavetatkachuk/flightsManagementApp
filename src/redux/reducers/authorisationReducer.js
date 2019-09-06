@@ -7,7 +7,6 @@ import {
 
 const initialState = {
   user: {},
-  token: null,
   message: null
 };
 
@@ -16,11 +15,10 @@ export const authorisationReducer = (state = initialState, action) => {
     case LOGIN:
       return { ...state };
     case LOGOUT:
-      return { ...state, token: null };
+      return { ...state, user: null };
     case SET_USER:
       return {
         ...state,
-        token: action.payload.token,
         user: action.payload.user
       };
     case LOGIN_FAILED:
