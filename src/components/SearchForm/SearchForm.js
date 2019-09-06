@@ -14,10 +14,12 @@ import "./searchForm.scss";
 
 class SearchForm extends React.Component {
   render() {
-    const { getFlights, history } = this.props;
+    const { getFlights, history, flights } = this.props;
     const onSubmit = values => {
-      getFlights(values);
-      history.push("/flights");
+      // getFlights(values);
+      // flights.flights && history.push("/flights");
+      // flights.error &&
+      console.log(flights.flights);
     };
     const directions = data.cities.map(city => (
       <option key={Object.keys(city)} value={Object.values(city)}>
@@ -48,6 +50,15 @@ class SearchForm extends React.Component {
         }}
         render={({ handleSubmit, submitting, pristine }) => (
           <form className="search-form" onSubmit={handleSubmit}>
+            <div>
+              {flights.error ? (
+                <p className="search-form__label">
+                  There are no flights for these dates
+                </p>
+              ) : (
+                <p className="search-form__label"></p>
+              )}
+            </div>
             <div className="search-form__field">
               <Field
                 name="from"
@@ -155,8 +166,11 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
-
+const mapStateToProps = state => {
+  const { flights } = state;
+  return flights;
+};
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(SearchForm));

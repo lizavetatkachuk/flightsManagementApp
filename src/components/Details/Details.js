@@ -159,11 +159,6 @@ const Details = props => {
             <p className="details__cost__label">
               You have chosen: {mappedSeats}
             </p>
-            <div>
-              {/* <p className="details__cost__label">
-                Total : {luggage + flightDetail["price"] + donation + addition}$
-              </p> */}
-            </div>
             <Button
               btnclass="submit-order-btn"
               type="submit"
