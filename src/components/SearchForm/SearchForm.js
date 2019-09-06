@@ -14,12 +14,10 @@ import "./searchForm.scss";
 
 class SearchForm extends React.Component {
   render() {
-    const { getFlights, history, flights } = this.props;
+    const { getFlights, history, error } = this.props;
     const onSubmit = values => {
-      // getFlights(values);
-      // flights.flights && history.push("/flights");
-      // flights.error &&
-      console.log(flights.flights);
+      getFlights(values);
+      !error && history.push("/flights");
     };
     const directions = data.cities.map(city => (
       <option key={Object.keys(city)} value={Object.values(city)}>
@@ -50,15 +48,7 @@ class SearchForm extends React.Component {
         }}
         render={({ handleSubmit, submitting, pristine }) => (
           <form className="search-form" onSubmit={handleSubmit}>
-            <div>
-              {flights.error ? (
-                <p className="search-form__label">
-                  There are no flights for these dates
-                </p>
-              ) : (
-                <p className="search-form__label"></p>
-              )}
-            </div>
+            <div></div>
             <div className="search-form__field">
               <Field
                 name="from"
@@ -146,6 +136,13 @@ class SearchForm extends React.Component {
             >
               Search Flights
             </Button>
+            {error ? (
+              <p className="search-form__label">
+                There are no flights for these dates
+              </p>
+            ) : (
+              <p className="search-form__label"></p>
+            )}
           </form>
         )}
       />
@@ -167,8 +164,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 const mapStateToProps = state => {
-  const { flights } = state;
-  return flights;
+  return { error: state.flights.error };
 };
 export default connect(
   mapStateToProps,

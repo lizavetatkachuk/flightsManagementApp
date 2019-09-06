@@ -4,11 +4,13 @@ import { getToken } from "../../helpers/authHelper";
 import { connect } from "react-redux";
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
-  const res = getToken();
+  const token = getToken();
   return (
     <Route
       {...rest}
-      render={props => (res ? <Component /> : <Redirect to="/login" />)}
+      render={props =>
+        token ? <Component /> : <Redirect to="/REQUEST_LOGIN" />
+      }
     />
   );
 };

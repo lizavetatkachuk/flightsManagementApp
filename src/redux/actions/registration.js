@@ -1,18 +1,18 @@
 import {
-  REGISTER,
-  UPDATE_REGISTER,
-  REGISTER_FAILED
+  REQUEST_REGISTER,
+  REQUEST_REGISTER_FAILED,
+  REQUEST_REGISTER_SUCSESS
 } from "../action-types/flightsActionTypes";
 
 export const register = values => ({
-  type: REGISTER,
+  type: REQUEST_REGISTER,
   payload: { ...values }
 });
 export const updateRegister = message => ({
-  type: UPDATE_REGISTER,
+  type: REQUEST_REGISTER_FAILED,
   payload: message
 });
 export const failRegister = message => ({
-  type: REGISTER_FAILED,
+  type: REQUEST_REGISTER_SUCSESS,
   payload: message
 });

@@ -26,13 +26,11 @@ const Details = props => {
         </div>
         <div>
           {addition ? (
-            <p className="details__cost__label">
-              Extra fee for business class: 20$
-            </p>
+            <p className="cost__label">Extra fee for business class: 20$</p>
           ) : null}
         </div>
         <div>
-          <p className="details__cost__label">Luggage: {luggage} $</p>
+          <p className="cost__label">Luggage: {luggage} $</p>
         </div>
         <div>
           <input
@@ -44,7 +42,7 @@ const Details = props => {
               setDonation(!donation);
             }}
           />
-          <label className="details__cost__label">
+          <label className="cost__label">
             Donate 1$ to reduce your carbon footprint
           </label>
         </div>
@@ -101,73 +99,61 @@ const Details = props => {
           booked={flightDetail.booked}
         ></Plane>
       </div>
-      <div className="details__container">
-        <div className="details__container__row">
-          <div className="details__luggage">
-            <p className="details__label">Choose your luggage</p>
-            <div className="bag">
-              <p className="details__luggage__label">
-                One small cabin bag(20*25*30)
-              </p>
-              <img
-                src={bagpack}
-                alt="bagpack"
-                className="details__luggage__icon"
-                onClick={() => setLuggage(8)}
-              />
-            </div>
-            <div className="bag">
-              <p className="details__luggage__label">
-                One medium check in bag(35*50*40)
-              </p>
-              <img
-                src={suitcase}
-                alt="oneSuitcase"
-                className="details__luggage__icon"
-                onClick={() => setLuggage(20)}
-              />
-            </div>
-            <div className="bag">
-              <p className="details__luggage__label">
-                Two check in bags (20*25*30) and (35*50*40)
-              </p>
-              <img
-                src={twoSuitcases}
-                alt="twoSuitcases"
-                className="details__luggage__icon"
-                onClick={() => setLuggage(25)}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="details__container__row">
-          <div className="details__people">
-            <p className="details__label">Choose the number of seats</p>
-            <Button onClick={decrement}>-</Button>
-            <input
-              readOnly={true}
-              type="text"
-              value={people}
-              className="details__people__input"
+      <div className="details__options options">
+        <div className="options__row luggage">
+          <p className="options__label">Choose your luggage</p>
+          <div className="bag">
+            <p className="luggage__label">One small cabin bag(20*25*30)</p>
+            <img
+              src={bagpack}
+              alt="bagpack"
+              className="luggage__icon"
+              onClick={() => setLuggage(8)}
             />
-            <Button onClick={increment}>+</Button>
+          </div>
+          <div className="bag">
+            <p className="luggage__label">One medium check in bag(35*50*40)</p>
+            <img
+              src={suitcase}
+              alt="oneSuitcase"
+              className="luggage__icon"
+              onClick={() => setLuggage(20)}
+            />
+          </div>
+          <div className="bag">
+            <p className="luggage__label">
+              Two check in bags (20*25*30) and (35*50*40)
+            </p>
+            <img
+              src={twoSuitcases}
+              alt="twoSuitcases"
+              className="luggage__icon"
+              onClick={() => setLuggage(25)}
+            />
           </div>
         </div>
-        <div className="details__container__row">
-          <div className="details__cost">
-            <p className="details__label">Total cost is </p>
-            <p className="details__cost__label">
-              You have chosen: {mappedSeats}
-            </p>
-            <Button
-              btnclass="submit-order-btn"
-              type="submit"
-              onClick={handleClick}
-              disabled={validated}
-            >
-              Book the tickets
-            </Button>
-          </div>
+        <div className="options__row people">
+          <p className="options__label">Choose the number of seats</p>
+          <Button onClick={decrement}>-</Button>
+          <input
+            readOnly={true}
+            type="text"
+            value={people}
+            className="people__input"
+          />
+          <Button onClick={increment}>+</Button>
+        </div>
+        <div className="options__row cost">
+          <p className="options__label">Total cost is </p>
+          <p className="cost__label">You have chosen: {mappedSeats}</p>
+          <Button
+            btnclass="submit-order-btn"
+            type="submit"
+            onClick={handleClick}
+            disabled={validated}
+          >
+            Book the tickets
+          </Button>
         </div>
       </div>
     </div>
