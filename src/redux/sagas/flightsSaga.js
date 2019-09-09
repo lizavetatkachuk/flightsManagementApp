@@ -12,7 +12,9 @@ const flightsApi = values => {
 function* searchEffectSaga(action) {
   try {
     let { data } = yield call(flightsApi, action.payload);
-    yield put(updateFlights(data));
+    data.length > 0
+      ? yield put(updateFlights(data))
+      : yield put(failFlights("There are no flights for these dates"));
   } catch (err) {
     yield put(failFlights(err.data));
   }

@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import Details from "./components/Details/Details";
 import Order from "./components/Orders/Order";
 import AdminPane from "./components/AdminPane/AdminPane.tsx";
+import Airports from "./components/Airports/Airports.tsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./app.scss";
 
@@ -23,7 +24,17 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <PrivateRoute userRole="client" path="/orders" component={Order} />
-          <PrivateRoute userRole="admin" path="/admin" component={AdminPane} />
+          <PrivateRoute
+            userRole="admin"
+            exact
+            path="/admin"
+            component={AdminPane}
+          />
+          <PrivateRoute
+            userRole="admin"
+            path="/admin/airports"
+            component={Airports}
+          />
         </Switch>
       </div>
     </Router>
