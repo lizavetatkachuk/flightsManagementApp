@@ -1,7 +1,7 @@
 import {
-  GET_FLIGHTS,
-  UPDATE_FLIGHTS,
-  FLIGHTS_FAILED
+  REQUEST_FLIGHTS,
+  REQUEST_FLIGHTS_SUCSESS,
+  REQUEST_FLIGHTS_FAILED
 } from "../action-types/flightsActionTypes";
 
 const initialState = {
@@ -12,11 +12,11 @@ const initialState = {
 
 export const flightsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_FLIGHTS:
+    case REQUEST_FLIGHTS:
       return { ...state, loading: true };
-    case UPDATE_FLIGHTS:
+    case REQUEST_FLIGHTS_SUCSESS:
       return { ...state, flights: action.payload, loading: false };
-    case FLIGHTS_FAILED:
+    case REQUEST_FLIGHTS_FAILED:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

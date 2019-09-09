@@ -1,7 +1,10 @@
 import axios from "axios";
 import { takeEvery, call, put } from "redux-saga/effects";
-import { LOGIN } from "../action-types/flightsActionTypes";
-import { setUser, failLogIn } from "../actions/authorisation";
+import { REQUEST_LOGIN } from "../action-types/flightsActionTypes";
+import {
+  requestLoginSucsess,
+  requestLoginFailed
+} from "../actions/authorisation";
 import { setToken } from "../../helpers/authHelper";
 
 const api = axios.create({
@@ -19,13 +22,13 @@ function* loginEffectSaga(action) {
     let res = yield call(requestLogin, action.payload);
     console.log(res);
     const { history } = action.payload;
-    yield put(setUser(res.data));
+    yield put(requestLoginSucsess(res.data));
     setToken(res.data.token);
     history.push("/");
   } catch (err) {
-    yield put(failLogIn(err.response.data));
+    yield put(requestLoginFailed(err.response.data));
   }
 }
 export function* loginWatcherSaga() {
-  yield takeEvery(LOGIN, loginEffectSaga);
+  yield takeEvery(REQUEST_LOGIN, loginEffectSaga);
 }

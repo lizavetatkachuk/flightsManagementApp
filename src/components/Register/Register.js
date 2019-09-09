@@ -5,17 +5,17 @@ import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
 import bcrypt from "bcryptjs";
-import { register } from "./../../redux/actions/registration";
+import { requestRegister } from "./../../redux/actions/registration";
 import Button from "./../Shared/Button/Button";
 import { mustBeEmail, validatePassword } from "./../../validators";
 import "./../Login/login.scss";
 
 const Register = props => {
-  const { history, register, data } = props;
+  const { history, requestRegister, data } = props;
   const onSubmit = values => {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(values.password, salt, function(err, hash) {
-        register({ ...values, password: hash, history });
+        requestRegister({ ...values, password: hash, history });
       });
     });
   };
@@ -108,7 +108,7 @@ const Register = props => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      register
+      requestRegister
     },
     dispatch
   );

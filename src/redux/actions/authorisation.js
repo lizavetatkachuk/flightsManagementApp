@@ -1,22 +1,22 @@
 import {
-  LOGIN,
+  REQUEST_LOGIN,
   LOGOUT,
-  SET_USER,
-  LOGIN_FAILED
+  REQUEST_LOGIN_SUCSESS,
+  REQUEST_LOGIN_FAILED
 } from "../action-types/flightsActionTypes";
 
-export const logIn = values => ({
-  type: LOGIN,
+export const requestLogin = values => ({
+  type: REQUEST_LOGIN,
   payload: { ...values }
 });
 export const logOut = () => ({
   type: LOGOUT
 });
-export const setUser = user => ({
-  type: SET_USER,
+export const requestLoginSucsess = user => ({
+  type: REQUEST_LOGIN_SUCSESS,
   payload: { ...user }
 });
-export const failLogIn = message => ({
-  type: LOGIN_FAILED,
+export const requestLoginFailed = message => ({
+  type: REQUEST_LOGIN_FAILED,
   payload: message
 });

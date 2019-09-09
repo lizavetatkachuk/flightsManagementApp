@@ -4,15 +4,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { Link, withRouter } from "react-router-dom";
-import { logIn } from "./../../redux/actions/authorisation";
+import { requestLogin } from "./../../redux/actions/authorisation";
 import Button from "./../Shared/Button/Button";
 import { mustBeEmail, minLength } from "./../../validators";
 import "./login.scss";
 
 const Login = props => {
-  const { history, logIn, auth } = props;
+  const { history, requestLogin, auth } = props;
   const onSubmit = values => {
-    logIn({ ...values, history });
+    requestLogin({ ...values, history });
   };
   return (
     <div className="login">
@@ -76,7 +76,7 @@ const Login = props => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      logIn
+      requestLogin
     },
     dispatch
   );

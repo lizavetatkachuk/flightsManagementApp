@@ -1,19 +1,19 @@
 import {
-  UPDATE_FLIGHTS,
-  GET_FLIGHTS,
-  FLIGHTS_FAILED
+  REQUEST_FLIGHTS,
+  REQUEST_FLIGHTS_SUCSESS,
+  REQUEST_FLIGHTS_FAILED
 } from "../action-types/flightsActionTypes";
 
-export const getFlights = values => ({
-  type: GET_FLIGHTS,
+export const requestFlights = values => ({
+  type: REQUEST_FLIGHTS,
   payload: { ...values }
 });
 
-export const updateFlights = values => ({
-  type: UPDATE_FLIGHTS,
+export const requestFlightsSucsess = values => ({
+  type: REQUEST_FLIGHTS_SUCSESS,
   payload: [...values]
 });
-export const failFlights = error => ({
-  type: FLIGHTS_FAILED,
+export const requestFlightsFailed = error => ({
+  type: REQUEST_FLIGHTS_FAILED,
   payload: error
 });

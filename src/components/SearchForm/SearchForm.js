@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
-import { getFlights } from "./../../redux/actions/flights";
+import { requestFlights } from "./../../redux/actions/flights";
 import Button from "./../Shared/Button/Button";
 import { Picker } from "./../Picker/Picker";
 import { validateDate } from "../../validators";
@@ -14,9 +14,9 @@ import "./searchForm.scss";
 
 class SearchForm extends React.Component {
   render() {
-    const { getFlights, history, error } = this.props;
+    const { requestFlights, history, error } = this.props;
     const onSubmit = values => {
-      getFlights(values);
+      requestFlights(values);
       !error && history.push("/flights");
     };
     const directions = data.cities.map(city => (
@@ -159,7 +159,7 @@ SearchForm.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getFlights
+      requestFlights
     },
     dispatch
   );

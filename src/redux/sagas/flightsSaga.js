@@ -1,7 +1,10 @@
 import { takeEvery, call, put } from "redux-saga/effects";
 
-import { updateFlights, failFlights } from "../actions/flights";
-import { GET_FLIGHTS } from "../action-types/flightsActionTypes";
+import {
+  requestFlightsSucsess,
+  requestFlightsFailed
+} from "../actions/flights";
+import { REQUEST_FLIGHTS } from "../action-types/flightsActionTypes";
 import { api } from "./../../helpers/apiHeler";
 
 const flightsApi = values => {
@@ -13,12 +16,12 @@ function* searchEffectSaga(action) {
   try {
     let { data } = yield call(flightsApi, action.payload);
     data.length > 0
-      ? yield put(updateFlights(data))
-      : yield put(failFlights("No flights"));
+      ? yield put(requestFlightsSucsess(data))
+      : yield put(requestFlightsFailed("No flights"));
   } catch (err) {
-    yield put(failFlights(err.data));
+    yield put(requestFlightsFailed(err.data));
   }
 }
 export function* searchWatcherSaga() {
-  yield takeEvery(GET_FLIGHTS, searchEffectSaga);
+  yield takeEvery(REQUEST_FLIGHTS, searchEffectSaga);
 }
