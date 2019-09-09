@@ -7,7 +7,6 @@ import {
 
 const initialState = {
   user: {},
-  token: null,
   message: null
 };
 
@@ -20,7 +19,6 @@ export const authorisationReducer = (state = initialState, action) => {
     case REQUEST_LOGIN_SUCSESS:
       return {
         ...state,
-        token: action.payload.token,
         user: action.payload.user
       };
     case REQUEST_LOGIN_FAILED:

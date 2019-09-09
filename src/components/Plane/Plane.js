@@ -9,7 +9,7 @@ export const Plane = props => {
   const [selected, setSelected] = useState([]);
   const businessClass = "business";
   const economyClass = "economy";
-  const handleChange = seat => {
+  const handleChange = (seat, seatClass) => {
     if (selected.includes(seat)) {
       const newSelected = selected.filter(item => item !== seat);
       setSelected(newSelected);
@@ -18,7 +18,7 @@ export const Plane = props => {
       if (selected.length < people) {
         const newSelected = [...selected, seat];
         setSelected(newSelected);
-        onClick({ seatClass: businessClass, seat });
+        onClick({ seatClass, seat });
       }
     }
   };
@@ -44,7 +44,7 @@ export const Plane = props => {
               className={seatClass}
               key={seatNum}
               onClick={() => {
-                handleChange(seatNum, seatClass);
+                handleChange(seatNum, businessClass);
               }}
             >
               {seatNum}
@@ -74,7 +74,7 @@ export const Plane = props => {
               className={seatClass}
               key={seatNum}
               onClick={() => {
-                handleChange(seatNum, seatClass);
+                handleChange(seatNum, businessClass);
               }}
             >
               {seatNum}
@@ -117,7 +117,7 @@ export const Plane = props => {
               className={seatClass}
               key={seatNum}
               onClick={() => {
-                handleChange(seatNum, seatClass);
+                handleChange(seatNum, economyClass);
               }}
             >
               {seatNum}
@@ -147,7 +147,7 @@ export const Plane = props => {
               className={seatClass}
               key={seatNum}
               onClick={() => {
-                handleChange(seatNum, seatClass);
+                handleChange(seatNum, economyClass);
               }}
             >
               {seatNum}
@@ -158,12 +158,8 @@ export const Plane = props => {
     const classKey = `economyClass${i}`;
     return (
       <div className="row" key={classKey}>
-        <div className="seats" key="economyLeft">
-          {leftSide}
-        </div>
-        <div className="seats" key="economyRight">
-          {rightSide}
-        </div>
+        <div className="seats">{leftSide}</div>
+        <div className="seats">{rightSide}</div>
       </div>
     );
   });
