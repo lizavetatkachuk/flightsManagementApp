@@ -17,6 +17,9 @@ const Details = props => {
   const [people, setPeople] = useState(1);
   const [seats, setSeats] = useState([]);
   const [seatClass, setClass] = useState("");
+  const small = 8;
+  const medium = 20;
+  const large = 25;
   const { flights, history } = props;
   const token = getToken();
   const mappedSeats = seats.map(seat => {
@@ -116,7 +119,7 @@ const Details = props => {
                 src={bagpack}
                 alt="bagpack"
                 className="details__luggage__icon"
-                onClick={() => setLuggage(8)}
+                onClick={() => setLuggage(small)}
               />
             </div>
             <div className="bag">
@@ -127,7 +130,7 @@ const Details = props => {
                 src={suitcase}
                 alt="oneSuitcase"
                 className="details__luggage__icon"
-                onClick={() => setLuggage(20)}
+                onClick={() => setLuggage(medium)}
               />
             </div>
             <div className="bag">
@@ -138,7 +141,7 @@ const Details = props => {
                 src={twoSuitcases}
                 alt="twoSuitcases"
                 className="details__luggage__icon"
-                onClick={() => setLuggage(25)}
+                onClick={() => setLuggage(large)}
               />
             </div>
           </div>

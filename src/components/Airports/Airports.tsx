@@ -26,6 +26,7 @@ const Container = styled.div`
   .delete,
   .add {
     align-self: center;
+    justify-self: flex-end;
     margin-left: 50px;
     font-size: 30px;
     background-color: Transparent;
@@ -38,7 +39,7 @@ const Container = styled.div`
   .airport {
     display: flex;
     flex-flow: row wrap;
-    width: 15%;
+    width: 25%;
     font-size: 25px;
     margin: 10px;
     color: #0c0663;
@@ -63,9 +64,7 @@ function Airports() {
       .then(res => {
         setAirports(res.data);
       })
-      .catch(err => {
-        "This airport already exists";
-      });
+      .catch(err => {});
   };
   useEffect(() => {
     api.get("/admin/airports").then(res => setAirports(res.data));

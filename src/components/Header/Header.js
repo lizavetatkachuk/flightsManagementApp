@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link, NavLink, withRouter } from "react-router-dom";
@@ -13,15 +13,28 @@ const Header = props => {
   const role = checkAdmin();
   return (
     <header className="header">
-      <nav className="header__nav">
-        <NavLink exact to="/" className="nav-btn" activeClassName="selected">
+      <nav className="header__nav navigation">
+        <NavLink
+          exact
+          to="/"
+          className="navigation__btn"
+          activeClassName="selected"
+        >
           Search Flights
         </NavLink>
-        <NavLink to="/orders" className="nav-btn" activeClassName="selected">
+        <NavLink
+          to="/orders"
+          className="navigation__btn"
+          activeClassName="selected"
+        >
           My flights
         </NavLink>
-        {role ? (
-          <NavLink to="/admin" className="nav-btn" activeClassName="selected">
+        {role === "admin" ? (
+          <NavLink
+            to="/admin"
+            className="navigation__btn"
+            activeClassName="selected"
+          >
             Admin Pane
           </NavLink>
         ) : null}
@@ -33,7 +46,7 @@ const Header = props => {
         {token ? (
           <Button
             btntype="button"
-            btnclass="nav-btn"
+            btnclass="navigation__btn"
             onClick={() => {
               removeToken();
               logOut();
@@ -42,8 +55,8 @@ const Header = props => {
             Log Out
           </Button>
         ) : (
-          <NavLink to="/login" className="nav-btn">
-            <Button btntype="button" btnclass="nav-btn">
+          <NavLink to="/login" className="navigation__btn">
+            <Button btntype="button" btnclass="navigation__btn">
               Log In
             </Button>
           </NavLink>
@@ -60,7 +73,8 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 const mapStateToProps = state => {
-  return { ...state };
+  const { auth } = state;
+  return auth;
 };
 export default connect(
   mapStateToProps,
