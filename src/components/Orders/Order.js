@@ -25,7 +25,7 @@ const Order = () => {
     return (
       <li className="flight__item" key={order._id}>
         <div>
-          Flying from {order.from} to {order.to} {order.price}$ departs at{" "}
+          Flying from {order.from} to {order.to} {order.price}$ departs at
           {order.time}
         </div>
         <div className="company">Airlines : {order.company}</div>

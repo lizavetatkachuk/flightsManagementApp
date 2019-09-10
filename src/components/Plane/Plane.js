@@ -85,12 +85,8 @@ export const Plane = props => {
     const classKey = `businessClass${i}`;
     return (
       <div className="row" key={classKey}>
-        <div className="seats" key="businessLeft">
-          {leftSide}
-        </div>
-        <div className="seats" key="businessRight">
-          {rightSide}
-        </div>
+        <div className="seats">{leftSide}</div>
+        <div className="seats">{rightSide}</div>
       </div>
     );
   });

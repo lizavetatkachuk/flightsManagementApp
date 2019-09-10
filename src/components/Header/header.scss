@@ -7,11 +7,9 @@
   align-items: center;
   padding: 20px;
   text-decoration: none;
+  font-size: 30px;
   background: linear-gradient(180deg, #232079 0%, #7881a5 69%, #95a6b1 100%);
-  &__nav,
-  &__login {
-    font-size: 30px;
-  }
+
   &__title {
     font-style: italic;
     align-items: flex-start;
@@ -22,19 +20,19 @@
     margin-top: 0;
   }
 }
-
-.nav-btn {
-  cursor: pointer;
-  background-color: transparent;
-  text-decoration: none;
-  border: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-  margin: 15px;
-  color: $font-color;
-  outline: none;
+.navigation {
+  &__btn {
+    cursor: pointer;
+    background-color: transparent;
+    text-decoration: none;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    margin: 15px;
+    color: $font-color;
+    outline: none;
+  }
 }
-
 .selected {
   color: $font-color;
   border-bottom: 2px solid $font-color;

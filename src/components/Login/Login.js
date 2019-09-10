@@ -82,7 +82,8 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 const mapStateToProps = state => {
-  return { ...state };
+  const { auth } = state;
+  return auth;
 };
 Login.propTypes = {
   history: PropTypes.object.isRequired,
