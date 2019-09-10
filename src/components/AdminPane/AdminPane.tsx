@@ -25,12 +25,10 @@ const Container = styled.div`
   }
 `;
 function Example(Props: AdminProps) {
-  console.log(Props);
   return (
     <Container>
       <li>
         <Link to="/login" className="admin_pane_element">
-          {" "}
           Airports
         </Link>
       </li>
