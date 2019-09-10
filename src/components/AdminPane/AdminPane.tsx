@@ -28,7 +28,7 @@ function AdminPane(Props: AdminProps) {
       <Link to="/admin/airports" className="admin_pane_element">
         Airports
       </Link>
-      <Link to="/" className="admin_pane_element">
+      <Link to="/admin/flights" className="admin_pane_element">
         Flights
       </Link>
     </Container>

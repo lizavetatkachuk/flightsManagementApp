@@ -9,6 +9,7 @@ import Details from "./components/Details/Details";
 import Order from "./components/Orders/Order";
 import AdminPane from "./components/AdminPane/AdminPane.tsx";
 import Airports from "./components/Airports/Airports.tsx";
+import AllFlights from "./components/AllFlights/AllFlights.tsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./app.scss";
 
@@ -34,6 +35,11 @@ const App = () => {
             userRole="admin"
             path="/admin/airports"
             component={Airports}
+          />
+          <PrivateRoute
+            userRole="admin"
+            path="/admin/flights"
+            component={AllFlights}
           />
         </Switch>
       </div>

@@ -8,22 +8,35 @@ import { getFlights } from "./../../redux/actions/flights";
 import Button from "./../Shared/Button/Button";
 import { Picker } from "./../Picker/Picker";
 import { validateDate } from "../../validators";
-import data from "./../../data";
+import { api } from "./../../helpers/apiHeler";
 import pic from "./../../static/images/arrows.svg";
 import "./searchForm.scss";
 
 class SearchForm extends React.Component {
+  componentDidMount() {
+    api.get("/admin/airports").then(res => {
+      const cities = res.data;
+      this.setState(state => ({ cities: cities }));
+    });
+  }
+  state = {
+    cities: []
+  };
   render() {
     const { getFlights, history } = this.props;
     const onSubmit = values => {
       getFlights(values);
       history.push("/flights");
     };
-    const directions = data.cities.map(city => (
-      <option key={Object.keys(city)} value={Object.values(city)}>
-        {Object.values(city)}
-      </option>
-    ));
+    const directions = this.state.cities ? (
+      this.state.cities.map(city => (
+        <option key={city.code} value={city.name}>
+          {city.name}
+        </option>
+      ))
+    ) : (
+      <option key="empty"></option>
+    );
     return (
       <Form
         onSubmit={onSubmit}
