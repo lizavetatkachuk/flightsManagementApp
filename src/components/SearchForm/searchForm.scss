@@ -52,6 +52,12 @@
     width: 32%;
   }
 }
+.picker {
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  width: 32%;
+}
 .radio {
   height: 15px;
   width: 15px;

@@ -18,14 +18,14 @@ const Header = props => {
           exact
           to="/"
           className="navigation__btn"
-          activeClassName="selected"
+          activeClassName="navigation__btn--selected"
         >
           Search Flights
         </NavLink>
         <NavLink
           to="/orders"
           className="navigation__btn"
-          activeClassName="selected"
+          activeClassName="navigation__btn--selected"
         >
           My flights
         </NavLink>
@@ -33,7 +33,7 @@ const Header = props => {
           <NavLink
             to="/admin"
             className="navigation__btn"
-            activeClassName="selected"
+            activeClassName="navigation__btn--selected"
           >
             Admin Pane
           </NavLink>
