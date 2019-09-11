@@ -19,6 +19,7 @@ const Details = props => {
     seats: [],
     seatClass: ""
   };
+
   const reducer = (state, action) => {
     switch (action.type) {
       case "setDonation":
@@ -30,68 +31,57 @@ const Details = props => {
       case "decrement":
         return { ...state, people: state.people - 1 };
       case "setSeats": {
-        if (state.seats.includes(action.payload.seat)) {
+        const seatNums = state.seats.map(seat => seat.seat);
+        if (seatNums.includes(action.payload.seat)) {
           const newSeats = state.seats.filter(
-            item => item !== action.payload.seat
+            item => item.seat !== action.payload.seat
           );
           return { ...state, seats: newSeats };
         } else {
-          const newSeats = [...state.seats, action.payload.seat];
+          const newSeats = [...state.seats, action.payload];
           return { ...state, seats: newSeats };
         }
-      }
-      case "setClass": {
-        return { ...state, seatClass: action.payload.seatClass };
       }
       default:
         return { ...state };
     }
   };
+
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [seatClass, setClass] = useState("");
   const small = 8;
   const medium = 20;
   const large = 25;
   const { flights, history } = props;
   const token = getToken();
+  const businessSeats = state.seats.filter(
+    seat => seat.seatClass === "business"
+  );
   const mappedSeats = state.seats.map(seat => {
     return (
-      <li key={seat} className="list">
+      <li key={seat.seat} className="list">
         <div>
-          <p>Seat {seat}</p>
+          <p>Seat {seat.seat}</p>
         </div>
         <div>
-          {state.seatClass === "business" ? (
+          {seat.seatClass === "business" ? (
             <p className="details__cost__label">
               Extra fee for business class: 20$
             </p>
           ) : null}
         </div>
-        <div>
-          <p className="details__cost__label">Luggage: {state.luggage} $</p>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="scales"
-            name="scales"
-            checked={state.donation}
-            onChange={() => {
-              dispatch({ type: "setDonation" });
-            }}
-          />
-          <label className="details__cost__label">
-            Donate 1$ to reduce your carbon footprint
-          </label>
-        </div>
       </li>
     );
   });
+
   const onClick = value => {
     dispatch({ type: "setSeats", payload: value });
-    dispatch({ type: "setClass", payload: value });
   };
   const validated = state.seats ? false : true;
+
+  const seatNums = state.seats.map(seat => {
+    return seat.seat;
+  });
+
   const handleClick = () => {
     if (!!token) {
       const { from, to, price, time, company, _id } = flightDetail;
@@ -102,7 +92,7 @@ const Details = props => {
         price,
         time,
         company,
-        seats: state.seats,
+        seats: seatNums,
         donation: state.donation,
         luggage: state.donation
       };
@@ -111,10 +101,14 @@ const Details = props => {
       });
     } else history.push("/login");
   };
+
   const flightDetail = flights.find(flight => {
     const result = flight._id === props.match.params.id;
     return result;
   }) || { booked: [] };
+
+  const cost =
+    state.seats.length * flightDetail.price + businessSeats.length * 20;
   return (
     <div className="details">
       <div className="details__plane">
@@ -182,11 +176,31 @@ const Details = props => {
         </div>
         <div className="details__container__row">
           <div className="details__cost">
-            <p className="details__label">Total cost is </p>
+            <p className="details__label">
+              Total cost is {cost + state.luggage + state.donation}{" "}
+            </p>
+            <div>
+              <input
+                type="checkbox"
+                id="scales"
+                name="scales"
+                checked={state.donation}
+                onChange={() => {
+                  dispatch({ type: "setDonation" });
+                }}
+              />
+              <label className="details__cost__label">
+                Donate 1$ to reduce your carbon footprint
+              </label>
+              <div>
+                <p className="details__cost__label">
+                  Luggage: {state.luggage} $
+                </p>
+              </div>
+            </div>
             <div className="details__cost__label">
               You have chosen: {mappedSeats}
             </div>
-            <div></div>
             <Button
               btnclass="submit-order-btn"
               type="submit"
@@ -201,6 +215,7 @@ const Details = props => {
     </div>
   );
 };
+
 Details.propTypes = {
   flights: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
@@ -211,6 +226,7 @@ Details.propTypes = {
 const mapStateToProps = state => {
   return { flights: state.flights.flights };
 };
+
 export default connect(
   mapStateToProps,
   null

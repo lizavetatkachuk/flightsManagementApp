@@ -55,10 +55,18 @@ const Container = styled.div`
     padding-left: 10px;
     padding-right: 5px;
   }
+  .error {
+    color: red;
+    height: 21px;
+    font-size: 19px;
+    position: initial;
+    margin-block-end: 0em;
+    margin-block-start: 0em;
+  }
 `;
 function Airports() {
   const [airports, setAirports] = useState([]);
-
+  const [error, setError] = useState("");
   const handleDeletion = (code: string) => {
     api.post(`/admin/airports/${code}`).then(res => {
       setAirports(res.data);
@@ -73,8 +81,7 @@ function Airports() {
         setAirports(res.data);
       })
       .catch(err => {
-        const error = err;
-        return error;
+        setError(err);
       });
   };
   useEffect(() => {
@@ -135,6 +142,11 @@ function Airports() {
           </form>
         )}
       />
+      {error ? (
+        <p className="error">The airport already exists</p>
+      ) : (
+        <p className="error"> </p>
+      )}
       {mappedAirports}
     </Container>
   );

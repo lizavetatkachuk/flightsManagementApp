@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { History } from "history";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { Picker } from "./../Picker/Picker";
 import { api } from "./../../helpers/apiHeler";
 
 interface IFlight {
@@ -170,17 +171,7 @@ function AddFlight({ history }: RouteComponentProps) {
                 </React.Fragment>
               )}
             />
-            <Field
-              name="time"
-              render={({ input, meta }) => (
-                <React.Fragment>
-                  <input
-                    className="input-field"
-                    placeholder="Departure time in the format DD-MM-YY hh:mm "
-                    {...input}
-                  />
-                </React.Fragment>
-              )}
+            <Field className="flight-dates" component={Picker} name="there" />
             />
             <button type="submit" className="add">
               Add the flight
