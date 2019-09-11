@@ -1,5 +1,6 @@
 import {
-  UPDATE_FLIGHTS,
+  UPDATE_FLIGHTS_THERE,
+  UPDATE_FLIGHTS_BACK,
   GET_FLIGHTS,
   FLIGHTS_FAILED
 } from "../action-types/flightsActionTypes";
@@ -9,8 +10,12 @@ export const getFlights = values => ({
   payload: { ...values }
 });
 
-export const updateFlights = values => ({
-  type: UPDATE_FLIGHTS,
+export const updateFlightsThere = values => ({
+  type: UPDATE_FLIGHTS_THERE,
+  payload: [...values]
+});
+export const updateFlightsBack = values => ({
+  type: UPDATE_FLIGHTS_BACK,
   payload: [...values]
 });
 export const failFlights = error => ({

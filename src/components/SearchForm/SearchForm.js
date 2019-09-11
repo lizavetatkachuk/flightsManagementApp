@@ -40,6 +40,7 @@ class SearchForm extends React.Component {
     return (
       <Form
         onSubmit={onSubmit}
+        initialValues={{ return: "one-way" }}
         validate={values => {
           const errors = {};
           if (!values.from) {

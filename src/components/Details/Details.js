@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -56,6 +56,7 @@ const Details = props => {
   const businessSeats = state.seats.filter(
     seat => seat.seatClass === "business"
   );
+
   const mappedSeats = state.seats.map(seat => {
     return (
       <li key={seat.seat} className="list">
@@ -99,6 +100,7 @@ const Details = props => {
       api.post("/order", {
         ...order
       });
+      history.push("/orders");
     } else history.push("/login");
   };
 
@@ -224,7 +226,7 @@ Details.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { flights: state.flights.flights };
+  return { flights: state.flights.flightsThere };
 };
 
 export default connect(

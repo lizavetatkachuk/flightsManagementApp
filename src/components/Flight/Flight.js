@@ -8,6 +8,7 @@ import "./flights.scss";
 const Flight = props => {
   const [mode, setMode] = useState("price");
   const { flights } = props;
+
   const dynamicSort = property => {
     return function(a, b) {
       const result =
@@ -15,8 +16,9 @@ const Flight = props => {
       return result;
     };
   };
-  flights.flights.sort(dynamicSort(mode));
-  const flightsInfo = flights.flights.map(flight => {
+
+  flights.flightsThere.sort(dynamicSort(mode));
+  const flightsInfo = flights.flightsThere.map(flight => {
     return (
       <Link to={`/flights/${flight._id}`} className="flight" key={flight._id}>
         <li className="flight__item" key={flight._id}>
@@ -25,11 +27,23 @@ const Flight = props => {
       </Link>
     );
   });
+
+  const flightsBackInfo = flights.flightsBack.map(flight => {
+    return (
+      <Link to={`/flights/${flight._id}`} className="flight" key={flight._id}>
+        <li className="flight__item" key={flight._id}>
+          {flight.company} {flight.price}$ departs at {flight.time}
+        </li>
+      </Link>
+    );
+  });
+
   const onChange = value => {
     setMode(value);
   };
+
   return (
-    <Fragment>
+    <Fragment className="container">
       {flights.eror ? (
         <p className="server-msg">Internal Server Error</p>
       ) : null}
@@ -38,9 +52,11 @@ const Flight = props => {
       ) : null}
       <Filter onChange={onChange} />
       <ul>{flightsInfo}</ul>
+      <ul>{flightsBackInfo}</ul>
     </Fragment>
   );
 };
+
 Flight.propTypes = {
   flights: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,

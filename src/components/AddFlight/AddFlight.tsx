@@ -5,10 +5,15 @@ import { History } from "history";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Picker } from "./../Picker/Picker";
 import { api } from "./../../helpers/apiHeler";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface IFlight {
-  name: string;
-  code: string;
+  from: string;
+  to: string;
+  there: string;
+  company: string;
+  price: number;
+  plane: string;
 }
 interface IAirport {
   name: string;
@@ -16,6 +21,14 @@ interface IAirport {
 }
 interface IHistory {
   history: History;
+}
+interface IError {
+  to: string | null;
+  from: string | null;
+  plane: string | null;
+  company: string | null;
+  price: string | null;
+  there: string | null;
 }
 
 const Container = styled.div`
@@ -62,22 +75,46 @@ const Container = styled.div`
     width: 15%;
     outline: none;
     cursor: pointer;
+    :disabled {
+      color: grey;
+    }
+  }
+  .error{
+    margin-left:10px;
+    position:initial;
+    font-size:18px;
+    height:20px;
+  }
+  .search-form__label{
+    margin-top: 20px;
+    margin-left:10px;
+     font-size: 20px;
+  }
+  .react-datepicker__input-container input{
+    margin-top: 0px;
+    margin-left:10px;
+    color: #0c0663;
   }
 `;
+
 function AddFlight({ history }: RouteComponentProps) {
   const [airports, setAirports] = useState([]);
+
   useEffect(() => {
     api.get("/admin/airports").then(res => setAirports(res.data));
   }, []);
+
   const handleAddition = (values: IFlight) => {
     api
       .post("/admin/flights/add", {
         ...values,
+        time: values.there,
         booked: []
       })
       .catch(err => console.log(err));
     history.push("/admin/flights");
   };
+
   const destinations = airports ? (
     airports.map((airport: IAirport) => (
       <option key={airport.code} value={airport.name}>
@@ -87,10 +124,37 @@ function AddFlight({ history }: RouteComponentProps) {
   ) : (
     <option key="empty"></option>
   );
+
   return (
     <Container>
       <Form
         onSubmit={handleAddition}
+        // validate={values => {
+        //   const errors: IError = {
+        //     to: null,
+        //     from: null,
+        //     plane: null,
+        //     company: null,
+        //     price: null,
+        //     there: null
+        //   };
+        //   if (!values.from) {
+        //     errors.from = "Choose the airport";
+        //   }
+        //   if (!values.to) {
+        //     errors.to = "Choose the destination";
+        //   }
+        //   if (!values.plane) {
+        //     errors.plane = "Choose the plane type";
+        //   }
+        //   if (!values.there) {
+        //     errors.there = "Choose the dates";
+        //   }
+        //   if (!values.company) {
+        //     errors.company = "Choose the company";
+        //   }
+        //   return errors;
+        // }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form className="form" onSubmit={handleSubmit}>
             <Field
@@ -101,10 +165,13 @@ function AddFlight({ history }: RouteComponentProps) {
                     Choose the departure airport
                   </label>
                   <select className="input-field" {...input}>
+                    <option key="empty-departure"></option>
                     {destinations}
                   </select>
-                  {meta.error && meta.touched && (
+                  {meta.error && meta.touched ? (
                     <span className="error">{meta.error}</span>
+                  ) : (
+                    <span className="error"></span>
                   )}
                 </React.Fragment>
               )}
@@ -117,10 +184,13 @@ function AddFlight({ history }: RouteComponentProps) {
                     Choose the destination airport
                   </label>
                   <select className="input-field" {...input}>
+                    <option key="empty-destination"></option>
                     {destinations}
                   </select>
-                  {meta.error && meta.touched && (
+                  {meta.error && meta.touched ? (
                     <span className="error">{meta.error}</span>
+                  ) : (
+                    <span></span>
                   )}
                 </React.Fragment>
               )}
@@ -131,6 +201,7 @@ function AddFlight({ history }: RouteComponentProps) {
                 <React.Fragment>
                   <label className="form__label">Choose plane type</label>
                   <select className="input-field" {...input}>
+                    <option key="empty-plane"></option>
                     <option key="Boeing-737-800" value="Boeing-737-800">
                       Boeing 737 800
                     </option>
@@ -141,8 +212,10 @@ function AddFlight({ history }: RouteComponentProps) {
                       Bombardier CRJ200
                     </option>
                   </select>
-                  {meta.error && meta.touched && (
+                  {meta.error && meta.touched ? (
                     <span className="error">{meta.error}</span>
+                  ) : (
+                    <span className="error"></span>
                   )}
                 </React.Fragment>
               )}
@@ -155,7 +228,12 @@ function AddFlight({ history }: RouteComponentProps) {
                     className="input-field"
                     placeholder="Enter the company"
                     {...input}
-                  />
+                  />{" "}
+                  {meta.error && meta.touched ? (
+                    <span className="error">{meta.error}</span>
+                  ) : (
+                    <span className="error"></span>
+                  )}
                 </React.Fragment>
               )}
             />
@@ -168,12 +246,21 @@ function AddFlight({ history }: RouteComponentProps) {
                     placeholder="Enter the basic price "
                     {...input}
                   />
+                  {meta.error && meta.touched ? (
+                    <span className="error">{meta.error}</span>
+                  ) : (
+                    <span className="error"></span>
+                  )}
                 </React.Fragment>
               )}
             />
-            <Field className="flight-dates" component={Picker} name="there" />
-            />
-            <button type="submit" className="add">
+            <Field className="dates" component={Picker as any} name="there" />
+
+            <button
+              type="submit"
+              className="add"
+              disabled={submitting || pristine}
+            >
               Add the flight
             </button>
           </form>
@@ -182,4 +269,5 @@ function AddFlight({ history }: RouteComponentProps) {
     </Container>
   );
 }
+
 export default withRouter(AddFlight);
