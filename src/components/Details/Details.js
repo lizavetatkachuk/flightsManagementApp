@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -12,40 +12,72 @@ import bagpack from "./../../static/images/bagpack.svg";
 import "./details.scss";
 
 const Details = props => {
-  const [donation, setDonation] = useState(true);
-  const [luggage, setLuggage] = useState(0);
-  const [people, setPeople] = useState(1);
-  const [seats, setSeats] = useState([]);
+  const initialState = {
+    donation: true,
+    luggage: 0,
+    people: 1,
+    seats: [],
+    seatClass: ""
+  };
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "setDonation":
+        return { ...state, donation: !state.donation };
+      case "setLuggage":
+        return { ...state, luggage: action.payload };
+      case "increment":
+        return { ...state, people: state.people + 1 };
+      case "decrement":
+        return { ...state, people: state.people - 1 };
+      case "setSeats": {
+        if (state.seats.includes(action.payload.seat)) {
+          const newSeats = state.seats.filter(
+            item => item !== action.payload.seat
+          );
+          return { ...state, seats: newSeats };
+        } else {
+          const newSeats = [...state.seats, action.payload.seat];
+          return { ...state, seats: newSeats };
+        }
+      }
+      case "setClass": {
+        return { ...state, seatClass: action.payload.seatClass };
+      }
+      default:
+        return { ...state };
+    }
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [seatClass, setClass] = useState("");
   const small = 8;
   const medium = 20;
   const large = 25;
   const { flights, history } = props;
   const token = getToken();
-  const mappedSeats = seats.map(seat => {
+  const mappedSeats = state.seats.map(seat => {
     return (
       <li key={seat} className="list">
         <div>
           <p>Seat {seat}</p>
         </div>
         <div>
-          {seatClass === "business" ? (
+          {state.seatClass === "business" ? (
             <p className="details__cost__label">
               Extra fee for business class: 20$
             </p>
           ) : null}
         </div>
         <div>
-          <p className="details__cost__label">Luggage: {luggage} $</p>
+          <p className="details__cost__label">Luggage: {state.luggage} $</p>
         </div>
         <div>
           <input
             type="checkbox"
             id="scales"
             name="scales"
-            checked={donation}
+            checked={state.donation}
             onChange={() => {
-              setDonation(!donation);
+              dispatch({ type: "setDonation" });
             }}
           />
           <label className="details__cost__label">
@@ -56,24 +88,10 @@ const Details = props => {
     );
   });
   const onClick = value => {
-    if (seats.includes(value.seat)) {
-      const newSeats = seats.filter(item => item !== value.seat);
-      setSeats(newSeats);
-    } else {
-      const newSeats = [...seats, value.seat];
-      setSeats(newSeats);
-      setClass(value.seatClass);
-    }
+    dispatch({ type: "setSeats", payload: value });
+    dispatch({ type: "setClass", payload: value });
   };
-  const increment = () => {
-    const newValue = people + 1;
-    setPeople(newValue);
-  };
-  const decrement = () => {
-    const newValue = people - 1;
-    setPeople(newValue);
-  };
-  const validated = seats ? false : true;
+  const validated = state.seats ? false : true;
   const handleClick = () => {
     if (!!token) {
       const { from, to, price, time, company, _id } = flightDetail;
@@ -84,9 +102,9 @@ const Details = props => {
         price,
         time,
         company,
-        seats,
-        donation,
-        luggage
+        seats: state.seats,
+        donation: state.donation,
+        luggage: state.donation
       };
       api.post("/order", {
         ...order
@@ -102,8 +120,9 @@ const Details = props => {
       <div className="details__plane">
         <p className="details__label">Choose your seat</p>
         <Plane
+          plane={flightDetail.plane}
           onClick={onClick}
-          people={people}
+          people={state.people}
           booked={flightDetail.booked}
         ></Plane>
       </div>
@@ -119,7 +138,7 @@ const Details = props => {
                 src={bagpack}
                 alt="bagpack"
                 className="details__luggage__icon"
-                onClick={() => setLuggage(small)}
+                onClick={() => dispatch({ type: "setLuggage", payload: small })}
               />
             </div>
             <div className="bag">
@@ -130,7 +149,9 @@ const Details = props => {
                 src={suitcase}
                 alt="oneSuitcase"
                 className="details__luggage__icon"
-                onClick={() => setLuggage(medium)}
+                onClick={() =>
+                  dispatch({ type: "setLuggage", payload: medium })
+                }
               />
             </div>
             <div className="bag">
@@ -141,7 +162,7 @@ const Details = props => {
                 src={twoSuitcases}
                 alt="twoSuitcases"
                 className="details__luggage__icon"
-                onClick={() => setLuggage(large)}
+                onClick={() => dispatch({ type: "setLuggage", payload: large })}
               />
             </div>
           </div>
@@ -149,22 +170,22 @@ const Details = props => {
         <div className="details__container__row">
           <div className="details__people">
             <p className="details__label">Choose the number of seats</p>
-            <Button onClick={decrement}>-</Button>
+            <Button onClick={() => dispatch({ type: "decrement" })}>-</Button>
             <input
               readOnly={true}
               type="text"
-              value={people}
+              value={state.people}
               className="details__people__input"
             />
-            <Button onClick={increment}>+</Button>
+            <Button onClick={() => dispatch({ type: "increment" })}>+</Button>
           </div>
         </div>
         <div className="details__container__row">
           <div className="details__cost">
             <p className="details__label">Total cost is </p>
-            <p className="details__cost__label">
+            <div className="details__cost__label">
               You have chosen: {mappedSeats}
-            </p>
+            </div>
             <div></div>
             <Button
               btnclass="submit-order-btn"

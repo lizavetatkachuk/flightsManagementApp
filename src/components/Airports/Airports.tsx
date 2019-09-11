@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { api } from "./../../helpers/apiHeler";
+
 interface IAirport {
   name: string;
   code: string;
@@ -27,18 +28,24 @@ const Container = styled.div`
   .add {
     align-self: center;
     justify-self: flex-end;
-    margin-left: 50px;
+    margin-left: 20px;
+    margin-right: 15px;
     font-size: 30px;
     background-color: Transparent;
     color: #0c0663;
     border-radius: 7px;
     height: 15%;
     width: 15%;
+    outline: none;
     cursor: pointer;
+    :disabled {
+      color: grey;
+    }
   }
   .airport {
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
     width: 25%;
     font-size: 25px;
     margin: 10px;
@@ -51,6 +58,7 @@ const Container = styled.div`
 `;
 function Airports() {
   const [airports, setAirports] = useState([]);
+
   const handleDeletion = (code: string) => {
     api.post(`/admin/airports/${code}`).then(res => {
       setAirports(res.data);
@@ -64,7 +72,10 @@ function Airports() {
       .then(res => {
         setAirports(res.data);
       })
-      .catch(err => {});
+      .catch(err => {
+        const error = err;
+        return error;
+      });
   };
   useEffect(() => {
     api.get("/admin/airports").then(res => setAirports(res.data));
@@ -72,7 +83,7 @@ function Airports() {
   const mappedAirports = airports
     ? airports.map((airport: IAirport) => {
         return (
-          <li className="airport" key={airport.code}>
+          <div className="airport" key={airport.code}>
             <p>{airport.name}</p>
             <button
               className="delete"
@@ -80,7 +91,7 @@ function Airports() {
             >
               -
             </button>
-          </li>
+          </div>
         );
       })
     : null;
@@ -114,7 +125,11 @@ function Airports() {
                 </React.Fragment>
               )}
             />
-            <button type="submit" className="add">
+            <button
+              type="submit"
+              className="add"
+              disabled={submitting || pristine}
+            >
               Add the airport
             </button>
           </form>

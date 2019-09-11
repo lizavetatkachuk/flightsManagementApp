@@ -27,20 +27,20 @@ const plane = {
   ]
 };
 const plane2 = {
-  business: [["A", "B"], ["A", "B"], ["A", "B"], ["A", "B"], ["A", "B"]],
+  business: [["A", "B", "E", "F"], ["A", "B", "E", "F"]],
   economy: [
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D"]
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F"]
   ]
 };
 const plane3 = {
@@ -81,4 +81,4 @@ const cities = [
   { "SXF-sky": "Berlin Shonenfield" },
   { "BVA-sky": "Paris Beauvais " }
 ];
-export default { plane, cities };
+export default { plane, cities, plane2, plane3 };

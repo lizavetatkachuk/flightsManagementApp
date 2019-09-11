@@ -4,9 +4,13 @@ import data from "../../data";
 import "./plane.scss";
 
 export const Plane = props => {
-  const { onClick, people } = props;
+  const { onClick, people, plane } = props;
   const { booked } = props || [];
   const [selected, setSelected] = useState([]);
+  var planeType = "plane";
+  if (plane === "AirbusA320(ceo)") planeType = "plane";
+  else if (plane === "BombardierCRJ200") planeType = "plane2";
+  else planeType = "plane3";
   const businessClass = "business";
   const economyClass = "economy";
   const handleChange = (seat, seatClass) => {
@@ -22,7 +26,7 @@ export const Plane = props => {
       }
     }
   };
-  const business = data.plane.business.map((item, i) => {
+  const business = data[planeType].business.map((item, i) => {
     const leftSide = item
       .filter((seat, index) => {
         return index < 2;
@@ -91,7 +95,7 @@ export const Plane = props => {
     );
   });
 
-  const economy = data.plane.economy.map((item, i) => {
+  const economy = data[planeType].economy.map((item, i) => {
     const leftSide = item
       .filter((seat, index) => {
         return index < 3;
@@ -159,10 +163,13 @@ export const Plane = props => {
       </div>
     );
   });
-  const plane = [...business, ...economy];
-  return <div className="plane">{plane}</div>;
+  const planeMap = [...business, ...economy];
+  return <div className="plane">{planeMap}</div>;
 };
 Plane.propTypes = {
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  people: PropTypes.number,
+  booked: PropTypes.array,
+  plane: PropTypes.string
 };
 export default Plane;

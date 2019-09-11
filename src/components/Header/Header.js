@@ -8,7 +8,7 @@ import { getToken, removeToken, checkAdmin } from "../../helpers/authHelper";
 import "./header.scss";
 
 const Header = props => {
-  const { logOut, auth } = props;
+  const { logOut } = props;
   const token = getToken();
   const role = checkAdmin();
   return (

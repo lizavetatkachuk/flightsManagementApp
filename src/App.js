@@ -10,6 +10,7 @@ import Order from "./components/Orders/Order";
 import AdminPane from "./components/AdminPane/AdminPane.tsx";
 import Airports from "./components/Airports/Airports.tsx";
 import AllFlights from "./components/AllFlights/AllFlights.tsx";
+import AddFlight from "./components/AddFlight/AddFlight.tsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./app.scss";
 
@@ -38,8 +39,14 @@ const App = () => {
           />
           <PrivateRoute
             userRole="admin"
+            exact
             path="/admin/flights"
             component={AllFlights}
+          />
+          <PrivateRoute
+            userRole="admin"
+            path="/admin/flights/add"
+            component={AddFlight}
           />
         </Switch>
       </div>
