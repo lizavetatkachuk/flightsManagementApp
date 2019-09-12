@@ -21,10 +21,14 @@ const App = () => {
         <Header />
         <Switch>
           <Route path="/" exact component={SearchForm} />
-          <Route path="/flights/:id" exact component={Details} />
           <Route
             path="/flights/:from/:to/:return/:there/:back"
+            exact
             component={Flight}
+          />{" "}
+          <Route
+            path="/flights/:from/:to/:return/:there/:back/:id"
+            component={Details}
           />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />

@@ -1,10 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
+import { getFlights } from "./../../redux/actions/flights";
 import { getToken } from "./../../helpers/authHelper";
 import suitcase from "./../../static/images/suitcase.svg";
 import twoSuitcases from "./../../static/images/suitcases.svg";
@@ -51,7 +53,7 @@ const Details = props => {
   const small = 8;
   const medium = 20;
   const large = 25;
-  const { flights, history } = props;
+  const { flights, history, getFlights } = props;
   const token = getToken();
   const businessSeats = state.seats.filter(
     seat => seat.seatClass === "business"
@@ -77,6 +79,12 @@ const Details = props => {
   const onClick = value => {
     dispatch({ type: "setSeats", payload: value });
   };
+
+  useEffect(() => {
+    const values = { ...props.match.params };
+    getFlights(values);
+  }, []);
+
   const validated = state.seats ? false : true;
 
   const seatNums = state.seats.map(seat => {
@@ -229,7 +237,15 @@ const mapStateToProps = state => {
   return { flights: state.flights.flightsThere };
 };
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getFlights
+    },
+    dispatch
+  );
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(withRouter(Details));

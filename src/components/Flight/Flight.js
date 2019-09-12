@@ -11,7 +11,7 @@ const Flight = props => {
   const [mode, setMode] = useState("price");
   const [there, setThere] = useState(null);
   const [back, setBack] = useState(null);
-  const { flights, history } = props;
+  const { flights, history, getFlights, match } = props;
 
   const dynamicSort = property => {
     return function(a, b) {
@@ -23,25 +23,27 @@ const Flight = props => {
 
   const onClick = () => {
     if (!!there) {
-      history.push(`/flights/${there}`);
+      history.push(
+        `/flights/${match.params.from}/${match.params.to}/${match.params.return}/${match.params.there}/${match.params.back}/${there}`
+      );
     }
   };
 
   useEffect(() => {
     const values = { ...props.match.params };
-    console.log(values);
     getFlights(values);
-  });
+  }, []);
 
   flights.flightsThere.sort(dynamicSort(mode));
   const flightsInfo = flights.flightsThere.map(flight => {
+    const selected = flight._id === there ? "--selected" : "";
     return (
       <li
-        className="flight"
+        className={`flight ${selected}`}
         key={flight._id}
         onClick={() => setThere(flight._id)}
       >
-        <p className="flight__item" key={flight._id}>
+        <p className={`flight__item${selected}`} key={flight._id}>
           {flight.company} {flight.price}$ departs at {flight.time}
         </p>
       </li>
@@ -49,13 +51,14 @@ const Flight = props => {
   });
 
   const flightsBackInfo = flights.flightsBack.map(flight => {
+    const selected = flight._id === back ? "--selected" : "";
     return (
       <li
         className="flight"
         key={flight._id}
         onClick={() => setBack(flight._id)}
       >
-        <p className="flight__item" key={flight._id}>
+        <p className={`flight__item${selected}`} key={flight._id}>
           {" "}
           {flight.company} {flight.price}$ departs at {flight.time}
         </p>
