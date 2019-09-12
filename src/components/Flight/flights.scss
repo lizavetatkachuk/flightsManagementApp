@@ -1,15 +1,27 @@
 @import "./../Shared/index.scss";
 .flight {
   color: $base-color;
+  cursor: pointer;
   &__item {
     font-size: 25px;
-    margin-left: 25%;
+    margin-left: 5%;
     margin-right: 15%;
     margin-bottom: 20px;
     background-color: rgba($font-color, 0.7);
     border-radius: 8px;
     height: auto;
     padding: 12px;
+
+    &--selected {
+      background-color: rgba($red-color, 0.7);
+      font-size: 25px;
+      margin-left: 5%;
+      margin-right: 15%;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      height: auto;
+      padding: 12px;
+    }
   }
 }
 .server-msg {
@@ -18,6 +30,35 @@
   text-align: center;
   font-weight: bold;
 }
+.container {
+  display: flex;
+  flex-direction: row;
+  position: initial;
+  justify-content: space-between;
+  &__column {
+    width: 43%;
+  }
+}
 .company {
   text-align: center;
+}
+.list {
+  &__label {
+    font-size: 25px;
+    margin-left: 5%;
+  }
+}
+.details-btn {
+  outline: none;
+  cursor: pointer;
+  align-self: flex-start;
+  border-radius: 6px;
+  background-color: rgba($font-color, 0.8);
+  font-size: 22px;
+  color: $base-color;
+  padding: 5px;
+  margin-left: 60px;
+  :disabled {
+    background-color: grey;
+  }
 }

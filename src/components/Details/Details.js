@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
+import { requestFlights } from "./../../redux/actions/flights";
 import { getToken } from "./../../helpers/authHelper";
 import suitcase from "./../../static/images/suitcase.svg";
 import twoSuitcases from "./../../static/images/suitcases.svg";
@@ -12,68 +14,83 @@ import bagpack from "./../../static/images/bagpack.svg";
 import "./details.scss";
 
 const Details = props => {
-  const [donation, setDonation] = useState(true);
-  const [luggage, setLuggage] = useState(0);
-  const [people, setPeople] = useState(1);
-  const [seats, setSeats] = useState([]);
-  const [seatClass, setClass] = useState("");
-  const { flights, history } = props;
+  const initialState = {
+    donation: true,
+    luggage: 0,
+    people: 1,
+    seats: [],
+    seatClass: ""
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "setDonation":
+        return { ...state, donation: !state.donation };
+      case "setLuggage":
+        return { ...state, luggage: action.payload };
+      case "increment":
+        return { ...state, people: state.people + 1 };
+      case "decrement":
+        return { ...state, people: state.people - 1 };
+      case "setSeats": {
+        const seatNums = state.seats.map(seat => seat.seat);
+        if (seatNums.includes(action.payload.seat)) {
+          const newSeats = state.seats.filter(
+            item => item.seat !== action.payload.seat
+          );
+          return { ...state, seats: newSeats };
+        } else {
+          const newSeats = [...state.seats, action.payload];
+          return { ...state, seats: newSeats };
+        }
+      }
+      default:
+        return { ...state };
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
   const small = 8;
   const medium = 20;
   const large = 25;
+  const { flights, history, requestFlights } = props;
   const token = getToken();
-  const mappedSeats = seats.map(seat => {
+  const businessSeats = state.seats.filter(
+    seat => seat.seatClass === "business"
+  );
+
+  const mappedSeats = state.seats.map(seat => {
     return (
-      <li key={seat} className="list">
+      <li key={seat.seat} className="list">
         <div>
-          <p>Seat {seat}</p>
+          <p>Seat {seat.seat}</p>
         </div>
         <div>
-          {seatClass === "business" ? (
+          {seat.seatClass === "business" ? (
             <p className="details__cost__label">
               Extra fee for business class: 20$
             </p>
           ) : null}
         </div>
-        <div>
-          <p className="cost__label">Luggage: {luggage} $</p>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="scales"
-            name="scales"
-            checked={donation}
-            onChange={() => {
-              setDonation(!donation);
-            }}
-          />
-          <label className="cost__label">
-            Donate 1$ to reduce your carbon footprint
-          </label>
-        </div>
       </li>
     );
   });
+
   const onClick = value => {
-    if (seats.includes(value.seat)) {
-      const newSeats = seats.filter(item => item !== value.seat);
-      setSeats(newSeats);
-    } else {
-      const newSeats = [...seats, value.seat];
-      setSeats(newSeats);
-      setClass(value.seatClass);
-    }
+    dispatch({ type: "setSeats", payload: value });
   };
-  const increment = () => {
-    const newValue = people + 1;
-    setPeople(newValue);
-  };
-  const decrement = () => {
-    const newValue = people - 1;
-    setPeople(newValue);
-  };
-  const validated = seats ? false : true;
+
+  useEffect(() => {
+    const values = { ...props.match.params };
+    getFlights(values);
+  }, []);
+
+  const validated = state.seats ? false : true;
+
+  const seatNums = state.seats.map(seat => {
+    return seat.seat;
+  });
+
   const handleClick = () => {
     if (!!token) {
       const { from, to, price, time, company, _id } = flightDetail;
@@ -84,60 +101,124 @@ const Details = props => {
         price,
         time,
         company,
-        seats,
-        donation,
-        luggage
+        seats: seatNums,
+        donation: state.donation,
+        luggage: state.donation
       };
       api.post("/order", {
         ...order
       });
+      history.push("/orders");
     } else history.push("/login");
   };
+
   const flightDetail = flights.find(flight => {
     const result = flight._id === props.match.params.id;
     return result;
   }) || { booked: [] };
+
+  const cost =
+    state.seats.length * flightDetail.price + businessSeats.length * 20;
   return (
     <div className="details">
       <div className="details__plane">
         <p className="details__label">Choose your seat</p>
         <Plane
+          plane={flightDetail.plane}
           onClick={onClick}
-          people={people}
+          people={state.people}
           booked={flightDetail.booked}
         ></Plane>
       </div>
-      <div className="details__options options">
-        <div className="options__row luggage">
-          <p className="options__label">Choose your luggage</p>
-          <div className="bag">
-            <p className="luggage__label">One small cabin bag(20*25*30)</p>
-            <img
-              src={bagpack}
-              alt="bagpack"
-              className="luggage__icon"
-              onClick={() => setLuggage(small)}
-            />
+      <div className="details__container">
+        <div className="details__container__row">
+          <div className="details__luggage">
+            <p className="details__label">Choose your luggage</p>
+            <div className="bag">
+              <p className="details__luggage__label">
+                One small cabin bag(20*25*30)
+              </p>
+              <img
+                src={bagpack}
+                alt="bagpack"
+                className="details__luggage__icon"
+                onClick={() => dispatch({ type: "setLuggage", payload: small })}
+              />
+            </div>
+            <div className="bag">
+              <p className="details__luggage__label">
+                One medium check in bag(35*50*40)
+              </p>
+              <img
+                src={suitcase}
+                alt="oneSuitcase"
+                className="details__luggage__icon"
+                onClick={() =>
+                  dispatch({ type: "setLuggage", payload: medium })
+                }
+              />
+            </div>
+            <div className="bag">
+              <p className="details__luggage__label">
+                Two check in bags (20*25*30) and (35*50*40)
+              </p>
+              <img
+                src={twoSuitcases}
+                alt="twoSuitcases"
+                className="details__luggage__icon"
+                onClick={() => dispatch({ type: "setLuggage", payload: large })}
+              />
+            </div>
           </div>
-          <div className="bag">
-            <p className="luggage__label">One medium check in bag(35*50*40)</p>
-            <img
-              src={suitcase}
-              alt="oneSuitcase"
-              className="luggage__icon"
-              onClick={() => setLuggage(medium)}
+        </div>
+        <div className="details__container__row">
+          <div className="details__people">
+            <p className="details__label">Choose the number of seats</p>
+            <Button onClick={() => dispatch({ type: "decrement" })}>-</Button>
+            <input
+              readOnly={true}
+              type="text"
+              value={state.people}
+              className="details__people__input"
             />
+            <Button onClick={() => dispatch({ type: "increment" })}>+</Button>
           </div>
-          <div className="bag">
-            <p className="luggage__label">
-              Two check in bags (20*25*30) and (35*50*40)
+        </div>
+        <div className="details__container__row">
+          <div className="details__cost">
+            <p className="details__label">
+              Total cost is {cost + state.luggage + state.donation}{" "}
             </p>
-            <img
-              src={twoSuitcases}
-              alt="twoSuitcases"
-              className="luggage__icon"
-              onClick={() => setLuggage(large)}
-            />
+            <div>
+              <input
+                type="checkbox"
+                id="scales"
+                name="scales"
+                checked={state.donation}
+                onChange={() => {
+                  dispatch({ type: "setDonation" });
+                }}
+              />
+              <label className="details__cost__label">
+                Donate 1$ to reduce your carbon footprint
+              </label>
+              <div>
+                <p className="details__cost__label">
+                  Luggage: {state.luggage} $
+                </p>
+              </div>
+            </div>
+            <div className="details__cost__label">
+              You have chosen: {mappedSeats}
+            </div>
+            <Button
+              btnclass="submit-order-btn"
+              type="submit"
+              onClick={handleClick}
+              disabled={validated}
+            >
+              Book the tickets
+            </Button>
           </div>
         </div>
         <div className="options__row people">
@@ -167,6 +248,7 @@ const Details = props => {
     </div>
   );
 };
+
 Details.propTypes = {
   flights: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
@@ -175,9 +257,18 @@ Details.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { flights: state.flights.flights };
+  return { flights: state.flights.flightsThere };
 };
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      requestFlights
+    },
+    dispatch
+  );
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(withRouter(Details));

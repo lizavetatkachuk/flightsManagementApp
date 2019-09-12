@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 const PrivateRoute = ({ component: Component, auth, userRole, ...rest }) => {
   const token = getToken();
   const role = checkAdmin(token);
-  console.log(userRole);
   switch (userRole) {
     case "client":
       return (

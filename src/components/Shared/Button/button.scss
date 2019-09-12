@@ -9,6 +9,9 @@
   color: $base-color;
   font-size: 18px;
   margin: 5px;
+  :disabled {
+    color: grey;
+  }
 }
 
 .search-flights-btn {
