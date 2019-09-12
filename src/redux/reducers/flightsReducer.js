@@ -18,6 +18,8 @@ export const flightsReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     case UPDATE_FLIGHTS_THERE:
       return { ...state, flightsThere: action.payload, loading: false };
+    case UPDATE_FLIGHTS_BACK:
+      return { ...state, flightsBack: action.payload, loading: false };
     case FLIGHTS_FAILED:
       return { ...state, loading: false, error: action.payload };
     default:

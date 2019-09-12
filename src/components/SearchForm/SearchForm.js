@@ -19,15 +19,20 @@ class SearchForm extends React.Component {
       this.setState(state => ({ cities: cities }));
     });
   }
+
   state = {
     cities: []
   };
+
   render() {
     const { getFlights, history } = this.props;
     const onSubmit = values => {
       getFlights(values);
-      history.push("/flights");
+      history.push(
+        `/flights/${values.from}/${values.to}/${values.return}/${values.there}/${values.back}`
+      );
     };
+
     const directions = this.state.cities ? (
       this.state.cities.map(city => (
         <option key={city.code} value={city.name}>
@@ -37,6 +42,7 @@ class SearchForm extends React.Component {
     ) : (
       <option key="empty"></option>
     );
+
     return (
       <Form
         onSubmit={onSubmit}
@@ -67,7 +73,7 @@ class SearchForm extends React.Component {
                 name="from"
                 render={({ input, meta }) => (
                   <React.Fragment>
-                    <div className="container--vertical">
+                    <div className="input-container--vertical">
                       <label className="search-form__label">Flying From</label>
                       <select className="search-form__select " {...input}>
                         {directions}
@@ -87,7 +93,7 @@ class SearchForm extends React.Component {
                 name="to"
                 render={({ input, meta }) => (
                   <React.Fragment>
-                    <div className="container--vertical">
+                    <div className="input-container--vertical">
                       <label className="search-form__label">Flying To</label>
                       <select className="search-form__select" {...input}>
                         {directions}
@@ -106,7 +112,7 @@ class SearchForm extends React.Component {
                 value="one-way"
                 type="radio"
                 render={({ input, meta }) => (
-                  <div className="container">
+                  <div className="input-container">
                     <label className="search-form__label">One Way</label>
                     <input className="radio" {...input} />
                     {meta.error && meta.touched && (
@@ -121,7 +127,7 @@ class SearchForm extends React.Component {
                 value="return"
                 type="radio"
                 render={({ input, meta }) => (
-                  <div className="container">
+                  <div className="input-container">
                     <label className="search-form__label">Return</label>
                     <input className="radio" {...input} />
                   </div>
@@ -155,6 +161,7 @@ class SearchForm extends React.Component {
     );
   }
 }
+
 SearchForm.propTypes = {
   getFlights: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,

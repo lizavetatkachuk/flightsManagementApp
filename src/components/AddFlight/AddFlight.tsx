@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
-import { History } from "history";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Picker } from "./../Picker/Picker";
 import { api } from "./../../helpers/apiHeler";
@@ -19,16 +18,13 @@ interface IAirport {
   name: string;
   code: string;
 }
-interface IHistory {
-  history: History;
-}
 interface IError {
-  to: string | null;
-  from: string | null;
-  plane: string | null;
-  company: string | null;
-  price: string | null;
-  there: string | null;
+  to?: string | null;
+  from?: string | null;
+  plane?: string | null;
+  company?: string | null;
+  price?: string | null;
+  there?: string | null;
 }
 
 const Container = styled.div`
@@ -129,32 +125,25 @@ function AddFlight({ history }: RouteComponentProps) {
     <Container>
       <Form
         onSubmit={handleAddition}
-        // validate={values => {
-        //   const errors: IError = {
-        //     to: null,
-        //     from: null,
-        //     plane: null,
-        //     company: null,
-        //     price: null,
-        //     there: null
-        //   };
-        //   if (!values.from) {
-        //     errors.from = "Choose the airport";
-        //   }
-        //   if (!values.to) {
-        //     errors.to = "Choose the destination";
-        //   }
-        //   if (!values.plane) {
-        //     errors.plane = "Choose the plane type";
-        //   }
-        //   if (!values.there) {
-        //     errors.there = "Choose the dates";
-        //   }
-        //   if (!values.company) {
-        //     errors.company = "Choose the company";
-        //   }
-        //   return errors;
-        // }}
+        validate={values => {
+          const errors: IError = {};
+          if (!values.from) {
+            errors.from = "Choose the airport";
+          }
+          if (!values.to) {
+            errors.to = "Choose the destination";
+          }
+          if (!values.plane) {
+            errors.plane = "Choose the plane type";
+          }
+          if (!values.there) {
+            errors.there = "Choose the dates";
+          }
+          if (!values.company) {
+            errors.company = "Choose the company";
+          }
+          return errors;
+        }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form className="form" onSubmit={handleSubmit}>
             <Field

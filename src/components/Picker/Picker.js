@@ -20,7 +20,7 @@ export class Picker extends React.Component {
     const title = name === "there" ? "Fly there" : "Fly back";
 
     return (
-      <div className="container--vertical">
+      <div className="input-container--vertical">
         <label className="search-form__label">{title}</label>
         <DatePicker
           selected={date}

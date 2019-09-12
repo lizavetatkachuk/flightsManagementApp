@@ -1,13 +1,17 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getFlights } from "./../../redux/actions/flights";
 import Filter from "./../Filter/Filter";
+import Button from "./../Shared/Button/Button";
 import "./flights.scss";
 
 const Flight = props => {
   const [mode, setMode] = useState("price");
-  const { flights } = props;
+  const [there, setThere] = useState(null);
+  const [back, setBack] = useState(null);
+  const { flights, history } = props;
 
   const dynamicSort = property => {
     return function(a, b) {
@@ -17,24 +21,45 @@ const Flight = props => {
     };
   };
 
+  const onClick = () => {
+    if (!!there) {
+      history.push(`/flights/${there}`);
+    }
+  };
+
+  useEffect(() => {
+    const values = { ...props.match.params };
+    console.log(values);
+    getFlights(values);
+  });
+
   flights.flightsThere.sort(dynamicSort(mode));
   const flightsInfo = flights.flightsThere.map(flight => {
     return (
-      <Link to={`/flights/${flight._id}`} className="flight" key={flight._id}>
-        <li className="flight__item" key={flight._id}>
+      <li
+        className="flight"
+        key={flight._id}
+        onClick={() => setThere(flight._id)}
+      >
+        <p className="flight__item" key={flight._id}>
           {flight.company} {flight.price}$ departs at {flight.time}
-        </li>
-      </Link>
+        </p>
+      </li>
     );
   });
 
   const flightsBackInfo = flights.flightsBack.map(flight => {
     return (
-      <Link to={`/flights/${flight._id}`} className="flight" key={flight._id}>
-        <li className="flight__item" key={flight._id}>
+      <li
+        className="flight"
+        key={flight._id}
+        onClick={() => setBack(flight._id)}
+      >
+        <p className="flight__item" key={flight._id}>
+          {" "}
           {flight.company} {flight.price}$ departs at {flight.time}
-        </li>
-      </Link>
+        </p>
+      </li>
     );
   });
 
@@ -43,7 +68,7 @@ const Flight = props => {
   };
 
   return (
-    <Fragment className="container">
+    <Fragment>
       {flights.eror ? (
         <p className="server-msg">Internal Server Error</p>
       ) : null}
@@ -51,8 +76,19 @@ const Flight = props => {
         <p className="server-msg">Loading Your Flights</p>
       ) : null}
       <Filter onChange={onChange} />
-      <ul>{flightsInfo}</ul>
-      <ul>{flightsBackInfo}</ul>
+      <div className="container">
+        <ul className="container__column list">
+          <p className="list__label">Fly there</p>
+          {flightsInfo}
+        </ul>
+        <ul className="container__column list">
+          <p className="list__label">Fly back</p>
+          {flightsBackInfo}
+        </ul>
+      </div>
+      <Button btnclass="details-btn" onClick={onClick}>
+        Show flight details
+      </Button>
     </Fragment>
   );
 };
@@ -68,7 +104,15 @@ const mapStateToProps = state => {
   return { flights: state.flights };
 };
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getFlights
+    },
+    dispatch
+  );
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Flight);
