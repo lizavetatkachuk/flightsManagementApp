@@ -124,96 +124,80 @@ const Details = props => {
           booked={flightDetail.booked}
         ></Plane>
       </div>
-      <div className="details__container">
-        <div className="details__container__row">
-          <div className="details__luggage">
-            <p className="details__label">Choose your luggage</p>
-            <div className="bag">
-              <p className="details__luggage__label">
-                One small cabin bag(20*25*30)
-              </p>
-              <img
-                src={bagpack}
-                alt="bagpack"
-                className="details__luggage__icon"
-                onClick={() => dispatch({ type: "setLuggage", payload: small })}
-              />
-            </div>
-            <div className="bag">
-              <p className="details__luggage__label">
-                One medium check in bag(35*50*40)
-              </p>
-              <img
-                src={suitcase}
-                alt="oneSuitcase"
-                className="details__luggage__icon"
-                onClick={() =>
-                  dispatch({ type: "setLuggage", payload: medium })
-                }
-              />
-            </div>
-            <div className="bag">
-              <p className="details__luggage__label">
-                Two check in bags (20*25*30) and (35*50*40)
-              </p>
-              <img
-                src={twoSuitcases}
-                alt="twoSuitcases"
-                className="details__luggage__icon"
-                onClick={() => dispatch({ type: "setLuggage", payload: large })}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="details__container__row">
-          <div className="details__people">
-            <p className="details__label">Choose the number of seats</p>
-            <Button onClick={() => dispatch({ type: "decrement" })}>-</Button>
-            <input
-              readOnly={true}
-              type="text"
-              value={state.people}
-              className="details__people__input"
+      <div className="details__options options">
+        <div className="options__row luggage">
+          <p className="options__label">Choose your luggage</p>
+          <div className="bag">
+            <p className="luggage__label">One small cabin bag(20*25*30)</p>
+            <img
+              src={bagpack}
+              alt="bagpack"
+              className="luggage__icon"
+              onClick={() => dispatch({ type: "setLuggage", payload: small })}
             />
-            <Button onClick={() => dispatch({ type: "increment" })}>+</Button>
+          </div>
+          <div className="bag">
+            <p className="luggage__label">One medium check in bag(35*50*40)</p>
+            <img
+              src={suitcase}
+              alt="oneSuitcase"
+              className="luggage__icon"
+              onClick={() => dispatch({ type: "setLuggage", payload: medium })}
+            />
+          </div>
+          <div className="bag">
+            <p className="luggage__label">
+              Two check in bags (20*25*30) and (35*50*40)
+            </p>
+            <img
+              src={twoSuitcases}
+              alt="twoSuitcases"
+              className="luggage__icon"
+              onClick={() => dispatch({ type: "setLuggage", payload: large })}
+            />
           </div>
         </div>
-        <div className="details__container__row">
-          <div className="details__cost">
-            <p className="details__label">
-              Total cost is {cost + state.luggage + state.donation}{" "}
-            </p>
+        <div className="options__row people">
+          <p className="options__label">Choose the number of seats</p>
+          <Button onClick={() => dispatch({ type: "decrement" })}>-</Button>
+          <input
+            readOnly={true}
+            type="text"
+            value={state.people}
+            className="people__input"
+          />
+          <Button onClick={() => dispatch({ type: "increment" })}>+</Button>
+        </div>
+        <div className="options__row cost">
+          <p className="options__label">
+            Total cost is {cost + state.luggage + state.donation}
+          </p>
+          <div>
+            <input
+              type="checkbox"
+              id="scales"
+              name="scales"
+              checked={state.donation}
+              onChange={() => {
+                dispatch({ type: "setDonation" });
+              }}
+            />
+            <label className="cost__label">
+              Donate 1$ to reduce your carbon footprint
+            </label>
             <div>
-              <input
-                type="checkbox"
-                id="scales"
-                name="scales"
-                checked={state.donation}
-                onChange={() => {
-                  dispatch({ type: "setDonation" });
-                }}
-              />
-              <label className="details__cost__label">
-                Donate 1$ to reduce your carbon footprint
-              </label>
-              <div>
-                <p className="details__cost__label">
-                  Luggage: {state.luggage} $
-                </p>
-              </div>
+              <p className="cost__label">Luggage: {state.luggage} $</p>
             </div>
-            <div className="details__cost__label">
-              You have chosen: {mappedSeats}
-            </div>
-            <Button
-              btnclass="submit-order-btn"
-              type="submit"
-              onClick={handleClick}
-              disabled={validated}
-            >
-              Book the tickets
-            </Button>
           </div>
+          <div className="cost__label">You have chosen: {mappedSeats}</div>
+          <Button
+            btnclass="submit-order-btn"
+            type="submit"
+            onClick={handleClick}
+            disabled={validated}
+          >
+            Book the tickets
+          </Button>
         </div>
       </div>
     </div>
