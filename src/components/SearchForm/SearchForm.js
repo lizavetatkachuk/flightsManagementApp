@@ -172,7 +172,7 @@ class SearchForm extends React.Component {
 }
 
 SearchForm.propTypes = {
-  getFlights: PropTypes.func.isRequired,
+  requestFlights: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired

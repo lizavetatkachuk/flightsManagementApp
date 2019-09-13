@@ -10,7 +10,7 @@ import { mustBeEmail, minLength } from "./../../validators";
 import "./login.scss";
 
 const Login = props => {
-  const { history, requestLogin, auth } = props;
+  const { history, requestLogin, message } = props;
   const onSubmit = values => {
     requestLogin({ ...values, history });
   };
@@ -30,7 +30,7 @@ const Login = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
-            {auth.message ? <p className="Error"></p> : null}
+            {message ? <p className="Error"></p> : null}
             <label className="form-label">Login</label>
             <Field
               name="email"
@@ -58,7 +58,6 @@ const Login = props => {
               validate={minLength}
             />
             <Button btntype="submit" disabled={submitting || pristine}>
-              {" "}
               Log In
             </Button>
           </form>

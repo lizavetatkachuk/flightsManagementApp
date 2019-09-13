@@ -53,11 +53,15 @@ const Details = props => {
   const small = 8;
   const medium = 20;
   const large = 25;
-  const { flights, history } = props;
+  const { flights, history, match, requestFlights } = props;
   const token = getToken();
   const businessSeats = state.seats.filter(
     seat => seat.seatClass === "business"
   );
+  useEffect(() => {
+    const values = { ...props.match.params };
+    requestFlights(values);
+  }, []);
 
   const mappedSeats = state.seats.map(seat => {
     return (
