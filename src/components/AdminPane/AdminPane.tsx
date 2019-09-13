@@ -10,26 +10,35 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-flow: column wrap;
-
-  .admin_pane_element {
+  margin-top: 20px;
+  .admin-pane {
     width: 10%;
-    font-size: 30px;
     margin: 10px;
-    color: #0c0663;
     background-color: #e0e417b3;
     border-radius: 8px;
     height: auto;
     padding: 12px;
+    text-align: center;
+    &__element {
+      font-size: 30px;
+      color: #0c0663;
+    }
+    :hover {
+      box-shadow: 7px 7px 7px grey;
+    }
+  }
+  a:-webkit-any-link {
+    text-decoration: none;
   }
 `;
 function AdminPane(Props: AdminProps) {
   return (
     <Container>
-      <Link to="/admin/airports" className="admin_pane_element">
-        Airports
+      <Link to="/admin/airports" className="admin-pane">
+        <span className="admin-pane__element"> Airports</span>
       </Link>
-      <Link to="/admin/flights" className="admin_pane_element">
-        Flights
+      <Link to="/admin/flights" className="admin-pane">
+        <span className="admin-pane__element"> Flights</span>
       </Link>
     </Container>
   );

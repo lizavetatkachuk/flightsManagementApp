@@ -61,7 +61,7 @@ const Details = props => {
   useEffect(() => {
     const values = { ...props.match.params };
     requestFlights(values);
-  }, []);
+  });
 
   const mappedSeats = state.seats.map(seat => {
     return (
