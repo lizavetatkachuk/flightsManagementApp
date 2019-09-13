@@ -53,7 +53,7 @@ const Details = props => {
   const small = 8;
   const medium = 20;
   const large = 25;
-  const { flights, history, requestFlights } = props;
+  const { flights, history } = props;
   const token = getToken();
   const businessSeats = state.seats.filter(
     seat => seat.seatClass === "business"
@@ -79,12 +79,6 @@ const Details = props => {
   const onClick = value => {
     dispatch({ type: "setSeats", payload: value });
   };
-
-  useEffect(() => {
-    const values = { ...props.match.params };
-    getFlights(values);
-  }, []);
-
   const validated = state.seats ? false : true;
 
   const seatNums = state.seats.map(seat => {
@@ -220,29 +214,6 @@ const Details = props => {
               Book the tickets
             </Button>
           </div>
-        </div>
-        <div className="options__row people">
-          <p className="options__label">Choose the number of seats</p>
-          <Button onClick={decrement}>-</Button>
-          <input
-            readOnly={true}
-            type="text"
-            value={people}
-            className="people__input"
-          />
-          <Button onClick={increment}>+</Button>
-        </div>
-        <div className="options__row cost">
-          <p className="options__label">Total cost is </p>
-          <p className="cost__label">You have chosen: {mappedSeats}</p>
-          <Button
-            btnclass="submit-order-btn"
-            type="submit"
-            onClick={handleClick}
-            disabled={validated}
-          >
-            Book the tickets
-          </Button>
         </div>
       </div>
     </div>

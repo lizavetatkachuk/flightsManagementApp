@@ -12,8 +12,56 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
   min-height: 100vh;
-  &__options {
+  &__container {
     width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    &__row {
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
+  &__luggage,
+  &__cost {
+    display: flex;
+    flex-flow: row wrap;
+
+    justify-content: space-around;
+    width: 100%;
+    &__icon {
+      width: 29%;
+      height: auto;
+      padding: 22px;
+      cursor: pointer;
+    }
+    &__label {
+      color: $base-color;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .details__label {
+      width: 100%;
+    }
+  }
+  &__people {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    .details__label {
+      width: 100%;
+    }
+    &__input {
+      width: 40px;
+      text-align: center;
+      background-color: rgba($base-color, 0.2);
+      outline: none;
+      border-radius: 6px;
+    }
+    .button {
+      height: 30%;
+    }
+    font-size: 15px;
   }
   &__plane {
     width: 35%;
@@ -25,64 +73,8 @@
     font-style: italic;
     font-weight: bold;
     text-align: center;
-    width: 100%;
   }
 }
 .bag {
   width: 25%;
-}
-.options {
-  display: flex;
-  flex-flow: column wrap;
-  &__row {
-    display: flex;
-    flex-flow: row wrap;
-  }
-  &__label {
-    color: $base-color;
-    font-size: 25px;
-    font-style: italic;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-  }
-}
-.luggage,
-.cost {
-  display: flex;
-  flex-flow: row wrap;
-
-  justify-content: space-around;
-  width: 100%;
-  &__icon {
-    width: 29%;
-    height: auto;
-    padding: 22px;
-    cursor: pointer;
-  }
-  &__label {
-    color: $base-color;
-    font-size: 18px;
-    font-weight: bold;
-  }
-}
-.people {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  width: 100%;
-  .details__label {
-    width: 100%;
-  }
-  &__input {
-    width: 40px;
-    text-align: center;
-    background-color: rgba($base-color, 0.2);
-    outline: none;
-    border-radius: 6px;
-  }
-  .button {
-    height: 30%;
-  }
-  font-size: 15px;
 }
