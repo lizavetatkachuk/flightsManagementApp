@@ -28,11 +28,7 @@ class SearchForm extends React.Component {
     const { requestFlights, history, error } = this.props;
 
     const onSubmit = values => {
-      requestFlights(values);
-      !error &&
-        history.push(
-          `/flights/${values.from}/${values.to}/${values.return}/${values.there}/${values.back}`
-        );
+      requestFlights({ ...values, history });
     };
 
     const directions = this.state.cities ? (
@@ -44,11 +40,10 @@ class SearchForm extends React.Component {
     ) : (
       <option key="empty"></option>
     );
+
     return (
       <Form
-        onSubmit={values => {
-          onSubmit(values);
-        }}
+        onSubmit={onSubmit}
         initialValues={{ return: "one-way" }}
         validate={values => {
           const errors = {};
