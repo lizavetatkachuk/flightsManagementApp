@@ -11,6 +11,7 @@ const Header = props => {
   const { logOut } = props;
   const token = getToken();
   const role = checkAdmin();
+
   return (
     <header className="header">
       <nav className="header__nav navigation">
@@ -65,6 +66,7 @@ const Header = props => {
     </header>
   );
 };
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -72,10 +74,12 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+
 const mapStateToProps = state => {
   const { auth } = state;
   return auth;
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

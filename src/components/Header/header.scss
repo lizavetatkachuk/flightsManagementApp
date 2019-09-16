@@ -12,7 +12,10 @@
 
   &__title {
     font-style: italic;
-    align-items: flex-start;
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
     width: 30%;
     font-size: 50px;
     text-decoration: none;

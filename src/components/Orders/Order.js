@@ -20,7 +20,6 @@ const Order = () => {
 
   const ordersInfo = orders
     ? orders.map(order => {
-        console.log(order);
         return (
           <li className="flight__item" key={order._id}>
             <div>

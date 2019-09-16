@@ -14,50 +14,63 @@ interface IFlight {
 }
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  padding-top: 40px;
   .delete {
     align-self: center;
-    justify-self: flex-end;
     margin-bottom: 10px;
+    margin-top: 10px;
     font-size: 20px;
-    background-color: Transparent;
+    background-color: #e0e417b3;
     color: #0c0663;
     border-radius: 7px;
     height: 15%;
     width: 22%;
     outline: none;
     cursor: pointer;
+    :hover {
+      box-shadow: 7px 7px 7px grey;
+    }
+  }
+  .list {
+    margin: 0 auto;
+    width: 37%;
   }
   .add {
-    text-align: center;
     margin-bottom: 10px;
     font-size: 25px;
     background-color: #e0e417b3;
     margin-top: 25px;
-    margin-right: 25px;
+    margin-right: 55px;
     color: #0c0663;
     border-radius: 7px;
-    height: 20%;
+    height: auto;
     padding: 7px;
-    width: 10%;
+    width: 8%;
     outline: none;
     cursor: pointer;
+    text-align: center;
+    position: fixed;
+    right: 20px;
+    top: 95px;
+    :hover {
+      box-shadow: 7px 7px 7px grey;
+    }
   }
   .flight {
+    cursor: initial;
     display: flex;
+    align-items: center;
     flex-flow: column wrap;
     width: 100%;
     font-size: 25px;
     margin: 10px;
     color: #0c0663;
-    background-color: #e0e417b3;
+    background-color: #aeb2bbcc;
     border-radius: 8px;
     padding-left: 10px;
     padding-right: 5px;
     &__details {
-      margin-block-start: 8px;
+      margin-block-start: 15px;
       margin-block-end: 0px;
       margin-inline-start: 0px;
       margin-inline-end: 0px;
@@ -83,8 +96,10 @@ const AllFlights = () => {
             <p className="flight__details">
               Flying from {flight.from} to {flight.to}
             </p>
-            <p className="flight__details">Airlines: {flight.company}</p>
-            <p className="flight__details">Date: {flight.time}</p>
+            <p className="flight__details">
+              Airlines: {flight.company} {"    "}Date: {flight.time}
+            </p>
+
             <button
               className="delete"
               onClick={() => handleDeletion(flight._id)}
@@ -97,7 +112,7 @@ const AllFlights = () => {
     : null;
   return (
     <Container>
-      <div>{mappedFlights} </div>
+      <div className="list">{mappedFlights} </div>
       <Link to="/admin/flights/add" className="add">
         Add Flight
       </Link>

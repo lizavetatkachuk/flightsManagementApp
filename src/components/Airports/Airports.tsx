@@ -9,21 +9,7 @@ interface IAirport {
 }
 const Container = styled.div`
   display: flex;
-  flex-flow: column wrap;
-  .input-field {
-    margin-top: 20px;
-    margin-left: 10px;
-    border-radius: 8px;
-    height: 35px;
-    font-size: 20px;
-    font-size: 20px;
-    color: #0c0663;
-    ::placeholder {
-      color: #0c0663;
-    }
-    background-color: Transparent;
-    width: 25%;
-  }
+  justify-content: space-between;
   .delete,
   .add {
     align-self: center;
@@ -40,20 +26,47 @@ const Container = styled.div`
     cursor: pointer;
     :disabled {
       color: grey;
+    }}
+  .form {
+    justify-self: flex-end;
+    display:flex
+    flex-direction:column;
+    align-items:center;
+    width: 40%;
+    .add{
+      margin-top:10px;
+      width:30%;
     }
+
   }
-  .airport {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    width: 25%;
-    font-size: 25px;
-    margin: 10px;
-    color: #0c0663;
-    background-color: #e0e417b3;
+  .input-field {
+    margin-top: 20px;
+    margin-left: 10px;
     border-radius: 8px;
-    padding-left: 10px;
-    padding-right: 5px;
+    height: 35px;
+    font-size: 20px;
+    font-size: 20px;
+    color: #0c0663;
+    ::placeholder {
+      color: #0c0663;
+    }
+    background-color:#bdbec0;
+  }}
+  
+  .list {
+    width: 30%;
+    &__airport {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      font-size: 25px;
+      margin: 10px;
+      color: #0c0663;
+      background-color: #e0e417b3;
+      border-radius: 8px;
+      padding-left: 10px;
+      padding-right: 5px;
+    }
   }
   .error {
     color: red;
@@ -90,7 +103,7 @@ function Airports() {
   const mappedAirports = airports
     ? airports.map((airport: IAirport) => {
         return (
-          <div className="airport" key={airport.code}>
+          <div className="list__airport" key={airport.code}>
             <p>{airport.name}</p>
             <button
               className="delete"
@@ -104,6 +117,7 @@ function Airports() {
     : null;
   return (
     <Container>
+      <div className="list">{mappedAirports}</div>
       <Form
         onSubmit={handleAddition}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
@@ -147,7 +161,6 @@ function Airports() {
       ) : (
         <p className="error"> </p>
       )}
-      {mappedAirports}
     </Container>
   );
 }

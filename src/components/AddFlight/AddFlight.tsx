@@ -19,52 +19,74 @@ interface IAirport {
   code: string;
 }
 interface IError {
-  to?: string | null;
-  from?: string | null;
-  plane?: string | null;
-  company?: string | null;
-  price?: string | null;
-  there?: string | null;
+  to?: string;
+  from?: string;
+  plane?: string;
+  company?: string;
+  price?: string;
+  there?: string;
 }
 
 const Container = styled.div`
   display: flex;
   flex-flow: column wrap;
-  padding: 30px;
+  padding-top: 70px;
   .form {
-    width: 60%;
+    padding-top: 10px;
+    width: 45%;
     display: flex;
+    align-items:center;
     flex-flow: column wrap;
     margin: auto;
-    background-color:  #e0e417a1;
+    background-color:  #7f95adcc;
     border-radius: 10px;
     &__label{
-        margin-top: 20px;
         font-size:20px;
-        margin-left: 12px;
+        margin-top: 20px;
+        margin-left: 10px;
     }
   }
+
+.picker {
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  width: 32%;
+}
+.picker {
+  display: flex;
+  flex-flow: row;
+  align-items:baseline;
+  margin-top: 10px;
+  width:90%;
+  .search-form__label{
+    width: 20%;
+    margin-left:0px;
+  }
+}
   .input-field {
-    width:67%;
-    margin-top: 20px;
-    margin-left: 10px;
+    width:90%;
     margin-right:0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border-radius: 8px;
-    height: 35px;
-    font-size: 15px;
+    height: 35px;  
     font-size: 20px;
     color: #0c0663;
     ::placeholder {
       color: #0c0663;
     }
-    background-color: Transparent;
+    background-color:#f7f3f3bf;   
+  }
+  input.input-field{
+    border-style:none;
   }
   .add {
     align-self: center;
     justify-self: flex-end;
     margin 20px;
     font-size: 20px;
-    background-color: Transparent;
+    background-color: #e0e417b3;
     color: #0c0663;
     border-radius: 7px;
     height: 15%;
@@ -72,7 +94,11 @@ const Container = styled.div`
     outline: none;
     cursor: pointer;
     :disabled {
-      color: grey;
+      background-color: grey;
+      color:#282a2dcc;
+    }
+    :hover {
+      box-shadow: 7px 7px 7px grey;
     }
   }
   .error{
@@ -86,9 +112,16 @@ const Container = styled.div`
     margin-left:10px;
      font-size: 20px;
   }
+  .picker{
+    display:flex;
+    flex-direction: column;
+    margin-bottom:19px;
+    margin-top: -20px;
+    align-items: center;
+  }
   .react-datepicker__input-container input{
     margin-top: 0px;
-    margin-left:10px;
+   margin-right:10px;
     color: #0c0663;
   }
 `;
@@ -157,11 +190,6 @@ function AddFlight({ history }: RouteComponentProps) {
                     <option key="empty-departure"></option>
                     {destinations}
                   </select>
-                  {meta.error && meta.touched ? (
-                    <span className="error">{meta.error}</span>
-                  ) : (
-                    <span className="error"></span>
-                  )}
                 </React.Fragment>
               )}
             />
@@ -209,6 +237,9 @@ function AddFlight({ history }: RouteComponentProps) {
                 </React.Fragment>
               )}
             />
+
+            <Field className="dates" component={Picker as any} name="there" />
+
             <Field
               name="company"
               render={({ input, meta }) => (
@@ -243,8 +274,6 @@ function AddFlight({ history }: RouteComponentProps) {
                 </React.Fragment>
               )}
             />
-            <Field className="dates" component={Picker as any} name="there" />
-
             <button
               type="submit"
               className="add"

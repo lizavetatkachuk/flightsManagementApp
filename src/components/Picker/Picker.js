@@ -27,6 +27,7 @@ export class Picker extends React.Component {
           onChange={date => this.handleChange(date)}
           errorText={touched && error}
           dateFormat="MMMM d, yyyy"
+          minDate={date}
         />
         {error && touched && <span className="error">{error}</span>}
       </div>
