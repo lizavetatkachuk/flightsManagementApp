@@ -100,6 +100,7 @@ function Airports() {
   useEffect(() => {
     api.get("/admin/airports").then(res => setAirports(res.data));
   }, []);
+
   const mappedAirports = airports
     ? airports.map((airport: IAirport) => {
         return (
@@ -115,6 +116,7 @@ function Airports() {
         );
       })
     : null;
+
   return (
     <Container>
       <div className="list">{mappedAirports}</div>
@@ -157,7 +159,6 @@ function Airports() {
         )}
       />
       <p className="error">{error ? "The airport already exists" : " "}</p>
-      {mappedAirports}
     </Container>
   );
 }
