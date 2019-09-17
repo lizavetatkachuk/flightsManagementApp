@@ -67,13 +67,11 @@ const Details = props => {
     return (
       <li key={seat.seat} className="list">
         <p>Seat {seat.seat}</p>
-        <div>
-          {seat.seatClass === "business" ? (
-            <p className="details__cost__label">
-              Extra fee for business class: 20$
-            </p>
-          ) : null}
-        </div>
+        {seat.seatClass === "business" ? (
+          <p className="details__cost__label">
+            Extra fee for business class: 20$
+          </p>
+        ) : null}
       </li>
     );
   });

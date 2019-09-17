@@ -1,9 +1,13 @@
 import React, { useEffect, useState, Fragment } from "react";
+import moment from "moment";
+import Filter from "./../Filter/Filter";
 import { api } from "./../../helpers/apiHeler";
 import "./../Flight/flights.scss";
 
 const Order = () => {
   const [orders, setOrders] = useState([]);
+  const [mode, setMode] = useState("All flights");
+  const now = moment().format("YYYY-MM-DD");
 
   const fetchOrders = async () => {
     try {
@@ -18,13 +22,37 @@ const Order = () => {
     fetchOrders();
   }, []);
 
-  const ordersInfo = orders
+  const onChange = value => {
+    setMode(value);
+  };
+
+  const filteredOrders = orders.filter(order => {
+    return now - order.time < 0;
+  });
+
+  const incomingOrders = filteredOrders ? (
+    filteredOrders.map(order => {
+      return (
+        <li className="flight__item" key={order._id}>
+          <div>
+            Flying from {order.flight.from} to {order.flight.to}
+            {"  "}
+            {order.flight.price}$ departs at {order.flight.time}
+          </div>
+          <div className="company">Airlines : {order.flight.company}</div>
+        </li>
+      );
+    })
+  ) : (
+    <li> "There are no incoming trips"</li>
+  );
+
+  const allOrders = orders
     ? orders.map(order => {
-        console.log(order);
         return (
           <li className="flight__item" key={order._id}>
             <div>
-              Flying from {order.flight.from} to {order.flight.to}{" "}
+              Flying from {order.flight.from} to {order.flight.to}
               {order.flight.price}$ departs at {order.flight.time}
             </div>
             <div className="company">Airlines : {order.flight.company}</div>
@@ -35,7 +63,17 @@ const Order = () => {
 
   return (
     <Fragment>
-      <ul>{ordersInfo}</ul>
+      <Filter
+        onChange={onChange}
+        value1="All flights"
+        value2="Incoming flights"
+        filterName="filterBy"
+      />
+      {mode === "All flights" ? (
+        <ul> {allOrders} </ul>
+      ) : (
+        <ul> {incomingOrders}</ul>
+      )}
     </Fragment>
   );
 };

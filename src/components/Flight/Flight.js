@@ -77,7 +77,12 @@ const Flight = props => {
       {flights.loading ? (
         <p className="server-msg">Loading Your Flights</p>
       ) : null}
-      <Filter onChange={onChange} />
+      <Filter
+        onChange={onChange}
+        value1="price"
+        value2="time"
+        filterName="orderBy"
+      />
       <div className="container">
         <ul className="container__column list">
           <p className="list__label">Fly there</p>
