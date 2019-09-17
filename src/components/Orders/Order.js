@@ -27,7 +27,7 @@ const Order = () => {
   };
 
   const filteredOrders = orders.filter(order => {
-    return now - order.time < 0;
+    return moment(order.flight.time).isAfter(now);
   });
 
   const incomingOrders = filteredOrders ? (
