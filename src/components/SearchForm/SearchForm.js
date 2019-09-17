@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { requestFlights } from "./../../redux/actions/flights";
 import Button from "./../Shared/Button/Button";
 import { Picker } from "./../Picker/Picker";
@@ -26,12 +26,9 @@ class SearchForm extends React.Component {
 
   render() {
     const { requestFlights, history, error } = this.props;
+
     const onSubmit = values => {
-      requestFlights(values);
-      !error &&
-        history.push(
-          `/flights/${values.from}/${values.to}/${values.return}/${values.there}/${values.back}`
-        );
+      requestFlights({ ...values, history });
     };
 
     const directions = this.state.cities ? (
@@ -99,7 +96,7 @@ class SearchForm extends React.Component {
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying To</label>
                       <select className="search-form__select" {...input}>
-                        <option key="empty"></option>
+                        <option key="empty-destination"></option>
                         {directions}
                       </select>
                       <span className="error">
@@ -117,11 +114,21 @@ class SearchForm extends React.Component {
                 type="radio"
                 render={({ input, meta }) => (
                   <div className="input-container">
-                    <label className="search-form__label">One Way</label>
-                    <input className="radio" {...input} />
-                    <span className="error">
-                      {meta.error && meta.touched ? meta.error : ""}
-                    </span>
+                    <label
+                      htmlFor="one-way"
+                      className="search-form__label radio-container"
+                    >
+                      One Way
+                      <input
+                        className="radio-container__radio"
+                        id="one-way"
+                        {...input}
+                      />
+                      <span className="radio-container__circle"></span>
+                    </label>
+                    {meta.error && meta.touched && (
+                      <span className="error">{meta.error}</span>
+                    )}
                   </div>
                 )}
               />
@@ -132,8 +139,18 @@ class SearchForm extends React.Component {
                 type="radio"
                 render={({ input, meta }) => (
                   <div className="input-container">
-                    <label className="search-form__label">Return</label>
-                    <input className="radio" {...input} />
+                    <label
+                      htmlFor="return"
+                      className="search-form__label radio-container"
+                    >
+                      Return
+                      <input
+                        className="radio-container__radio"
+                        id="return"
+                        {...input}
+                      />
+                      <span className="radio-container__circle"></span>
+                    </label>
                   </div>
                 )}
               />
@@ -151,7 +168,12 @@ class SearchForm extends React.Component {
                 validate={validateDate}
                 name="back"
               />
-            </div>
+              {error ? (
+                <p className="error">There are no flights for these dates</p>
+              ) : (
+                <p className="error"></p>
+              )}
+            </div>{" "}
             <Button
               btnype="submit"
               btnclass="search-flights-btn"
@@ -159,13 +181,6 @@ class SearchForm extends React.Component {
             >
               Search Flights
             </Button>
-            {error ? (
-              <p className="search-form__label">
-                There are no flights for these dates
-              </p>
-            ) : (
-              <p className="search-form__label"></p>
-            )}
           </form>
         )}
       />
@@ -187,9 +202,11 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+
 const mapStateToProps = state => {
   return { error: state.flights.error };
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

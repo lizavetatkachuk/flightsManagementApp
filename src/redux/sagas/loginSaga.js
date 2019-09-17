@@ -10,6 +10,7 @@ import { setToken } from "../../helpers/authHelper";
 const api = axios.create({
   baseURL: "/"
 });
+
 export const requestLogin = values => {
   const { email, password } = values;
   return api.post("auth/login", {
@@ -17,10 +18,10 @@ export const requestLogin = values => {
     password
   });
 };
+
 function* loginEffectSaga(action) {
   try {
     let res = yield call(requestLogin, action.payload);
-    console.log(res);
     const { history } = action.payload;
     yield put(requestLoginSucsess(res.data));
     setToken(res.data.token);
@@ -29,6 +30,7 @@ function* loginEffectSaga(action) {
     yield put(requestLoginFailed(err.response.data));
   }
 }
+
 export function* loginWatcherSaga() {
   yield takeEvery(REQUEST_LOGIN, loginEffectSaga);
 }

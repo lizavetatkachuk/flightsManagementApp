@@ -9,8 +9,11 @@
   color: $base-color;
   font-size: 18px;
   margin: 5px;
-  :disabled {
-    color: grey;
+  &:disabled {
+    color: rgb(31, 31, 31);
+  }
+  &:hover {
+    box-shadow: 7px 7px 7px rgb(36, 34, 34);
   }
 }
 
@@ -24,6 +27,12 @@
   font-size: 28px;
   padding: 5px;
   color: $base-color;
+  &:disabled {
+    color: rgb(31, 31, 31);
+  }
+  &:hover {
+    box-shadow: 7px 7px 7px rgb(36, 34, 34);
+  }
 }
 .submit-order-btn {
   outline: none;
@@ -34,4 +43,7 @@
   font-size: 20px;
   color: $base-color;
   margin: 10px;
+  &:hover {
+    box-shadow: 7px 7px 7px rgb(36, 34, 34);
+  }
 }

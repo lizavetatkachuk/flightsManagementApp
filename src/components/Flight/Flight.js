@@ -31,7 +31,7 @@ const Flight = props => {
 
   useEffect(() => {
     const values = { ...props.match.params };
-    requestFlights(values);
+    requestFlights({ ...values, history });
   }, []);
 
   flights.flightsThere.sort(dynamicSort(mode));

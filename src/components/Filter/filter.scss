@@ -1,9 +1,51 @@
-.filter-pane{
-    display:flex;
-    flex-direction: row;
-    align-items: stretch;
-    font-size:30px;
-   &__element{
-       margin: 30px;
-   }
+@import "../Shared/index.scss";
+.filter-pane {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  font-size: 30px;
+  &__element {
+    margin: 30px;
+  }
+}
+.radio-container {
+  display: block;
+  position: relative;
+  &__radio {
+    display: none;
+  }
+  &__circle {
+    position: absolute;
+    top: 15%;
+    left: 100%;
+    margin-left: 10px;
+    height: 18px;
+    width: 18px;
+    background-color: #eee;
+    border-radius: 50%;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 29%;
+      left: 25%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #eee;
+      display: none;
+    }
+  }
+}
+.radio-container {
+  &__radio:hover ~ &__circle {
+    background-color: rgb(99, 94, 94);
+  }
+}
+.radio-container {
+  &__radio:checked ~ &__circle {
+    background-color: $font-color;
+    &::after {
+      display: block;
+    }
+  }
 }

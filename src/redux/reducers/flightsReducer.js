@@ -17,11 +17,22 @@ export const flightsReducer = (state = initialState, action) => {
     case REQUEST_FLIGHTS:
       return { ...state, loading: true };
     case REQUEST_FLIGHTS_THERE_SUCSESS:
-      return { ...state, flightsThere: action.payload, loading: false };
+      return {
+        ...state,
+        flightsThere: action.payload,
+        loading: false,
+        error: null
+      };
     case REQUEST_FLIGHTS_BACK_SUCSESS:
       return { ...state, flightsBack: action.payload, loading: false };
     case REQUEST_FLIGHTS_FAILED:
-      return { ...state, loading: false, error: action.payload };
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        flightsThere: [],
+        flightsBack: []
+      };
     default:
       return state;
   }
