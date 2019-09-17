@@ -116,11 +116,16 @@ class SearchForm extends React.Component {
                   <div className="input-container">
                     <label
                       htmlFor="one-way"
-                      className="search-form__label radiobutton"
+                      className="search-form__label radio-container"
                     >
                       One Way
+                      <input
+                        className="radio-container__radio"
+                        id="one-way"
+                        {...input}
+                      />
+                      <span className="radio-container__circle"></span>
                     </label>
-                    <input className="radio" id="one-way" {...input} />
                     {meta.error && meta.touched && (
                       <span className="error">{meta.error}</span>
                     )}
@@ -136,11 +141,16 @@ class SearchForm extends React.Component {
                   <div className="input-container">
                     <label
                       htmlFor="return"
-                      className="search-form__label radiobutton"
+                      className="search-form__label radio-container"
                     >
                       Return
+                      <input
+                        className="radio-container__radio"
+                        id="return"
+                        {...input}
+                      />
+                      <span className="radio-container__circle"></span>
                     </label>
-                    <input className="radio" id="return" {...input} />
                   </div>
                 )}
               />

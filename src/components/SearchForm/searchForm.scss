@@ -60,17 +60,48 @@
   flex-flow: column wrap;
   width: 32%;
 }
-.radio {
-  // display: none;
-}
-.radiobutton {
-  ::after {
-    content: "\f111";
-    display: inline-block;
-    text-align: center;
-    width: 1em;
+.radio-container {
+  display: block;
+  position: relative;
+  &__radio {
+    display: none;
+  }
+  &__circle {
+    position: absolute;
+    top: 15%;
+    left: 100%;
+    margin-left: 10px;
+    height: 23px;
+    width: 23px;
+    background-color: #eee;
+    border-radius: 50%;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 29%;
+      left: 25%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #eee;
+      display: none;
+    }
   }
 }
+.radio-container {
+  &__radio:hover ~ &__circle {
+    background-color: rgb(99, 94, 94);
+  }
+}
+.radio-container {
+  &__radio:checked ~ &__circle {
+    background-color: $font-color;
+    &::after {
+      display: block;
+    }
+  }
+}
+
 .react-datepicker {
   &-wrapper {
     width: 100%;
