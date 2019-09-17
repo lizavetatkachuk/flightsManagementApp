@@ -7,12 +7,15 @@ export const Plane = props => {
   const { onClick, people, plane } = props;
   const { booked } = props || [];
   const [selected, setSelected] = useState([]);
+
   var planeType = "plane";
   if (plane === "AirbusA320(ceo)") planeType = "plane";
   else if (plane === "BombardierCRJ200") planeType = "plane2";
   else planeType = "plane3";
+
   const businessClass = "business";
   const economyClass = "economy";
+
   const handleChange = (seat, seatClass) => {
     if (selected.includes(seat)) {
       const newSelected = selected.filter(item => item !== seat);
@@ -163,9 +166,11 @@ export const Plane = props => {
       </div>
     );
   });
+
   const planeMap = [...business, ...economy];
   return <div className="plane">{planeMap}</div>;
 };
+
 Plane.propTypes = {
   onClick: PropTypes.func,
   people: PropTypes.number,

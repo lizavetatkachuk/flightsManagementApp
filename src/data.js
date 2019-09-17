@@ -67,18 +67,10 @@ const plane3 = {
     ["A", "B", "C", "D", "E", "F"]
   ]
 };
-const cities = [
-  { "MSQ-sky": "Minsk" },
-  { "ATL-sky": "Atlanta" },
-  { "LAX-sky": "Los Angeles" },
-  { "LHR-sky": "London Heathrow" },
-  { "FRA-sky": "Frankfurt" },
-  { "BOM-sky": "Mumbai" },
-  { "IST-sky": "Istanbul" },
-  { "MAD-sky": "Madrid Barajas" },
-  { "ORD-sky": "Chicago O'Hare International" },
-  { "SFO-sky": "SanFransisco" },
-  { "SXF-sky": "Berlin Shonenfield" },
-  { "BVA-sky": "Paris Beauvais " }
+const planes = [
+  { "Boeing-737-800": "Boeing 737 800" },
+  { "AirbusA320(ceo)": "Airbus A320(ceo)" },
+  { BombardierCRJ200: "Bombardier CRJ20" }
 ];
-export default { plane, cities, plane2, plane3 };
+
+export default { planes, plane, plane2, plane3 };

@@ -19,6 +19,7 @@ const Container = styled.div`
     height: auto;
     padding: 12px;
     text-align: center;
+    text-decoration: none;
     &__element {
       font-size: 30px;
       color: #0c0663;
@@ -26,9 +27,6 @@ const Container = styled.div`
     :hover {
       box-shadow: 7px 7px 7px grey;
     }
-  }
-  a:-webkit-any-link {
-    text-decoration: none;
   }
 `;
 function AdminPane(Props: AdminProps) {

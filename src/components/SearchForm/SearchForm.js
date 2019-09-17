@@ -78,11 +78,12 @@ class SearchForm extends React.Component {
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying From</label>
                       <select className="search-form__select " {...input}>
+                        <option key="empty"></option>
                         {directions}
                       </select>
-                      {meta.error && meta.touched && (
-                        <span className="error">{meta.error}</span>
-                      )}
+                      <span className="error">
+                        {meta.error && meta.touched ? meta.error : ""}
+                      </span>
                     </div>
                   </React.Fragment>
                 )}
@@ -98,11 +99,12 @@ class SearchForm extends React.Component {
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying To</label>
                       <select className="search-form__select" {...input}>
+                        <option key="empty"></option>
                         {directions}
                       </select>
-                      {meta.error && meta.touched && (
-                        <span className="error">{meta.error}</span>
-                      )}
+                      <span className="error">
+                        {meta.error && meta.touched ? meta.error : ""}
+                      </span>
                     </div>
                   </React.Fragment>
                 )}
@@ -117,9 +119,9 @@ class SearchForm extends React.Component {
                   <div className="input-container">
                     <label className="search-form__label">One Way</label>
                     <input className="radio" {...input} />
-                    {meta.error && meta.touched && (
-                      <span className="error">{meta.error}</span>
-                    )}
+                    <span className="error">
+                      {meta.error && meta.touched ? meta.error : ""}
+                    </span>
                   </div>
                 )}
               />

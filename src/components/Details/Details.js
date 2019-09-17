@@ -66,9 +66,7 @@ const Details = props => {
   const mappedSeats = state.seats.map(seat => {
     return (
       <li key={seat.seat} className="list">
-        <div>
-          <p>Seat {seat.seat}</p>
-        </div>
+        <p>Seat {seat.seat}</p>
         <div>
           {seat.seatClass === "business" ? (
             <p className="details__cost__label">
@@ -117,6 +115,7 @@ const Details = props => {
 
   const cost =
     state.seats.length * flightDetail.price + businessSeats.length * 20;
+
   return (
     <div className="details">
       <div className="details__plane">
@@ -193,7 +192,7 @@ const Details = props => {
               <p className="cost__label">Luggage: {state.luggage} $</p>
             </div>
           </div>
-          <div className="cost__label">You have chosen: {mappedSeats}</div>
+          <ul className="cost__label">You have chosen: {mappedSeats}</ul>
           <Button
             btnclass="submit-order-btn"
             type="submit"

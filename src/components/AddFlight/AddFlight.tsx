@@ -4,6 +4,7 @@ import { Form, Field } from "react-final-form";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Picker } from "./../Picker/Picker";
 import { api } from "./../../helpers/apiHeler";
+import data from "./../../data";
 import "react-datepicker/dist/react-datepicker.css";
 
 interface IFlight {
@@ -19,12 +20,12 @@ interface IAirport {
   code: string;
 }
 interface IError {
-  to?: string | null;
-  from?: string | null;
-  plane?: string | null;
-  company?: string | null;
-  price?: string | null;
-  there?: string | null;
+  to?: string;
+  from?: string;
+  plane?: string;
+  company?: string;
+  price?: string;
+  there?: string;
 }
 
 const Container = styled.div`
@@ -120,6 +121,13 @@ function AddFlight({ history }: RouteComponentProps) {
   ) : (
     <option key="empty"></option>
   );
+  const planeTypes = data.planes.map((plane: object) => {
+    return (
+      <option key={Object.keys(plane)[0]} value={Object.values(plane)[0]}>
+        {Object.values(plane)[0]}
+      </option>
+    );
+  });
 
   return (
     <Container>
@@ -157,11 +165,9 @@ function AddFlight({ history }: RouteComponentProps) {
                     <option key="empty-departure"></option>
                     {destinations}
                   </select>
-                  {meta.error && meta.touched ? (
-                    <span className="error">{meta.error}</span>
-                  ) : (
-                    <span className="error"></span>
-                  )}
+                  <span className="error">
+                    {meta.error && meta.touched ? meta.error : ""}
+                  </span>
                 </React.Fragment>
               )}
             />
@@ -176,11 +182,9 @@ function AddFlight({ history }: RouteComponentProps) {
                     <option key="empty-destination"></option>
                     {destinations}
                   </select>
-                  {meta.error && meta.touched ? (
-                    <span className="error">{meta.error}</span>
-                  ) : (
-                    <span></span>
-                  )}
+                  <span className="error">
+                    {meta.error && meta.touched ? meta.error : ""}
+                  </span>
                 </React.Fragment>
               )}
             />
@@ -191,21 +195,11 @@ function AddFlight({ history }: RouteComponentProps) {
                   <label className="form__label">Choose plane type</label>
                   <select className="input-field" {...input}>
                     <option key="empty-plane"></option>
-                    <option key="Boeing-737-800" value="Boeing-737-800">
-                      Boeing 737 800
-                    </option>
-                    <option key="AirbusA320(ceo)" value="AirbusA320(ceo)">
-                      Airbus A320(ceo)
-                    </option>
-                    <option key="BombardierCRJ200" value="BombardierCRJ200">
-                      Bombardier CRJ200
-                    </option>
+                    {planeTypes}
                   </select>
-                  {meta.error && meta.touched ? (
-                    <span className="error">{meta.error}</span>
-                  ) : (
-                    <span className="error"></span>
-                  )}
+                  <span className="error">
+                    {meta.error && meta.touched ? meta.error : ""}
+                  </span>
                 </React.Fragment>
               )}
             />
@@ -217,12 +211,10 @@ function AddFlight({ history }: RouteComponentProps) {
                     className="input-field"
                     placeholder="Enter the company"
                     {...input}
-                  />{" "}
-                  {meta.error && meta.touched ? (
-                    <span className="error">{meta.error}</span>
-                  ) : (
-                    <span className="error"></span>
-                  )}
+                  />
+                  <span className="error">
+                    {meta.error && meta.touched ? meta.error : ""}
+                  </span>
                 </React.Fragment>
               )}
             />
@@ -235,11 +227,9 @@ function AddFlight({ history }: RouteComponentProps) {
                     placeholder="Enter the basic price "
                     {...input}
                   />
-                  {meta.error && meta.touched ? (
-                    <span className="error">{meta.error}</span>
-                  ) : (
-                    <span className="error"></span>
-                  )}
+                  <span className="error">
+                    {meta.error && meta.touched ? meta.error : ""}
+                  </span>
                 </React.Fragment>
               )}
             />

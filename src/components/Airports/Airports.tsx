@@ -142,11 +142,7 @@ function Airports() {
           </form>
         )}
       />
-      {error ? (
-        <p className="error">The airport already exists</p>
-      ) : (
-        <p className="error"> </p>
-      )}
+      <p className="error">{error ? "The airport already exists" : " "}</p>
       {mappedAirports}
     </Container>
   );

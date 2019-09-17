@@ -36,9 +36,9 @@ const Login = props => {
               name="email"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  {meta.error && meta.touched && (
-                    <span className="Error">{meta.error}</span>
-                  )}
+                  <span className="error">
+                    {meta.error && meta.touched ? meta.error : ""}
+                  </span>
                   <input className="input-field" {...input} />
                 </React.Fragment>
               )}
@@ -49,9 +49,9 @@ const Login = props => {
               name="password"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  {meta.error && meta.touched && (
-                    <span className="Error">{meta.error}</span>
-                  )}
+                  <span className="error">
+                    {meta.error && meta.touched ? meta.error : ""}
+                  </span>
                   <input className="input-field" {...input} type="password" />
                 </React.Fragment>
               )}

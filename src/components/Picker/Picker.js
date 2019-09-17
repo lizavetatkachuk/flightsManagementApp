@@ -28,7 +28,7 @@ export class Picker extends React.Component {
           errorText={touched && error}
           dateFormat="MMMM d, yyyy"
         />
-        {error && touched && <span className="error">{error}</span>}
+        <span className="error">{error && touched ? error : ""}</span>
       </div>
     );
   }

@@ -32,11 +32,9 @@ const Container = styled.div`
   }
   .add {
     text-align: center;
-    margin-bottom: 10px;
     font-size: 25px;
     background-color: #e0e417b3;
-    margin-top: 25px;
-    margin-right: 25px;
+    margin: 25px 25px 10px 0;
     color: #0c0663;
     border-radius: 7px;
     height: 20%;
@@ -57,10 +55,7 @@ const Container = styled.div`
     padding-left: 10px;
     padding-right: 5px;
     &__details {
-      margin-block-start: 8px;
-      margin-block-end: 0px;
-      margin-inline-start: 0px;
-      margin-inline-end: 0px;
+      margin: 8px 0 0 0;
     }
   }
 `;
@@ -76,6 +71,7 @@ const AllFlights = () => {
   useEffect(() => {
     api.get("/admin/flights").then(res => setFlights(res.data));
   }, []);
+
   const mappedFlights = flights
     ? flights.map((flight: IFlight) => {
         return (
@@ -95,6 +91,7 @@ const AllFlights = () => {
         );
       })
     : null;
+
   return (
     <Container>
       <div>{mappedFlights} </div>
@@ -104,4 +101,5 @@ const AllFlights = () => {
     </Container>
   );
 };
+
 export default AllFlights;
