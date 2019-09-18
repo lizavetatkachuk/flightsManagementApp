@@ -119,12 +119,14 @@ const Details = props => {
     <div className="details">
       <div className="details__plane">
         <p className="details__label">Choose your seat</p>
-        <Plane
-          plane={state.flight.plane ? state.flight.plane : "BombardierCRJ200"}
-          onClick={onClick}
-          people={state.people}
-          booked={state.flight.booked ? state.flight.booked : []}
-        ></Plane>
+        {state.flight.plane && (
+          <Plane
+            plane={state.flight.plane}
+            onClick={onClick}
+            people={state.people}
+            booked={state.flight.booked}
+          ></Plane>
+        )}
       </div>
       <div className="details__options options">
         <div className="options__row luggage">

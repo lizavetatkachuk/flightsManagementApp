@@ -23,27 +23,21 @@ export const Plane = props => {
   const economyClass = "economy";
 
   const mappedBusiness = () => {
-    var businessRows = [];
-    for (var i = 0; i < planeSchema.business / 4; i++) {
-      let row = [[i], [i], [i], [i]];
+    const businessRows = [];
+    for (let i = 0; i < planeSchema.business / 4; i++) {
+      let row = [["A"], ["B"], ["C"], ["D"]];
       businessRows.push(row);
     }
     return businessRows;
   };
   const mappedEconomy = () => {
-    var economyRows = [];
-    for (var i = 0; i < planeSchema.business / 6; i++) {
-      console.log("hi");
-      let row = [[i], [i], [i], [i], [i], [i]];
+    const economyRows = [];
+    for (let i = 0; i < planeSchema.economy / 6; i++) {
+      let row = [["A"], ["B"], ["C"], ["D"], ["E"], ["F"]];
       economyRows.push(row);
     }
     return economyRows;
   };
-  const a = mappedBusiness();
-  const b = mappedEconomy();
-  console.log(a);
-  const pl = [...a, ...b];
-  console.log(pl);
 
   const handleChange = (seat, seatClass) => {
     if (selected.includes(seat)) {
@@ -58,7 +52,7 @@ export const Plane = props => {
       }
     }
   };
-  const business = data[planeType].business.map((item, i) => {
+  const business = mappedBusiness().map((item, i) => {
     const leftSide = item
       .filter((seat, index) => {
         return index < 2;
@@ -118,13 +112,13 @@ export const Plane = props => {
     );
   });
 
-  const economy = data[planeType].economy.map((item, i) => {
+  const economy = mappedEconomy().map((item, i) => {
     const leftSide = item
       .filter((seat, index) => {
         return index < 3;
       })
       .map(seat => {
-        const seatNum = `${data.plane.business.length + i + 1}${seat}`;
+        const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
@@ -148,7 +142,7 @@ export const Plane = props => {
         return index >= 3;
       })
       .map(seat => {
-        const seatNum = `${data.plane.business.length + i + 1}${seat}`;
+        const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
@@ -171,7 +165,7 @@ export const Plane = props => {
       <div className="row" key={classKey}>
         <div className="seats">{leftSide}</div>
         <div className="row__number">
-          <p>{data.plane.business.length + i - 1}</p>
+          <p>{planeSchema.business / 4 + i + 1}</p>
         </div>
         <div className="seats">{rightSide}</div>
       </div>
