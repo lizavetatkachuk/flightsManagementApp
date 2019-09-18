@@ -26,9 +26,11 @@ const Order = () => {
     setMode(value);
   };
 
-  const filteredOrders = orders.filter(order => {
-    return moment(order.flight.time).isAfter(now);
-  });
+  const filteredOrders = orders
+    ? orders.filter(order => {
+        return moment(order.flight.time).isAfter(now);
+      })
+    : null;
 
   const incomingOrders = filteredOrders ? (
     filteredOrders.map(order => {
@@ -65,8 +67,8 @@ const Order = () => {
     <Fragment>
       <Filter
         onChange={onChange}
-        value1="All flights"
-        value2="Incoming flights"
+        value1="Incoming flights"
+        value2="All flights"
         filterName="filterBy"
       />
       {mode === "All flights" ? (

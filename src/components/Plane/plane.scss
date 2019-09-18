@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  font-size: 22px;
+  font-weight: bold;
   justify-content: space-around;
   margin: 3px;
   width: 40%;
@@ -19,7 +21,6 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  color: $dark-color;
   box-shadow: 3px 3px 3px grey;
   align-items: center;
 }
@@ -27,7 +28,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 7%;
+  height: 5%;
+  &__number {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+  }
 }
 .business {
   margin: 6px;
@@ -39,7 +46,6 @@
   border-radius: 5px;
   &--selected {
     background-color: $base-color;
-    color: $font-color;
   }
 }
 .economy {
@@ -53,10 +59,10 @@
   border-radius: 4px;
   &--selected {
     background-color: $base-color;
-    color: $font-color;
   }
 }
 .booked {
   cursor: default;
   background-color: grey;
+  box-shadow: 3px 3px 3px rgb(90, 82, 82);
 }

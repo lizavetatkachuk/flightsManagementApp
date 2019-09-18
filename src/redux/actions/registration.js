@@ -8,9 +8,8 @@ export const requestRegister = values => ({
   type: REQUEST_REGISTER,
   payload: { ...values }
 });
-export const requestRegisterSucsess = message => ({
-  type: REQUEST_REGISTER_SUCSESS,
-  payload: message
+export const requestRegisterSucsess = () => ({
+  type: REQUEST_REGISTER_SUCSESS
 });
 export const requestRegisterFailed = message => ({
   type: REQUEST_REGISTER_FAILED,

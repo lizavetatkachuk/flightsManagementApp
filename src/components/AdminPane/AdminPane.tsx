@@ -38,6 +38,9 @@ function AdminPane(Props: AdminProps) {
       <Link to="/admin/flights" className="admin-pane">
         <span className="admin-pane__element"> Flights</span>
       </Link>
+      <Link to="/admin/planes" className="admin-pane">
+        <span className="admin-pane__element"> Planes</span>
+      </Link>
     </Container>
   );
 }

@@ -18,25 +18,44 @@ const Filter = props => {
           <label className="filter-pane__element">
             {filterName === "orderBy" ? "Order by" : "Show "}
           </label>
-          <label className="filter-pane__element">
-            <Field
-              initialValue={value1}
-              name={filterName}
-              component="input"
-              type="radio"
-              value={value1}
-            />
-            {value1}
-          </label>
-          <label className="filter-pane__element">
-            <Field
-              name={filterName}
-              component="input"
-              type="radio"
-              value={value2}
-            />
-            {value2}
-          </label>
+          <Field
+            initialValue={value1}
+            name={filterName}
+            type="radio"
+            value={value1}
+            render={({ input, meta }) => (
+              <div className="input-container">
+                <label className="filter-pane__element radio-container">
+                  {value1}
+                  <input
+                    className="radio-container__radio"
+                    value={value1}
+                    {...input}
+                  />
+                  <span className="radio-container__circle"></span>
+                </label>
+              </div>
+            )}
+          />
+
+          <Field
+            name={filterName}
+            type="radio"
+            value={value2}
+            render={({ input, meta }) => (
+              <div className="input-container">
+                <label className="filter-pane__element radio-container">
+                  {value2}
+                  <input
+                    className="radio-container__radio"
+                    value={value2}
+                    {...input}
+                  />
+                  <span className="radio-container__circle"></span>
+                </label>
+              </div>
+            )}
+          />
           <OnChange name={filterName}>
             {value => {
               onChange(value);
