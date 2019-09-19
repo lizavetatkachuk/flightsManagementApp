@@ -15,7 +15,6 @@ const flightsApi = values => {
 
 function* searchEffectSaga(action) {
   const { history } = action.payload;
-  console.log(history);
   try {
     if (action.payload.return === "return") {
       let data1 = yield call(flightsApi, action.payload);

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { api } from "./../../helpers/apiHeler";
 import data from "../../data";
 import "./plane.scss";
 
@@ -7,14 +8,33 @@ export const Plane = props => {
   const { onClick, people, plane } = props;
   const { booked } = props || [];
   const [selected, setSelected] = useState([]);
+  const [planeSchema, setSchema] = useState([]);
 
-  var planeType = "plane";
-  if (plane === "AirbusA320(ceo)") planeType = "plane";
-  else if (plane === "BombardierCRJ200") planeType = "plane2";
-  else planeType = "plane3";
+  useEffect(() => {
+    api.get(`/admin/planes/${plane}`).then(res => setSchema(res.data));
+  }, []);
 
   const businessClass = "business";
   const economyClass = "economy";
+
+  const mappedBusiness = () => {
+    const businessRows = [];
+    for (let i = 0; i < planeSchema.business / 4; i++) {
+     
+      let row = [["A"], ["B"], ["C"], ["D"]];
+      businessRows.push(row);
+    }
+    return businessRows;
+  };
+  const mappedEconomy = () => {
+    const economyRows = [];
+     for (let i = 0; i < planeSchema.economy / 6; i++) {
+    
+      let row = [["A"], ["B"], ["C"], ["D"], ["E"], ["F"]];
+      economyRows.push(row);
+    }
+    return economyRows;
+  };
 
   const handleChange = (seat, seatClass) => {
     if (selected.includes(seat)) {
@@ -29,7 +49,7 @@ export const Plane = props => {
       }
     }
   };
-  const business = data[planeType].business.map((item, i) => {
+  const business = mappedBusiness().map((item, i) => {
     const leftSide = item
       .filter((seat, index) => {
         return index < 2;
@@ -40,11 +60,7 @@ export const Plane = props => {
           ? `seat ${businessClass} ${businessClass}--selected`
           : `seat ${businessClass}`;
         if (booked.includes(seatNum)) {
-          return (
-            <div className={`${seatClass} booked`} key={seatNum}>
-              {seatNum}
-            </div>
-          );
+          return <div className={`${seatClass} booked`} key={seatNum}></div>;
         } else {
           return (
             <div
@@ -53,9 +69,7 @@ export const Plane = props => {
               onClick={() => {
                 handleChange(seatNum, businessClass);
               }}
-            >
-              {seatNum}
-            </div>
+            ></div>
           );
         }
       });
@@ -70,11 +84,7 @@ export const Plane = props => {
           ? `seat ${businessClass} ${businessClass}--selected`
           : `seat ${businessClass}`;
         if (booked.includes(seatNum)) {
-          return (
-            <div className={`${seatClass} booked`} key={seatNum}>
-              {seatNum}
-            </div>
-          );
+          return <div className={`${seatClass} booked`} key={seatNum}></div>;
         } else {
           return (
             <div
@@ -83,9 +93,7 @@ export const Plane = props => {
               onClick={() => {
                 handleChange(seatNum, businessClass);
               }}
-            >
-              {seatNum}
-            </div>
+            ></div>
           );
         }
       });
@@ -93,27 +101,26 @@ export const Plane = props => {
     return (
       <div className="row" key={classKey}>
         <div className="seats">{leftSide}</div>
+        <div className="row__number">
+          <p>{i + 1}</p>
+        </div>
         <div className="seats">{rightSide}</div>
       </div>
     );
   });
 
-  const economy = data[planeType].economy.map((item, i) => {
+  const economy = mappedEconomy().map((item, i) => {
     const leftSide = item
       .filter((seat, index) => {
         return index < 3;
       })
       .map(seat => {
-        const seatNum = `${data.plane.business.length + i + 1}${seat}`;
+         const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
         if (booked.includes(seatNum)) {
-          return (
-            <div className={`${seatClass} booked`} key={seatNum}>
-              {seatNum}
-            </div>
-          );
+          return <div className={`${seatClass} booked`} key={seatNum}></div>;
         } else {
           return (
             <div
@@ -122,9 +129,7 @@ export const Plane = props => {
               onClick={() => {
                 handleChange(seatNum, economyClass);
               }}
-            >
-              {seatNum}
-            </div>
+            ></div>
           );
         }
       });
@@ -134,16 +139,12 @@ export const Plane = props => {
         return index >= 3;
       })
       .map(seat => {
-        const seatNum = `${data.plane.business.length + i + 1}${seat}`;
+        const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
         if (booked.includes(seatNum)) {
-          return (
-            <div className={`${seatClass} booked`} key={seatNum}>
-              {seatNum}
-            </div>
-          );
+          return <div className={`${seatClass} booked`} key={seatNum}></div>;
         } else {
           return (
             <div
@@ -152,9 +153,7 @@ export const Plane = props => {
               onClick={() => {
                 handleChange(seatNum, economyClass);
               }}
-            >
-              {seatNum}
-            </div>
+            ></div>
           );
         }
       });
@@ -162,13 +161,32 @@ export const Plane = props => {
     return (
       <div className="row" key={classKey}>
         <div className="seats">{leftSide}</div>
+        <div className="row__number">
+          <p>{planeSchema.business / 4 + i + 1}</p>
+        </div>
         <div className="seats">{rightSide}</div>
       </div>
     );
   });
 
   const planeMap = [...business, ...economy];
-  return <div className="plane">{planeMap}</div>;
+  return (
+    <div className="plane">
+      <div className="row">
+        <div className="seats">
+          <div>A</div>
+          <div>B</div>
+          <div>C</div>
+        </div>
+        <div className="seats">
+          <div>D</div>
+          <div>E</div>
+          <div>F</div>
+        </div>
+      </div>
+      {planeMap}
+    </div>
+  );
 };
 
 Plane.propTypes = {

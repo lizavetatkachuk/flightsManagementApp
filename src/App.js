@@ -9,6 +9,7 @@ import Details from "./components/Details/Details";
 import Order from "./components/Orders/Order";
 import AdminPane from "./components/AdminPane/AdminPane.tsx";
 import Airports from "./components/Airports/Airports.tsx";
+import Planes from "./components/Planes/Planes.tsx";
 import AllFlights from "./components/AllFlights/AllFlights.tsx";
 import AddFlight from "./components/AddFlight/AddFlight.tsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -43,6 +44,11 @@ const App = () => {
             userRole="admin"
             path="/admin/airports"
             component={Airports}
+          />
+          <PrivateRoute
+            userRole="admin"
+            path="/admin/planes"
+            component={Planes}
           />
           <PrivateRoute
             userRole="admin"

@@ -55,9 +55,7 @@
 .cost {
   display: flex;
   flex-flow: row wrap;
-
   justify-content: space-around;
-  width: 100%;
   &__icon {
     width: 29%;
     height: auto;
@@ -90,3 +88,95 @@
   }
   font-size: 15px;
 }
+@media (min-width: $breakpoint-small-screen){ 
+ .luggage,.cost{
+   &__label{
+     font-size:22px;
+   }
+ }
+  }
+  @media (min-width: $breakpoint-tablet)and (max-width:$breakpoint-small-screen){
+    .luggage,.cost{
+      &__label{
+        font-size:22px;
+      }
+      &__icon{
+        padding:18px;
+        width:32%;
+      }
+    }
+    .details{
+      &__plane{
+        margin:7px;
+      }
+    }
+    }
+    @media (min-width: $breakpoint-phone)and (max-width:$breakpoint-tablet){
+      .luggage,.cost{
+        flex-flow:column;
+        &__label{
+          font-size:18px;
+          width:100%;
+        }
+        &__icon{
+          padding:0px;
+          width:15%;
+          height:15%;
+        }
+      }
+      .bag{
+        width:100%;
+                }
+    .cost{
+      flex-flow:column;
+    }
+      .details{
+        &__plane{
+          width:38.5%;
+          margin:5px;
+        }
+      }
+      }
+      @media (max-width:$breakpoint-phone){
+        .options{
+          &__label{
+            display:block;
+            font-size:21px;
+            text-align:left;
+          }}
+          .people{
+            justify-content:flex-start;
+          }
+        .luggage,.cost{
+          width:55%;
+          flex-flow:column;
+          &__label{      
+            font-size:18px;
+            width:100%;
+          }
+          &__icon{
+            padding:0px;
+            width:15%;
+            height:15%;
+          }
+        }
+        .bag{
+width:100%;
+        }
+        .details{
+          &__plane{
+            width:63%;
+            margin:3px;
+          }
+        }
+        .row{
+          height:3.3%;
+        }
+        .business{
+          width: 31.5%;
+        }
+        .economy{
+          width:26.5%;
+        }
+        }  
+  

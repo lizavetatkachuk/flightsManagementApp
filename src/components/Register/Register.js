@@ -11,7 +11,8 @@ import { mustBeEmail, validatePassword } from "./../../validators";
 import "./../Login/login.scss";
 
 const Register = props => {
-  const { history, requestRegister, data } = props;
+  const { history, requestRegister, register } = props;
+
   const onSubmit = values => {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(values.password, salt, function(err, hash) {
@@ -43,7 +44,7 @@ const Register = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
-            {data.registered ? (
+            {register.error ? (
               <p className="Error">This email is already in use</p>
             ) : null}
             <label className="form-label">Enter your email</label>
@@ -113,7 +114,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 const mapStateToProps = state => {
-  return { data: state.registered };
+  return { register: state.register };
 };
 Register.propTypes = {
   history: PropTypes.object.isRequired,

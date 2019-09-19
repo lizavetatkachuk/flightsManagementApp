@@ -6,7 +6,6 @@ import { bindActionCreators } from "redux";
 import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
-import { requestFlights } from "./../../redux/actions/flights";
 import { getToken } from "./../../helpers/authHelper";
 import suitcase from "./../../static/images/suitcase.svg";
 import twoSuitcases from "./../../static/images/suitcases.svg";
@@ -19,11 +18,14 @@ const Details = props => {
     luggage: 0,
     people: 1,
     seats: [],
-    seatClass: ""
+    seatClass: "",
+    flight: {}
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
+      case "setFlight":
+        return { ...state, flight: action.payload };
       case "setDonation":
         return { ...state, donation: !state.donation };
       case "setLuggage":
@@ -53,7 +55,7 @@ const Details = props => {
   const small = 8;
   const medium = 20;
   const large = 25;
-  const { flights, history, match, requestFlights } = props;
+  const { flights, history, match } = props;
   const token = getToken();
 
   const businessSeats = state.seats.filter(
@@ -62,7 +64,9 @@ const Details = props => {
 
   useEffect(() => {
     const values = { ...props.match.params };
-    requestFlights(values);
+    api.get(`/flight/${values.id}`).then(res => {
+      dispatch({ type: "setFlight", payload: res.data });
+    });
   }, []);
 
   const mappedSeats = state.seats.map(seat => {
@@ -89,7 +93,7 @@ const Details = props => {
 
   const handleClick = () => {
     if (!!token) {
-      const { from, to, price, time, company, _id } = flightDetail;
+      const { from, to, price, time, company, _id } = state.flight;
       const order = {
         flight: _id,
         from,
@@ -108,30 +112,28 @@ const Details = props => {
     } else history.push("/login");
   };
 
-  const flightDetail = flights.find(flight => {
-    const result = flight._id === props.match.params.id;
-    return result;
-  }) || { booked: [] };
-
   const cost =
-    state.seats.length * flightDetail.price + businessSeats.length * 20;
+    state.seats.length * state.flight.price + businessSeats.length * 20;
 
   return (
     <div className="details">
       <div className="details__plane">
         <p className="details__label">Choose your seat</p>
-        <Plane
-          plane={flightDetail.plane}
-          onClick={onClick}
-          people={state.people}
-          booked={flightDetail.booked}
-        ></Plane>
+        {state.flight.plane && 
+               <Plane
+            plane={state.flight.plane}
+            onClick={onClick}
+            people={state.people}
+            booked={state.flight.booked}
+           
+          ></Plane>
+        }
       </div>
       <div className="details__options options">
         <div className="options__row luggage">
           <p className="options__label">Choose your luggage</p>
           <div className="bag">
-            <p className="luggage__label">One small cabin bag(20*25*30)</p>
+            <p className="luggage__label">One small cabin bag (20*25*30)</p>
             <img
               src={bagpack}
               alt="bagpack"
@@ -140,7 +142,7 @@ const Details = props => {
             />
           </div>
           <div className="bag">
-            <p className="luggage__label">One medium check in bag(35*50*40)</p>
+            <p className="luggage__label">One medium check in bag (35*50*40)</p>
             <img
               src={suitcase}
               alt="oneSuitcase"
@@ -208,25 +210,9 @@ const Details = props => {
 };
 
 Details.propTypes = {
-  flights: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  return { flights: state.flights.flightsThere };
-};
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      requestFlights
-    },
-    dispatch
-  );
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(Details));
+export default withRouter(Details);

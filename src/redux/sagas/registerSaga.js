@@ -22,7 +22,7 @@ function* registerEffectSaga(action) {
   try {
     let message = yield call(requestSignUp, action.payload);
     const { history } = action.payload;
-    yield put(requestRegisterSucsess(message));
+    yield put(requestRegisterSucsess());
     history.push("/login");
   } catch (err) {
     yield put(requestRegisterFailed("Email already in use"));

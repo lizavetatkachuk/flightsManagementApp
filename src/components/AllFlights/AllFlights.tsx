@@ -36,17 +36,12 @@ const Container = styled.div`
     width: 37%;
   }
   .add {
-    <<<<<<<HEAD
     text-align: center;
     font-size: 25px;
     background-color: #e0e417b3;
     margin: 25px 25px 10px 0;
-    =======margin-bottom: 10px;
     font-size: 25px;
     background-color: #e0e417b3;
-    margin-top: 25px;
-    margin-right: 55px;
-    >>>>>>>feature-styles
     color: #0c0663;
     border-radius: 7px;
     height: auto;
@@ -82,15 +77,17 @@ const Container = styled.div`
 `;
 const AllFlights = () => {
   const [flights, setFlights] = useState([]);
+
   const handleDeletion = (id: string) => {
     api.post(`/admin/flights/${id}`).then(res => {
-      console.log(flights);
-      setFlights(res.data);
+      api.get("/admin/flights").then(res => setFlights(res.data));
     });
   };
 
   useEffect(() => {
-    api.get("/admin/flights").then(res => setFlights(res.data));
+    api.get("/admin/flights").then(res => {
+      setFlights(res.data);
+    });
   }, []);
 
   const mappedFlights = flights

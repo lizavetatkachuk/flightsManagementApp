@@ -5,6 +5,6 @@ import { authorisationReducer } from "./authorisationReducer";
 
 export const rootReducer = combineReducers({
   flights: flightsReducer,
-  registered: registrationReducer,
+  register: registrationReducer,
   auth: authorisationReducer
 });

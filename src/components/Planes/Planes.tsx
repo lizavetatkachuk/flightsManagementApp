@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
-import { api } from "./../../helpers/apiHeler";
+import { api } from "../../helpers/apiHeler";
 
-interface IAirport {
+interface IPlane {
   name: string;
-  code: string;
+  key: string;
+  business: number;
+  economy: number;
+  maxCargo: number;
 }
 const Container = styled.div`
   display: flex;
@@ -16,7 +19,7 @@ const Container = styled.div`
     justify-self: flex-end;
     margin-left: 20px;
     margin-right: 15px;
-    font-size: 30px;
+    font-size: 25px;
     background-color: Transparent;
     color: #0c0663;
     border-radius: 7px;
@@ -55,7 +58,7 @@ const Container = styled.div`
   
   .list {
     width: 30%;
-    &__airport {
+    &__plane {
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
@@ -77,41 +80,40 @@ const Container = styled.div`
     margin-block-start: 0em;
   }
 `;
-function Airports() {
-  const [airports, setAirports] = useState([]);
+function Planes() {
+  const [planes, setPlanes] = useState([]);
   const [error, setError] = useState("");
 
   const handleDeletion = (code: string) => {
-    api.post(`/admin/airports/${code}`).then(res => {
-      api.get("/admin/airports").then(res => setAirports(res.data));
+    api.post(`/admin/planes/${code}`).then(res => {
+      api.get("/admin/planes").then(res => setPlanes(res.data));
     });
   };
 
   const handleAddition = (values: object) => {
     api
-      .post("/admin/airports/", {
+      .post("/admin/planes/", {
         ...values
       })
       .then(res => {
-        api.get("/admin/airports").then(res => setAirports(res.data));
+        api.get("/admin/planes").then(res => setPlanes(res.data));
       })
       .catch(err => {
         setError(err);
       });
   };
-
   useEffect(() => {
-    api.get("/admin/airports").then(res => setAirports(res.data));
+    api.get("/admin/planes").then(res => setPlanes(res.data));
   }, []);
 
-  const mappedAirports = airports
-    ? airports.map((airport: IAirport) => {
+  const mappedPlanes = planes
+    ? planes.map((plane: IPlane) => {
         return (
-          <div className="list__airport" key={airport.code}>
-            <p>{airport.name}</p>
+          <div className="list__plane" key={plane.key}>
+            <p>{plane.name}</p>
             <button
               className="delete"
-              onClick={() => handleDeletion(airport.code)}
+              onClick={() => handleDeletion(plane.key)}
             >
               -
             </button>
@@ -122,7 +124,7 @@ function Airports() {
 
   return (
     <Container>
-      <div className="list">{mappedAirports}</div>
+      <div className="list">{mappedPlanes}</div>
       <Form
         onSubmit={handleAddition}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
@@ -133,19 +135,55 @@ function Airports() {
                 <React.Fragment>
                   <input
                     className="input-field"
-                    placeholder="Enter the airport name"
+                    placeholder="Enter the plane name"
                     {...input}
                   />
                 </React.Fragment>
               )}
             />
             <Field
-              name="code"
+              name="key"
               render={({ input, meta }) => (
                 <React.Fragment>
                   <input
                     className="input-field"
-                    placeholder="Enter the airport code"
+                    placeholder="Enter the plane shorthand code"
+                    {...input}
+                  />
+                </React.Fragment>
+              )}
+            />
+            <Field
+              name="business"
+              render={({ input, meta }) => (
+                <React.Fragment>
+                  <input
+                    className="input-field"
+                    placeholder="Enter the number of seats in business class"
+                    {...input}
+                  />
+                </React.Fragment>
+              )}
+            />
+            <Field
+              name="economy"
+              render={({ input, meta }) => (
+                <React.Fragment>
+                  <input
+                    className="input-field"
+                    placeholder="Enter the number of seats in economy class"
+                    {...input}
+                  />
+                </React.Fragment>
+              )}
+            />
+            <Field
+              name="maxCargo"
+              render={({ input, meta }) => (
+                <React.Fragment>
+                  <input
+                    className="input-field"
+                    placeholder="Enter the maximum cargo capacity "
                     {...input}
                   />
                 </React.Fragment>
@@ -156,13 +194,13 @@ function Airports() {
               className="add"
               disabled={submitting || pristine}
             >
-              Add the airport
+              Add the plane
             </button>
           </form>
         )}
       />
-      <p className="error">{error ? "The airport already exists" : " "}</p>
+      <p className="error">{error ? "The plane already exists" : " "}</p>
     </Container>
   );
 }
-export default Airports;
+export default Planes;

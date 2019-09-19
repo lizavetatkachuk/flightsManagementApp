@@ -19,6 +19,10 @@ interface IAirport {
   name: string;
   code: string;
 }
+interface IPlane {
+  key: string;
+  name: string;
+}
 interface IError {
   to?: string;
   from?: string;
@@ -129,9 +133,11 @@ const Container = styled.div`
 
 function AddFlight({ history }: RouteComponentProps) {
   const [airports, setAirports] = useState([]);
+  const [planes, setPlanes] = useState([]);
 
   useEffect(() => {
     api.get("/admin/airports").then(res => setAirports(res.data));
+    api.get("/admin/planes").then(res => setPlanes(res.data));
   }, []);
 
   const handleAddition = (values: IFlight) => {
@@ -155,13 +161,15 @@ function AddFlight({ history }: RouteComponentProps) {
     <option key="empty"></option>
   );
 
-  const planeTypes = data.planes.map((plane: object) => {
-    return (
-      <option key={Object.keys(plane)[0]} value={Object.values(plane)[0]}>
-        {Object.values(plane)[0]}
+  const planeTypes = planes ? (
+    planes.map((plane: IPlane) => (
+      <option key={plane.key} value={plane.key}>
+        {plane.name}
       </option>
-    );
-  });
+    ))
+  ) : (
+    <option key="empty"></option>
+  );
 
   return (
     <Container>
