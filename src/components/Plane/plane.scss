@@ -66,3 +66,67 @@
   background-color: grey;
   box-shadow: 3px 3px 3px rgb(90, 82, 82);
 }
+@media (min-width: $breakpoint-small-screen){ 
+.row{
+  height:4%;
+}
+.business{
+  width: 29%;
+}
+.economy{
+  width:24%;
+}
+}
+@media (min-width: $breakpoint-tablet)and (max-width:$breakpoint-small-screen){
+  .row{
+    height:3.5%;
+  }
+  .business{
+    width: 32%;
+    margin:6px;
+  }
+  .economy{
+    width:26%;
+    height:45%;
+    margin:4px;
+  }
+  }
+  @media (min-width: $breakpoint-phone)and (max-width:$breakpoint-tablet){
+    .row{
+      height:3.35%;
+    }
+    .business{
+      width: 32;
+      margin:5px;
+    }
+    .economy{
+      width:30%;
+      height:35%;
+      margin:2px;
+    }
+    }
+    @media (max-width:$breakpoint-phone){
+      .row{
+        height:3.3%;
+      }
+      .business{
+        width: 31.5%;
+      }
+      .economy{
+        width:26.5%;
+        height:38%;
+      }
+      }
+      @media (max-width:$breakpoint-se){
+        .row{
+          height:3.3%;
+        }
+        .business{
+          width: 31.5%;
+        }
+        .economy{
+          width:26.5%;
+          height:33%;
+        }
+        }
+

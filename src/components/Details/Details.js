@@ -119,12 +119,17 @@ const Details = props => {
     <div className="details">
       <div className="details__plane">
         <p className="details__label">Choose your seat</p>
-        {state.flight.plane && (
+        {/* {state.flight.plane &&  */}
+        { (
           <Plane
-            plane={state.flight.plane}
+            // plane={state.flight.plane}
+            // onClick={onClick}
+            // people={state.people}
+            // booked={state.flight.booked}
+            plane={''}
             onClick={onClick}
-            people={state.people}
-            booked={state.flight.booked}
+            people={1}
+            booked={[]}
           ></Plane>
         )}
       </div>
@@ -132,7 +137,7 @@ const Details = props => {
         <div className="options__row luggage">
           <p className="options__label">Choose your luggage</p>
           <div className="bag">
-            <p className="luggage__label">One small cabin bag(20*25*30)</p>
+            <p className="luggage__label">One small cabin bag (20*25*30)</p>
             <img
               src={bagpack}
               alt="bagpack"
@@ -141,7 +146,7 @@ const Details = props => {
             />
           </div>
           <div className="bag">
-            <p className="luggage__label">One medium check in bag(35*50*40)</p>
+            <p className="luggage__label">One medium check in bag (35*50*40)</p>
             <img
               src={suitcase}
               alt="oneSuitcase"

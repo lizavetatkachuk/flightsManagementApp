@@ -13,18 +13,14 @@ export const Plane = props => {
   useEffect(() => {
     api.get(`/admin/planes/${plane}`).then(res => setSchema(res.data));
   }, []);
-
-  var planeType = "plane";
-  if (plane === "AirbusA320(ceo)") planeType = "plane";
-  else if (plane === "BombardierCRJ200") planeType = "plane2";
-  else planeType = "plane3";
-
+  
   const businessClass = "business";
   const economyClass = "economy";
 
   const mappedBusiness = () => {
     const businessRows = [];
-    for (let i = 0; i < planeSchema.business / 4; i++) {
+    // for (let i = 0; i < planeSchema.business / 4; i++) {
+      for (let i = 0; i <16 / 4; i++) {
       let row = [["A"], ["B"], ["C"], ["D"]];
       businessRows.push(row);
     }
@@ -32,7 +28,8 @@ export const Plane = props => {
   };
   const mappedEconomy = () => {
     const economyRows = [];
-    for (let i = 0; i < planeSchema.economy / 6; i++) {
+    // for (let i = 0; i < planeSchema.economy / 6; i++) {
+      for (let i = 0; i < 42 / 4; i++) {
       let row = [["A"], ["B"], ["C"], ["D"], ["E"], ["F"]];
       economyRows.push(row);
     }
@@ -118,7 +115,8 @@ export const Plane = props => {
         return index < 3;
       })
       .map(seat => {
-        const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
+        // const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
+            const seatNum = `${16 / 4 + i + 1}${seat}`;
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
@@ -142,7 +140,8 @@ export const Plane = props => {
         return index >= 3;
       })
       .map(seat => {
-        const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
+        // const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
+        const seatNum = `${16 / 4 + i + 1}${seat}`;
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
