@@ -1,0 +1,62 @@
+@import "../Shared/index.scss";
+
+.plane {
+  height: 60%;
+  width: 90%;
+  margin: auto;
+}
+
+.seats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  margin: 3px;
+  width: 40%;
+}
+
+.seat {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  color: $dark-color;
+  box-shadow: 3px 3px 3px grey;
+  align-items: center;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 7%;
+}
+.business {
+  margin: 6px;
+  background-color: $font-color;
+  width: 27%;
+  padding-top: 6px;
+  padding-bottom: 2px;
+  margin: 4px;
+  border-radius: 5px;
+  &--selected {
+    background-color: $base-color;
+    color: $font-color;
+  }
+}
+.economy {
+  font-size: 13px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  background-color: #4398d1;
+  width: 22%;
+  padding-top: 3px;
+  padding-bottom: 2px;
+  border-radius: 4px;
+  &--selected {
+    background-color: $base-color;
+    color: $font-color;
+  }
+}
+.booked {
+  cursor: default;
+  background-color: grey;
+}

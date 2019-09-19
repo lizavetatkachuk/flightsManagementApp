@@ -1,0 +1,92 @@
+@import "../Shared/index.scss";
+.details {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(149, 166, 177, 0.9) 0%,
+      rgba(242, 242, 247, 0.3) 30%,
+      rgba(242, 242, 247, 0.808) 100%
+    ),
+    url("./../../static/images/clouds.jpg");
+  background-repeat: repeat-y;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  min-height: 100vh;
+  &__options {
+    width: 100%;
+  }
+  &__plane {
+    width: 35%;
+    margin: 20px;
+  }
+  &__label {
+    color: $base-color;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+  }
+}
+.list {
+  width: 100%;
+}
+.bag {
+  width: 25%;
+}
+.options {
+  display: flex;
+  flex-flow: column wrap;
+  &__row {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  &__label {
+    color: $base-color;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+  }
+}
+.luggage,
+.cost {
+  display: flex;
+  flex-flow: row wrap;
+
+  justify-content: space-around;
+  width: 100%;
+  &__icon {
+    width: 29%;
+    height: auto;
+    padding: 22px;
+    cursor: pointer;
+  }
+  &__label {
+    color: $base-color;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+.people {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 100%;
+  .details__label {
+    width: 100%;
+  }
+  &__input {
+    width: 40px;
+    text-align: center;
+    background-color: rgba($base-color, 0.2);
+    outline: none;
+    border-radius: 6px;
+  }
+  .button {
+    height: 30%;
+  }
+  font-size: 15px;
+}

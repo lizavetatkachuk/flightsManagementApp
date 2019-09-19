@@ -1,0 +1,49 @@
+@import "../index.scss";
+.button {
+  outline: none;
+  cursor: pointer;
+  align-self: center;
+  width: auto;
+  background-color: rgba(#9c98bd, 0.3);
+  border-radius: 6px;
+  color: $base-color;
+  font-size: 18px;
+  margin: 5px;
+  &:disabled {
+    color: rgb(31, 31, 31);
+  }
+  &:hover {
+    box-shadow: 7px 7px 7px rgb(36, 34, 34);
+  }
+}
+
+.search-flights-btn {
+  outline: none;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: auto;
+  width: 20%;
+  background-color: $form-color;
+  font-size: 28px;
+  padding: 5px;
+  color: $base-color;
+  &:disabled {
+    color: rgb(31, 31, 31);
+  }
+  &:hover {
+    box-shadow: 7px 7px 7px rgb(36, 34, 34);
+  }
+}
+.submit-order-btn {
+  outline: none;
+  cursor: pointer;
+  align-self: flex-start;
+  border-radius: 6px;
+  background-color: rgba($font-color, 0.8);
+  font-size: 20px;
+  color: $base-color;
+  margin: 10px;
+  &:hover {
+    box-shadow: 7px 7px 7px rgb(36, 34, 34);
+  }
+}
