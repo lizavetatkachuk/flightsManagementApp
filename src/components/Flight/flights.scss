@@ -10,6 +10,7 @@
     background-color: rgba($font-color, 0.7);
     border-radius: 8px;
     height: auto;
+    width: auto;
     padding: 12px;
 
     &--selected {
@@ -39,10 +40,9 @@
     width: 43%;
   }
 }
-.company {
-  text-align: center;
-}
 .list {
+  padding:0px;
+  list-style-type: none;
   &__label {
     font-size: 25px;
     margin-left: 5%;
@@ -60,5 +60,33 @@
   margin-left: 60px;
   :disabled {
     background-color: grey;
+  }
+}
+@media(max-width:$breakpoint-tablet){
+  .details-btn{
+    font-size:20px;
+  }
+  .flight__item{
+    font-size:21px;
+  }
+  .list{
+    margin-left:3px;
+    &__label{
+      font-size:23px;
+    }
+  }
+}
+@media(max-width:$breakpoint-phone){
+  .details-btn{
+    font-size:18px;
+  }
+  .flight__item{
+    font-size:20px;
+  }
+  .list{
+    margin-left:2px;
+    &__label{
+      font-size:22px;
+    }
   }
 }

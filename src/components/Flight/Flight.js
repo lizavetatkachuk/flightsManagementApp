@@ -8,7 +8,7 @@ import Button from "./../Shared/Button/Button";
 import "./flights.scss";
 
 const Flight = props => {
-  const [mode, setMode] = useState("price");
+  const [mode, setMode] = useState("Price");
   const [there, setThere] = useState(null);
   const [back, setBack] = useState(null);
   const { flights, history, requestFlights, match } = props;
@@ -30,11 +30,13 @@ const Flight = props => {
   };
 
   useEffect(() => {
-    const values = { ...props.match.params };
+    const values = { ...match.params };
     requestFlights({ ...values, history });
   }, []);
 
-  flights.flightsThere.sort(dynamicSort(mode));
+  flights.flightsThere.sort(dynamicSort(mode.toLowerCase));
+  flights.flightsBack.sort(dynamicSort(mode.toLowerCase));
+
   const flightsInfo = flights.flightsThere.map(flight => {
     const selected = flight._id === there ? "--selected" : "";
     return (
@@ -79,8 +81,8 @@ const Flight = props => {
       ) : null}
       <Filter
         onChange={onChange}
-        value1="price"
-        value2="time"
+        value1="Price"
+        value2="Time"
         filterName="orderBy"
       />
       <div className="container">

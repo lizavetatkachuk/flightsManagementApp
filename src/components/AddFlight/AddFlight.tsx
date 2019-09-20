@@ -4,7 +4,6 @@ import { Form, Field } from "react-final-form";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Picker } from "./../Picker/Picker";
 import { api } from "./../../helpers/apiHeler";
-import data from "./../../data";
 import "react-datepicker/dist/react-datepicker.css";
 
 interface IFlight {
@@ -128,6 +127,33 @@ const Container = styled.div`
     margin-top: 0px;
    margin-right:10px;
     color: #0c0663;
+  }
+  @media(max-width:1200px) and (min-width:768px){
+   .search-form__label{
+     margin:13px;
+     width:auto;
+   }
+   .add{
+     font-size:18x;
+   }
+  }
+  @media(max-width:768px) and (min-width:465px){
+   .form{
+     width:80%;
+   }
+   .add{
+    font-size:17x;
+    width:auto;
+  }
+  }
+  @media(max-width:465px) {
+    .form{
+      width:90%;
+    }
+    .add{
+      font-size:16x;
+      width:auto;
+    }
   }
 `;
 

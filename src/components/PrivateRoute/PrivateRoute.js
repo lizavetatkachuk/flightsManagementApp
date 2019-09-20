@@ -21,6 +21,10 @@ const PrivateRoute = ({ component: Component, auth, userRole, ...rest }) => {
           render={props => (role ? <Component /> : <Redirect to="/login" />)}         
         />
       );
+      default:
+        return(
+          <Redirect to='/'></Redirect>
+        )
   }
 };
 const mapStateToProps = state => {

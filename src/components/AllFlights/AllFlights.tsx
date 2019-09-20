@@ -74,6 +74,45 @@ const Container = styled.div`
       margin: 8px 0 0 0;
     }
   }
+  @media(max-width:1200px) and (min-width:768px){
+    .list{
+      width:47%;
+    }
+  }
+  @media(max-width:768px) and (min-width:465px){
+    .flight{
+      font-size:19px;
+    }
+    .list{
+      width:69%;
+    }
+    .delete{
+      font-size:18px;
+      width:auto;
+    }
+    .add{
+      font-size:18px;
+      width:auto;
+    }
+  }
+  @media(max-width:465px) {
+    .flight{
+      font-size:18px;
+    }
+    .list{
+      width:80%;
+      margin:0px;
+    }
+    .delete{
+      font-size:16px;
+      width:auto;
+    }
+    .add{
+      right:40%;
+      font-size:18px;margin:5px;
+      width:auto;
+    }
+  }
 `;
 const AllFlights = () => {
   const [flights, setFlights] = useState([]);

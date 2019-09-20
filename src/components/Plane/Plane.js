@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { api } from "./../../helpers/apiHeler";
-import data from "../../data";
 import "./plane.scss";
 
 export const Plane = props => {
@@ -12,7 +11,7 @@ export const Plane = props => {
 
   useEffect(() => {
     api.get(`/admin/planes/${plane}`).then(res => setSchema(res.data));
-  }, []);
+  }, [plane]);
 
   const businessClass = "business";
   const economyClass = "economy";

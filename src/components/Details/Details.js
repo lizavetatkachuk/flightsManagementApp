@@ -1,8 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
@@ -55,7 +53,7 @@ const Details = props => {
   const small = 8;
   const medium = 20;
   const large = 25;
-  const { flights, history, match } = props;
+  const { history, match } = props;
   const token = getToken();
 
   const businessSeats = state.seats.filter(
@@ -63,7 +61,7 @@ const Details = props => {
   );
 
   useEffect(() => {
-    const values = { ...props.match.params };
+    const values = { ...match.params };
     api.get(`/flight/${values.id}`).then(res => {
       dispatch({ type: "setFlight", payload: res.data });
     });

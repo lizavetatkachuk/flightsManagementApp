@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import { requestFlights } from "./../../redux/actions/flights";
 import Button from "./../Shared/Button/Button";
 import { Picker } from "./../Picker/Picker";

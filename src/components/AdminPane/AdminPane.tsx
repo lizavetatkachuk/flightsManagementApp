@@ -12,7 +12,7 @@ const Container = styled.div`
   flex-flow: column wrap;
   margin-top: 20px;
   .admin-pane {
-    width: 10%;
+    width: 13%;
     margin: 10px;
     background-color: #e0e417b3;
     border-radius: 8px;
@@ -26,6 +26,20 @@ const Container = styled.div`
     }
     :hover {
       box-shadow: 7px 7px 7px grey;
+    }
+  }
+  @media(max-width:768px) and (min-width:465px){
+    .admin-pane{
+      &__element{
+      font-size:25px;}
+      width:28%;
+    }
+  }
+  @media(max-width:465px) {
+    .admin-pane{
+      &__element{
+        font-size:23px;}
+      width:40%;
     }
   }
 `;

@@ -31,14 +31,13 @@ const Container = styled.div`
       color: grey;
     }}
   .form {
-    justify-self: flex-end;
     display:flex
     flex-direction:column;
     align-items:center;
     width: 40%;
     .add{
       margin-top:10px;
-      width:30%;
+      width:auto;
     }
 
   }
@@ -60,7 +59,7 @@ const Container = styled.div`
     width: 30%;
     &__plane {
       display: flex;
-      flex-flow: row wrap;
+      flex-fdirection: row ;
       justify-content: space-between;
       font-size: 25px;
       margin: 10px;
@@ -78,6 +77,51 @@ const Container = styled.div`
     position: initial;
     margin-block-end: 0em;
     margin-block-start: 0em;
+  }
+  @media(max-width:768px) and (min-width:465px){
+    .form{
+      width:55%;
+      position:absolute;
+      right:15px;
+    }
+    .input-field{
+      font-size:18px;
+    }
+    .add{
+      font-size:20px;
+      width:auto;
+    }
+    .list{
+      width:30%;
+      &__plane{
+        font-size:21px;
+      }
+    }
+  }
+  @media(max-width:465px) {
+    .form{
+      width:60%;
+      position:absolute;
+      right:15px;
+    }
+    .input-field{
+      font-size:15px;
+    }
+    .add{
+      font-size:15px;
+      width:50%;
+    }
+    .list{
+      width:29%;
+      &__plane{
+        font-size:12px;
+      }
+    }
+.delete{
+  margin:0px;
+  font-size:15px;
+  height:auto;
+}
   }
 `;
 function Planes() {

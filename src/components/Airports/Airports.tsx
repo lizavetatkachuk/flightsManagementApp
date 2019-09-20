@@ -34,8 +34,9 @@ const Container = styled.div`
     align-items:center;
     width: 40%;
     .add{
+      height:auto;
       margin-top:10px;
-      width:30%;
+      width:auto;
     }
 
   }
@@ -44,7 +45,6 @@ const Container = styled.div`
     margin-left: 10px;
     border-radius: 8px;
     height: 35px;
-    font-size: 20px;
     font-size: 20px;
     color: #0c0663;
     ::placeholder {
@@ -75,6 +75,72 @@ const Container = styled.div`
     position: initial;
     margin-block-end: 0em;
     margin-block-start: 0em;
+  }
+  @media(max-width:768px) and (min-width:465px){
+    .list {
+      width: 40%;
+      &__airport {
+        font-size: 24px;
+        margin: 8px;
+      }
+    }
+    .delete{
+      width:20%;
+    }
+    .add{
+      font-size:23px;
+    }
+  }
+  @media(max-width:465px) {
+    .form{
+      margin-top:10px;
+      width:50%;
+    }
+    .input-field{
+margin:0px;
+font-size:18px;
+    }
+    .list {
+      width: 40%;
+      &__airport {
+        font-size: 20px;
+        margin: 3px;
+      }
+    }
+    .delete{
+      width:15%;
+      margin-right:0px;
+    }
+    .add{
+      font-size:18px;
+    }
+  }
+  @media(max-width:330px) {
+    .form{
+      margin-top:10px;
+      width:53%;
+    }
+    .input-field{
+margin:0px;
+font-size:15px;
+    }
+    .list {
+      width: 35%;
+      &__airport {
+        font-size: 20px;
+        margin: 3px;
+      }
+    }
+    .delete{
+      width:15%;
+      height:auto;
+      font-size:23px;
+      margin-left:2px;
+      margin-right:0px;
+    }
+    .add{
+      font-size:16px;
+    }
   }
 `;
 function Airports() {
