@@ -5,9 +5,9 @@
   flex-flow: column wrap;
   justify-items: stretch;
   justify-content: space-evenly;
+  margin:0 auto;
   background-color: $form-color;
   color: $base-color;
-  margin: 0 auto;
   margin-top: 5%;
   width: 80%;
   border-radius: 15px;
@@ -29,7 +29,7 @@
   &__field {
     display: flex;
     position: relative;
-    flex-flow: row wrap;
+   flex-direction:row;
     font-size: 20px;
     justify-content: space-between;
     align-items:center;
@@ -151,7 +151,7 @@
   justify-content: flex-start;
 }
 
-@media(max-width:$breakpoint-tablet) and (min-width:$breakpoint-phone){
+@media(max-width:$breakpoint-tablet) and (min-width:$breakpoint-phone){ 
   .input-container{        
     label{
       font-size:23px;      
@@ -160,7 +160,11 @@
   .picker{
     padding-right: 15px;
   }
-  .search-form{  
+  .search-form{       
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-45%, -50%);
     padding-bottom:15px;
     &__field{
       padding:15px;
@@ -174,7 +178,7 @@
   }
   .there-and-back{
     justify-content:space-between;
-    padding-right:40px;
+    padding-right:70px;
   }
    .shift-btn{
     width:49px;
@@ -185,9 +189,10 @@
     font-size:22px;
   }
  }
-@media(max-width:$breakpoint-phone) {
+@media(max-width:$breakpoint-phone)and (min-width:$breakpoint-se) {
   .input-container{   
     box-sizing:border-box;  
+    width:55%;
       label{
         font-size:20px;
       }
@@ -197,8 +202,13 @@
     height:45px;
   }
   .search-form{ 
+    margin-top:10%;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    transform: translate(-45%, -50%);
      padding-bottom:13px;
-    min-height:35vh;
+    min-height:55vh;
     &__field{
       padding:10px;
     }
@@ -207,15 +217,58 @@
       font-size:19px;
     }
   } 
-   .there-and-back{
-    justify-content:space-between;
-    padding-right:60px;
+  .there-and-back{
+    flex-direction:row;
+    justify-content:flex-start;
   }
+  .radio-container{
+&__circe{
+  top:25%;
+  left:140%;
+}}
   .search-flights-btn{
     width:27%;
     font-size:17px;
   }
    .picker{
     padding-right: 12px;
+  }
+ }
+ @media(max-width:$breakpoint-se) {
+  .search-form{ 
+       padding-bottom:13px;
+    min-height:40vh;
+    &__field{
+      flex-direction:column;
+    }   
+    &__label{
+      font-size:20px;
+    }
+  }
+  .picker{
+    width:70%;
+  }
+  .input-container{
+    label{
+      font-size:20px;
+    }
+    width:55%;
+    &--vertical{
+      width:70%;
+    }
+  }
+  .there-and-back{
+    flex-direction:row;
+    justify-content:flex-start;
+  }
+  .radio-container{
+&__circe{
+  top:25%;
+  left:110%;
+}
+  }
+  .search-flights-btn{
+    width:50%;
+    font-size:17px;
   }
  }

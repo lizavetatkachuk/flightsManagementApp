@@ -8,13 +8,16 @@ import { getToken, removeToken, checkAdmin } from "../../helpers/authHelper";
 import "./header.scss";
 
 const Header = props => {
-  const { logOut } = props;
+  const { logOut,onClick } = props;
   const token = getToken();
   const role = checkAdmin();
 
   return (
     <header className="header">
       <nav className="header__nav navigation">
+        <div className='navigation__btn mobile__menu' onClick={onClick}>
+Menu
+        </div>
         <NavLink
           exact
           to="/"
@@ -43,11 +46,11 @@ const Header = props => {
       <Link to="/" className="header__title">
         EasyFly
       </Link>
-      <div className="header__login">
+      <div className="header__login ">
         {token ? (
           <Button
             btntype="button"
-            btnclass="navigation__btn"
+            btnclass="navigation__btn mobile__login"
             onClick={() => {
               removeToken();
               logOut();
@@ -56,8 +59,8 @@ const Header = props => {
             Log Out
           </Button>
         ) : (
-          <NavLink to="/login" className="navigation__btn">
-            <Button btntype="button" btnclass="navigation__btn">
+          <NavLink to="/login" className="navigation__btn mobile__login">
+            <Button btntype="button" btnclass="navigation__btn mobile__login">
               Log In
             </Button>
           </NavLink>

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Register from "./components/Register/Register";
@@ -13,13 +13,24 @@ import Planes from "./components/Planes/Planes.tsx";
 import AllFlights from "./components/AllFlights/AllFlights.tsx";
 import AddFlight from "./components/AddFlight/AddFlight.tsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import SideBar from './components/SideBar/SideBar.tsx';
 import "./app.scss";
 
 const App = () => {
+
+  const [isOpen,setOpen]=useState(0);
+
+  const onOpen=()=>{    
+  setOpen(1);
+  }
+  const onClose=()=>{
+    setOpen(0);
+  }
   return (
     <Router>
       <div className="app">
-        <Header />
+        <Header onClick={onOpen}/>
+        {isOpen? <SideBar onClick={onClose}/>:null}       
         <Switch>
           <Route path="/" exact component={SearchForm} />
           <Route

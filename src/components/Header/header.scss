@@ -8,8 +8,10 @@
   padding: 20px;
   text-decoration: none;
   background: linear-gradient(180deg, #232079 0%, #7881a5 69%, #95a6b1 100%);
+  z-index:200;
 
   &__title {
+  color: $font-color;
     font-style: italic;
     position: absolute;
     text-align: center;
@@ -18,14 +20,19 @@
     width: 30%;
     font-size: 50px;
     text-decoration: none;
-    color: $font-color;
     margin-top: 0;
+  }
+}
+.mobile{
+  &__menu{
+  display:none;
   }
 }
 .navigation {
   display:flex;
   width:25%;
   &__btn {
+  color: $font-color;
     cursor: pointer;
     background-color: transparent;
     text-decoration: none;
@@ -33,7 +40,6 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     margin: 15px;
-    color: $font-color;
     outline: none;
     &--selected {
       color: $font-color;
@@ -81,40 +87,40 @@
   }
 }}
 @media(max-width:$breakpoint-phone) {
-  .navigation {
-    width:10%;
-  &__btn {   
-    font-size: 13px;
-    margin: 3px;
+  .mobile {  
+    &__menu,&__login{   
+    font-size:20px;
+    display:inline-block;
     }
-}
+  }
+  .navigation{ 
+    &__btn:not(.mobile__login):not(.mobile__menu){
+    display:none;
+    font-size:20px;
+    }
+  }
+  
 .header{
   padding-left:2px;
   &__title{
-    width:18%;
-    font-size:22px; 
-    position: absolute;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-38%);
+    font-size:26px; 
   }
 }}
 @media(max-width:$breakpoint-se) {
-  .navigation {
-    width:10%;
-  &__btn {   
-    font-size: 12px;
-    margin: 2px;
+  .mobile {  
+    &__menu,&__login{   
+    font-size:20px;
+    display:inline-block;
     }
-}
+  }
+  .navigation{ 
+    &__btn:not(.mobile__login):not(.mobile__menu){
+    display:none;
+    font-size:20px;
+    }
 .header{
   padding-left:2px;
   &__title{
-    width:17%;
-    font-size:22px; 
-    position: absolute;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-35%);
+    font-size:25px; 
   }
-}}
+}}}
