@@ -5,19 +5,19 @@ import { Link, NavLink, withRouter } from "react-router-dom";
 import { logOut } from "./../../redux/actions/authorisation";
 import Button from "./../Shared/Button/Button";
 import { getToken, removeToken, checkAdmin } from "../../helpers/authHelper";
+import logout from "./../../static/images/logout.svg";
+import menu from "./../../static/images/menu.svg";
 import "./header.scss";
 
 const Header = props => {
-  const { logOut,onClick } = props;
+  const { logOut,onClick,history } = props;
   const token = getToken();
   const role = checkAdmin();
 
   return (
     <header className="header">
-      <nav className="header__nav navigation">
-        <div className='navigation__btn mobile__menu' onClick={onClick}>
-Menu
-        </div>
+      <nav className="header__nav navigation">        
+        <img src={menu} className='mobile__menu' onClick={onClick}></img>       
         <NavLink
           exact
           to="/"
@@ -48,9 +48,10 @@ Menu
       </Link>
       <div className="header__login ">
         {token ? (
+          <React.Fragment>
           <Button
             btntype="button"
-            btnclass="navigation__btn mobile__login"
+            btnclass="navigation__btn "
             onClick={() => {
               removeToken();
               logOut();
@@ -58,12 +59,22 @@ Menu
           >
             Log Out
           </Button>
+          <img className='mobile__login' src={logout} onClick={() => {
+              removeToken();
+              logOut();
+            }}></img>
+
+</React.Fragment>
         ) : (
-          <NavLink to="/login" className="navigation__btn mobile__login">
-            <Button btntype="button" btnclass="navigation__btn mobile__login">
+          <React.Fragment>
+          <NavLink to="/login" className="navigation__btn ">
+            <Button btntype="button" btnclass="navigation__btn">
               Log In
             </Button>
           </NavLink>
+          <img className='mobile__login' src={logout} onClick={() => {history.push('/login')
+}}></img>
+          </React.Fragment>
         )}
       </div>
     </header>

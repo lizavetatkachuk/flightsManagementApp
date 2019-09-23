@@ -23,14 +23,16 @@ const App = () => {
   const onOpen=()=>{    
   setOpen(1);
   }
+
   const onClose=()=>{
     setOpen(0);
   }
+
   return (
     <Router>
       <div className="app">
         <Header onClick={onOpen}/>
-        {isOpen? <SideBar onClick={onClose}/>:null}       
+        <SideBar isOpen={isOpen} onClick={onClose}/>    
         <Switch>
           <Route path="/" exact component={SearchForm} />
           <Route

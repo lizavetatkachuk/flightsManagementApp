@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { withRouter,RouteComponentProps } from "react-router-dom";
 import { checkAdmin } from "../../helpers/authHelper";
+import pic from "./../../static/images/close.svg";
 
 const Container = styled.div`
 position:fixed;
@@ -14,9 +15,10 @@ font-size:20px;
   z-index:100;
   height:100%;
   width:100%;
-  background-color:#a6a49ccc;
   color:#0c0663;
   .sidebar{
+    transform:translateX(-100%);
+    transition: transform 0.3s ease-out;
     cursor:pointer;
     margin:0;
 padding-top:20px;
@@ -25,22 +27,18 @@ list-style-type:none;
     width:50%;
     heigth:100%;
     background-color:#e3e87ae6;    
-    li{
-      margin:5px;
-      width:80%;
-     
-    }
+    
   }
-  .sidebar li{
-    :hover {
-      background-color: #acae78e;
-      border-radius:3px;
-    }
+  .open{
+    transform:translateX(0);
   }
+
   .close-btn{
     cursor:pointer;
    position:absolute;
-   right:10%;
+   height:17px;
+   width:17px;
+   right:18%;
    top:2%;
   }
   .close-btn:before{
@@ -62,11 +60,12 @@ list-style-type:none;
 function SideBar(props) { 
 
   const role = checkAdmin();
-  const {history, onClick}=props;
+  const {history, onClick, isOpen}=props;
+  const openClass= isOpen ? 'sidebar open' : 'sidebar';
 
   return (
     <Container>   
-      <ul className='sidebar'>
+      <ul className={openClass}>
       <li onClick={ ()=>{onClick();
       history.push('/')
     }} >
@@ -83,10 +82,9 @@ function SideBar(props) {
             Admin Pane
          </li>
         ) : null}
+           <img src={pic} className="close-btn" onClick={onClick}/>       
         </ul>   
-         <div className="close-btn" onClick={onClick}>
-Close
-        </div>
+      
     </Container>
   );
 }
