@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import socketIOClient from "socket.io-client";
 import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
@@ -11,6 +12,8 @@ import bagpack from "./../../static/images/bagpack.svg";
 import "./details.scss";
 
 const Details = props => {
+  const socket = socketIOClient('http://localhost:8000');
+
   const initialState = {
     donation: true,
     luggage: 0,
@@ -82,6 +85,7 @@ const Details = props => {
 
   const onClick = value => {
     dispatch({ type: "setSeats", payload: value });
+    socket.emit(`choose`, {message:'emited an action'})
   };
   const validated = state.seats ? false : true;
 
