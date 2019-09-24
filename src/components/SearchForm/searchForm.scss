@@ -1,5 +1,7 @@
 @import "../Shared/index.scss";
 .search-form {
+  z-index:2;
+  position:static;
   min-height: 70vh;
   display: flex;
   flex-flow: column wrap;
@@ -42,6 +44,13 @@
   color: $red-color;
   position: absolute;
   bottom: -30px;
+}
+.server-error {
+  font-size: 24px;
+  color: $red-color;
+  position: absolute;
+  left:30%;
+  top:110%;
 }
 }
 .input-container {
@@ -150,30 +159,55 @@
 .there-and-back {
   justify-content: flex-start;
 }
-
+@media(max-width:$breakpoint-small-screen) and (min-width:$breakpoint-tablet){
+  .search-form{
+    min-height: 50vh;
+    width:auto;
+    margin:8%;
+  }
+  .server-error {
+    left:25%;
+  }
+}
 @media(max-width:$breakpoint-tablet) and (min-width:$breakpoint-phone){ 
-  .input-container{        
-    label{
-      font-size:23px;      
-    }
+
+  .input-container{   
+    box-sizing:border-box;  
+    width:55%;
+      label{
+        font-size:22px;        
+      }
+  }
+  .input-container--vertical{
+    width:90%;
   }
   .picker{
-    padding-right: 15px;
+    padding-right: 12px;
+    width:90%;
   }
   .search-form{       
+    width:65%;
   position: absolute;
-  top: 45%;
-  left: 50%;
+  top: 50%;
+  left: 45%;
   transform: translate(-45%, -50%);
     padding-bottom:15px;
     &__field{
+      flex-direction:column;
       padding:15px;
       box-sizing:border-box; 
       height:10%;
     }
-    min-height:55vh;
+    min-height:72vh;
     &__label{
       font-size:23px;
+    }
+    .server-error {
+      font-size: 22px;
+      color: $red-color;
+      position: absolute;
+      left:23%;
+      top:90%;
     }
     .error {
       font-size: 19px;
@@ -184,14 +218,15 @@
     }
   }
   .there-and-back{
-    justify-content:space-between;
-    padding-right:70px;
+    flex-direction:row;
+    padding-left:25px;
   }
    .shift-btn{
     width:49px;
     height:49px;
   }
   .search-flights-btn{
+    margin:15px auto;
     width:22%;
     font-size:22px;
   }
@@ -202,14 +237,11 @@
     box-sizing:border-box;  
     width:55%;
       label{
-        font-size:20px;
-        &--vertical{
-          width:70%;
-        }
+        font-size:20px;       
       }
   }
   .input-container--vertical{
-    width:70%;
+    width:85%;
   }
   
   .shift-btn{
@@ -217,13 +249,14 @@
     height:45px;
   }
   .search-form{ 
+    width:90%;
     margin-top:10%;
     position: absolute;
-    top: 45%;
+    top: 60%;
     left: 45%;
     transform: translate(-45%, -50%);
      padding-bottom:13px;
-    min-height:55vh;
+    min-height:63vh;
     &__field{
       padding:10px;
       flex-direction:column;
@@ -231,6 +264,13 @@
    
     &__label{
       font-size:19px;
+    }
+    .server-error {
+      font-size: 19px;
+      color: $red-color;
+      position: absolute;
+      left:15%;
+      top:89%;
     }
     .error {
       font-size: 19px;
@@ -242,7 +282,6 @@
   } 
   .there-and-back{
     flex-direction:row;
-    justify-content:flex-start;
   }
   .radio-container{
 &__circe{
@@ -252,22 +291,30 @@
   .search-flights-btn{
     width:27%;
     font-size:17px;
+    margin:20px auto;
   }
    .picker{
     padding-right: 12px;
-    width:70%;
+    width:85%;
   }
  }
  @media(max-width:$breakpoint-se) {
  
   .search-form{ 
-       padding-bottom:13px;
-    min-height:40vh;
+  width:95%;
+    min-height:75vh;
     &__field{
       flex-direction:column;
     }   
     &__label{
       font-size:20px;
+    }
+    .server-error {
+      font-size: 18px;
+      color: $red-color;
+      position: absolute;
+      left:15%;
+      top:88%;
     }
     .error {
       font-size: 18px;
@@ -277,7 +324,7 @@
     }
   }
   .picker{
-    width:70%;
+    width:90%;
   }
   .input-container{
     label{
@@ -285,7 +332,7 @@
     }
     width:55%;
     &--vertical{
-      width:70%;
+      width:90%;
     }
   }
   .there-and-back{
@@ -301,5 +348,6 @@
   .search-flights-btn{
     width:50%;
     font-size:17px;
+    margin:15px auto;
   }
  }

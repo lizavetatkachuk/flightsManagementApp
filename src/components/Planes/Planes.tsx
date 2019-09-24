@@ -11,8 +11,7 @@ interface IPlane {
   maxCargo: number;
 }
 const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
+
   .delete,
   .add {
     align-self: center;
@@ -23,18 +22,19 @@ const Container = styled.div`
     background-color: Transparent;
     color: #0c0663;
     border-radius: 7px;
-    height: 15%;
-    width: 15%;
+    height:50%;
+    width: 20%;
     outline: none;
     cursor: pointer;
     :disabled {
       color: grey;
     }}
   .form {
+    margin:0 auto;
     display:flex
     flex-direction:column;
     align-items:center;
-    width: 40%;
+    width: 50%;
     .add{
       margin-top:10px;
       width:auto;
@@ -56,10 +56,17 @@ const Container = styled.div`
   }}
   
   .list {
-    width: 30%;
+    padding-right:10px;
+    width:100%;
+    margin:15px;
+    box-sizing:border-box;
+    display:flex;
+    flex-flow:row wrap;
+    justify-content:center;
     &__plane {
+      width:20%;
       display: flex;
-      flex-fdirection: row ;
+      flex-direction: row ;
       justify-content: space-between;
       font-size: 25px;
       margin: 10px;
@@ -78,11 +85,24 @@ const Container = styled.div`
     margin-block-end: 0em;
     margin-block-start: 0em;
   }
+  @media(max-width:1200px) and (min-width:768px){
+    .form{
+      width:67%;
+    }
+    .input-field{
+      font-size:19px;
+    }
+    .list {    
+      &__plane{
+        width:24%;
+        font-size: 24px;
+        margin: 8px;
+      }
+    }
+  }
   @media(max-width:768px) and (min-width:465px){
     .form{
-      width:55%;
-      position:absolute;
-      right:15px;
+      width:80%;
     }
     .input-field{
       font-size:18px;
@@ -91,18 +111,17 @@ const Container = styled.div`
       font-size:20px;
       width:auto;
     }
-    .list{
-      width:30%;
+    .list {    
       &__plane{
-        font-size:21px;
+        width:30%;
+        font-size: 22px;
+        margin: 6px;
       }
     }
   }
   @media(max-width:465px) {
     .form{
-      width:60%;
-      position:absolute;
-      right:15px;
+      width:83%;
     }
     .input-field{
       font-size:15px;
@@ -111,10 +130,35 @@ const Container = styled.div`
       font-size:15px;
       width:50%;
     }
-    .list{
-      width:29%;
+    .list {    
       &__plane{
-        font-size:12px;
+        width:32%;
+        font-size: 21px;
+        margin: 5px;
+      }
+    }
+.delete{
+  margin:0px;
+  font-size:15px;
+  height:auto;
+}
+  }
+  @media(max-width:330px) {
+    .form{
+      width:95%;
+    }
+    .input-field{
+      font-size:15px;
+    }
+    .add{
+      font-size:18px;
+      width:50%;
+    }
+    .list {    
+      &__plane{
+        width:32%;
+        font-size: 21px;
+        margin: 5px;
       }
     }
 .delete{
@@ -140,12 +184,15 @@ function Planes() {
         ...values
       })
       .then(res => {
-        api.get("/admin/planes").then(res => setPlanes(res.data));
+        api.get("/admin/planes").then(
+          res => {
+            setPlanes(res.data)});
       })
       .catch(err => {
         setError(err);
       });
   };
+
   useEffect(() => {
     api.get("/admin/planes").then(res => setPlanes(res.data));
   }, []);
@@ -168,7 +215,6 @@ function Planes() {
 
   return (
     <Container>
-      <div className="list">{mappedPlanes}</div>
       <Form
         onSubmit={handleAddition}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
@@ -244,6 +290,7 @@ function Planes() {
         )}
       />
       <p className="error">{error ? "The plane already exists" : " "}</p>
+      <div className="list">{mappedPlanes}</div>
     </Container>
   );
 }

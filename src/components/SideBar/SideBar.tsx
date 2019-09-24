@@ -12,11 +12,11 @@ font-size:20px;
   transform:translateX(${props => props.theme.position}%);
   transition: transform 0.3s ease-out;
   z-index:100;
-  height:100%;
+  height:100vh;
   width:100%;
   color:#0c0663;
   .sidebar{
-  height:100%;
+  height:100vh;
     cursor:pointer;
     margin:0;
     padding-top:20px;

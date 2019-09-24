@@ -7,9 +7,7 @@ interface IAirport {
   name: string;
   code: string;
 }
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
+const Container = styled.div` 
   .delete,
   .add {
     align-self: center;
@@ -20,15 +18,15 @@ const Container = styled.div`
     background-color: Transparent;
     color: #0c0663;
     border-radius: 7px;
-    height: 15%;
-    width: 15%;
+    height:50%;
+    width: 20%;
     outline: none;
     cursor: pointer;
     :disabled {
       color: grey;
     }}
   .form {
-    justify-self: flex-end;
+   margin:0 auto;
     display:flex
     flex-direction:column;
     align-items:center;
@@ -53,11 +51,18 @@ const Container = styled.div`
     background-color:#bdbec0;
   }}
   
-  .list {
-    width: 30%;
+  .airport-list {
+    padding-right:10px;
+    width:100%;
+    margin:15px;
+    box-sizing:border-box;
+    display:flex;
+    flex-flow:row wrap;
+    justify-content:center;
     &__airport {
+      width:10%;
       display: flex;
-      flex-flow: row wrap;
+      flex-direction: row ;
       justify-content: space-between;
       font-size: 25px;
       margin: 10px;
@@ -76,39 +81,54 @@ const Container = styled.div`
     margin-block-end: 0em;
     margin-block-start: 0em;
   }
-  @media(max-width:768px) and (min-width:465px){
-    .list {
-      width: 40%;
+  @media(max-width:1200px) and (min-width:768px){
+    .airport-list {    
       &__airport {
+        width:14%;
+        font-size: 24px;
+        margin: 8px;
+      }
+    }
+  }
+  @media(max-width:768px) and (min-width:465px){
+    .airport-list {    
+      &__airport {
+        width:16%;
         font-size: 24px;
         margin: 8px;
       }
     }
     .delete{
-      width:20%;
+      width:23%;
+      font-size:20px;
     }
     .add{
       font-size:23px;
     }
+    .form{     
+      width:56%;
+    }
   }
-  @media(max-width:465px) {
+  @media(max-width:560px) {
     .form{
       margin-top:10px;
-      width:50%;
+      width:70%;
     }
     .input-field{
 margin:0px;
 font-size:18px;
     }
-    .list {
-      width: 40%;
+    .airport-list {
       &__airport {
-        font-size: 20px;
+        width:27%;
+        font-size: 19px;
         margin: 3px;
       }
     }
     .delete{
-      width:15%;
+      width:20%;
+      font-size:20px;
+      margin-left:10px;
       margin-right:0px;
     }
     .add{
@@ -118,23 +138,23 @@ font-size:18px;
   @media(max-width:330px) {
     .form{
       margin-top:10px;
-      width:53%;
+      width:70%;
     }
     .input-field{
 margin:0px;
 font-size:15px;
     }
-    .list {
-      width: 35%;
+    .airport-list {
       &__airport {
-        font-size: 20px;
-        margin: 3px;
+        width:30%;
+        font-size: 17px;
+        margin: 7px;
       }
     }
     .delete{
       width:15%;
       height:auto;
-      font-size:23px;
+      font-size:18px;
       margin-left:2px;
       margin-right:0px;
     }
@@ -173,7 +193,7 @@ function Airports() {
   const mappedAirports = airports
     ? airports.map((airport: IAirport) => {
         return (
-          <div className="list__airport" key={airport.code}>
+          <div className="airport-list__airport" key={airport.code}>
             <p>{airport.name}</p>
             <button
               className="delete"
@@ -187,8 +207,7 @@ function Airports() {
     : null;
 
   return (
-    <Container>
-      <div className="list">{mappedAirports}</div>
+    <Container>    
       <Form
         onSubmit={handleAddition}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
@@ -228,6 +247,8 @@ function Airports() {
         )}
       />
       <p className="error">{error ? "The airport already exists" : " "}</p>
+      <div className="airport-list">{mappedAirports}</div>
+      
     </Container>
   );
 }

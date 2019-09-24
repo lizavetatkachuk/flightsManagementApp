@@ -74,8 +74,8 @@ class SearchForm extends React.Component {
                   <React.Fragment>
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying From</label>
-                      <select className="search-form__select " {...input}>
-                        <option key="empty"></option>
+                      <select className="search-form__select " {...input} placeholder='Choose the airport'>
+                      <option  key="empty-destination" value="" disabled selected hidden>Please, choose the airport</option>
                         {directions}
                       </select>
                       <span className="error">
@@ -95,8 +95,8 @@ class SearchForm extends React.Component {
                   <React.Fragment>
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying To</label>
-                      <select className="search-form__select" {...input}>
-                        <option key="empty-destination"></option>
+                      <select className="search-form__select" {...input} placeholder='Choose the airport'>                      
+                        <option  key="empty-destination" value="" disabled selected hidden>Please, choose the airport</option>
                         {directions}
                       </select>
                       <span className="error">
@@ -169,9 +169,9 @@ class SearchForm extends React.Component {
                 name="back"
               />
               {error ? (
-                <p className="error">There are no flights for these dates</p>
+                <p className="server-error">There are no flights for these dates</p>
               ) : (
-                <p className="error"></p>
+                <p className="server-error"></p>
               )}
             </div>{" "}
             <Button

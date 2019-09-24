@@ -7,12 +7,13 @@
       rgba(242, 242, 247, 0.808) 100%
     ),
     url("./../../static/images/clouds.jpg");
-  background-repeat: repeat-y;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  min-height: 100vh;
+  min-height: 90vh;
+  background-attachment: fixed;
+  position: static;
   &__options {
     width: 100%;
   }
