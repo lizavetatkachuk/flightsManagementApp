@@ -10,10 +10,13 @@ import { mustBeEmail, minLength } from "./../../validators";
 import "./login.scss";
 
 const Login = props => {
+
   const { history, requestLogin, message } = props;
+
   const onSubmit = values => {
     requestLogin({ ...values, history });
   };
+
   return (
     <div className="login">
       <Form
@@ -30,7 +33,7 @@ const Login = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
-            {message ? <p className="server-error"></p> : null}
+            {message ? <p className="server-error">{message}</p> : null}
             <label className="form-label">Login</label>
             <Field
               name="email"
@@ -72,6 +75,7 @@ const Login = props => {
     </div>
   );
 };
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -79,10 +83,12 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+
 const mapStateToProps = state => {
-  const { auth } = state;
+  const  auth ={message:state.auth.message};
   return auth;
 };
+
 Login.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,

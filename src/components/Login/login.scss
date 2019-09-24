@@ -10,6 +10,7 @@
   height: auto;
   width: 35%;
   padding: 25px;
+  padding-top:35px;
  
   .field{
     text-align: center;
@@ -32,14 +33,18 @@
     }  
 
 .error{
+  width:100%;
+  left:0%;
   font-size: 21px;
   color: $red-color;
   position: absolute; 
   padding-left:6px;
-  bottom:0px;
+  bottom:-10px;
 }
 }
 .server-error{
+  top:-12px;
+  position:absolute;
   font-size: 21px;
   color: $red-color;
 }
@@ -66,13 +71,26 @@
   font-size: 22px;
   margin-top: 8px;
 }
-@media(max-width:$breakpoint-tablet) and (min-width:$breakpoint-phone){
+@media(max-width:$breakpoint-small-screen) and (min-width:$breakpoint-tablet){
   .login,.register{
-    width:55%;
+    width:60%;
     padding:15px;
     }
     .error,.server-error{
-      font-size:19px;
+      font-size:20px;
+    }
+  .input-field,.field{
+    width:90%;
+  }
+}
+
+@media(max-width:$breakpoint-tablet) and (min-width:$breakpoint-phone){
+  .login,.register{
+    width:75%;
+    padding:15px;
+    }
+    .error,.server-error{
+      font-size:18px;
     }
   .input-field,.field{
     width:90%;
@@ -80,7 +98,7 @@
 }
 @media(max-width:$breakpoint-phone) {
   .login,.register{
-    width:70%;
+    width:85%;
     top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
