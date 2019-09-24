@@ -45,18 +45,18 @@ const Register = props => {
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
             {register.error ? (
-              <p className="Error">This email is already in use</p>
+              <p className="server-error">This email is already in use</p>
             ) : null}
             <label className="form-label">Enter your email</label>
             <Field
               name="email"
               render={({ input, meta }) => (
-                <React.Fragment>
+                <div className='field'>
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
                   <input className="input-field" {...input} />
-                </React.Fragment>
+                </div>
               )}
               validate={mustBeEmail}
             />
@@ -64,12 +64,12 @@ const Register = props => {
             <Field
               name="password"
               render={({ input, meta }) => (
-                <React.Fragment>
+                <div className='field'>
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
                   <input className="input-field" {...input} type="password" />
-                </React.Fragment>
+                </div>
               )}
               validate={validatePassword}
             />
@@ -77,12 +77,12 @@ const Register = props => {
             <Field
               name="confirmpassword"
               render={({ input, meta }) => (
-                <React.Fragment>
+                <div className='field'>
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
                   <input className="input-field" {...input} type="password" />
-                </React.Fragment>
+                </div>
               )}
             />
             <label className="form-label">Pick up a username</label>

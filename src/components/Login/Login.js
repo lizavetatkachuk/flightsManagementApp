@@ -30,17 +30,17 @@ const Login = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
-            {message ? <p className="Error"></p> : null}
+            {message ? <p className="server-error"></p> : null}
             <label className="form-label">Login</label>
             <Field
               name="email"
               render={({ input, meta }) => (
-                <React.Fragment>
+                <div className='field'>
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
                   <input className="input-field" {...input} />
-                </React.Fragment>
+                </div>
               )}
               validate={mustBeEmail}
             />
@@ -48,12 +48,12 @@ const Login = props => {
             <Field
               name="password"
               render={({ input, meta }) => (
-                <React.Fragment>
+                <div className='field'>
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
                   <input className="input-field" {...input} type="password" />
-                </React.Fragment>
+                </div>
               )}
               validate={minLength}
             />

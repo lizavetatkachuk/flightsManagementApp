@@ -2,7 +2,7 @@ const validatePassword = value => {
   const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
   return (
     !pattern.test(value) &&
-    "The passwords should contain from 6 to 20 characters which, at least one numeric digit, one uppercase and one lowercase letter"
+    "Should be from 6 to 20 characters with 1 digit, uppercase and lowercase letter"
   );
 };
 

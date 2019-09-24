@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { withRouter,RouteComponentProps } from "react-router-dom";
 import { checkAdmin } from "../../helpers/authHelper";
@@ -9,21 +9,19 @@ position:fixed;
 left:0;
 top:110px;
 font-size:20px;
-  display: flex;
-  flex-direction:row;
-  justify-content:flex-start;
+  transform:translateX(${props => props.theme.position}%);
+  transition: transform 0.3s ease-out;
   z-index:100;
   height:100%;
   width:100%;
   color:#0c0663;
   .sidebar{
-    transform:translateX(-100%);
-    transition: transform 0.3s ease-out;
+  height:100%;
     cursor:pointer;
     margin:0;
-padding-top:20px;
-padding-left:10px;
-list-style-type:none;
+    padding-top:20px;
+    padding-left:10px;
+    list-style-type:none;
     width:50%;
     heigth:100%;
     background-color:#e3e87ae6;    
@@ -61,11 +59,13 @@ function SideBar(props) {
 
   const role = checkAdmin();
   const {history, onClick, isOpen}=props;
-  const openClass= isOpen ? 'sidebar open' : 'sidebar';
+ const theme={
+   position: isOpen? 0 : -100
+ }
 
   return (
-    <Container>   
-      <ul className={openClass}>
+    <Container theme={theme}>   
+      <ul className='sidebar'>
       <li onClick={ ()=>{onClick();
       history.push('/')
     }} >
