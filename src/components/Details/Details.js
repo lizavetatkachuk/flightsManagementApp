@@ -12,7 +12,17 @@ import bagpack from "./../../static/images/bagpack.svg";
 import "./details.scss";
 
 const Details = props => {
-  const socket = socketIOClient('http://localhost:8000');
+
+  const socket = socketIOClient('http://localhost:8000');  
+
+  socket.on('seats:found', (data) => {
+   data.seats.map(seat=>
+    {  dispatch({ type: "setFrozen", payload: seat.seat });    }) 
+  });
+
+  socket.on('seat:frozen', data=>{
+    dispatch({ type: "setFrozen", payload: data.seat });    
+  })
 
   const initialState = {
     donation: true,
@@ -20,7 +30,8 @@ const Details = props => {
     people: 1,
     seats: [],
     seatClass: "",
-    flight: {}
+    flight: {},
+    frozen:[]
   };
 
   const reducer = (state, action) => {
@@ -35,6 +46,10 @@ const Details = props => {
         return { ...state, people: state.people + 1 };
       case "decrement":
         return { ...state, people: state.people - 1 };
+        case "setFrozen":
+       {
+         const newFrozen = [...state.frozen, action.payload];
+        return { ...state, frozen: newFrozen };}
       case "setSeats": {
         const seatNums = state.seats.map(seat => seat.seat);
         if (seatNums.includes(action.payload.seat)) {
@@ -58,16 +73,17 @@ const Details = props => {
   const large = 25;
   const { history, match } = props;
   const token = getToken();
+  const values = { ...match.params };
 
   const businessSeats = state.seats.filter(
     seat => seat.seatClass === "business"
   );
 
-  useEffect(() => {
-    const values = { ...match.params };
+  useEffect(() => {    
     api.get(`/flight/${values.id}`).then(res => {
       dispatch({ type: "setFlight", payload: res.data });
     });
+    socket.emit('connected');
   }, []);
 
   const mappedSeats = state.seats.map(seat => {
@@ -85,7 +101,7 @@ const Details = props => {
 
   const onClick = value => {
     dispatch({ type: "setSeats", payload: value });
-    socket.emit(`choose`, {message:'emited an action'})
+    socket.emit(`seat:choose`, {token:token,seat:value.seat,flight:values.id})
   };
   const validated = state.seats ? false : true;
 
@@ -123,6 +139,7 @@ const Details = props => {
         <p className="details__label">Choose your seat</p>
         {state.flight.plane && 
                <Plane
+               frozen={state.frozen}
             plane={state.flight.plane}
             onClick={onClick}
             people={state.people}

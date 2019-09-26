@@ -4,14 +4,15 @@ import { api } from "./../../helpers/apiHeler";
 import "./plane.scss";
 
 export const Plane = props => {
-  const { onClick, people, plane } = props;
+  const { onClick, people, plane,frozen } = props;
   const { booked } = props || [];
   const [selected, setSelected] = useState([]);
   const [planeSchema, setSchema] = useState([]);
 
+
   useEffect(() => {
     api.get(`/admin/planes/${plane}`).then(res => setSchema(res.data));
-  }, [plane]);
+  },[] );
 
   const businessClass = "business";
   const economyClass = "economy";
@@ -58,9 +59,22 @@ export const Plane = props => {
         const seatClass = selected.includes(seatNum)
           ? `seat ${businessClass} ${businessClass}--selected`
           : `seat ${businessClass}`;
-        if (booked.includes(seatNum)) {
-          return <div className={`${seatClass} booked`} key={seatNum}></div>;
-        } else {
+
+          if(selected.includes(seatNum)) {
+            return (
+              <div
+                className={seatClass}
+                key={seatNum}
+                onClick={() => {
+                  handleChange(seatNum, businessClass);
+                }}
+              ></div>)
+          }
+
+         else if(booked.includes(seatNum)||frozen.includes(seatNum))  {
+            return <div className={`${seatClass} booked`} key={seatNum}></div>;
+          } else 
+          {
           return (
             <div
               className={seatClass}
@@ -79,12 +93,23 @@ export const Plane = props => {
       })
       .map(seat => {
         const seatNum = `${i + 1}${seat}`;
+
         const seatClass = selected.includes(seatNum)
           ? `seat ${businessClass} ${businessClass}--selected`
           : `seat ${businessClass}`;
-        if (booked.includes(seatNum)) {
-          return <div className={`${seatClass} booked`} key={seatNum}></div>;
-        } else {
+          if(selected.includes(seatNum)) {
+            return (
+              <div
+                className={seatClass}
+                key={seatNum}
+                onClick={() => {
+                  handleChange(seatNum, businessClass);
+                }}
+              ></div>)
+          }
+         else if(booked.includes(seatNum)||frozen.includes(seatNum))  {
+            return <div className={`${seatClass} booked`} key={seatNum}></div>;
+          }  else {
           return (
             <div
               className={seatClass}
@@ -115,12 +140,25 @@ export const Plane = props => {
       })
       .map(seat => {
          const seatNum = `${planeSchema.business / 4 + i + 1}${seat}`;
+
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
-        if (booked.includes(seatNum)) {
-          return <div className={`${seatClass} booked`} key={seatNum}></div>;
-        } else {
+
+          if(selected.includes(seatNum)) {
+            return (
+              <div
+                className={seatClass}
+                key={seatNum}
+                onClick={() => {
+                  handleChange(seatNum,economyClass);
+                }}
+              ></div>)
+          }
+         else if(booked.includes(seatNum)||frozen.includes(seatNum))  {
+
+            return <div className={`${seatClass} booked`} key={seatNum}></div>;
+          }  else {
           return (
             <div
               className={seatClass}
@@ -142,9 +180,19 @@ export const Plane = props => {
         const seatClass = selected.includes(seatNum)
           ? `seat ${economyClass} ${economyClass}--selected`
           : `seat ${economyClass}`;
-        if (booked.includes(seatNum)) {
-          return <div className={`${seatClass} booked`} key={seatNum}></div>;
-        } else {
+          if(selected.includes(seatNum)) {
+            return (
+              <div
+                className={seatClass}
+                key={seatNum}
+                onClick={() => {
+                  handleChange(seatNum, economyClass);
+                }}
+              ></div>)
+          }
+       else if(booked.includes(seatNum)||frozen.includes(seatNum))  {
+            return <div className={`${seatClass} booked`} key={seatNum}></div>;
+          } else {
           return (
             <div
               className={seatClass}
