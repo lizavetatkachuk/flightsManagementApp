@@ -7,3 +7,11 @@
   position: static;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+@media (max-width: $breakpoint-tablet){
+  .app{
+    min-height:120vh;
+  background: linear-gradient(
+    rgba(48, 73, 210, 0.9) 0%, rgba(11, 11, 154, 0.3) 30%, rgba(103, 145, 245, 0.808) 100%);  
+  }
+  }
+

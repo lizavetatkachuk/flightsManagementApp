@@ -21,6 +21,7 @@ const Details = props => {
   });
 
   socket.on('seat:frozen', data=>{
+    console.log(data);
     dispatch({ type: "setFrozen", payload: data.seat });    
   })
 

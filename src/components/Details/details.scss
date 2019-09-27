@@ -97,6 +97,11 @@
  }
   }
   @media (min-width: $breakpoint-tablet)and (max-width:$breakpoint-small-screen){
+    .details{
+      background: linear-gradient(
+        rgba(48, 73, 210, 0.9) 0%, rgba(11, 11, 154, 0.3) 30%, rgba(103, 145, 245, 0.808) 100%);
+    ;
+    }
     .luggage,.cost{
       &__label{
         font-size:22px;
@@ -113,6 +118,11 @@
     }
     }
     @media (min-width: $breakpoint-phone)and (max-width:$breakpoint-tablet){
+      .details{
+        background: linear-gradient(
+        to bottom,
+        rgba(48, 73, 210, 0.9) 0%, rgba(11, 11, 154, 0.3) 30%, rgba(103, 145, 245, 0.808) 100%);
+      ;}
       .luggage,.cost{
         flex-flow:column;
         &__label{
@@ -139,6 +149,11 @@
       }
       }
       @media (max-width:$breakpoint-phone){
+        .details{
+          background: linear-gradient(
+          to bottom,
+          rgba(48, 73, 210, 0.9) 0%, rgba(11, 11, 154, 0.3) 30%, rgba(103, 145, 245, 0.808) 100%);
+        ;}
         .options{
           &__label{
             display:block;
