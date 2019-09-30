@@ -2,7 +2,8 @@ import {
   REQUEST_LOGIN,
   LOGOUT,
   REQUEST_LOGIN_SUCSESS,
-  REQUEST_LOGIN_FAILED
+  REQUEST_LOGIN_FAILED,
+  LOGIN_ERROR_CLEAR
 } from "../action-types/flightsActionTypes";
 
 const initialState = {
@@ -23,6 +24,8 @@ export const authorisationReducer = (state = initialState, action) => {
       };
     case REQUEST_LOGIN_FAILED:
       return { ...state, message: action.payload };
+    case LOGIN_ERROR_CLEAR:
+      return { ...state, message: null };
     default:
       return state;
   }

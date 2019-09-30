@@ -10,44 +10,55 @@
   height: auto;
   width: 35%;
   padding: 25px;
-  padding-top:35px;
- 
-  .field{
+  padding-top: 35px;
+
+  .field {
     text-align: center;
-    position:relative;
-    margin:0;
-    padding:0;
-    width:100%;
-    height:70px;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 70px;
   }
   &__form {
     display: flex;
     flex-direction: column;
-    align-items: center;    
+    align-items: center;
   }
   &__form .button {
-      :hover {
-        transform: translate(-2px, 2px);
-        box-shadow: 7px 7px 7px grey;    
-      }
-    }  
+    :hover {
+      transform: translate(-2px, 2px);
+      box-shadow: 7px 7px 7px grey;
+    }
+  }
 
-.error{
-  width:100%;
-  left:0%;
-  font-size: 19px;
-  color: $red-color;
-  position: absolute; 
-  padding-left:6px;
-  bottom:7px;
+  .error {
+    width: 100%;
+    left: 0%;
+    font-size: 19px;
+    color: $red-color;
+    position: absolute;
+    padding-left: 6px;
+    bottom: 12px;
+    &--long {
+      width: 100%;
+      left: 0%;
+      font-size: 16px;
+      color: $red-color;
+      position: absolute;
+      padding-left: 6px;
+      bottom: -1px;
+    }
+  }
+  .server-error {
+    left: 35%;
+    top: -12px;
+    position: absolute;
+    font-size: 19px;
+    color: $red-color;
+  }
 }
-}
-.server-error{
-  top:-12px;
-  position:absolute;
-  font-size: 19px;
-  color: $red-color;
-}
+
 .sign-up {
   align-self: flex-end;
   display: flex;
@@ -71,50 +82,68 @@
   font-size: 22px;
   margin-top: 8px;
 }
-@media(max-width:$breakpoint-small-screen) and (min-width:$breakpoint-tablet){
-  .login,.register{
-    width:60%;
-    padding:15px;
+@media (max-width: $breakpoint-small-screen) and (min-width: $breakpoint-tablet) {
+  .login,
+  .register {
+    width: 60%;
+    padding: 15px;
+  }
+  .error,
+  .server-error {
+    font-size: 18px;
+    &--long {
+      font-size: 16px;
     }
-    .error,.server-error{
-      font-size:18px;
-    }
-  .input-field,.field{
-    width:90%;
+  }
+  .input-field,
+  .field {
+    width: 90%;
   }
 }
 
-@media(max-width:$breakpoint-tablet) and (min-width:$breakpoint-phone){
-  .login,.register{
-    width:75%;
-    padding:15px;
+@media (max-width: $breakpoint-tablet) and (min-width: $breakpoint-phone) {
+  .login,
+  .register {
+    width: 75%;
+    padding: 15px;
+  }
+  .error,
+  .server-error {
+    font-size: 17px;
+    &--long {
+      font-size: 16px;
     }
-    .error,.server-error{
-      font-size:17px;
-    }
-  .input-field,.field{
-    width:90%;
+  }
+  .input-field,
+  .field {
+    width: 90%;
   }
 }
-@media(max-width:$breakpoint-phone) {
-  .login,.register{
-    width:85%;
+@media (max-width: $breakpoint-phone) {
+  .login,
+  .register {
+    width: 85%;
     top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-    padding:15px;
-  .error,.server-error{
-    font-size:16px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    .error,
+    .server-error {
+      font-size: 16px;
+      &--long {
+        font-size: 16px;
+      }
+    }
   }
-    }
-    .form-label{
-      margin-left:12px;
-      font-size:18px;
-    }
-    .field{
-      height: 60px;
-    }
-  .input-field,.field{
-    width:80%;
+  .form-label {
+    margin-left: 12px;
+    font-size: 18px;
+  }
+  .field {
+    height: 60px;
+  }
+  .input-field,
+  .field {
+    width: 80%;
   }
 }

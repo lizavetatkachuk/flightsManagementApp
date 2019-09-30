@@ -30,8 +30,10 @@ const Flight = props => {
   };
 
   useEffect(() => {
+    const { match } = props;
     const values = { ...match.params };
     requestFlights({ ...values, history });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   flights.flightsThere.sort(dynamicSort(mode.toLowerCase));

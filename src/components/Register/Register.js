@@ -4,14 +4,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
+import { OnChange } from "react-final-form-listeners";
 import bcrypt from "bcryptjs";
-import { requestRegister } from "./../../redux/actions/registration";
+import {
+  requestRegister,
+  clearRegisterError
+} from "./../../redux/actions/registration";
 import Button from "./../Shared/Button/Button";
 import { mustBeEmail, validatePassword } from "./../../validators";
 import "./../Login/login.scss";
 
 const Register = props => {
-  const { history, requestRegister, register } = props;
+  const { history, requestRegister, register, clearRegisterError } = props;
 
   const onSubmit = values => {
     bcrypt.genSalt(10, function(err, salt) {
@@ -44,16 +48,17 @@ const Register = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="register__form">
-            {register.error ? (
-              <p className="server-error">This email is already in use</p>
-            ) : null}
             <label className="form-label">Enter your email</label>
             <Field
               name="email"
               render={({ input, meta }) => (
-                <div className='field'>
+                <div className="field">
                   <span className="error">
-                    {meta.error && meta.touched ? meta.error : ""}
+                    {meta.error && meta.touched
+                      ? meta.error
+                      : register.error
+                      ? "This email is already in use"
+                      : ""}
                   </span>
                   <input className="input-field" {...input} />
                 </div>
@@ -64,8 +69,8 @@ const Register = props => {
             <Field
               name="password"
               render={({ input, meta }) => (
-                <div className='field'>
-                  <span className="error">
+                <div className="field">
+                  <span className="error--long">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
                   <input className="input-field" {...input} type="password" />
@@ -77,7 +82,7 @@ const Register = props => {
             <Field
               name="confirmpassword"
               render={({ input, meta }) => (
-                <div className='field'>
+                <div className="field">
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
@@ -89,7 +94,7 @@ const Register = props => {
             <Field
               name="name"
               render={({ input, meta }) => (
-                <div className='field'>
+                <div className="field">
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
@@ -97,6 +102,11 @@ const Register = props => {
                 </div>
               )}
             />
+            <OnChange name="email">
+              {value => {
+                clearRegisterError();
+              }}
+            </OnChange>
             <Button btntype="submit" disabled={submitting || pristine}>
               Register
             </Button>
@@ -109,7 +119,8 @@ const Register = props => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      requestRegister
+      requestRegister,
+      clearRegisterError
     },
     dispatch
   );

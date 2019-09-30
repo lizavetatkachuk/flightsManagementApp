@@ -10,14 +10,19 @@ import menu from "./../../static/images/menu.svg";
 import "./header.scss";
 
 const Header = props => {
-  const { logOut,onClick,history } = props;
+  const { logOut, onClick, history } = props;
   const token = getToken();
   const role = checkAdmin();
 
   return (
     <header className="header">
-      <nav className="header__nav navigation">        
-        <img src={menu} className='mobile__menu' onClick={onClick}></img>       
+      <nav className="header__nav navigation">
+        <img
+          src={menu}
+          className="mobile__menu"
+          alt="mobile-menu-tab"
+          onClick={onClick}
+        ></img>
         <NavLink
           exact
           to="/"
@@ -49,31 +54,41 @@ const Header = props => {
       <div className="header__login ">
         {token ? (
           <React.Fragment>
-          <Button
-            btntype="button"
-            btnclass="navigation__btn "
-            onClick={() => {
-              removeToken();
-              logOut();
-            }}
-          >
-            Log Out
-          </Button>
-          <img className='mobile__login' src={logout} onClick={() => {
-              removeToken();
-              logOut();
-            }}></img>
-
-</React.Fragment>
+            <Button
+              btntype="button"
+              btnclass="navigation__btn "
+              onClick={() => {
+                removeToken();
+                logOut();
+              }}
+            >
+              Log Out
+            </Button>
+            <img
+              className="mobile__login"
+              alt="mobile-logout-btn"
+              src={logout}
+              onClick={() => {
+                removeToken();
+                logOut();
+              }}
+            ></img>
+          </React.Fragment>
         ) : (
           <React.Fragment>
-          <NavLink to="/login" className="navigation__btn ">
-            <Button btntype="button" btnclass="navigation__btn">
-              Log In
-            </Button>
-          </NavLink>
-          <img className='mobile__login' src={logout} onClick={() => {history.push('/login')
-}}></img>
+            <NavLink to="/login" className="navigation__btn ">
+              <Button btntype="button" btnclass="navigation__btn">
+                Log In
+              </Button>
+            </NavLink>
+            <img
+              className="mobile__login"
+              alt="mobile-logout-btn"
+              src={logout}
+              onClick={() => {
+                history.push("/login");
+              }}
+            ></img>
           </React.Fragment>
         )}
       </div>

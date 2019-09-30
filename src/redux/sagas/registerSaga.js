@@ -20,7 +20,7 @@ export const requestSignUp = values => {
 };
 function* registerEffectSaga(action) {
   try {
-    let message = yield call(requestSignUp, action.payload);
+    yield call(requestSignUp, action.payload);
     const { history } = action.payload;
     yield put(requestRegisterSucsess());
     history.push("/login");

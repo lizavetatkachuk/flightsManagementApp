@@ -1,12 +1,12 @@
 @import "../Shared/index.scss";
 .search-form {
-  z-index:2;
+  z-index: 2;
   min-height: 70vh;
   display: flex;
   flex-flow: column wrap;
   justify-items: stretch;
   justify-content: space-evenly;
-  margin:0 auto;
+  margin: 0 auto;
   background-color: $form-color;
   color: $base-color;
   margin-top: 5%;
@@ -30,36 +30,36 @@
   &__field {
     display: flex;
     position: relative;
-   flex-direction:row;
+    flex-direction: row;
     font-size: 20px;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
     justify-self: flex-start;
     padding: 20px;
   }
 
-.error {
-  font-size: 21px;
-  color: $red-color;
-  position: absolute;
-  bottom: -30px;
-}
-.server-error {
-  font-size: 24px;
-  color: $red-color;
-  position: absolute;
-  left:30%;
-  top:110%;
-}
+  .error {
+    font-size: 21px;
+    color: $red-color;
+    position: absolute;
+    bottom: -30px;
+  }
+  .server-error {
+    font-size: 24px;
+    color: $red-color;
+    position: absolute;
+    left: 30%;
+    top: 110%;
+  }
 }
 .input-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 23%;
+  min-width: 23%;
   label {
-    font-size: 26px;
+    font-size: 24px;
   }
   position: relative;
   &--vertical {
@@ -67,7 +67,7 @@
     display: flex;
     flex-flow: column wrap;
     width: 32%;
-    label{
+    label {
       justify-self: flex-end;
     }
   }
@@ -79,7 +79,7 @@
   width: 32%;
 }
 .radio-container {
-  margin-left:0px;
+  margin-left: 0px;
   display: block;
   position: relative;
   &__radio {
@@ -129,7 +129,7 @@
   &__input-container {
     width: 100%;
     input {
-      width: 100%;
+      width: 98%;
       height: 33px;
       font-family: $font;
       font-size: 20px;
@@ -159,162 +159,176 @@
 .there-and-back {
   justify-content: flex-start;
 }
-@media(max-width:$breakpoint-small-screen) and (min-width:$breakpoint-tablet){
-  .search-form{
+@media (max-width: $breakpoint-small-screen) and (min-width: $breakpoint-tablet) {
+  .search-form {
     min-height: 55vh;
-    width:auto;
-    margin:8%;
+    width: auto;
+    margin: 8%;
+    &__label {
+      font-size: 23px;
+    }
+  }
+
+  .input-container--vertical {
+    width: 35%;
+  }
+  .picker {
+    width: 35%;
+  }
+  .input-container {
+    label {
+      font-size: 20px;
+    }
+    min-width: 20%;
   }
   .server-error {
-    left:25%;
+    left: 25%;
   }
 }
-@media(max-width:$breakpoint-tablet) and (min-width:$breakpoint-phone){ 
-
-  .input-container{   
-    box-sizing:border-box;  
-    width:55%;
-      label{
-        font-size:22px;        
-      }
-  }
-  .input-container--vertical{
-    width:90%;
-  }
-  .picker{
-    padding-right: 12px;
-    width:90%;
-  }
-  .search-form{       
-    width:65%;
-  position: absolute;
-  top: 50%;
-  left: 45%;
-  transform: translate(-45%, -50%);
-    padding-bottom:15px;
-    &__field{
-      flex-direction:column;
-      padding:15px;
-      box-sizing:border-box; 
-      height:10%;
+@media (max-width: $breakpoint-tablet) and (min-width: $breakpoint-phone) {
+  .input-container {
+    box-sizing: border-box;
+    width: 55%;
+    label {
+      font-size: 22px;
     }
-    min-height:72vh;
-    &__label{
-      font-size:23px;
+  }
+  .input-container--vertical {
+    width: 90%;
+  }
+  .picker {
+    padding-right: 12px;
+    width: 90%;
+  }
+  .search-form {
+    width: 65%;
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-45%, -50%);
+    padding-bottom: 15px;
+    &__field {
+      flex-direction: column;
+      padding: 15px;
+      box-sizing: border-box;
+      height: 10%;
+    }
+    min-height: 72vh;
+    &__label {
+      font-size: 23px;
     }
     .server-error {
       font-size: 22px;
       color: $red-color;
       position: absolute;
-      left:23%;
-      top:90%;
+      left: 23%;
+      top: 90%;
     }
     .error {
       font-size: 19px;
-      width:110%;
+      width: 110%;
       color: $red-color;
       position: absolute;
       bottom: -25px;
     }
   }
-  .there-and-back{
-    flex-direction:row;
-    padding-left:25px;
+  .there-and-back {
+    flex-direction: row;
+    padding-left: 35px;
   }
-   .shift-btn{
-    width:49px;
-    height:49px;
+  .shift-btn {
+    width: 49px;
+    height: 49px;
   }
-  .search-flights-btn{
-    margin:15px auto;
-    width:22%;
-    font-size:22px;
+  .search-flights-btn {
+    margin: 15px auto;
+    width: 22%;
+    font-size: 23px;
   }
- }
-@media(max-width:$breakpoint-phone)and (min-width:$breakpoint-se) {
-  
-  .input-container{   
-    box-sizing:border-box;  
-    width:55%;
-      label{
-        font-size:20px;       
-      }
+}
+@media (max-width: $breakpoint-phone) and (min-width: $breakpoint-se) {
+  .input-container {
+    box-sizing: border-box;
+    width: 55%;
+    label {
+      font-size: 20px;
+    }
   }
-  .input-container--vertical{
-    width:85%;
+  .input-container--vertical {
+    width: 85%;
   }
-  
-  .shift-btn{
-    width:45px;
-    height:45px;
+
+  .shift-btn {
+    width: 45px;
+    height: 45px;
   }
-  .search-form{ 
-    width:90%;
-    margin-top:10%;
+  .search-form {
+    width: 90%;
+    margin-top: 10%;
     position: absolute;
     top: 60%;
     left: 45%;
     transform: translate(-45%, -50%);
-     padding-bottom:13px;
-    min-height:63vh;
-    &__field{
-      padding:10px;
-      flex-direction:column;
+    padding-bottom: 13px;
+    min-height: 63vh;
+    &__field {
+      padding: 10px;
+      flex-direction: column;
     }
-   
-    &__label{
-      font-size:19px;
+
+    &__label {
+      font-size: 19px;
     }
     .server-error {
       font-size: 19px;
       color: $red-color;
       position: absolute;
-      left:15%;
-      top:89%;
+      left: 15%;
+      top: 89%;
     }
     .error {
       font-size: 19px;
-      width:110%;
+      width: 110%;
       color: $red-color;
       position: absolute;
       bottom: -25px;
     }
-  } 
-  .there-and-back{
-    flex-direction:row;
   }
-  .radio-container{
-&__circe{
-  top:25%;
-  left:140%;
-}}
-  .search-flights-btn{
-    width:27%;
-    font-size:17px;
-    margin:20px auto;
+  .there-and-back {
+    flex-direction: row;
   }
-   .picker{
+  .radio-container {
+    &__circe {
+      top: 25%;
+      left: 140%;
+    }
+  }
+  .search-flights-btn {
+    width: 27%;
+    font-size: 17px;
+    margin: 20px auto;
+  }
+  .picker {
     padding-right: 12px;
-    width:85%;
+    width: 85%;
   }
- }
- @media(max-width:$breakpoint-se) {
- 
-  .search-form{ 
-  width:95%;
-    min-height:75vh;
-    &__field{
-      flex-direction:column;
-    }   
-    &__label{
-      font-size:20px;
+}
+@media (max-width: $breakpoint-se) {
+  .search-form {
+    width: 95%;
+    min-height: 75vh;
+    &__field {
+      flex-direction: column;
+    }
+    &__label {
+      font-size: 20px;
     }
     .server-error {
       font-size: 18px;
       color: $red-color;
       position: absolute;
-      left:15%;
-      top:88%;
+      left: 15%;
+      top: 88%;
     }
     .error {
       font-size: 18px;
@@ -323,31 +337,31 @@
       bottom: -23px;
     }
   }
-  .picker{
-    width:90%;
+  .picker {
+    width: 90%;
   }
-  .input-container{
-    label{
-      font-size:20px;
+  .input-container {
+    label {
+      font-size: 20px;
     }
-    width:55%;
-    &--vertical{
-      width:90%;
+    width: 55%;
+    &--vertical {
+      width: 90%;
     }
   }
-  .there-and-back{
-    flex-direction:row;
-    justify-content:flex-start;
+  .there-and-back {
+    flex-direction: row;
+    justify-content: flex-start;
   }
-  .radio-container{
-&__circe{
-  top:25%;
-  left:110%;
+  .radio-container {
+    &__circe {
+      top: 25%;
+      left: 110%;
+    }
+  }
+  .search-flights-btn {
+    width: 50%;
+    font-size: 17px;
+    margin: 15px auto;
+  }
 }
-  }
-  .search-flights-btn{
-    width:50%;
-    font-size:17px;
-    margin:15px auto;
-  }
- }

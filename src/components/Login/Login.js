@@ -4,14 +4,17 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { Link, withRouter } from "react-router-dom";
-import { requestLogin } from "./../../redux/actions/authorisation";
+import { OnChange } from "react-final-form-listeners";
+import {
+  requestLogin,
+  cleanLoginError
+} from "./../../redux/actions/authorisation";
 import Button from "./../Shared/Button/Button";
 import { mustBeEmail, minLength } from "./../../validators";
 import "./login.scss";
 
 const Login = props => {
-
-  const { history, requestLogin, message } = props;
+  const { history, requestLogin, message, cleanLoginError } = props;
 
   const onSubmit = values => {
     requestLogin({ ...values, history });
@@ -33,14 +36,17 @@ const Login = props => {
         }}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit} className="login__form">
-            {message ? <p className="server-error">{message}</p> : null}
             <label className="form-label">Login</label>
             <Field
               name="email"
               render={({ input, meta }) => (
-                <div className='field'>
+                <div className="field">
                   <span className="error">
-                    {meta.error && meta.touched ? meta.error : ""}
+                    {meta.error && meta.touched
+                      ? meta.error
+                      : message
+                      ? "Wrong email or password"
+                      : ""}
                   </span>
                   <input className="input-field" {...input} />
                 </div>
@@ -51,7 +57,7 @@ const Login = props => {
             <Field
               name="password"
               render={({ input, meta }) => (
-                <div className='field'>
+                <div className="field">
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
@@ -63,6 +69,16 @@ const Login = props => {
             <Button btntype="submit" disabled={submitting || pristine}>
               Log In
             </Button>
+            <OnChange name="password">
+              {value => {
+                cleanLoginError();
+              }}
+            </OnChange>
+            <OnChange name="email">
+              {value => {
+                cleanLoginError();
+              }}
+            </OnChange>
           </form>
         )}
       />
@@ -79,13 +95,14 @@ const Login = props => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      requestLogin
+      requestLogin,
+      cleanLoginError
     },
     dispatch
   );
 
 const mapStateToProps = state => {
-  const  auth ={message:state.auth.message};
+  const auth = { message: state.auth.message };
   return auth;
 };
 

@@ -89,138 +89,138 @@
   }
   font-size: 15px;
 }
-@media (min-width: $breakpoint-small-screen){ 
-  
- .luggage,.cost{
-   &__label{
-     font-size:22px;
-   }
- }
+@media (min-width: $breakpoint-small-screen) {
+  .luggage,
+  .cost {
+    &__label {
+      font-size: 20px;
+    }
   }
-  @media (min-width: $breakpoint-tablet)and (max-width:$breakpoint-small-screen){
-    .details{
-      background-image: none;
-      background: linear-gradient(
-        rgba(48, 73, 210, 0.9) 0%, rgba(11, 11, 154, 0.3) 30%, rgba(103, 145, 245, 0.808) 100%);
-    ;
+}
+@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-small-screen) {
+  .luggage,
+  .cost {
+    &__label {
+      font-size: 22px;
     }
-    
-    .luggage,.cost{
-      &__label{
-        font-size:22px;
-      }
-      &__icon{
-        padding:18px;
-        width:32%;
-      }
+    &__icon {
+      padding: 18px;
+      width: 32%;
     }
-    .details{
-      &__plane{
-        margin:7px;
-      }
+  }
+  .details {
+    &__plane {
+      margin: 7px;
     }
+  }
+}
+@media (min-width: $breakpoint-phone) and (max-width: $breakpoint-tablet) {
+  .details {
+    background-image: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(175, 181, 165, 0.78) 0%,
+      rgba(11, 11, 154, 0.3) 30%,
+      rgba(189, 196, 212, 0.808) 100%
+    );
+  }
+  .luggage,
+  .cost {
+    ul {
+      margin-left: 0px;
+      padding-left: 0px;
     }
-    @media (min-width: $breakpoint-phone)and (max-width:$breakpoint-tablet){
-      .details{
-        background-image: none;
-        background: linear-gradient(
-        to bottom,
-        rgba(48, 73, 210, 0.9) 0%, rgba(11, 11, 154, 0.3) 30%, rgba(103, 145, 245, 0.808) 100%);
-      ;}
-      .luggage,.cost{
-        ul{
-          margin-left: 0px;
-          padding-left:0px;
-        }
-        flex-flow:column;
-        &__label{
-          font-size:18px;
-          width:100%;
-        }
-        &__icon{
-          padding:0px;
-          width:15%;
-          height:15%;
-        }
-      }
-      .options__row{
-        margin-left:30px;
-        text-align: center;
-      }
-      .bag{
-        width:100%;
-        text-align: center;
-                }
-      .block{
-        width:100%;
-        text-align: center;
-
-                }
-    .cost{
-      flex-flow:column;
+    flex-flow: column;
+    &__label {
+      font-size: 18px;
+      width: 100%;
     }
-      .details{
-        &__plane{
-          width:38.5%;
-          margin:5px;
-        }
-      }
-      }
-      @media (max-width:$breakpoint-phone){
-        .details{
-
-          background-image: none;
-          background: linear-gradient(
-          to bottom,
-          rgba(48, 73, 210, 0.9) 0%, rgba(11, 11, 154, 0.3) 30%, rgba(103, 145, 245, 0.808) 100%);
-        ;}
-        .options{
-          &__row{
-            margin-left:10px;
-            text-align: center;
-          }
-          &__label{
-            display:block;
-            font-size:21px;
-            text-align:left;
-          }}
-          .people{
-            justify-content:flex-start;
-          }
-        .luggage,.cost{
-          ul{
-            margin-left: 0px;
-            padding-left:0px;
-          }
-          width:55%;
-          flex-flow:column;
-          &__label{      
-            font-size:16px;
-            width:100%;
-          }
-          &__icon{
-            padding:0px;
-            width:15%;
-            height:15%;
-          }
-        }
-        .bag{
-width:100%;
-        }
-        .details{
-          &__plane{
-            width:63%;
-            margin:3px;
-          }
-        }
-        .row{
-          height:3.3%;
-        }
-        .business{
-          width: 31.5%;
-        }
-        .economy{
-          width:26.5%;
-        }
-        }  
-  
+    &__icon {
+      padding: 0px;
+      width: 15%;
+      height: 15%;
+    }
+  }
+  .options__row {
+    margin-left: 30px;
+    text-align: center;
+  }
+  .bag {
+    width: 100%;
+    text-align: center;
+  }
+  .block {
+    width: 100%;
+    text-align: center;
+  }
+  .cost {
+    flex-flow: column;
+  }
+  .details {
+    &__plane {
+      width: 38.5%;
+      margin: 5px;
+    }
+  }
+}
+@media (max-width: $breakpoint-phone) {
+  .details {
+    background-image: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(175, 181, 165, 0.78) 0%,
+      rgba(11, 11, 154, 0.3) 30%,
+      rgba(189, 196, 212, 0.808) 100%
+    );
+  }
+  .options {
+    &__row {
+      margin-left: 10px;
+      text-align: center;
+    }
+    &__label {
+      display: block;
+      font-size: 21px;
+      text-align: left;
+    }
+  }
+  .people {
+    justify-content: flex-start;
+  }
+  .luggage,
+  .cost {
+    ul {
+      margin-left: 0px;
+      padding-left: 0px;
+    }
+    width: 55%;
+    flex-flow: column;
+    &__label {
+      font-size: 16px;
+      width: 100%;
+    }
+    &__icon {
+      padding: 0px;
+      width: 15%;
+      height: 15%;
+    }
+  }
+  .bag {
+    width: 100%;
+  }
+  .details {
+    &__plane {
+      width: 63%;
+      margin: 3px;
+    }
+  }
+  .row {
+    height: 3.3%;
+  }
+  .business {
+    width: 31.5%;
+  }
+  .economy {
+    width: 26.5%;
+  }
+}

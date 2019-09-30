@@ -1,90 +1,105 @@
 import React from "react";
 import styled from "styled-components";
-import { withRouter,RouteComponentProps } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { checkAdmin } from "../../helpers/authHelper";
 import pic from "./../../static/images/close.svg";
 
 const Container = styled.div`
-position:fixed;
-left:0;
-top:110px;
-font-size:20px;
-  transform:translateX(${props => props.theme.position}%);
+  position: fixed;
+  left: 0;
+  top: 110px;
+  font-size: 20px;
+  transform: translateX(${props => props.theme.position}%);
   transition: transform 0.3s ease-out;
-  z-index:100;
-  height:100vh;
-  width:100%;
-  color:#0c0663;
-  .sidebar{
-  height:100vh;
-    cursor:pointer;
-    margin:0;
-    padding-top:20px;
-    padding-left:10px;
-    list-style-type:none;
-    width:50%;
-    heigth:100%;
-    background-color:#e3e87ae6;    
-    
+  z-index: 100;
+  height: 100vh;
+  width: 100%;
+  color: #0c0663;
+  .sidebar {
+    height: 100vh;
+    cursor: pointer;
+    margin: 0;
+    padding-top: 40px;
+    padding-left: 10px;
+    list-style-type: none;
+    width: 55%;
+    heigth: 100%;
+    background-color: #e3e87ae6;
+    li {
+      margin: 10px;
+    }
   }
-  .open{
-    transform:translateX(0);
+  .open {
+    transform: translateX(0);
   }
 
-  .close-btn{
-    cursor:pointer;
-   position:absolute;
-   height:17px;
-   width:17px;
-   right:18%;
-   top:2%;
+  .close-btn {
+    cursor: pointer;
+    position: absolute;
+    height: 17px;
+    width: 17px;
+    right: 47%;
+    top: 1.5%;
   }
-  .close-btn:before{
+  .close-btn:before {
     transform: rotate(45deg);
-    content: ' ';
-      height: 33px;
-      width: 2px;
-      color:#0c0663;
+    content: " ";
+    height: 33px;
+    width: 2px;
+    color: #0c0663;
   }
-  .close-btn:after{
+  .close-btn:after {
     transform: rotate(-45deg);
-    content: ' ';
-      height: 33px;
-      width: 2px;
-      color:#0c0663;
+    content: " ";
+    height: 33px;
+    width: 2px;
+    color: #0c0663;
   }
 `;
 
-function SideBar(props) { 
-
+function SideBar(props) {
   const role = checkAdmin();
-  const {history, onClick, isOpen}=props;
- const theme={
-   position: isOpen? 0 : -100
- }
+  const { history, onClick, isOpen } = props;
+  const theme = {
+    position: isOpen ? 0 : -100
+  };
 
   return (
-    <Container theme={theme}>   
-      <ul className='sidebar'>
-      <li onClick={ ()=>{onClick();
-      history.push('/')
-    }} >
-        Search Flights</li>
-       <li onClick={()=>{onClick();
-         history.push('/orders')
-        }}>
+    <Container theme={theme}>
+      <ul className="sidebar">
+        <li
+          onClick={() => {
+            onClick();
+            history.push("/");
+          }}
+        >
+          Search Flights
+        </li>
+        <li
+          onClick={() => {
+            onClick();
+            history.push("/orders");
+          }}
+        >
           My flights
         </li>
         {role === "admin" ? (
-         <li onClick={()=>{onClick();
-         history.push('/admin')
-         }}>
+          <li
+            onClick={() => {
+              onClick();
+              history.push("/admin");
+            }}
+          >
             Admin Pane
-         </li>
+          </li>
         ) : null}
-           <img src={pic} className="close-btn" onClick={onClick}/>       
-        </ul>   
-      
+        <img
+          alt="close-tab-btn"
+          src={pic}
+          className="close-btn"
+          onClick={onClick}
+        />
+      </ul>
     </Container>
   );
 }

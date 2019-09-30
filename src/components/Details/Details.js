@@ -17,6 +17,7 @@ const Details = props => {
   socket.on("seats:found", data => {
     data.seats.map(seat => {
       dispatch({ type: "setFrozen", payload: seat.seat });
+      return null;
     });
   });
 
@@ -73,18 +74,20 @@ const Details = props => {
   const large = 25;
   const { history, match } = props;
   const token = getToken();
-  const values = { ...match.params };
 
   const businessSeats = state.seats.filter(
     seat => seat.seatClass === "business"
   );
 
   useEffect(() => {
+    const { match } = props;
+    const values = { ...match.params };
     api.get(`/flight/${values.id}`).then(res => {
       dispatch({ type: "setFlight", payload: res.data });
     });
     socket.emit("connected");
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props]);
 
   const mappedSeats = state.seats.map(seat => {
     return (
@@ -100,6 +103,7 @@ const Details = props => {
   });
 
   const onClick = value => {
+    const values = { ...match.params };
     dispatch({ type: "setSeats", payload: value });
     socket.emit(`seat:choose`, {
       token: token,
