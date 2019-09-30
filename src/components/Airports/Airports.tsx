@@ -26,7 +26,7 @@ const Container = styled.div`
       color: grey;
     }}
   .form {
-   margin:0 auto;
+   margin:20px auto;
     display:flex
     flex-direction:column;
     align-items:center;

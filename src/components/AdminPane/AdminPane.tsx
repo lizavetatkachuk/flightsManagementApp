@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Airports from "./../Airports/Airports";
+import Planes from "./../Planes/Planes";
+import AllFlights from './../AllFlights/AllFlights'
+import "react-tabs/style/react-tabs.scss";
 
 interface AdminProps {
   history: object;
@@ -13,6 +17,15 @@ const Container = styled.div`
   display: flex;
   flex-flow: column wrap;
   margin-top: 20px;
+  .react-tabs{
+    &__tab-list{
+      font-size:23px;
+    }
+    &__tab--selected {
+      background: #e2e91eab;
+      border-radius: 5px;
+  }
+  }
   .admin-pane {
     width: 13%;
     margin: 10px;
@@ -46,18 +59,26 @@ const Container = styled.div`
   }
 `;
 function AdminPane(Props: AdminProps) {
-  return (
+  return(
     <Container>
-      <Link to="/admin/airports" className="admin-pane">
-        <span className="admin-pane__element"> Airports</span>
-      </Link>
-      <Link to="/admin/flights" className="admin-pane">
-        <span className="admin-pane__element"> Flights</span>
-      </Link>
-      <Link to="/admin/planes" className="admin-pane">
-        <span className="admin-pane__element"> Planes</span>
-      </Link>
-    </Container>
-  );
+  <Tabs>
+  <TabList style={{}}>
+    <Tab>Airports</Tab>
+    <Tab>Flights</Tab>
+    <Tab>Planes</Tab>
+  </TabList>
+
+  <TabPanel>
+    <Airports></Airports>
+  </TabPanel>
+  <TabPanel>
+   <AllFlights></AllFlights>
+  </TabPanel>
+  <TabPanel>
+   <Planes></Planes>
+  </TabPanel>
+</Tabs>
+</Container>)
+    
 }
 export default AdminPane;

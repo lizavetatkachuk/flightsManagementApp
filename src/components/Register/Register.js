@@ -89,12 +89,12 @@ const Register = props => {
             <Field
               name="name"
               render={({ input, meta }) => (
-                <React.Fragment>
+                <div className='field'>
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
                   </span>
                   <input className="input-field" {...input} type="text" />
-                </React.Fragment>
+                </div>
               )}
             />
             <Button btntype="submit" disabled={submitting || pristine}>

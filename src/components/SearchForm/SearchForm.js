@@ -75,7 +75,7 @@ class SearchForm extends React.Component {
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying From</label>
                       <select className="search-form__select " {...input} placeholder='Choose the airport'>
-                      <option  key="empty-destination" value="" disabled selected hidden>Please, choose the airport</option>
+                      <option  key="empty-destination" value="" disabled selected hidden>Choose the airport</option>
                         {directions}
                       </select>
                       <span className="error">
@@ -96,7 +96,7 @@ class SearchForm extends React.Component {
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying To</label>
                       <select className="search-form__select" {...input} placeholder='Choose the airport'>                      
-                        <option  key="empty-destination" value="" disabled selected hidden>Please, choose the airport</option>
+                        <option  key="empty-destination" value="" disabled selected hidden>Choose the airport</option>
                         {directions}
                       </select>
                       <span className="error">
@@ -179,7 +179,7 @@ class SearchForm extends React.Component {
               btnclass="search-flights-btn"
               disabled={submitting || pristine}
             >
-              Search Flights
+              Search
             </Button>
           </form>
         )}

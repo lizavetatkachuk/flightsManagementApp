@@ -32,14 +32,14 @@ const Container = styled.div`
     }
   }
   .list {
-    margin: 0 auto;
+    margin: 20px auto;
     width: 37%;
   }
   .add {
     text-align: center;
     font-size: 25px;
     background-color: #e0e417b3;
-    margin: 25px 25px 10px 0;
+    margin: 85px 25px 10px 0;
     font-size: 25px;
     background-color: #e0e417b3;
     color: #0c0663;

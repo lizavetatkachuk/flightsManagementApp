@@ -79,6 +79,7 @@
   width: 32%;
 }
 .radio-container {
+  margin-left:0px;
   display: block;
   position: relative;
   &__radio {
@@ -136,7 +137,7 @@
       background-color: rgba(#f7f3f3, 0.75);
       border: none;
       border-radius: 5px;
-      padding: 5px;
+      padding-left: 5px;
     }
   }
 }
@@ -160,7 +161,7 @@
 }
 @media(max-width:$breakpoint-small-screen) and (min-width:$breakpoint-tablet){
   .search-form{
-    min-height: 50vh;
+    min-height: 55vh;
     width:auto;
     margin:8%;
   }

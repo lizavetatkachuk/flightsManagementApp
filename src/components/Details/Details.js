@@ -21,7 +21,6 @@ const Details = props => {
   });
 
   socket.on('seat:frozen', data=>{
-    console.log(data);
     dispatch({ type: "setFrozen", payload: data.seat });    
   })
 
@@ -197,7 +196,8 @@ const Details = props => {
           <p className="options__label">
             Total cost is {cost + state.luggage + state.donation}
           </p>
-          <div>
+          
+          <div className='block'>
             <input
               type="checkbox"
               id="scales"
@@ -207,12 +207,11 @@ const Details = props => {
                 dispatch({ type: "setDonation" });
               }}
             />
+
             <label className="cost__label">
               Donate 1$ to reduce your carbon footprint
             </label>
-            <div>
-              <p className="cost__label">Luggage: {state.luggage} $</p>
-            </div>
+              <p className="cost__label">Luggage: {state.luggage} $</p>           
           </div>
           <ul className="cost__label">You have chosen: {mappedSeats}</ul>
           <Button
