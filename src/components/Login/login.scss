@@ -35,7 +35,7 @@
   .error {
     width: 100%;
     left: 0%;
-    font-size: 19px;
+    font-size: $tablet-small;
     color: $red-color;
     position: absolute;
     padding-left: 6px;
@@ -43,7 +43,7 @@
     &--long {
       width: 100%;
       left: 0%;
-      font-size: 16px;
+      font-size: $phone-small;
       color: $red-color;
       position: absolute;
       padding-left: 6px;
@@ -54,7 +54,7 @@
     left: 35%;
     top: -12px;
     position: absolute;
-    font-size: 19px;
+    font-size: $tablet-small;
     color: $red-color;
   }
 }
@@ -68,7 +68,7 @@
 }
 
 .input-field {
-  font-size: 16px;
+  font-size: $se-medium;
   width: 75%;
   height: 20px;
   border-radius: 5px;
@@ -79,7 +79,7 @@
 
 .form-label {
   align-self: center;
-  font-size: 22px;
+  font-size: $tablet-medium;
   margin-top: 8px;
 }
 @media (max-width: $breakpoint-small-screen) and (min-width: $breakpoint-tablet) {
@@ -90,9 +90,9 @@
   }
   .error,
   .server-error {
-    font-size: 18px;
+    font-size: $phone-small;
     &--long {
-      font-size: 16px;
+      font-size: $se-medium;
     }
   }
   .input-field,
@@ -109,9 +109,9 @@
   }
   .error,
   .server-error {
-    font-size: 17px;
+    font-size: $phone-small;
     &--long {
-      font-size: 16px;
+      font-size: $se-medium;
     }
   }
   .input-field,
@@ -129,15 +129,15 @@
     padding: 15px;
     .error,
     .server-error {
-      font-size: 16px;
+      font-size: $se-medium;
       &--long {
-        font-size: 16px;
+        font-size: $se-medium;
       }
     }
   }
   .form-label {
     margin-left: 12px;
-    font-size: 18px;
+    font-size: $phone-small;
   }
   .field {
     height: 60px;

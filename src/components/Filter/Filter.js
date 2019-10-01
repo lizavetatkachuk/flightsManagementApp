@@ -10,7 +10,7 @@ const Filter = props => {
   const onSubmit = values => {
     console.log(`Form values: ${JSON.stringify(values, null, 4)}`);
   };
-  
+
   return (
     <Form
       onSubmit={onSubmit}
@@ -26,7 +26,7 @@ const Filter = props => {
             type="radio"
             value={value1}
             render={({ input, meta }) => (
-              <div className="input-container">
+              <div className="filter-container">
                 <label className="filter-pane__element radio-container">
                   {value1}
                   <input
@@ -45,7 +45,7 @@ const Filter = props => {
             type="radio"
             value={value2}
             render={({ input, meta }) => (
-              <div className="input-container">
+              <div className="filter-container">
                 <label className="filter-pane__element radio-container">
                   {value2}
                   <input

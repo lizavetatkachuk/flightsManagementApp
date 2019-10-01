@@ -51,10 +51,49 @@ const Container = styled.div`
     font-size: 23px;
   }
   @media (max-width: 1200px) and (min-width: 768px) {
+    .rt-resizable-header-content {
+      padding-left: 10px;
+      text-align: left;
+      font-size: 19px;
+    }
+    .ReactTable {
+      .rt-td {
+        padding: 15px 10px;
+        font-size: 18px;
+      }
+    }
   }
   @media (max-width: 768px) and (min-width: 465px) {
+    .rt-resizable-header-content {
+      padding-left: 10px;
+      text-align: left;
+      font-size: 16px;
+    }
+    .ReactTable {
+      margin: 5px;
+      .rt-td {
+        padding: 10px 5px;
+        font-size: 15px;
+      }
+      .-pagination {
+        font-size: 15px;
+        }
+      }
+    }
   }
   @media (max-width: 465px) {
+    .rt-resizable-header-content {
+      padding-left: 10px;
+      text-align: left;
+      font-size: 16px;
+    }
+    .ReactTable {
+      margin: 5px;
+      .rt-td {
+        padding: 10px 5px;
+        font-size: 15px;
+      }
+    }
   }
 `;
 const AllFlights = () => {

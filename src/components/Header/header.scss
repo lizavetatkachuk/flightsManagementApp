@@ -2,137 +2,144 @@
 .header {
   height: 70px;
   display: flex;
-  flex-direction: row ;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   text-decoration: none;
   background: linear-gradient(180deg, #232079 0%, #7881a5 69%, #95a6b1 100%);
-  z-index:200;
+  z-index: 200;
 
   &__title {
-  color: $font-color;
-    font-style: italic;
+    color: $font-color;
     position: absolute;
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
     width: 30%;
-    font-size: 50px;
+    font-size: $desktop-large;
     text-decoration: none;
     margin-top: 0;
   }
 }
-.mobile{  
-  &__menu, &__login{
+.mobile {
+  &__menu,
+  &__login {
     color: $font-color;
-    cursor:pointer;
-  display:none;  }
-  &__login{
-  width:38px;
-  height:38px; }
-  &__menu{
-    margin-left:10px;
-    width:35px;
-    height:35px;
+    cursor: pointer;
+    display: none;
   }
- 
+  &__login {
+    width: 38px;
+    height: 38px;
+  }
+  &__menu {
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+  }
 }
 .navigation {
-  display:flex;
-  width:25%;
+  display: flex;
+  width: 25%;
   &__btn {
-  color: $font-color;
+    color: $font-color;
     cursor: pointer;
     background-color: transparent;
     text-decoration: none;
     border: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
+    font-size: $desktop-medium;
     margin: 15px;
     outline: none;
     &--selected {
       color: $font-color;
-      text-decoration:underline;
+      border-bottom: 2px solid $font-color;
     }
   }
 }
 .selected {
   color: $font-color;
   border-bottom: 2px solid $font-color;
-} 
- @media (min-width: $breakpoint-tablet)and (max-width:$breakpoint-small-screen){
+}
+
+@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-small-screen) {
   .navigation {
-    width:13%;
-  &__btn {   
-    font-size: 23px;
-    margin-right: 18px;
-    margin-left:2px;
+    width: 13%;
+    &__btn {
+      font-size: $tablet-medium;
+      margin-right: 18px;
+      margin-left: 2px;
     }
-}
-.header{
-  padding-left:2px;
-  &__title{
-    left: 50%;
-    transform: translateX(-40%);
-    width:20%;
-    font-size:29px;
+  }
+  .header {
+    padding-left: 2px;
+    &__title {
+      left: 50%;
+      transform: translateX(-40%);
+      width: 20%;
+      font-size: $tablet-large;
+    }
   }
 }
- }
-@media(max-width:$breakpoint-tablet) and (min-width:$breakpoint-phone){
+@media (max-width: $breakpoint-tablet) and (min-width: $breakpoint-phone) {
   .navigation {
-    width:13%;
-  &__btn {   
-    font-size: 19px;
-    margin-right: 19px;
-    margin-left:0px;
+    width: 13%;
+    &__btn {
+      font-size: $tablet-small;
+      margin-right: 19px;
+      margin-left: 0px;
     }
+  }
+  .header {
+    padding-left: 2px;
+    &__title {
+      left: 50%;
+      transform: translateX(-40%);
+      width: 20%;
+      font-size: $tablet-medium;
+    }
+  }
 }
-.header{
-  padding-left:2px;
-  &__title{
-    left: 50%;
-    transform: translateX(-40%);
-    width:20%;
-    font-size:28px;
-  }
-}}
-@media(max-width:$breakpoint-phone) {
-  .mobile {  
-    &__menu,&__login{   
-    font-size:20px;
-    display:inline-block;
+@media (max-width: $breakpoint-phone) {
+  .mobile {
+    &__menu,
+    &__login {
+      font-size: $phone-medium;
+      display: inline-block;
     }
   }
-  .navigation{ 
-    &__btn{
-    display:none;
-    font-size:20px;
+  .navigation {
+    &__btn {
+      display: none;
+      font-size: $phone-medium;
     }
   }
-  
-.header{
-  padding-left:2px;
-  &__title{
-    font-size:26px; 
-  }
-}}
-@media(max-width:$breakpoint-se) {
-  .mobile {  
-    &__menu,&__login{   
-    font-size:20px;
-    display:inline-block;
+
+  .header {
+    padding-left: 2px;
+    &__title {
+      font-size: $phone-large;
     }
   }
-  .navigation{ 
-    &__btn{
-    display:none;
-    font-size:20px;
+}
+@media (max-width: $breakpoint-se) {
+  .mobile {
+    &__menu,
+    &__login {
+      font-size: $se-large;
+      display: inline-block;
     }
-.header{
-  padding-left:2px;
-  &__title{
-    font-size:25px; 
   }
-}}}
+  .navigation {
+    &__btn {
+      display: none;
+      font-size: $se-large;
+    }
+    .header {
+      padding-left: 2px;
+      &__title {
+        font-size: $phone-large;
+      }
+    }
+  }
+}

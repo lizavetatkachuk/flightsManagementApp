@@ -23,8 +23,7 @@
   }
   &__label {
     color: $base-color;
-    font-size: 25px;
-    font-style: italic;
+    font-size: $desktop-small;
     font-weight: bold;
     text-align: center;
     width: 100%;
@@ -45,8 +44,7 @@
   }
   &__label {
     color: $base-color;
-    font-size: 25px;
-    font-style: italic;
+    font-size: $desktop-small;
     font-weight: bold;
     text-align: center;
     width: 100%;
@@ -65,8 +63,6 @@
   }
   &__label {
     color: $base-color;
-    font-size: 18px;
-    font-weight: bold;
   }
 }
 .people {
@@ -93,7 +89,7 @@
   .luggage,
   .cost {
     &__label {
-      font-size: 20px;
+      font-size: $tablet-medium;
     }
   }
 }
@@ -101,11 +97,17 @@
   .luggage,
   .cost {
     &__label {
-      font-size: 22px;
+      font-size: $tablet-small;
     }
     &__icon {
       padding: 18px;
       width: 32%;
+    }
+  }
+  .details,
+  .options {
+    &__label {
+      font-size: $tablet-medium;
     }
   }
   .details {
@@ -123,6 +125,13 @@
       rgba(11, 11, 154, 0.3) 30%,
       rgba(189, 196, 212, 0.808) 100%
     );
+  }
+
+  .details,
+  .options {
+    &__label {
+      font-size: $tablet-small;
+    }
   }
   .luggage,
   .cost {
@@ -173,6 +182,13 @@
       rgba(189, 196, 212, 0.808) 100%
     );
   }
+
+  .details,
+  .options {
+    &__label {
+      font-size: $phone-small;
+    }
+  }
   .options {
     &__row {
       margin-left: 10px;
@@ -180,7 +196,6 @@
     }
     &__label {
       display: block;
-      font-size: 21px;
       text-align: left;
     }
   }
@@ -196,13 +211,13 @@
     width: 55%;
     flex-flow: column;
     &__label {
-      font-size: 16px;
+      font-size: $se-medium;
       width: 100%;
     }
     &__icon {
       padding: 0px;
-      width: 15%;
-      height: 15%;
+      width: 35%;
+      height: 35%;
     }
   }
   .bag {
