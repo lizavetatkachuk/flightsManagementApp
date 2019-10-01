@@ -33,7 +33,8 @@ const Details = props => {
     seats: [],
     seatClass: "",
     flight: {},
-    frozen: []
+    frozen: [],
+    finished: false
   };
 
   const reducer = (state, action) => {
@@ -48,6 +49,8 @@ const Details = props => {
         return { ...state, people: state.people + 1 };
       case "decrement":
         return { ...state, people: state.people - 1 };
+      case "setFinished":
+        return { ...state, finished: action.payload };
       case "setFrozen": {
         const newFrozen = [...state.frozen, action.payload];
         return { ...state, frozen: newFrozen };
@@ -89,9 +92,10 @@ const Details = props => {
     socket.emit("connected");
     setTimeout(() => {
       socket.emit("seat:outdated", { token: token, flight: values.id });
-    }, 6000);
+      dispatch({ type: "setFinished", payload: true });
+    }, 600000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props]);
+  }, [props, state.finished]);
 
   const mappedSeats = state.seats.map(seat => {
     return (
