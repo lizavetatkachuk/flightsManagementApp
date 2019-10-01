@@ -84,18 +84,29 @@ const Details = props => {
   );
 
   useEffect(() => {
-    const { match } = props;
     const values = { ...match.params };
     api.get(`/flight/${values.id}`).then(res => {
       dispatch({ type: "setFlight", payload: res.data });
     });
+
+    let countDown = setInterval(() => {
+      dispatch({ type: "setTime" });
+      console.log(state.timeLeft);
+    }, 1000);
+
     socket.emit("connected");
-    setTimeout(() => {
+
+    let sessionTimer = setTimeout(() => {
       socket.emit("seat:outdated", { token: token, flight: values.id });
       dispatch({ type: "setFinished", payload: true });
     }, 600000);
+
+    return () => {
+      clearTimeout(sessionTimer);
+      clearInterval(countDown);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props, state.finished]);
+  }, [state.timeLeft]);
 
   const mappedSeats = state.seats.map(seat => {
     return (
