@@ -147,7 +147,14 @@ const AllFlights = () => {
 
   return (
     <Container>
-      <ReactTable data={flights} columns={columns} defaultPageSize={10} />
+      <ReactTable
+        getHeaderProps={props => {
+          console.log(props);
+        }}
+        data={flights}
+        columns={columns}
+        defaultPageSize={10}
+      />
     </Container>
   );
 };
