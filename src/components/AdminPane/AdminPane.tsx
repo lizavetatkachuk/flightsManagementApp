@@ -28,37 +28,20 @@ const Container = styled.div`
       border-radius: 5px;
     }
   }
-  .admin-pane {
-    width: 13%;
-    margin: 10px;
-    background-color: #e0e417b3;
-    border-radius: 8px;
-    height: auto;
-    padding: 12px;
-    text-align: center;
-    text-decoration: none;
-    &__element {
-      font-size: 30px;
-      color: #0c0663;
-    }
-    :hover {
-      box-shadow: 7px 7px 7px grey;
-    }
-  }
   @media (max-width: 768px) and (min-width: 465px) {
-    .admin-pane {
-      &__element {
-        font-size: 25px;
+    .react-tabs {
+      &__tab-list {
+        font-size: 20px;
+        margin: 0 0 25px;
       }
-      width: 28%;
     }
   }
   @media (max-width: 465px) {
-    .admin-pane {
-      &__element {
-        font-size: 23px;
+    .react-tabs {
+      &__tab-list {
+        font-size: 18px;
+        margin: 0 0 25px;
       }
-      width: 40%;
     }
   }
 `;

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
-import { withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { requestFlights } from "./../../redux/actions/flights";
 import Button from "./../Shared/Button/Button";
 import { Picker } from "./../Picker/Picker";
@@ -74,8 +74,19 @@ class SearchForm extends React.Component {
                   <React.Fragment>
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying From</label>
-                      <select className="search-form__select " {...input} placeholder='Choose the airport'>
-                      <option  key="empty-destination" value="" disabled selected hidden>Choose the airport</option>
+                      <select
+                        className="search-form__select "
+                        {...input}
+                        placeholder="Choose the airport"
+                      >
+                        <option
+                          key="empty-destination"
+                          value=""
+                          disabled
+                          hidden
+                        >
+                          Choose the airport
+                        </option>
                         {directions}
                       </select>
                       <span className="error">
@@ -95,8 +106,15 @@ class SearchForm extends React.Component {
                   <React.Fragment>
                     <div className="input-container--vertical">
                       <label className="search-form__label">Flying To</label>
-                      <select className="search-form__select" {...input} placeholder='Choose the airport'>                      
-                        <option  key="empty-destination" value="" disabled selected hidden>Choose the airport</option>
+                      <select className="search-form__select" {...input}>
+                        <option
+                          key="empty-destination"
+                          value=""
+                          disabled
+                          hidden
+                        >
+                          Choose the airport
+                        </option>
                         {directions}
                       </select>
                       <span className="error">
@@ -169,7 +187,9 @@ class SearchForm extends React.Component {
                 name="back"
               />
               {error ? (
-                <p className="server-error">There are no flights for these dates</p>
+                <p className="server-error">
+                  There are no flights for these dates
+                </p>
               ) : (
                 <p className="server-error"></p>
               )}

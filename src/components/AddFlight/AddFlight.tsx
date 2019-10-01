@@ -49,6 +49,13 @@ const Container = styled.div`
         margin-top: 20px;
         margin-left: 10px;
     }
+
+  .search-form__label{
+    width:auto;
+    margin-top: 20px;
+    margin-left:10px;
+     font-size: 20px;
+  }
   }
 
 .picker {
@@ -110,11 +117,7 @@ const Container = styled.div`
     position:initial;
     font-size:18px;
     height:20px;
-  }
-  .search-form__label{
-    margin-top: 20px;
-    margin-left:10px;
-     font-size: 20px;
+    color:#c11c1cd4;
   }
   .picker{
     display:flex;
@@ -129,12 +132,14 @@ const Container = styled.div`
     color: #0c0663;
   }
   @media(max-width:1200px) and (min-width:768px){
+    .form{
    .search-form__label{
-     margin:13px;
+     margin:17px;
      width:auto;
-   }
+   }}
    .add{
      font-size:18x;
+     width:30%;
    }
   }
   @media(max-width:768px) and (min-width:465px){

@@ -89,11 +89,6 @@ const Details = props => {
       dispatch({ type: "setFlight", payload: res.data });
     });
 
-    let countDown = setInterval(() => {
-      dispatch({ type: "setTime" });
-      console.log(state.timeLeft);
-    }, 1000);
-
     socket.emit("connected");
 
     let sessionTimer = setTimeout(() => {
@@ -103,7 +98,6 @@ const Details = props => {
 
     return () => {
       clearTimeout(sessionTimer);
-      clearInterval(countDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.timeLeft]);

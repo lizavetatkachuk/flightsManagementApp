@@ -3,7 +3,7 @@
   color: $base-color;
   cursor: pointer;
   &__item {
-    font-size: 25px;
+    font-size: $desktop-small;
     margin-left: 5%;
     margin-right: 15%;
     margin-bottom: 20px;
@@ -12,10 +12,13 @@
     height: auto;
     width: auto;
     padding: 12px;
-
+    cursor: pointer;
+    &:hover {
+      box-shadow: 7px 7px 7px rgb(79, 80, 37);
+    }
     &--selected {
       background-color: rgba($red-color, 0.7);
-      font-size: 25px;
+      font-size: $desktop-small;
       margin-left: 5%;
       margin-right: 15%;
       margin-bottom: 20px;
@@ -26,7 +29,7 @@
   }
 }
 .server-msg {
-  font-size: 25px;
+  font-size: $desktop-small;
   color: $red-color;
   text-align: center;
   font-weight: bold;
@@ -41,10 +44,10 @@
   }
 }
 .list {
-  padding:0px;
+  padding: 0px;
   list-style-type: none;
   &__label {
-    font-size: 25px;
+    font-size: $desktop-small;
     margin-left: 5%;
   }
 }
@@ -54,39 +57,42 @@
   align-self: flex-start;
   border-radius: 6px;
   background-color: rgba($font-color, 0.8);
-  font-size: 22px;
+  font-size: $tablet-medium;
   color: $base-color;
   padding: 5px;
   margin-left: 60px;
-  :disabled {
+  &:disabled {
     background-color: grey;
   }
+  &:hover {
+    box-shadow: 7px 7px 7px rgb(36, 34, 34);
+  }
 }
-@media(max-width:$breakpoint-tablet){
-  .details-btn{
-    font-size:20px;
+@media (max-width: $breakpoint-tablet) {
+  .details-btn {
+    font-size: $tablet-small;
   }
-  .flight__item{
-    font-size:21px;
+  .flight__item {
+    font-size: $tablet-small;
   }
-  .list{
-    margin-left:3px;
-    &__label{
-      font-size:23px;
+  .list {
+    margin-left: 3px;
+    &__label {
+      font-size: $tablet-medium;
     }
   }
 }
-@media(max-width:$breakpoint-phone){
-  .details-btn{
-    font-size:18px;
+@media (max-width: $breakpoint-phone) {
+  .details-btn {
+    font-size: $phone-small;
   }
-  .flight__item{
-    font-size:20px;
+  .flight__item {
+    font-size: $phone-small;
   }
-  .list{
-    margin-left:2px;
-    &__label{
-      font-size:22px;
+  .list {
+    margin-left: 2px;
+    &__label {
+      font-size: $phone-medium;
     }
   }
 }

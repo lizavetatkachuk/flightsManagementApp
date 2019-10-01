@@ -112,7 +112,7 @@ const Container = styled.div`
     }
     .list {    
       &__plane{
-        width:30%;
+        width:35%;
         font-size: 22px;
         margin: 6px;
       }
@@ -131,8 +131,8 @@ const Container = styled.div`
     }
     .list {    
       &__plane{
-        width:32%;
-        font-size: 21px;
+        width:37%;
+        font-size: 18px;
         margin: 5px;
       }
     }
@@ -156,7 +156,7 @@ const Container = styled.div`
     .list {    
       &__plane{
         width:32%;
-        font-size: 21px;
+        font-size: 15px;
         margin: 5px;
       }
     }
@@ -183,9 +183,9 @@ function Planes() {
         ...values
       })
       .then(res => {
-        api.get("/admin/planes").then(
-          res => {
-            setPlanes(res.data)});
+        api.get("/admin/planes").then(res => {
+          setPlanes(res.data);
+        });
       })
       .catch(err => {
         setError(err);

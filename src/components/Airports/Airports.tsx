@@ -25,6 +25,9 @@ const Container = styled.div`
     :disabled {
       color: grey;
     }}
+    .add{
+      font-size:25px;
+    }
   .form {
    margin:20px auto;
     display:flex
@@ -60,7 +63,7 @@ const Container = styled.div`
     flex-flow:row wrap;
     justify-content:center;
     &__airport {
-      width:10%;
+      width:12%;
       display: flex;
       flex-direction: row ;
       justify-content: space-between;
@@ -76,7 +79,7 @@ const Container = styled.div`
   .error {
     color: red;
     height: 21px;
-    font-size: 19px;
+    font-size: 20px;
     position: initial;
     margin-block-end: 0em;
     margin-block-start: 0em;
@@ -84,55 +87,64 @@ const Container = styled.div`
   @media(max-width:1200px) and (min-width:768px){
     .airport-list {    
       &__airport {
-        width:14%;
-        font-size: 24px;
+        width:17%;
+        font-size: 25px;
         margin: 8px;
       }
+    }
+    .delete{
+      margin-right:2px;
+      margin-left:3px;
     }
   }
-  @media(max-width:768px) and (min-width:465px){
+  @media(max-width:768px) and (min-width:560px){
     .airport-list {    
       &__airport {
-        width:16%;
-        font-size: 24px;
+        width:27%;
+        font-size: 25px;
         margin: 8px;
       }
     }
+
+    .input-field{
+    width:80%;
+          }
     .delete{
       width:23%;
       font-size:20px;
     }
     .add{
-      font-size:23px;
+      font-size:25px;
     }
     .form{     
-      width:56%;
+      width:54%;
     }
   }
   @media(max-width:560px) {
     .form{
       margin-top:10px;
-      width:70%;
+      width:60%;
     }
     .input-field{
 margin:0px;
 font-size:18px;
+width:100%;
     }
     .airport-list {
       &__airport {
-        width:27%;
-        font-size: 19px;
+        width:29%;
+        font-size: 18px;
         margin: 3px;
       }
     }
     .delete{
       width:20%;
       font-size:20px;
-      margin-left:10px;
+      margin-left:7px;
       margin-right:0px;
     }
     .add{
-      font-size:18px;
+      font-size:20px;
     }
   }
   @media(max-width:330px) {
@@ -141,13 +153,14 @@ font-size:18px;
       width:70%;
     }
     .input-field{
+      width:100%;
 margin:0px;
 font-size:15px;
     }
     .airport-list {
       &__airport {
-        width:30%;
-        font-size: 17px;
+        width:32%;
+        font-size: 18px;
         margin: 7px;
       }
     }
@@ -159,7 +172,7 @@ font-size:15px;
       margin-right:0px;
     }
     .add{
-      font-size:16px;
+      font-size:18px;
     }
   }
 `;
@@ -207,7 +220,7 @@ function Airports() {
     : null;
 
   return (
-    <Container>    
+    <Container>
       <Form
         onSubmit={handleAddition}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
@@ -248,7 +261,6 @@ function Airports() {
       />
       <p className="error">{error ? "The airport already exists" : " "}</p>
       <div className="airport-list">{mappedAirports}</div>
-      
     </Container>
   );
 }
