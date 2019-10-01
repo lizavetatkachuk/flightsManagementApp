@@ -15,10 +15,11 @@ const Details = props => {
   const socket = socketIOClient("http://localhost:8000");
 
   socket.on("seats:found", data => {
-    data.seats.map(seat => {
-      dispatch({ type: "setFrozen", payload: seat.seat });
-      return null;
-    });
+    data.seats.length > 0 &&
+      data.seats.map(seat => {
+        dispatch({ type: "setFrozen", payload: seat.seat });
+        return null;
+      });
   });
 
   socket.on("seat:frozen", data => {
@@ -86,6 +87,9 @@ const Details = props => {
       dispatch({ type: "setFlight", payload: res.data });
     });
     socket.emit("connected");
+    setTimeout(() => {
+      socket.emit("seat:outdated", { token: token, flight: values.id });
+    }, 6000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
