@@ -35,7 +35,8 @@ const App = () => {
             exact
             component={Flight}
           />
-          <Route
+          <PrivateRoute
+            userRole="client"
             path="/flights/:from/:to/:return/:there/:back/:id"
             component={Details}
           />
