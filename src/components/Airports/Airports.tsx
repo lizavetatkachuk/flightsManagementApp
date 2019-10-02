@@ -30,6 +30,7 @@ const Container = styled.div`
     }
   .form {
    margin:20px auto;
+   margin-bottom:40px;
     display:flex
     flex-direction:column;
     align-items:center;
@@ -84,8 +85,10 @@ const Container = styled.div`
   .error {
     color: red;
     height: 21px;
-    font-size: 20px;
-    position: initial;
+    font-size: 18px;
+    position: absolute;
+    left:45%;
+    top:37%;
     margin-block-end: 0em;
     margin-block-start: 0em;
   }
@@ -97,6 +100,9 @@ const Container = styled.div`
         margin: 8px;
         height:98px;
       }
+    }
+    .error{
+      left:40%;
     }
     .delete{
       margin-right:2px;
@@ -113,10 +119,16 @@ const Container = styled.div`
         margin: 8px;
       }
     }
+    .error{
+      left:35%
+    }
     .btn-container{
       flex-flow:column wrap;
     }
-
+.error{
+  top:38%;
+  left:31%;
+}
     .input-field{
     width:80%;
           }   
@@ -125,6 +137,9 @@ const Container = styled.div`
     }
     .form{     
       width:54%;
+    }
+    .add,.edit,.delete{
+      font-size:20px;
     }
   }
   @media(max-width:560px) {
@@ -136,6 +151,10 @@ const Container = styled.div`
 margin:0px;
 font-size:18px;
 width:100%;
+    }
+    .error{
+      top:32%;
+      left:30%;
     }
     .btn-container{
       flex-flow:column wrap;
@@ -165,6 +184,10 @@ font-size:15px;
     }
     .btn-container{
       flex-flow:column wrap;
+    }
+    .error{
+      top:35%;
+      left:30%;
     }
     .airport-list {
       margin:8px;
@@ -198,7 +221,10 @@ function Airports() {
             ...values
           })
           .then(res => {
-            api.get("/admin/airports").then(res => setAirports(res.data));
+            api.get("/admin/airports").then(res => {
+              setAirports(res.data);
+              setEdited(null);
+            });
           })
           .catch(err => {
             setError(err);
@@ -247,6 +273,7 @@ function Airports() {
     <Container>
       <Form
         onSubmit={handleAddition}
+        initialValues={edited}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form className="form" onSubmit={handleSubmit}>
             <Field
@@ -257,7 +284,6 @@ function Airports() {
                     className="input-field"
                     placeholder="Enter the airport name"
                     {...input}
-                    value={edited ? edited.name : ""}
                   />
                 </React.Fragment>
               )}
@@ -270,7 +296,6 @@ function Airports() {
                     className="input-field"
                     placeholder="Enter the airport code"
                     {...input}
-                    value={edited ? edited.code : ""}
                   />
                 </React.Fragment>
               )}
@@ -280,7 +305,7 @@ function Airports() {
               className="add"
               disabled={submitting || pristine}
             >
-              Add the airport
+              {edited ? "Edit" : "Add"} the airport
             </button>
           </form>
         )}

@@ -30,6 +30,9 @@ interface IError {
   price?: string;
   there?: string;
 }
+interface IProps {
+  flight?: IFlight;
+}
 
 const Container = styled.div`
   display: flex;
@@ -162,9 +165,11 @@ const Container = styled.div`
   }
 `;
 
-function AddFlight({ history }: RouteComponentProps) {
+function AddFlight({ history }: RouteComponentProps, flight: IFlight) {
   const [airports, setAirports] = useState([]);
+  const [edited, setEdited] = useState(0);
   const [planes, setPlanes] = useState([]);
+  console.log(flight);
 
   useEffect(() => {
     api.get("/admin/airports").then(res => setAirports(res.data));
