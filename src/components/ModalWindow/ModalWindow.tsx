@@ -32,6 +32,7 @@ const ModalWindow = (Props: IModal) => {
   return (
     <Container>
       <ReactModal
+        ariaHideApp={false}
         shouldCloseOnOverlayClick={true}
         isOpen={Props.isOpen}
         style={{

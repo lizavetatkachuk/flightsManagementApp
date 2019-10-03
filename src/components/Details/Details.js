@@ -164,7 +164,7 @@ const Details = props => {
         {state.flight.plane && (
           <Plane
             frozen={state.frozen}
-            plane={state.flight.plane}
+            plane={state.flight.plane.key}
             onClick={onClick}
             people={state.people}
             booked={state.flight.booked}

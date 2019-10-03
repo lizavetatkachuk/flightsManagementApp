@@ -27,7 +27,6 @@ const Order = () => {
   };
 
   const filteredOrders = orders.filter(order => {
-    console.log(order);
     return moment(order.flight.time).isAfter(now);
   });
 

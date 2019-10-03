@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
+import SearchBar from "./../SearchBar/SearchBar";
 import { api } from "./../../helpers/apiHeler";
-import { object } from "prop-types";
 
 interface IAirport {
   name: string;
@@ -245,7 +245,9 @@ function Airports() {
   };
 
   useEffect(() => {
-    api.get("/admin/airports").then(res => setAirports(res.data));
+    api.get("/admin/airports").then(res => {
+      setAirports(res.data);
+    });
   }, []);
 
   const mappedAirports = airports
@@ -271,6 +273,10 @@ function Airports() {
 
   return (
     <Container>
+      <SearchBar
+        filter={(x: Array<IAirport>) => setAirports(x)}
+        items={airports}
+      />
       <Form
         onSubmit={handleAddition}
         initialValues={edited}

@@ -5,7 +5,7 @@ import ModalWindow from "./../ModalWindow/ModalWindow";
 import { api } from "./../../helpers/apiHeler";
 import "react-table/react-table.css";
 
-interface IFlight {
+interface IFight {
   _id: string;
   booked: Array<string>;
   from: string;
@@ -111,9 +111,14 @@ const AllFlights = () => {
     });
   };
 
-  const handleEdit = (flight: object) => {
+  const handleEdit = (flight: any) => {
     setOpen(true);
-    setEdited(flight);
+    setEdited({
+      ...flight,
+      from: flight.from._id,
+      to: flight.to._id,
+      plane: flight.plane._id
+    });
   };
 
   useEffect(() => {

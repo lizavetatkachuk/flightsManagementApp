@@ -22,6 +22,7 @@ interface IAirport {
 interface IPlane {
   key: string;
   name: string;
+  _id: string;
 }
 interface IError {
   to?: string;
@@ -210,7 +211,7 @@ function AddFlight(Props: IProps) {
 
   const planeTypes = planes ? (
     planes.map((plane: IPlane) => (
-      <option key={plane.key} value={plane.key}>
+      <option key={plane.key} value={plane._id}>
         {plane.name}
       </option>
     ))
