@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ReactTable from "react-table";
+import ModalWindow from "./../ModalWindow/ModalWindow";
 import { api } from "./../../helpers/apiHeler";
 import "react-table/react-table.css";
 
@@ -15,13 +16,16 @@ interface IFlight {
 }
 
 const Container = styled.div`
-  .delete {
+  .delete,.edit {
     font-size: 35px;
     background-color: Transparent;
     outline: none;
     border: none;
     cursor: pointer;
     color: #0c0663;
+  }
+  .edit{
+    font-size:20px;
   }
   .ReactTable {
     margin: 20px;
@@ -98,11 +102,18 @@ const Container = styled.div`
 `;
 const AllFlights = () => {
   const [flights, setFlights] = useState([]);
+  const [edited, setEdited] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleDeletion = (id: string) => {
     api.post(`/admin/flights/${id}`).then(res => {
       api.get("/admin/flights").then(res => setFlights(res.data));
     });
+  };
+
+  const handleEdit = (flight: object) => {
+    setOpen(true);
+    setEdited(flight);
   };
 
   useEffect(() => {
@@ -142,19 +153,27 @@ const AllFlights = () => {
           -
         </button>
       )
+    },
+    {
+      Header: "Edit the flight",
+      Cell: ({ row }) => (
+        <button className="edit" onClick={() => handleEdit(row._original)}>
+          Edit
+        </button>
+      )
     }
   ];
 
   return (
     <Container>
-      <ReactTable
-        getHeaderProps={props => {
-          console.log(props);
+      <ModalWindow
+        isOpen={open}
+        data={edited}
+        close={() => {
+          setOpen(false);
         }}
-        data={flights}
-        columns={columns}
-        defaultPageSize={10}
-      />
+      ></ModalWindow>
+      <ReactTable data={flights} columns={columns} defaultPageSize={10} />
     </Container>
   );
 };

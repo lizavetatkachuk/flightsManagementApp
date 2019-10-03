@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
+import { OnChange } from "react-final-form-listeners";
 import { api } from "../../helpers/apiHeler";
 
 interface IPlane {
@@ -11,25 +12,28 @@ interface IPlane {
   maxCargo: number;
 }
 const Container = styled.div`
-  .delete,
-  .add {
-    align-self: center;
-    justify-self: flex-end;
-    margin-left: 20px;
-    margin-right: 15px;
-    font-size: 25px;
-    background-color: Transparent;
-    color: #0c0663;
-    border-radius: 7px;
-    height:50%;
-    width: 20%;
-    outline: none;
-    cursor: pointer;
-    :disabled {
-      color: grey;
-    }}
+.delete,
+.add,.edit  {
+  align-self: center;
+  justify-self: flex-end;
+  margin-left: 10px;
+  font-size: 23px;
+  background-color: Transparent;
+  color: #0c0663;
+  border-radius: 7px;
+  height:50%;
+  width: auto%;
+  outline: none;
+  cursor: pointer;
+  :disabled {
+    color: grey;
+  }}
+  .add{
+    font-size:25px;
+  }
   .form {
     margin:20px auto;
+    margin-bottom:40px;
     display:flex
     flex-direction:column;
     align-items:center;
@@ -53,7 +57,11 @@ const Container = styled.div`
     }
     background-color:#bdbec0;
   }}
-  
+  .btn-container{
+    justify-self:flex-end;
+    display:flex;
+    flex-flow:row wrap ;
+  }
   .list {
     padding-right:10px;
     width:100%;
@@ -63,6 +71,7 @@ const Container = styled.div`
     flex-flow:row wrap;
     justify-content:center;
     &__plane {
+      padding:10px;
       width:20%;
       display: flex;
       flex-direction: row ;
@@ -78,13 +87,18 @@ const Container = styled.div`
   }
   .error {
     color: red;
-    height: 21px;
-    font-size: 19px;
-    position: initial;
+    height: 21px;  
+    font-size: 18px;
+    position: absolute;
+    left:45%;
+    top:57%;
     margin-block-end: 0em;
     margin-block-start: 0em;
   }
   @media(max-width:1200px) and (min-width:768px){
+    .error{
+      left:40%;
+    }
     .form{
       width:67%;
     }
@@ -93,58 +107,74 @@ const Container = styled.div`
     }
     .list {    
       &__plane{
-        width:24%;
-        font-size: 24px;
+        padding:10px;
+        width:30%;
+        font-size: 20px;
         margin: 8px;
       }
+    }
+    .add{
+      font-size:23px;
+    }
+    .edit,.delete{
+      font-size:20px;
     }
   }
   @media(max-width:768px) and (min-width:465px){
     .form{
-      width:80%;
+      width:82%;
     }
     .input-field{
       font-size:18px;
     }
-    .add{
+    .add,.edit,.delete{
       font-size:20px;
-      width:auto;
+    }
+    .error{
+      top:57%;
+      left:35%;
+    }
+    .btn-container{
+      flex-flow:column wrap;
     }
     .list {    
       &__plane{
-        width:35%;
-        font-size: 22px;
+        padding:10px;
+        width:47%;
+        font-size: 20px;
         margin: 6px;
       }
     }
   }
   @media(max-width:465px) {
     .form{
-      width:83%;
+      width:85%;
     }
     .input-field{
       font-size:15px;
     }
-    .add{
-      font-size:15px;
-      width:50%;
+    .btn-container{
+      flex-flow:column wrap;
+    }
+    .error{
+      top:57%;
+      left:30%;
+    }
+    .add,.edit,.delete{
+      font-size:18px;
     }
     .list {    
       &__plane{
-        width:37%;
+        padding:8px;
+        width:57%;
         font-size: 18px;
         margin: 5px;
       }
     }
-.delete{
-  margin:0px;
-  font-size:15px;
-  height:auto;
-}
   }
   @media(max-width:330px) {
     .form{
-      width:95%;
+      width:98%;
     }
     .input-field{
       font-size:15px;
@@ -153,22 +183,32 @@ const Container = styled.div`
       font-size:18px;
       width:50%;
     }
+    .btn-container{
+      flex-flow:column wrap;
+    }
+    .error{
+      top:61%;
+      left:28%;
+    }
     .list {    
       &__plane{
-        width:32%;
-        font-size: 15px;
+        padding:8px;
+        width:75%;
+        font-size: 18px;
         margin: 5px;
       }
     }
-.delete{
-  margin:0px;
-  font-size:15px;
-  height:auto;
-}
+    .add{
+      font-size:20px;
+    }
+    .edit,.delete{
+      font-size:18px;
+    }
   }
 `;
 function Planes() {
   const [planes, setPlanes] = useState([]);
+  const [edited, setEdited] = useState(null);
   const [error, setError] = useState("");
 
   const handleDeletion = (code: string) => {
@@ -178,18 +218,37 @@ function Planes() {
   };
 
   const handleAddition = (values: object) => {
-    api
-      .post("/admin/planes/", {
-        ...values
-      })
-      .then(res => {
-        api.get("/admin/planes").then(res => {
-          setPlanes(res.data);
-        });
-      })
-      .catch(err => {
-        setError(err);
-      });
+    edited
+      ? api
+          .patch("/admin/planes", {
+            ...values
+          })
+          .then(res => {
+            api.get("/admin/planes").then(res => {
+              setPlanes(res.data);
+              setEdited(null);
+            });
+          })
+          .catch(err => {
+            setError(err);
+          })
+      : api
+          .post("/admin/planes/", {
+            ...values
+          })
+          .then(res => {
+            api.get("/admin/planes").then(res => {
+              setPlanes(res.data);
+              setEdited(null);
+            });
+          })
+          .catch(err => {
+            setError(err);
+          });
+  };
+
+  const handleEdit = (plane: object) => {
+    setEdited(plane);
   };
 
   useEffect(() => {
@@ -201,12 +260,17 @@ function Planes() {
         return (
           <div className="list__plane" key={plane.key}>
             <p>{plane.name}</p>
-            <button
-              className="delete"
-              onClick={() => handleDeletion(plane.key)}
-            >
-              -
-            </button>
+            <div className="btn-container">
+              <button
+                className="delete"
+                onClick={() => handleDeletion(plane.key)}
+              >
+                Delete
+              </button>
+              <button className="edit" onClick={() => handleEdit(plane)}>
+                Edit
+              </button>
+            </div>
           </div>
         );
       })
@@ -216,6 +280,7 @@ function Planes() {
     <Container>
       <Form
         onSubmit={handleAddition}
+        initialValues={edited}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form className="form" onSubmit={handleSubmit}>
             <Field
@@ -283,8 +348,18 @@ function Planes() {
               className="add"
               disabled={submitting || pristine}
             >
-              Add the plane
+              {edited ? "Edit" : "Add"} the plane
             </button>
+            <OnChange name="name">
+              {value => {
+                setError(null);
+              }}
+            </OnChange>
+            <OnChange name="code">
+              {value => {
+                setError(null);
+              }}
+            </OnChange>
           </form>
         )}
       />

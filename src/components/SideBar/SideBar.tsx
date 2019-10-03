@@ -41,20 +41,6 @@ const Container = styled.div`
     right: 47%;
     top: 1.5%;
   }
-  .close-btn:before {
-    transform: rotate(45deg);
-    content: " ";
-    height: 33px;
-    width: 2px;
-    color: #0c0663;
-  }
-  .close-btn:after {
-    transform: rotate(-45deg);
-    content: " ";
-    height: 33px;
-    width: 2px;
-    color: #0c0663;
-  }
 `;
 
 function SideBar(props) {
