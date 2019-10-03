@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export class Picker extends React.Component {
   state = { date: new Date() };
+
   handleChange = date => {
     const local = moment(date)
       .local()
@@ -13,6 +14,7 @@ export class Picker extends React.Component {
     this.setState({ date });
     this.props.input.onChange(local);
   };
+
   render() {
     const { touched, error } = this.props.meta;
     const { date } = this.state;

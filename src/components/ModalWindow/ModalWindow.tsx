@@ -2,23 +2,15 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ReactModal from "react-modal";
 import AddFlight from "./../AddFlight/AddFlight";
-import { api } from "./../../helpers/apiHeler";
-
+import pic from "./../../static/images/close.svg";
 const Container = styled.div`
-  .Modal {
+  .close-btn {
+    cursor: pointer;
     position: absolute;
-    top: -20%;
-    background-color: #e0e417b3;
-    height: 300px;
-  }
-
-  .Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #e0e417b3;
+    height: 17px;
+    width: 17px;
+    right: 47%;
+    top: 1.5%;
   }
 `;
 interface IFlight {
@@ -33,22 +25,14 @@ interface IFlight {
 interface IModal {
   isOpen: boolean;
   data: IFlight;
+  close: () => void;
 }
 
 const ModalWindow = (Props: IModal) => {
-  const handleEdit = () => {
-    api
-      .patch(`/admin/flights`, {
-        ...Props.data
-      })
-      .then(res => {
-        api.get("/admin/flights").then();
-      });
-  };
-
   return (
     <Container>
       <ReactModal
+        shouldCloseOnOverlayClick={true}
         isOpen={Props.isOpen}
         style={{
           overlay: {
@@ -74,7 +58,21 @@ const ModalWindow = (Props: IModal) => {
           }
         }}
       >
-        <AddFlight flight={Props.data} />
+        <AddFlight flight={Props.data} close={Props.close} />
+        <img
+          alt="close-tab-btn"
+          src={pic}
+          style={{
+            height: "17px",
+            width: "15px",
+            cursor: "pointer",
+            position: "absolute",
+            top: "1.5%",
+            right: "2%"
+          }}
+          className="close-btn"
+          onClick={() => Props.close()}
+        />
       </ReactModal>
     </Container>
   );

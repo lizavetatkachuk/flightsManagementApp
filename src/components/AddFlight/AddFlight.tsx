@@ -30,8 +30,9 @@ interface IError {
   price?: string;
   there?: string;
 }
-interface IProps {
+interface IProps extends RouteComponentProps {
   flight?: IFlight;
+  close?: () => void;
 }
 
 const Container = styled.div`
@@ -39,6 +40,7 @@ const Container = styled.div`
   flex-flow: column wrap;
   padding-top: 70px;
   .form {
+    font-family: "Nanum Gothic", sans-serif;
     padding-top: 10px;
     width: 45%;
     display: flex;
@@ -165,11 +167,9 @@ const Container = styled.div`
   }
 `;
 
-function AddFlight({ history }: RouteComponentProps, flight: IFlight) {
+function AddFlight(Props: IProps) {
   const [airports, setAirports] = useState([]);
-  const [edited, setEdited] = useState(0);
   const [planes, setPlanes] = useState([]);
-  console.log(flight);
 
   useEffect(() => {
     api.get("/admin/airports").then(res => setAirports(res.data));
@@ -177,14 +177,24 @@ function AddFlight({ history }: RouteComponentProps, flight: IFlight) {
   }, []);
 
   const handleAddition = (values: IFlight) => {
-    api
-      .post("/admin/flights/add", {
-        ...values,
-        time: values.there,
-        booked: []
-      })
-      .catch(err => console.log(err));
-    history.push("/admin/flights");
+    Props.flight
+      ? api
+          .patch("/admin/flights", {
+            ...values
+          })
+          .then(() => {
+            Props.close();
+          })
+          .catch(err => {
+            Props.close();
+          })
+      : api
+          .post("/admin/flights/add", {
+            ...values,
+            time: values.there,
+            booked: []
+          })
+          .catch(err => console.log(err));
   };
 
   const destinations = airports ? (
@@ -211,6 +221,7 @@ function AddFlight({ history }: RouteComponentProps, flight: IFlight) {
     <Container>
       <Form
         onSubmit={handleAddition}
+        initialValues={Props.flight}
         validate={values => {
           const errors: IError = {};
           if (!values.from) {
@@ -222,7 +233,7 @@ function AddFlight({ history }: RouteComponentProps, flight: IFlight) {
           if (!values.plane) {
             errors.plane = "Choose the plane type";
           }
-          if (!values.there) {
+          if (!values.there && !Props.flight) {
             errors.there = "Choose the dates";
           }
           if (!values.company) {
@@ -319,7 +330,7 @@ function AddFlight({ history }: RouteComponentProps, flight: IFlight) {
               className="add"
               disabled={submitting || pristine}
             >
-              Add the flight
+              {Props.flight ? "Edit" : "Add"} the flight
             </button>
           </form>
         )}

@@ -166,7 +166,13 @@ const AllFlights = () => {
 
   return (
     <Container>
-      <ModalWindow isOpen={open} data={edited}></ModalWindow>
+      <ModalWindow
+        isOpen={open}
+        data={edited}
+        close={() => {
+          setOpen(false);
+        }}
+      ></ModalWindow>
       <ReactTable data={flights} columns={columns} defaultPageSize={10} />
     </Container>
   );

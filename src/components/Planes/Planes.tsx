@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
+import { OnChange } from "react-final-form-listeners";
 import { api } from "../../helpers/apiHeler";
 
 interface IPlane {
@@ -225,6 +226,7 @@ function Planes() {
           .then(res => {
             api.get("/admin/planes").then(res => {
               setPlanes(res.data);
+              setEdited(null);
             });
           })
           .catch(err => {
@@ -237,6 +239,7 @@ function Planes() {
           .then(res => {
             api.get("/admin/planes").then(res => {
               setPlanes(res.data);
+              setEdited(null);
             });
           })
           .catch(err => {
@@ -347,6 +350,16 @@ function Planes() {
             >
               {edited ? "Edit" : "Add"} the plane
             </button>
+            <OnChange name="name">
+              {value => {
+                setError(null);
+              }}
+            </OnChange>
+            <OnChange name="code">
+              {value => {
+                setError(null);
+              }}
+            </OnChange>
           </form>
         )}
       />
