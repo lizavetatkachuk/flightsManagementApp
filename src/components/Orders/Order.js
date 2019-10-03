@@ -27,6 +27,7 @@ const Order = () => {
   };
 
   const filteredOrders = orders.filter(order => {
+    console.log(order);
     return moment(order.flight.time).isAfter(now);
   });
 
@@ -35,7 +36,7 @@ const Order = () => {
       return (
         <li className="flight__item" key={order._id}>
           <div>
-            Flying from {order.flight.from} to {order.flight.to}
+            Flying from {order.flight.from.name} to {order.flight.to.name}
             {"  "}
             {order.flight.price}$ departs at {order.flight.time}
           </div>
@@ -52,7 +53,7 @@ const Order = () => {
         return (
           <li className="flight__item" key={order._id}>
             <div>
-              Flying from {order.flight.from} to {order.flight.to}
+              Flying from {order.flight.from.name} to {order.flight.to.name}
               {order.flight.price}$ departs at {order.flight.time}
             </div>
             <div className="company">Airlines : {order.flight.company}</div>
@@ -70,9 +71,9 @@ const Order = () => {
         filterName="filterBy"
       />
       {mode === "All flights" ? (
-        <ul className='list'> {allOrders} </ul>
+        <ul className="list"> {allOrders} </ul>
       ) : (
-        <ul className='list'> {incomingOrders}</ul>
+        <ul className="list"> {incomingOrders}</ul>
       )}
     </Fragment>
   );

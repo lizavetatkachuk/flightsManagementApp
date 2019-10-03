@@ -125,11 +125,11 @@ const AllFlights = () => {
   const columns = [
     {
       Header: "Flying from",
-      accessor: "from"
+      accessor: "from.name"
     },
     {
       Header: "Flying to",
-      accessor: "to"
+      accessor: "to.name"
     },
     {
       Header: "Airlines",

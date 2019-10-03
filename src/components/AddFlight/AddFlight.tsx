@@ -17,6 +17,7 @@ interface IFlight {
 interface IAirport {
   name: string;
   code: string;
+  _id: string;
 }
 interface IPlane {
   key: string;
@@ -199,7 +200,7 @@ function AddFlight(Props: IProps) {
 
   const destinations = airports ? (
     airports.map((airport: IAirport) => (
-      <option key={airport.code} value={airport.name}>
+      <option key={airport.code} value={airport._id}>
         {airport.name}
       </option>
     ))

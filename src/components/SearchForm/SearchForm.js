@@ -33,7 +33,7 @@ class SearchForm extends React.Component {
 
     const directions = this.state.cities ? (
       this.state.cities.map(city => (
-        <option key={city.code} value={city.name}>
+        <option key={city.code} value={city._id}>
           {city.name}
         </option>
       ))
