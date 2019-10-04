@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 const PrivateRoute = ({ component: Component, auth, userRole, ...rest }) => {
   const token = getToken();
   const role = checkAdmin(token);
+
   switch (userRole) {
     case "client":
       return (
@@ -18,13 +19,13 @@ const PrivateRoute = ({ component: Component, auth, userRole, ...rest }) => {
       return (
         <Route
           {...rest}
-          render={props => (role ? <Component /> : <Redirect to="/login" />)}         
+          render={props =>
+            role === "admin" ? <Component /> : <Redirect to="/login" />
+          }
         />
       );
-      default:
-        return(
-          <Redirect to='/'></Redirect>
-        )
+    default:
+      return <Redirect to="/"></Redirect>;
   }
 };
 const mapStateToProps = state => {

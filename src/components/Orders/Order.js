@@ -25,10 +25,12 @@ const Order = () => {
   const onChange = value => {
     setMode(value);
   };
-
-  const filteredOrders = orders.filter(order => {
-    return moment(order.flight.time).isAfter(now);
-  });
+  const filteredOrders =
+    orders.length > 0
+      ? orders.filter(order => {
+          return moment(order.flight.time).isAfter(now);
+        })
+      : null;
 
   const incomingOrders = filteredOrders ? (
     filteredOrders.map(order => {

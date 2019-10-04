@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ReactModal from "react-modal";
 import AddFlight from "./../AddFlight/AddFlight";
 import pic from "./../../static/images/close.svg";
+
 const Container = styled.div`
   .close-btn {
     cursor: pointer;
@@ -14,6 +15,7 @@ const Container = styled.div`
   }
 `;
 interface IFlight {
+  _id: string;
   from: string;
   to: string;
   there: string;
@@ -26,6 +28,7 @@ interface IModal {
   isOpen: boolean;
   data: IFlight;
   close: () => void;
+  update: (any) => void;
 }
 
 const ModalWindow = (Props: IModal) => {
@@ -51,7 +54,6 @@ const ModalWindow = (Props: IModal) => {
             right: "10%",
             background: "#7e94b5d9",
             color: "#0c0663",
-            overflow: "auto",
             WebkitOverflowScrolling: "touch",
             borderRadius: "10px",
             outline: "none",
@@ -59,7 +61,11 @@ const ModalWindow = (Props: IModal) => {
           }
         }}
       >
-        <AddFlight flight={Props.data} close={Props.close} />
+        <AddFlight
+          flight={Props.data}
+          close={Props.close}
+          update={Props.update}
+        />
         <img
           alt="close-tab-btn"
           src={pic}

@@ -3,39 +3,9 @@ import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Picker } from "./../Picker/Picker";
-import { api } from "./../../helpers/apiHeler";
+import { api, post, patch } from "./../../helpers/apiHeler";
 import "react-datepicker/dist/react-datepicker.css";
-
-interface IFlight {
-  from: string;
-  to: string;
-  there: string;
-  company: string;
-  price: number;
-  plane: string;
-}
-interface IAirport {
-  name: string;
-  code: string;
-  _id: string;
-}
-interface IPlane {
-  key: string;
-  name: string;
-  _id: string;
-}
-interface IError {
-  to?: string;
-  from?: string;
-  plane?: string;
-  company?: string;
-  price?: string;
-  there?: string;
-}
-interface IProps extends RouteComponentProps {
-  flight?: IFlight;
-  close?: () => void;
-}
+import { updateExpression } from "@babel/types";
 
 const Container = styled.div`
   display: flex;
@@ -64,7 +34,6 @@ const Container = styled.div`
      font-size: 20px;
   }
   }
-
 .picker {
   position: relative;
   display: flex;
@@ -107,8 +76,7 @@ const Container = styled.div`
     background-color: #e0e417b3;
     color: #0c0663;
     border-radius: 7px;
-    height: 15%;
-    width: 15%;
+   padding:5px;
     outline: none;
     cursor: pointer;
     :disabled {
@@ -132,7 +100,27 @@ const Container = styled.div`
     margin-bottom:19px;
     margin-top: -20px;
     align-items: center;
+  } 
+  .message{
+    width:100%;
+    padding:10px;
+    position:absolute;
+    top:18%;
+    color: #0c0663;
+    text-align:center;
+    font-size:23px;
   }
+    .visible {
+      visibility: visible;
+      opacity :0;
+      transition: opacity 2s linear;
+    }
+    .hidden {
+      visibility: hidden;
+      opacity:1;
+      transition: visibility 0s 2s, opacity 2s linear;
+    }
+
   .react-datepicker__input-container input{
     margin-top: 0px;
    margin-right:10px;
@@ -145,8 +133,7 @@ const Container = styled.div`
      width:auto;
    }}
    .add{
-     font-size:18x;
-     width:30%;
+     font-size:18x;    
    }
   }
   @media(max-width:768px) and (min-width:465px){
@@ -155,7 +142,6 @@ const Container = styled.div`
    }
    .add{
     font-size:17x;
-    width:auto;
   }
   }
   @media(max-width:465px) {
@@ -164,14 +150,50 @@ const Container = styled.div`
     }
     .add{
       font-size:16x;
-      width:auto;
     }
   }
 `;
+interface IFlight {
+  _id: string;
+  from: string;
+  to: string;
+  there: string;
+  company: string;
+  price: number;
+  plane: string;
+}
+
+interface IAirport {
+  name: string;
+  code: string;
+  _id: string;
+}
+
+interface IPlane {
+  key: string;
+  name: string;
+  _id: string;
+}
+
+interface IError {
+  to?: string;
+  from?: string;
+  plane?: string;
+  company?: string;
+  price?: string;
+  there?: string;
+}
+
+interface IProps extends RouteComponentProps {
+  flight?: IFlight;
+  close?: () => void;
+  update?: (any) => void;
+}
 
 function AddFlight(Props: IProps) {
   const [airports, setAirports] = useState([]);
   const [planes, setPlanes] = useState([]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     api.get("/admin/airports").then(res => setAirports(res.data));
@@ -180,23 +202,29 @@ function AddFlight(Props: IProps) {
 
   const handleAddition = (values: IFlight) => {
     Props.flight
-      ? api
-          .patch("/admin/flights", {
-            ...values
-          })
-          .then(() => {
+      ? api.patch("/admin/flights", { ...values }).then(res => {
+          api.get("admin/flights").then(res => {
             Props.close();
-          })
-          .catch(err => {
-            Props.close();
-          })
-      : api
-          .post("/admin/flights/add", {
+            Props.update(res.data);
+          });
+        })
+      : post(
+          "/admin/flights/add",
+          {
             ...values,
             time: values.there,
             booked: []
-          })
-          .catch(err => console.log(err));
+          },
+          () => {
+            setMessage("Flight created");
+            setTimeout(() => {
+              setMessage("");
+            }, 2000);
+          },
+          err => {
+            setMessage("Invalid data");
+          }
+        );
   };
 
   const destinations = airports ? (
@@ -221,6 +249,9 @@ function AddFlight(Props: IProps) {
 
   return (
     <Container>
+      <div className={message ? "message visible" : "message hidden"}>
+        {message}
+      </div>
       <Form
         onSubmit={handleAddition}
         initialValues={Props.flight}
@@ -332,7 +363,7 @@ function AddFlight(Props: IProps) {
               className="add"
               disabled={submitting || pristine}
             >
-              {Props.flight ? "Edit" : "Add"} the flight
+              {Props.flight ? "Edit" : "Add"}
             </button>
           </form>
         )}

@@ -29,14 +29,14 @@ const Header = props => {
           className="navigation__btn"
           activeClassName="navigation__btn--selected"
         >
-          Search Flights
+          Search
         </NavLink>
         <NavLink
           to="/orders"
           className="navigation__btn"
           activeClassName="navigation__btn--selected"
         >
-          My flights
+          Flights
         </NavLink>
         {role === "admin" ? (
           <NavLink
@@ -44,7 +44,7 @@ const Header = props => {
             className="navigation__btn"
             activeClassName="navigation__btn--selected"
           >
-            Admin Pane
+            Admin
           </NavLink>
         ) : null}
       </nav>

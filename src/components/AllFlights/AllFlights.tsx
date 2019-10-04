@@ -5,16 +5,6 @@ import ModalWindow from "./../ModalWindow/ModalWindow";
 import { api } from "./../../helpers/apiHeler";
 import "react-table/react-table.css";
 
-interface IFight {
-  _id: string;
-  booked: Array<string>;
-  from: string;
-  to: string;
-  price: number;
-  company: string;
-  time: string;
-}
-
 const Container = styled.div`
   .delete,.edit {
     font-size: 35px;
@@ -100,6 +90,24 @@ const Container = styled.div`
     }
   }
 `;
+
+interface IFight {
+  _id: string;
+  booked: Array<string>;
+  from: {
+    _id: string;
+  };
+  to: {
+    _id: string;
+  };
+  plane: {
+    _id: string;
+  };
+  price: number;
+  company: string;
+  time: string;
+}
+
 const AllFlights = () => {
   const [flights, setFlights] = useState([]);
   const [edited, setEdited] = useState(null);
@@ -107,11 +115,14 @@ const AllFlights = () => {
 
   const handleDeletion = (id: string) => {
     api.post(`/admin/flights/${id}`).then(res => {
-      api.get("/admin/flights").then(res => setFlights(res.data));
+      let filtered = flights.filter(flight => {
+        return flight._id != id;
+      });
+      setFlights(filtered);
     });
   };
 
-  const handleEdit = (flight: any) => {
+  const handleEdit = (flight: IFight) => {
     setOpen(true);
     setEdited({
       ...flight,
@@ -176,6 +187,9 @@ const AllFlights = () => {
         data={edited}
         close={() => {
           setOpen(false);
+        }}
+        update={(flights: Array<IFight>) => {
+          setFlights(flights);
         }}
       ></ModalWindow>
       <ReactTable data={flights} columns={columns} defaultPageSize={10} />

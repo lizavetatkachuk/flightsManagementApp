@@ -7,12 +7,6 @@ import AllFlights from "./../AllFlights/AllFlights";
 import AddFlight from "./../AddFlight/AddFlight";
 import "react-tabs/style/react-tabs.scss";
 
-interface AdminProps {
-  history: object;
-  loaction: object;
-  match: object;
-}
-
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -45,6 +39,12 @@ const Container = styled.div`
     }
   }
 `;
+interface AdminProps {
+  history: object;
+  loaction: object;
+  match: object;
+}
+
 function AdminPane(Props: AdminProps) {
   return (
     <Container>

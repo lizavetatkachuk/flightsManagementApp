@@ -2,15 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
+import SearchBar from "./../SearchBar/SearchBar";
 import { api } from "../../helpers/apiHeler";
 
-interface IPlane {
-  name: string;
-  key: string;
-  business: number;
-  economy: number;
-  maxCargo: number;
-}
 const Container = styled.div`
 .delete,
 .add,.edit  {
@@ -18,7 +12,7 @@ const Container = styled.div`
   justify-self: flex-end;
   margin-left: 10px;
   font-size: 23px;
-  background-color: Transparent;
+  background-color: #e2e91eab;
   color: #0c0663;
   border-radius: 7px;
   height:50%;
@@ -79,7 +73,7 @@ const Container = styled.div`
       font-size: 25px;
       margin: 10px;
       color: #0c0663;
-      background-color: #e0e417b3;
+      background-color:#82a1c3b3;
       border-radius: 8px;
       padding-left: 10px;
       padding-right: 5px;
@@ -206,6 +200,14 @@ const Container = styled.div`
     }
   }
 `;
+interface IPlane {
+  name: string;
+  key: string;
+  business: number;
+  economy: number;
+  maxCargo: number;
+}
+
 function Planes() {
   const [planes, setPlanes] = useState([]);
   const [edited, setEdited] = useState(null);
@@ -275,9 +277,9 @@ function Planes() {
         );
       })
     : null;
-
   return (
     <Container>
+      {/* <SearchBar filter={(x: Array<IPlane>) => setPlanes(x)} items={planes} /> */}
       <Form
         onSubmit={handleAddition}
         initialValues={edited}
@@ -355,7 +357,7 @@ function Planes() {
                 setError(null);
               }}
             </OnChange>
-            <OnChange name="code">
+            <OnChange name="key">
               {value => {
                 setError(null);
               }}

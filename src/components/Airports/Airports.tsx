@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
+import { OnChange } from "react-final-form-listeners";
 import SearchBar from "./../SearchBar/SearchBar";
-import { api } from "./../../helpers/apiHeler";
+import { api, post, patch } from "./../../helpers/apiHeler";
 
-interface IAirport {
-  name: string;
-  code: string;
-}
 const Container = styled.div` 
   .delete,
   .add,.edit  {
@@ -15,7 +12,7 @@ const Container = styled.div`
     justify-self: flex-end;
     margin-left: 10px;
     font-size: 23px;
-    background-color: Transparent;
+    background-color: #e2e91eab;
     color: #0c0663;
     border-radius: 7px;
     height:50%;
@@ -76,7 +73,7 @@ const Container = styled.div`
       font-size: 25px;
       margin: 10px;
       color: #0c0663;
-      background-color: #e0e417b3;
+      background-color:#82a1c3b3;
       border-radius: 8px;
       padding-left: 10px;
       padding-right: 5px;
@@ -172,6 +169,20 @@ width:100%;
       font-size:18px;
     }
   }
+  .search-field {
+    position: absolute;
+    top: 15%;
+    right: 3%;
+    input {
+      color: #0c0663;
+      padding: 8px;
+      outline: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 20px;
+      background-color: Transparent;
+    }
+  }
   @media(max-width:330px) {
     .form{
       margin-top:10px;
@@ -203,28 +214,43 @@ font-size:15px;
     }
   }
 `;
+
+interface IAirport {
+  name: string;
+  code: string;
+}
+
 function Airports() {
   const [airports, setAirports] = useState([]);
+  const [filter, setFilter] = useState("");
   const [edited, setEdited] = useState(null);
   const [error, setError] = useState("");
 
   const handleDeletion = (code: string) => {
     api.post(`/admin/airports/${code}`).then(res => {
-      api.get("/admin/airports").then(res => setAirports(res.data));
+      let filtered = airports.filter(airport => {
+        return airport.code != code;
+      });
+      setAirports(filtered);
     });
   };
 
-  const handleAddition = (values: object) => {
+  const handleSearch = (items: Array<IAirport>) => {
+    setAirports(items);
+  };
+
+  const handleAddition = (values: { code: string }) => {
     edited
       ? api
           .patch("/admin/airports/", {
             ...values
           })
           .then(res => {
-            api.get("/admin/airports").then(res => {
-              setAirports(res.data);
-              setEdited(null);
+            let filtered = airports.filter(airport => {
+              return airport.code != values.code;
             });
+            setAirports([...filtered, values]);
+            setEdited(null);
           })
           .catch(err => {
             setError(err);
@@ -234,12 +260,14 @@ function Airports() {
             ...values
           })
           .then(res => {
-            api.get("/admin/airports").then(res => setAirports(res.data));
+            setAirports([...airports, values]);
+            setEdited(null);
           })
           .catch(err => {
             setError(err);
           });
   };
+
   const handleEdit = (airport: object) => {
     setEdited(airport);
   };
@@ -273,10 +301,21 @@ function Airports() {
 
   return (
     <Container>
-      <SearchBar
-        filter={(x: Array<IAirport>) => setAirports(x)}
-        items={airports}
-      />
+      <div className="search-field">
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={e => {
+            let filtered = airports
+              ? airports.filter((item: any) => {
+                  return item.name.includes(filter);
+                })
+              : null;
+            setFilter(e.target.value);
+            setAirports(filtered);
+          }}
+        ></input>
+      </div>
       <Form
         onSubmit={handleAddition}
         initialValues={edited}
@@ -313,6 +352,16 @@ function Airports() {
             >
               {edited ? "Edit" : "Add"} the airport
             </button>
+            <OnChange name="name">
+              {value => {
+                setError(null);
+              }}
+            </OnChange>
+            <OnChange name="code">
+              {value => {
+                setError(null);
+              }}
+            </OnChange>
           </form>
         )}
       />

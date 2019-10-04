@@ -4,10 +4,6 @@ import { Form, Field } from "react-final-form";
 import { api } from "./../../helpers/apiHeler";
 import { object } from "prop-types";
 
-interface IProps {
-  items: Array<any> | null;
-  filter(Array): void;
-}
 const Container = styled.div`
   .search-field {
     position: absolute;
@@ -32,6 +28,11 @@ const Container = styled.div`
   @media (max-width: 330px) {
   }
 `;
+interface IProps {
+  items: Array<any> | null;
+  search(any): void;
+}
+
 function SearchBar(Props: IProps) {
   const [filter, setFilter] = useState("");
 
@@ -40,7 +41,6 @@ function SearchBar(Props: IProps) {
         return item.name.includes(filter);
       })
     : null;
-
   return (
     <Container>
       <div className="search-field">
@@ -49,7 +49,7 @@ function SearchBar(Props: IProps) {
           placeholder="Search"
           onChange={e => {
             setFilter(e.target.value);
-            Props.filter(filtered);
+            Props.search(filtered);
           }}
         ></input>
       </div>
