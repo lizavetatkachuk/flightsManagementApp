@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
 import SearchBar from "./../SearchBar/SearchBar";
-import deleteSvg from './../../static/images/delete-yellow.svg';
-import editSvg from './../../static/images/edit-yellow.svg';
+import deleteSvg from "./../../static/images/delete-yellow.svg";
+import editSvg from "./../../static/images/edit-yellow.svg";
 import { api } from "../../helpers/apiHeler";
 
 const Container = styled.div`
@@ -24,7 +24,7 @@ const Container = styled.div`
     color: grey;
   }
   &:hover {
-    box-shadow: 7px 7px 7px #242222;
+    box-shadow: 3px 3px 3px #242222;
   }}
   .add{
     background-color: Transparent;
@@ -261,14 +261,18 @@ function Planes() {
           <div className="list__plane" key={plane.key}>
             <p>{plane.name}</p>
             <div className="btn-container">
-            <img src={deleteSvg } alt='delete-btn'
+              <img
+                src={deleteSvg}
+                alt="delete-btn"
                 className="delete"
                 onClick={() => handleDeletion(plane.key)}
-              >
-              </img>
-              <img src={editSvg} alt='edit-btn' className="edit" onClick={() => handleEdit(plane)}>
-                
-              </img>
+              ></img>
+              <img
+                src={editSvg}
+                alt="edit-btn"
+                className="edit"
+                onClick={() => handleEdit(plane)}
+              ></img>
             </div>
           </div>
         );

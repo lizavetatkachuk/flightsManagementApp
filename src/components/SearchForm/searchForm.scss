@@ -1,4 +1,7 @@
 @import "../Shared/index.scss";
+.form-container {
+  padding: 0% 0;
+}
 .search-form {
   z-index: 2;
   min-height: 70vh;
@@ -201,10 +204,6 @@
   }
   .search-form {
     width: 65%;
-    position: absolute;
-    top: 50%;
-    left: 45%;
-    transform: translate(-45%, -50%);
     padding-bottom: 15px;
     &__field {
       flex-direction: column;
@@ -249,36 +248,31 @@
 @media (max-width: $breakpoint-phone) and (min-width: $breakpoint-se) {
   .input-container {
     box-sizing: border-box;
-    width:29%;
-    margin-left:15px;
+    width: 29%;
+    margin-left: 15px;
     label {
       font-size: $phone-medium;
     }
   }
   .input-container--vertical {
     width: 85%;
-  
   }
 
   .shift-btn {
-    margin-top:20px;
+    margin-top: 20px;
     width: 45px;
     height: 45px;
   }
   .search-form {
     width: 90%;
     margin-top: 10%;
-    position: absolute;
-    top: 60%;
-    left: 45%;
-    transform: translate(-45%, -50%);
     padding-bottom: 13px;
     min-height: 63vh;
 
     .radio-container {
-      &__circe {
-        top: 25%;
-        left: 140%;
+      &__circle {
+        top: 1%;
+        left: 100%;
       }
     }
     &__field {
@@ -338,7 +332,7 @@
       top: 88%;
     }
     .shift-btn {
-      margin-top:20px;
+      margin-top: 20px;
       width: 45px;
       height: 45px;
     }
@@ -350,9 +344,9 @@
     }
 
     .radio-container {
-      &__circe {
-        top: 25%;
-        left: 110%;
+      &__circle {
+        top: 3%;
+        left: 100%;
       }
     }
   }

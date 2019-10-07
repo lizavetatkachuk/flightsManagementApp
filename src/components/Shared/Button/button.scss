@@ -9,8 +9,8 @@
   border: 2px solid $base-color;
   color: $base-color;
   font-size: 20px;
-  margin:auto;
-  padding:8px 17px;
+  margin: auto;
+  padding: 8px 17px;
   &:disabled {
     color: rgb(31, 31, 31);
   }
@@ -21,10 +21,10 @@
 
 .search-flights-btn {
   outline: none;
-  width:auto;
+  width: auto;
   cursor: pointer;
   border-radius: 6px;
-  background-color: $form-color;
+  background-color: Transparent;
   font-size: 28px;
   color: $base-color;
   &:disabled {

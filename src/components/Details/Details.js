@@ -127,7 +127,7 @@ const Details = props => {
       flight: values.id
     });
   };
-  const validated = state.seats ? false : true;
+  const validated = state.seats.length > 0 ? false : true;
 
   const seatNums = state.seats.map(seat => {
     return seat.seat;
@@ -215,37 +215,40 @@ const Details = props => {
           />
           <Button onClick={() => dispatch({ type: "increment" })}>+</Button>
         </div>
-        <div className="options__row cost">
-          <p className="options__label">
-            Total cost is {cost + state.luggage + state.donation}
-          </p>
+        {state.seats.length > 0 ? (
+          <div className="options__row cost">
+            <p className="options__label">
+              Total cost is{" "}
+              {state.flight.price + state.luggage + state.donation}
+            </p>
 
-          <div className="block">
-            <input
-              type="checkbox"
-              id="scales"
-              name="scales"
-              checked={state.donation}
-              onChange={() => {
-                dispatch({ type: "setDonation" });
-              }}
-            />
+            <div className="block">
+              <input
+                type="checkbox"
+                id="scales"
+                name="scales"
+                checked={state.donation}
+                onChange={() => {
+                  dispatch({ type: "setDonation" });
+                }}
+              />
 
-            <label className="cost__label">
-              Donate 1$ to reduce your carbon footprint
-            </label>
-            <p className="cost__label">Luggage: {state.luggage} $</p>
+              <label className="cost__label">
+                Donate 1$ to reduce your carbon footprint
+              </label>
+              <p className="cost__label">Luggage: {state.luggage} $</p>
+            </div>
+            <ul className="cost__label">You have chosen: {mappedSeats}</ul>
+            <Button
+              btnclass="submit-order-btn"
+              type="submit"
+              onClick={handleClick}
+              disabled={validated}
+            >
+              Book the tickets
+            </Button>
           </div>
-          <ul className="cost__label">You have chosen: {mappedSeats}</ul>
-          <Button
-            btnclass="submit-order-btn"
-            type="submit"
-            onClick={handleClick}
-            disabled={validated}
-          >
-            Book the tickets
-          </Button>
-        </div>
+        ) : null}
       </div>
     </div>
   );

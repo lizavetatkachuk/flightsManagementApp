@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
-import deleteSvg from './../../static/images/delete-yellow.svg';
-import editSvg from './../../static/images/edit-yellow.svg';
-import { api} from "./../../helpers/apiHeler";
+import deleteSvg from "./../../static/images/delete-yellow.svg";
+import editSvg from "./../../static/images/edit-yellow.svg";
+import { api } from "./../../helpers/apiHeler";
 
 const Container = styled.div` 
   .delete,
@@ -25,7 +25,7 @@ const Container = styled.div`
       color: grey;
     }
     &:hover {
-      box-shadow: 7px 7px 7px #242222;
+      box-shadow: 3px 3px 3px #242222;
     }}
     .add{
     color: #0c0663;
@@ -283,14 +283,18 @@ function Airports() {
           <div className="airport-list__airport" key={airport.code}>
             <p>{airport.name}</p>
             <div className="btn-container">
-              <img src={deleteSvg } alt='delete-btn'
+              <img
+                src={deleteSvg}
+                alt="delete-btn"
                 className="delete"
                 onClick={() => handleDeletion(airport.code)}
-              >
-              </img>
-              <img src={editSvg} alt='edit-btn' className="edit" onClick={() => handleEdit(airport)}>
-                
-              </img>
+              ></img>
+              <img
+                src={editSvg}
+                alt="edit-btn"
+                className="edit"
+                onClick={() => handleEdit(airport)}
+              ></img>
             </div>
           </div>
         );

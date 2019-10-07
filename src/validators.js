@@ -8,7 +8,10 @@ const validatePassword = value => {
 
 const mustBeEmail = value => {
   const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-  return !pattern.test(value) && "Email is invalid";
+  const pattern2 = /^.{1,}$/;
+  if (!pattern2.test(value)) {
+    return "Required";
+  } else return !pattern.test(value) && "Email is invalid";
 };
 
 const minLength = value => {

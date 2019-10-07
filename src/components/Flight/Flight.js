@@ -88,12 +88,12 @@ const Flight = props => {
         filterName="orderBy"
       />
       <div className="container">
-        <ul className="container__column list">
-          <p className="list__label">Fly there</p>
+        <ul className="container__column items-list">
+          <p className="items-list__label">Fly there</p>
           {flightsInfo}
         </ul>
-        <ul className="container__column list">
-          <p className="list__label">Fly back</p>
+        <ul className="container__column items-list">
+          <p className="items-list__label">Fly back</p>
           {flightsBackInfo}
         </ul>
       </div>

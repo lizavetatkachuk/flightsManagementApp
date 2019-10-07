@@ -26,7 +26,7 @@ const Container = styled.div`
     heigth: 100%;
     background-color: #e3e87ae6;
     li {
-      margin: 10px;
+      margin: 20px;
     }
   }
   .open {

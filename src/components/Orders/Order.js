@@ -72,9 +72,12 @@ const Order = () => {
         filterName="filterBy"
       />
       {mode === "All flights" ? (
-        <ul className="list"> {allOrders} </ul>
+        <ul className="items-list order"> {allOrders} </ul>
       ) : (
-        <ul className="list"> {incomingOrders}</ul>
+        <ul className="items-list" order>
+          {" "}
+          {incomingOrders}
+        </ul>
       )}
     </Fragment>
   );

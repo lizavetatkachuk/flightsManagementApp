@@ -69,6 +69,12 @@ const Login = props => {
             <Button btntype="submit" disabled={submitting || pristine}>
               Log In
             </Button>
+            <div className="sign-up">
+              <label className="form-label">Do not have an account yet?</label>
+              <Link to="/register">
+                <Button btntype="button">Register</Button>
+              </Link>
+            </div>
             <OnChange name="password">
               {value => {
                 cleanLoginError();
@@ -82,12 +88,6 @@ const Login = props => {
           </form>
         )}
       />
-      <div className="sign-up">
-        <label className="form-label">Do not have an account yet?</label>
-        <Link to="/register">
-          <Button btntype="button">Register</Button>
-        </Link>
-      </div>
     </div>
   );
 };

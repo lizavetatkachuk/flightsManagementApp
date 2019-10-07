@@ -6,6 +6,7 @@ import { logOut } from "./../../redux/actions/authorisation";
 import Button from "./../Shared/Button/Button";
 import { getToken, removeToken, checkAdmin } from "../../helpers/authHelper";
 import logout from "./../../static/images/logout.svg";
+import login from "./../../static/images/login.svg";
 import menu from "./../../static/images/menu.svg";
 import "./header.scss";
 
@@ -84,7 +85,7 @@ const Header = props => {
             <img
               className="mobile__login"
               alt="mobile-logout-btn"
-              src={logout}
+              src={login}
               onClick={() => {
                 history.push("/login");
               }}

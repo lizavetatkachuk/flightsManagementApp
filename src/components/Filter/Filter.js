@@ -18,7 +18,7 @@ const Filter = props => {
       render={({ form, submitting, pristine, values }) => (
         <form className="filter-pane">
           <label className="filter-pane__element">
-            {filterName === "orderBy" ? "Order by" : "Show "}
+            {filterName === "orderBy" ? "Order by" : null}
           </label>
           <Field
             initialValue={value1}
