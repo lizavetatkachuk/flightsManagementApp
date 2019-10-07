@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./button.scss";
 const Button = props => {
   const { btntype, btnclass, onClick, disabled } = props;
-  const buttonclass = btnclass ? btnclass : "button";
+  const buttonclass = btnclass ? `${btnclass} button` : "button";
   return (
     <button
       type={btntype}

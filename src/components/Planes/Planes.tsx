@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
 import SearchBar from "./../SearchBar/SearchBar";
+import deleteSvg from './../../static/images/delete-yellow.svg';
+import editSvg from './../../static/images/edit-yellow.svg';
 import { api } from "../../helpers/apiHeler";
 
 const Container = styled.div`
@@ -11,22 +13,27 @@ const Container = styled.div`
   align-self: center;
   justify-self: flex-end;
   margin-left: 10px;
-  font-size: 23px;
-  background-color: #e2e91eab;
+  font-size: 23px;  
   color: #0c0663;
+  padding:8px 10px;
   border-radius: 7px;
-  height:50%;
-  width: auto%;
+  width:33px;
   outline: none;
   cursor: pointer;
   :disabled {
     color: grey;
+  }
+  &:hover {
+    box-shadow: 7px 7px 7px #242222;
   }}
   .add{
+    background-color: Transparent;
+    color: #0c0663;
     font-size:25px;
+    border:2px solid #0c0663; 
   }
   .form {
-    margin:20px auto;
+    margin:0 auto;
     margin-bottom:40px;
     display:flex
     flex-direction:column;
@@ -54,7 +61,7 @@ const Container = styled.div`
   .btn-container{
     justify-self:flex-end;
     display:flex;
-    flex-flow:row wrap ;
+    flex-direction :row  ;
   }
   .list {
     padding-right:10px;
@@ -128,9 +135,6 @@ const Container = styled.div`
       top:57%;
       left:35%;
     }
-    .btn-container{
-      flex-flow:column wrap;
-    }
     .list {    
       &__plane{
         padding:10px;
@@ -146,9 +150,6 @@ const Container = styled.div`
     }
     .input-field{
       font-size:15px;
-    }
-    .btn-container{
-      flex-flow:column wrap;
     }
     .error{
       top:57%;
@@ -176,9 +177,6 @@ const Container = styled.div`
     .add{
       font-size:18px;
       width:50%;
-    }
-    .btn-container{
-      flex-flow:column wrap;
     }
     .error{
       top:61%;
@@ -263,15 +261,14 @@ function Planes() {
           <div className="list__plane" key={plane.key}>
             <p>{plane.name}</p>
             <div className="btn-container">
-              <button
+            <img src={deleteSvg } alt='delete-btn'
                 className="delete"
                 onClick={() => handleDeletion(plane.key)}
               >
-                Delete
-              </button>
-              <button className="edit" onClick={() => handleEdit(plane)}>
-                Edit
-              </button>
+              </img>
+              <img src={editSvg} alt='edit-btn' className="edit" onClick={() => handleEdit(plane)}>
+                
+              </img>
             </div>
           </div>
         );

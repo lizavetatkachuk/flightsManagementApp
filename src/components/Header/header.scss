@@ -50,6 +50,8 @@
     border: none;
     font-size: $desktop-medium;
     margin: 15px;
+    margin-left:0px;
+    padding:5px;
     outline: none;
     &--selected {
       color: $font-color;
@@ -68,11 +70,10 @@
     &__btn {
       font-size: $tablet-medium;
       margin-right: 18px;
-      margin-left: 2px;
     }
   }
   .header {
-    padding-left: 2px;
+    padding-left: 7px;
     &__title {
       left: 50%;
       transform: translateX(-40%);
@@ -91,7 +92,7 @@
     }
   }
   .header {
-    padding-left: 2px;
+       padding-left: 5px;
     &__title {
       left: 50%;
       transform: translateX(-40%);
@@ -116,7 +117,7 @@
   }
 
   .header {
-    padding-left: 2px;
+    padding-left: 5px;
     &__title {
       font-size: $phone-large;
     }
@@ -136,7 +137,7 @@
       font-size: $se-large;
     }
     .header {
-      padding-left: 2px;
+      padding-left: 5px;
       &__title {
         font-size: $phone-large;
       }

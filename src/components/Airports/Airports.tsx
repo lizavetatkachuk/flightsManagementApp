@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
-import SearchBar from "./../SearchBar/SearchBar";
-import { api, post, patch } from "./../../helpers/apiHeler";
+import deleteSvg from './../../static/images/delete-yellow.svg';
+import editSvg from './../../static/images/edit-yellow.svg';
+import { api} from "./../../helpers/apiHeler";
 
 const Container = styled.div` 
   .delete,
@@ -12,21 +13,28 @@ const Container = styled.div`
     justify-self: flex-end;
     margin-left: 10px;
     font-size: 23px;
-    background-color: #e2e91eab;
-    color: #0c0663;
+    color: #0c0663;  
+    padding:8px 10px;
     border-radius: 7px;
-    height:50%;
+    height:100%;
+    width:33px;
     width: auto%;
     outline: none;
     cursor: pointer;
     :disabled {
       color: grey;
+    }
+    &:hover {
+      box-shadow: 7px 7px 7px #242222;
     }}
     .add{
+    color: #0c0663;
+    background-color:Transparent;
+    border:2px solid #0c0663;
       font-size:25px;
     }
   .form {
-   margin:20px auto;
+   margin:0px auto;
    margin-bottom:40px;
     display:flex
     flex-direction:column;
@@ -54,7 +62,7 @@ const Container = styled.div`
   .btn-container{
     justify-self:flex-end;
     display:flex;
-    flex-flow:row wrap;
+    flex-direction:row;
   }
   .airport-list {
     padding-right:10px;
@@ -119,9 +127,6 @@ const Container = styled.div`
     .error{
       left:35%
     }
-    .btn-container{
-      flex-flow:column wrap;
-    }
 .error{
   top:38%;
   left:31%;
@@ -152,9 +157,6 @@ width:100%;
     .error{
       top:32%;
       left:30%;
-    }
-    .btn-container{
-      flex-flow:column wrap;
     }
     .airport-list {
       margin:8px;
@@ -192,9 +194,6 @@ width:100%;
       width:100%;
 margin:0px;
 font-size:15px;
-    }
-    .btn-container{
-      flex-flow:column wrap;
     }
     .error{
       top:35%;
@@ -284,15 +283,14 @@ function Airports() {
           <div className="airport-list__airport" key={airport.code}>
             <p>{airport.name}</p>
             <div className="btn-container">
-              <button
+              <img src={deleteSvg } alt='delete-btn'
                 className="delete"
                 onClick={() => handleDeletion(airport.code)}
               >
-                Delete
-              </button>
-              <button className="edit" onClick={() => handleEdit(airport)}>
-                Edit
-              </button>
+              </img>
+              <img src={editSvg} alt='edit-btn' className="edit" onClick={() => handleEdit(airport)}>
+                
+              </img>
             </div>
           </div>
         );

@@ -3,10 +3,14 @@ import styled from "styled-components";
 import ReactTable from "react-table";
 import ModalWindow from "./../ModalWindow/ModalWindow";
 import { api } from "./../../helpers/apiHeler";
+import deleteSvg from './../../static/images/delete-blue.svg';
+import editSvg from './../../static/images/edit-blue.svg';
 import "react-table/react-table.css";
 
 const Container = styled.div`
   .delete,.edit {
+    width:21px;
+    height:21px;
     font-size: 35px;
     background-color: Transparent;
     outline: none;
@@ -19,6 +23,8 @@ const Container = styled.div`
   }
   .ReactTable {
     margin: 20px;
+    margin-left:15px;
+    paddin-left:5px;
     border-radius: 12px;
     .rt-thead.-header {
       background-color: #82a1c3b3;
@@ -64,7 +70,8 @@ const Container = styled.div`
       font-size: 16px;
     }
     .ReactTable {
-      margin: 5px;
+      margin-left:5px;
+      margin: 7px;
       .rt-td {
         padding: 10px 5px;
         font-size: 15px;
@@ -77,6 +84,20 @@ const Container = styled.div`
   }
   @media (max-width: 465px) {
     .rt-resizable-header-content {
+      padding-left: 10px;
+      text-align: left;
+      font-size: 16px;
+    }
+    .ReactTable {
+      margin: 7px;
+      .rt-td {
+        padding: 10px 5px;
+        font-size: 15px;
+      }
+    }
+  }
+  @media (max-width: 330px) {
+    .rt-resizable-heder-content {
       padding-left: 10px;
       text-align: left;
       font-size: 16px;
@@ -160,22 +181,22 @@ const AllFlights = () => {
       accessor: "price"
     },
     {
-      Header: "Delete the flight",
+      Header: "",
       Cell: ({ row }) => (
-        <button
+        <img
+        src={deleteSvg} alt='delete-btn'
           className="delete"
           onClick={() => handleDeletion(row._original._id)}
         >
-          -
-        </button>
+          
+        </img>
       )
     },
     {
-      Header: "Edit the flight",
+      Header: "",
       Cell: ({ row }) => (
-        <button className="edit" onClick={() => handleEdit(row._original)}>
-          Edit
-        </button>
+        <img className="edit"  src={editSvg} alt='edit-btn' onClick={() => handleEdit(row._original)}>          
+        </img>
       )
     }
   ];

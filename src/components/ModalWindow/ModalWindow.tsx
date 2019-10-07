@@ -48,10 +48,7 @@ const ModalWindow = (Props: IModal) => {
             backgroundColor: "#abb4c5bf"
           },
           content: {
-            position: "absolute",
-            top: "12%",
-            left: "10%",
-            right: "10%",
+            position: "absolute",           
             background: "#7e94b5d9",
             color: "#0c0663",
             WebkitOverflowScrolling: "touch",

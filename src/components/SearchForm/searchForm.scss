@@ -243,23 +243,25 @@
   }
   .search-flights-btn {
     margin: 15px auto;
-    width: 22%;
     font-size: $tablet-medium;
   }
 }
 @media (max-width: $breakpoint-phone) and (min-width: $breakpoint-se) {
   .input-container {
     box-sizing: border-box;
-    width: 55%;
+    width:29%;
+    margin-left:15px;
     label {
       font-size: $phone-medium;
     }
   }
   .input-container--vertical {
     width: 85%;
+  
   }
 
   .shift-btn {
+    margin-top:20px;
     width: 45px;
     height: 45px;
   }
@@ -304,6 +306,7 @@
   }
   .there-and-back {
     flex-direction: row;
+    justify-content: space-evenly;
     padding-left: 17px;
   }
   .search-flights-btn {
@@ -333,6 +336,11 @@
       position: absolute;
       left: 15%;
       top: 88%;
+    }
+    .shift-btn {
+      margin-top:20px;
+      width: 45px;
+      height: 45px;
     }
     .error {
       font-size: $phone-small;

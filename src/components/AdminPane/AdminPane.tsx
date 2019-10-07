@@ -11,22 +11,28 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-flow: column wrap;
-  margin-top: 20px;
+  margin-top: 40px 0;
   .react-tabs {
     &__tab-list {
       font-size: 23px;
       border-bottom: none;
+      margin-left:15px;
     }
     &__tab--selected {
       background: #e2e91eab;
       border-radius: 5px;
     }
   }
+  @media (max-width: 1200px) {
+    .react-tabs__tab-list{
+      margin-left:7px;
+    }
+  }
   @media (max-width: 768px) and (min-width: 465px) {
     .react-tabs {
       &__tab-list {
         font-size: 20px;
-        margin: 0 0 25px;
+        margin: 0 7px 25px;
       }
     }
   }
@@ -34,7 +40,15 @@ const Container = styled.div`
     .react-tabs {
       &__tab-list {
         font-size: 18px;
-        margin: 0 0 25px;
+        margin: 0 7px 25px;
+      }
+    }
+  }
+  @media (max-width: 330px) {
+    .react-tabs {
+      &__tab-list {
+        font-size: 18px;
+        margin: 0 5px 25px;
       }
     }
   }

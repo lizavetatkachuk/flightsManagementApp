@@ -56,13 +56,11 @@
   cursor: pointer;
   align-self: flex-start;
   border-radius: 6px;
-  background-color: rgba($font-color, 0.8);
+  background-color:Transparent;
   font-size: $tablet-medium;
-  color: $base-color;
-  padding: 5px;
   margin-left: 60px;
   &:disabled {
-    background-color: grey;
+    color: grey;
   }
   &:hover {
     box-shadow: 7px 7px 7px rgb(36, 34, 34);

@@ -10,7 +10,7 @@ import { updateExpression } from "@babel/types";
 const Container = styled.div`
   display: flex;
   flex-flow: column wrap;
-  padding-top: 70px;
+  margin-top:30px;
   .form {
     font-family: "Nanum Gothic", sans-serif;
     padding-top: 10px;
@@ -73,18 +73,19 @@ const Container = styled.div`
     justify-self: flex-end;
     margin 20px;
     font-size: 20px;
-    background-color: #e0e417b3;
+    background-color: Transparent;
     color: #0c0663;
     border-radius: 7px;
-   padding:5px;
+    border:2px solid #0c0663;
+    padding:8px 10px;
     outline: none;
     cursor: pointer;
     :disabled {
-      background-color: grey;
+      
       color:#282a2dcc;
     }
     :hover {
-      box-shadow: 7px 7px 7px grey;
+      box-shadow: 7px 7px 7px #242222;
     }
   }
   .error{
@@ -129,8 +130,7 @@ const Container = styled.div`
   @media(max-width:1200px) and (min-width:768px){
     .form{
    .search-form__label{
-     margin:17px;
-     width:auto;
+     margin:17px;    
    }}
    .add{
      font-size:18x;    
