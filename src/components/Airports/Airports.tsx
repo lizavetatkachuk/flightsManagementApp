@@ -2,50 +2,60 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
+import SearchBar from "./../SearchBar/SearchBar";
 import deleteSvg from "./../../static/images/delete-yellow.svg";
 import editSvg from "./../../static/images/edit-yellow.svg";
 import { api } from "./../../helpers/apiHeler";
+import { If } from "typescript-logic";
 
-const Container = styled.div` 
-  .delete,
-  .add,.edit  {
-    align-self: center;
-    justify-self: flex-end;
-    margin-left: 10px;
+const AddButton = styled.button`
+  color: #0c0663;
+  background-color: Transparent;
+  padding: 8px 10px;
+  border-radius: 7px;
+  margin-top: 10px;
+  outline: none;
+  cursor: pointer;
+  border: 2px solid #0c0663;
+  font-size: 25px;
+  :disabled {
+    color: grey;
+  }
+  &:hover {
+    box-shadow: 3px 3px 3px #242222;
+  }
+  @media (max-width: 768px) and (min-width: 560px) {
     font-size: 23px;
-    color: #0c0663;  
-    padding:8px 10px;
-    border-radius: 7px;
-    height:100%;
-    width:33px;
-    width: auto%;
-    outline: none;
-    cursor: pointer;
-    :disabled {
-      color: grey;
-    }
-    &:hover {
-      box-shadow: 3px 3px 3px #242222;
-    }}
-    .add{
-    color: #0c0663;
-    background-color:Transparent;
-    border:2px solid #0c0663;
-      font-size:25px;
-    }
-  .form {
-   margin:0px auto;
-   margin-bottom:40px;
-    display:flex
-    flex-direction:column;
-    align-items:center;
-    width: 40%;
-    .add{
-      height:auto;
-      margin-top:10px;
-      width:auto;
-    }
+  }
+  @media (max-width: 560px) {
+    font-size: 18px;
+  }
+  @media (max-width: 330px) {
+    font-size: 18px;
+  }
+`;
 
+const EditButton = styled.img`
+  margin-left: 10px;
+  font-size: 23px;
+  border-radius: 7px;
+  width: 37px;
+  box-shadow: 3px 3px 3px Transparent;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 3px 3px 3px #242222;
+  }
+`;
+
+const Container = styled.div`
+  .form {
+    margin: 0px auto;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
   }
   .input-field {
     margin-top: 20px;
@@ -57,31 +67,31 @@ const Container = styled.div`
     ::placeholder {
       color: #0c0663;
     }
-    background-color:#bdbec0;
-  }}
-  .btn-container{
-    justify-self:flex-end;
-    display:flex;
-    flex-direction:row;
+    background-color: #bdbec0;
+  }
+  .btn-container {
+    justify-self: flex-end;
+    display: flex;
+    flex-direction: row;
   }
   .airport-list {
-    padding-right:10px;
-    width:100%;
-    margin:15px;
-    box-sizing:border-box;
-    display:flex;
-    flex-flow:row wrap;
-    justify-content:center;
+    padding-right: 10px;
+    width: 100%;
+    margin: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
     &__airport {
-      width:17%;
+      width: 17%;
       display: flex;
-      flex-direction: row ;
+      flex-direction: row;
       justify-content: space-between;
-      align-items:center;
+      align-items: center;
       font-size: 25px;
       margin: 10px;
       color: #0c0663;
-      background-color:#82a1c3b3;
+      background-color: #82a1c3b3;
       border-radius: 8px;
       padding-left: 10px;
       padding-right: 5px;
@@ -92,124 +102,112 @@ const Container = styled.div`
     height: 21px;
     font-size: 18px;
     position: absolute;
-    left:45%;
-    top:37%;
+    left: 45%;
+    top: 37%;
     margin-block-end: 0em;
     margin-block-start: 0em;
   }
-  @media(max-width:1200px) and (min-width:768px){
-    .airport-list {    
+  @media (max-width: 1200px) and (min-width: 768px) {
+    .airport-list {
       &__airport {
-        width:22%;
+        width: 22%;
         font-size: 23px;
         margin: 8px;
-        height:98px;
+        height: 98px;
       }
     }
-    .error{
-      left:40%;
-    }
-    .delete{
-      margin-right:2px;
-      margin-left:3px;
+    .error {
+      left: 40%;
     }
   }
-  @media(max-width:768px) and (min-width:560px){
-    .airport-list {    
-      margin:10px;
+  @media (max-width: 768px) and (min-width: 560px) {
+    .airport-list {
+      margin: 10px;
       &__airport {
-        height:98px;
-        width:30%;
+        height: 98px;
+        width: 30%;
         font-size: 20px;
         margin: 8px;
       }
     }
-    .error{
-      left:35%
+    .error {
+      left: 35%;
     }
-.error{
-  top:38%;
-  left:31%;
-}
-    .input-field{
-    width:80%;
-          }   
-    .add{
-      font-size:23px;
+    .error {
+      top: 38%;
+      left: 31%;
     }
-    .form{     
-      width:54%;
+    .input-field {
+      width: 80%;
     }
-    .add,.edit,.delete{
-      font-size:20px;
+    .add {
+      font-size: 23px;
+    }
+    .form {
+      width: 54%;
     }
   }
-  @media(max-width:560px) {
-    .form{
-      margin-top:10px;
-      width:60%;
+  @media (max-width: 560px) {
+    .form {
+      margin-top: 10px;
+      width: 60%;
     }
-    .input-field{
-margin:0px;
-font-size:18px;
-width:100%;
+    .input-field {
+      margin: 0px;
+      font-size: 18px;
+      width: 100%;
     }
-    .error{
-      top:32%;
-      left:30%;
+    .error {
+      top: 32%;
+      left: 30%;
     }
     .airport-list {
-      margin:8px;
+      margin: 8px;
       &__airport {
-        width:60%;
-        height:80px;
+        width: 60%;
+        height: 80px;
         font-size: 20px;
         margin: 3px;
       }
     }
-    .add,.edit,.delete{
-      font-size:18px;
+
+    .search-field {
+      position: absolute;
+      top: 15%;
+      right: 3%;
+      input {
+        color: #0c0663;
+        padding: 8px;
+        outline: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 20px;
+        background-color: Transparent;
+      }
     }
   }
-  .search-field {
-    position: absolute;
-    top: 15%;
-    right: 3%;
-    input {
-      color: #0c0663;
-      padding: 8px;
-      outline: none;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 20px;
-      background-color: Transparent;
+  @media (max-width: 330px) {
+    .form {
+      margin-top: 10px;
+      width: 70%;
     }
-  }
-  @media(max-width:330px) {
-    .form{
-      margin-top:10px;
-      width:70%;
+    .input-field {
+      width: 100%;
+      margin: 0px;
+      font-size: 15px;
     }
-    .input-field{
-      width:100%;
-margin:0px;
-font-size:15px;
-    }
-    .error{
-      top:35%;
-      left:30%;
+    .error {
+      top: 35%;
+      left: 30%;
     }
     .airport-list {
-      margin:8px;
+      margin: 8px;
       &__airport {
-        width:65%;
-        height:80px;
+        width: 65%;
+        height: 80px;
         font-size: 20px;
         margin: 3px;
       }
-    }
-    .add,.edit,.delete{
-      font-size:18px;
     }
   }
 `;
@@ -221,7 +219,6 @@ interface IAirport {
 
 function Airports() {
   const [airports, setAirports] = useState([]);
-  const [filter, setFilter] = useState("");
   const [edited, setEdited] = useState(null);
   const [error, setError] = useState("");
 
@@ -232,10 +229,6 @@ function Airports() {
       });
       setAirports(filtered);
     });
-  };
-
-  const handleSearch = (items: Array<IAirport>) => {
-    setAirports(items);
   };
 
   const handleAddition = (values: { code: string }) => {
@@ -277,24 +270,25 @@ function Airports() {
     });
   }, []);
 
+  useEffect(() => {}, [airports]);
+
   const mappedAirports = airports
     ? airports.map((airport: IAirport) => {
         return (
           <div className="airport-list__airport" key={airport.code}>
             <p>{airport.name}</p>
             <div className="btn-container">
-              <img
+              <EditButton
                 src={deleteSvg}
                 alt="delete-btn"
-                className="delete"
                 onClick={() => handleDeletion(airport.code)}
-              ></img>
-              <img
+              ></EditButton>
+              <EditButton
                 src={editSvg}
                 alt="edit-btn"
                 className="edit"
                 onClick={() => handleEdit(airport)}
-              ></img>
+              ></EditButton>
             </div>
           </div>
         );
@@ -303,21 +297,10 @@ function Airports() {
 
   return (
     <Container>
-      <div className="search-field">
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={e => {
-            let filtered = airports
-              ? airports.filter((item: any) => {
-                  return item.name.includes(filter);
-                })
-              : null;
-            setFilter(e.target.value);
-            setAirports(filtered);
-          }}
-        ></input>
-      </div>
+      <SearchBar
+        search={(x: Array<IAirport>) => setAirports(x)}
+        items={airports}
+      ></SearchBar>
       <Form
         onSubmit={handleAddition}
         initialValues={edited}
@@ -347,13 +330,9 @@ function Airports() {
                 </React.Fragment>
               )}
             />
-            <button
-              type="submit"
-              className="add"
-              disabled={submitting || pristine}
-            >
+            <AddButton type="submit" disabled={submitting || pristine}>
               {edited ? "Edit" : "Add"} the airport
-            </button>
+            </AddButton>
             <OnChange name="name">
               {value => {
                 setError(null);

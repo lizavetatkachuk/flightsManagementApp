@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import socketIOClient from "socket.io-client";
+import moment from "moment";
 import { api } from "./../../helpers/apiHeler";
 import Button from "./../Shared/Button/Button";
 import Plane from "./../Plane/Plane";
@@ -53,7 +54,7 @@ const Details = props => {
       case "setFinished":
         return { ...state, finished: action.payload };
       case "setTime":
-        return { ...state, timeLeft: state.timeLeft - 10000 };
+        return { ...state, timeLeft: state.timeLeft - 1000 };
       case "setFrozen": {
         const newFrozen = [...state.frozen, action.payload];
         return { ...state, frozen: newFrozen };
@@ -91,16 +92,24 @@ const Details = props => {
     api.get(`/flight/${values.id}`).then(res => {
       dispatch({ type: "setFlight", payload: res.data });
     });
-
     socket.emit("connected");
 
     let sessionTimer = setTimeout(() => {
       socket.emit("seat:outdated", { token: token, flight: values.id });
       dispatch({ type: "setFinished", payload: true });
     }, 600000);
-
     return () => {
       clearTimeout(sessionTimer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    let countdownTimer = setInterval(() => {
+      !state.finished && dispatch({ type: "setTime" });
+    }, 1000);
+    return () => {
+      clearTimeout(countdownTimer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.timeLeft]);
@@ -174,6 +183,13 @@ const Details = props => {
       <div className="details__options options">
         <div className="options__row luggage">
           <p className="options__label">Choose your luggage</p>
+          {state.finished ? (
+            <p className="timer">Your session has ended</p>
+          ) : (
+            <p className="timer">
+              Your session ends in {moment(state.timeLeft).format("mm:ss")}
+            </p>
+          )}
           <div className="bag">
             <p className="luggage__label">One small cabin bag (20*25*30)</p>
             <img

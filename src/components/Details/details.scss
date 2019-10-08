@@ -68,6 +68,12 @@
 .cost__label {
   margin-top: 0px;
 }
+.timer {
+  position: absolute;
+  top: 10%;
+  right: 1%;
+  font-size: $desktop-small;
+}
 .people {
   display: flex;
   flex-flow: row wrap;

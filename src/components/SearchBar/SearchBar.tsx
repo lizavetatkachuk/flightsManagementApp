@@ -41,6 +41,7 @@ function SearchBar(Props: IProps) {
         return item.name.includes(filter);
       })
     : null;
+
   return (
     <Container>
       <div className="search-field">
