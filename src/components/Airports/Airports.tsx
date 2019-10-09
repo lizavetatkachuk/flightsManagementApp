@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
@@ -6,7 +6,6 @@ import SearchBar from "./../SearchBar/SearchBar";
 import deleteSvg from "./../../static/images/delete-yellow.svg";
 import editSvg from "./../../static/images/edit-yellow.svg";
 import { api } from "./../../helpers/apiHeler";
-import { If } from "typescript-logic";
 
 const AddButton = styled.button`
   color: #0c0663;
@@ -83,7 +82,7 @@ const Container = styled.div`
     flex-flow: row wrap;
     justify-content: center;
     &__airport {
-      width: 17%;
+      width: 20%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -110,7 +109,7 @@ const Container = styled.div`
   @media (max-width: 1200px) and (min-width: 768px) {
     .airport-list {
       &__airport {
-        width: 22%;
+        width: 35%;
         font-size: 23px;
         margin: 8px;
         height: 98px;
@@ -125,7 +124,7 @@ const Container = styled.div`
       margin: 10px;
       &__airport {
         height: 98px;
-        width: 30%;
+        width: 37%;
         font-size: 20px;
         margin: 8px;
       }
@@ -219,6 +218,7 @@ interface IAirport {
 
 function Airports() {
   const [airports, setAirports] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [edited, setEdited] = useState(null);
   const [error, setError] = useState("");
 
@@ -264,16 +264,21 @@ function Airports() {
     setEdited(airport);
   };
 
+  const handleSearch = (airports: Array<IAirport>) => {
+    setFiltered(airports);
+  };
+
   useEffect(() => {
     api.get("/admin/airports").then(res => {
       setAirports(res.data);
+      setFiltered(res.data);
     });
   }, []);
 
-  useEffect(() => {}, [airports]);
+  useEffect(() => {}, [filtered]);
 
-  const mappedAirports = airports
-    ? airports.map((airport: IAirport) => {
+  const mappedAirports = filtered
+    ? filtered.map((airport: IAirport) => {
         return (
           <div className="airport-list__airport" key={airport.code}>
             <p>{airport.name}</p>
@@ -295,12 +300,13 @@ function Airports() {
       })
     : null;
 
+  const cleanError = () => {
+    setError(null);
+  };
+
   return (
     <Container>
-      <SearchBar
-        search={(x: Array<IAirport>) => setAirports(x)}
-        items={airports}
-      ></SearchBar>
+      <SearchBar search={handleSearch} items={airports}></SearchBar>
       <Form
         onSubmit={handleAddition}
         initialValues={edited}
@@ -333,16 +339,8 @@ function Airports() {
             <AddButton type="submit" disabled={submitting || pristine}>
               {edited ? "Edit" : "Add"} the airport
             </AddButton>
-            <OnChange name="name">
-              {value => {
-                setError(null);
-              }}
-            </OnChange>
-            <OnChange name="code">
-              {value => {
-                setError(null);
-              }}
-            </OnChange>
+            <OnChange name="name">{cleanError}</OnChange>
+            <OnChange name="code">{cleanError}</OnChange>
           </form>
         )}
       />

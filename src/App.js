@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Header from "./components/Header/Header";
+import Layout from "./components/Header";
 import Register from "./components/Register/Register";
 import Flight from "./components/Flight/Flight";
 import SearchForm from "./components/SearchForm/SearchForm";
@@ -9,7 +9,6 @@ import Details from "./components/Details/Details";
 import Order from "./components/Orders/Order";
 import AdminPane from "./components/AdminPane/AdminPane.tsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import SideBar from "./components/SideBar/SideBar.tsx";
 import "./app.scss";
 
 const App = () => {
@@ -26,8 +25,7 @@ const App = () => {
   return (
     <Router>
       <div className="app">
-        <Header onClick={onOpen} />
-        <SideBar isOpen={isOpen} onClick={onClose} />
+        <Layout />
         <Switch>
           <Route path="/" exact component={SearchForm} />
           <Route

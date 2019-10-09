@@ -31,13 +31,16 @@ interface IModal {
   update: (any) => void;
 }
 
-const ModalWindow = (Props: IModal) => {
+const ModalWindow = (props: IModal) => {
+  const handleClose = () => {
+    props.close();
+  };
   return (
     <Container>
       <ReactModal
         ariaHideApp={false}
         shouldCloseOnOverlayClick={true}
-        isOpen={Props.isOpen}
+        isOpen={props.isOpen}
         style={{
           overlay: {
             position: "fixed",
@@ -48,7 +51,7 @@ const ModalWindow = (Props: IModal) => {
             backgroundColor: "#abb4c5bf"
           },
           content: {
-            position: "absolute",           
+            position: "absolute",
             background: "#7e94b5d9",
             color: "#0c0663",
             WebkitOverflowScrolling: "touch",
@@ -59,9 +62,9 @@ const ModalWindow = (Props: IModal) => {
         }}
       >
         <AddFlight
-          flight={Props.data}
-          close={Props.close}
-          update={Props.update}
+          flight={props.data}
+          close={props.close}
+          update={props.update}
         />
         <img
           alt="close-tab-btn"
@@ -75,7 +78,7 @@ const ModalWindow = (Props: IModal) => {
             right: "2%"
           }}
           className="close-btn"
-          onClick={() => Props.close()}
+          onClick={handleClose}
         />
       </ReactModal>
     </Container>

@@ -23,7 +23,6 @@ const Container = styled.div`
     padding-left: 10px;
     list-style-type: none;
     width: 55%;
-    heigth: 100%;
     background-color: #e3e87ae6;
     li {
       margin: 20px;

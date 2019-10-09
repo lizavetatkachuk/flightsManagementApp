@@ -5,151 +5,148 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Picker } from "./../Picker/Picker";
 import { api, post, patch } from "./../../helpers/apiHeler";
 import "react-datepicker/dist/react-datepicker.css";
-import { updateExpression } from "@babel/types";
 
 const Container = styled.div`
   display: flex;
   flex-flow: column wrap;
-  margin-top:30px;
+  margin-top: 30px;
   .form {
     font-family: "Nanum Gothic", sans-serif;
     padding-top: 10px;
     width: 45%;
     display: flex;
-    align-items:center;
+    align-items: center;
     flex-flow: column wrap;
     margin: auto;
-    background-color:  #7f95adcc;
+    background-color: #7f95adcc;
     border-radius: 10px;
-    &__label{
-        font-size:20px;
-        margin-top: 20px;
-        margin-left: 10px;
+    &__label {
+      font-size: 20px;
+      margin-top: 20px;
+      margin-left: 10px;
     }
 
-  .search-form__label{
-    width:auto;
-    margin-top: 20px;
-    margin-left:10px;
-     font-size: 20px;
+    .search-form {
+      &__label {
+        width: auto;
+        margin-top: 20px;
+        margin-left: 10px;
+        font-size: 20px;
+      }
+    }
   }
+  .picker {
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+    width: 32%;
   }
-.picker {
-  position: relative;
-  display: flex;
-  flex-flow: column wrap;
-  width: 32%;
-}
-.picker {
-  display: flex;
-  flex-flow: row;
-  align-items:baseline;
-  margin-top: 10px;
-  width:90%;
-  .search-form__label{
-    width: 20%;
-    margin-left:0px;
+  .picker {
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    margin-top: 10px;
+    width: 90%;
   }
-}
   .input-field {
-    width:90%;
-    margin-right:0px;
+    width: 90%;
+    margin-right: 0px;
     margin-top: 5px;
     margin-bottom: 5px;
     border-radius: 8px;
-    height: 35px;  
+    height: 35px;
     font-size: 20px;
     color: #0c0663;
     ::placeholder {
       color: #0c0663;
     }
-    background-color:#f7f3f3bf;   
+    background-color: #f7f3f3bf;
   }
-  input.input-field{
-    border-style:none;
+  input.input-field {
+    border-style: none;
   }
   .add {
     align-self: center;
     justify-self: flex-end;
-    margin 20px;
+    margin: 20px;
     font-size: 20px;
     background-color: Transparent;
     color: #0c0663;
     border-radius: 7px;
-    border:2px solid #0c0663;
-    padding:8px 10px;
+    border: 2px solid #0c0663;
+    padding: 8px 10px;
     outline: none;
     cursor: pointer;
     :disabled {
-      
-      color:#282a2dcc;
+      color: #282a2dcc;
     }
     :hover {
       box-shadow: 7px 7px 7px #242222;
     }
   }
-  .error{
-    margin-left:10px;
-    position:initial;
-    font-size:18px;
-    height:20px;
-    color:#c11c1cd4;
+  .error {
+    margin-left: 10px;
+    position: initial;
+    font-size: 18px;
+    height: 20px;
+    color: #c11c1cd4;
   }
-  .picker{
-    display:flex;
+  .picker {
+    display: flex;
     flex-direction: column;
-    margin-bottom:19px;
+    margin-bottom: 19px;
     margin-top: -20px;
     align-items: center;
-  } 
-  .message{
-    width:100%;
-    padding:10px;
-    position:absolute;
-    top:18%;
-    color: #0c0663;
-    text-align:center;
-    font-size:23px;
   }
-    .visible {
-      visibility: visible;
-      opacity :0;
-      transition: opacity 2s linear;
-    }
-    .hidden {
-      visibility: hidden;
-      opacity:1;
-      transition: visibility 0s 2s, opacity 2s linear;
-    }
+  .message {
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    top: 18%;
+    color: #0c0663;
+    text-align: center;
+    font-size: 23px;
+  }
+  .visible {
+    visibility: visible;
+    opacity: 0;
+    transition: opacity 2s linear;
+  }
+  .hidden {
+    visibility: hidden;
+    opacity: 1;
+    transition: visibility 0s 2s, opacity 2s linear;
+  }
 
-  .react-datepicker__input-container input{
+  .react-datepicker__input-container input {
     margin-top: 0px;
-   margin-right:10px;
+    margin-right: 10px;
     color: #0c0663;
   }
-  @media(max-width:1200px) and (min-width:768px){
-    .form{
-   .search-form__label{
-     margin:17px;    
-   }}
-   .add{
-     font-size:18x;    
-   }
-  }
-  @media(max-width:768px) and (min-width:465px){
-   .form{
-     width:80%;
-   }
-   .add{
-    font-size:17x;
-  }
-  }
-  @media(max-width:465px) {
-    .form{
-      width:90%;
+  @media (max-width: 1200px) and (min-width: 768px) {
+    .form {
+      .search-form__label {
+        margin: 17px;
+      }
     }
-    .add{
-      font-size:16x;
+    .add {
+      font-size: 18x;
+    }
+  }
+  @media (max-width: 768px) and (min-width: 465px) {
+    .form {
+      width: 80%;
+    }
+    .add {
+      font-size: 17x;
+    }
+  }
+  @media (max-width: 465px) {
+    .form {
+      width: 90%;
+    }
+    .add {
+      font-size: 16x;
     }
   }
 `;
@@ -190,7 +187,7 @@ interface IProps extends RouteComponentProps {
   update?: (any) => void;
 }
 
-function AddFlight(Props: IProps) {
+function AddFlight(props: IProps) {
   const [airports, setAirports] = useState([]);
   const [planes, setPlanes] = useState([]);
   const [message, setMessage] = useState("");
@@ -201,11 +198,11 @@ function AddFlight(Props: IProps) {
   }, []);
 
   const handleAddition = (values: IFlight) => {
-    Props.flight
+    props.flight
       ? api.patch("/admin/flights", { ...values }).then(res => {
           api.get("admin/flights").then(res => {
-            Props.close();
-            Props.update(res.data);
+            props.close();
+            props.update(res.data);
           });
         })
       : post(
@@ -254,7 +251,7 @@ function AddFlight(Props: IProps) {
       </div>
       <Form
         onSubmit={handleAddition}
-        initialValues={Props.flight}
+        initialValues={props.flight}
         validate={values => {
           const errors: IError = {};
           if (!values.from) {
@@ -266,7 +263,7 @@ function AddFlight(Props: IProps) {
           if (!values.plane) {
             errors.plane = "Choose the plane type";
           }
-          if (!values.there && !Props.flight) {
+          if (!values.there && !props.flight) {
             errors.there = "Choose the dates";
           }
           if (!values.company) {
@@ -363,7 +360,7 @@ function AddFlight(Props: IProps) {
               className="add"
               disabled={submitting || pristine}
             >
-              {Props.flight ? "Edit" : "Add"}
+              {props.flight ? "Edit" : "Add"}
             </button>
           </form>
         )}

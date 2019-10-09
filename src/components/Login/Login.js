@@ -20,6 +20,10 @@ const Login = props => {
     requestLogin({ ...values, history });
   };
 
+  const cleanError = value => {
+    cleanLoginError();
+  };
+
   return (
     <div className="login">
       <Form
@@ -75,16 +79,8 @@ const Login = props => {
                 <Button btntype="button">Register</Button>
               </Link>
             </div>
-            <OnChange name="password">
-              {value => {
-                cleanLoginError();
-              }}
-            </OnChange>
-            <OnChange name="email">
-              {value => {
-                cleanLoginError();
-              }}
-            </OnChange>
+            <OnChange name="password">{cleanError}</OnChange>
+            <OnChange name="email">{cleanError}</OnChange>
           </form>
         )}
       />

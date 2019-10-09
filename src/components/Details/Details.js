@@ -119,9 +119,7 @@ const Details = props => {
       <li key={seat.seat} className="list">
         <p>Seat {seat.seat}</p>
         {seat.seatClass === "business" ? (
-          <p className="details__cost__label">
-            Extra fee for business class: 20$
-          </p>
+          <p className="cost__label">Extra fee for business class: 20$</p>
         ) : null}
       </li>
     );

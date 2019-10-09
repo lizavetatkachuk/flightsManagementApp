@@ -15,6 +15,14 @@ const Header = props => {
   const token = getToken();
   const role = checkAdmin();
 
+  const LogOut = () => {
+    removeToken();
+    logOut();
+  };
+  const redirect = () => {
+    history.push("/login");
+  };
+
   return (
     <header className="header">
       <nav className="header__nav navigation">
@@ -58,10 +66,7 @@ const Header = props => {
             <Button
               btntype="button"
               btnclass="navigation__btn "
-              onClick={() => {
-                removeToken();
-                logOut();
-              }}
+              onClick={LogOut}
             >
               Log Out
             </Button>
@@ -69,10 +74,7 @@ const Header = props => {
               className="mobile__login"
               alt="mobile-logout-btn"
               src={logout}
-              onClick={() => {
-                removeToken();
-                logOut();
-              }}
+              onClick={LogOut}
             ></img>
           </React.Fragment>
         ) : (
@@ -86,9 +88,7 @@ const Header = props => {
               className="mobile__login"
               alt="mobile-logout-btn"
               src={login}
-              onClick={() => {
-                history.push("/login");
-              }}
+              onClick={redirect}
             ></img>
           </React.Fragment>
         )}

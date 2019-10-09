@@ -198,6 +198,7 @@ interface IPlane {
 
 function Planes() {
   const [planes, setPlanes] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [edited, setEdited] = useState(null);
   const [error, setError] = useState("");
 
@@ -242,10 +243,13 @@ function Planes() {
   };
 
   useEffect(() => {
-    api.get("/admin/planes").then(res => setPlanes(res.data));
+    api.get("/admin/planes").then(res => {
+      setPlanes(res.data);
+      setFiltered(res.data);
+    });
   }, []);
 
-  useEffect(() => {}, [planes]);
+  useEffect(() => {}, [filtered]);
 
   const mappedPlanes = planes
     ? planes.map((plane: IPlane) => {
@@ -270,9 +274,18 @@ function Planes() {
         );
       })
     : null;
+
+  const handleSearch = (x: Array<IPlane>) => {
+    setFiltered(x);
+  };
+
+  const clearError = () => {
+    setError(null);
+  };
+
   return (
     <Container>
-      <SearchBar search={(x: Array<IPlane>) => setPlanes(x)} items={planes} />
+      <SearchBar search={handleSearch} items={planes} />
       <Form
         onSubmit={handleAddition}
         initialValues={edited}
@@ -345,16 +358,8 @@ function Planes() {
             >
               {edited ? "Edit" : "Add"} the plane
             </AddButton>
-            <OnChange name="name">
-              {value => {
-                setError(null);
-              }}
-            </OnChange>
-            <OnChange name="key">
-              {value => {
-                setError(null);
-              }}
-            </OnChange>
+            <OnChange name="name">{clearError}</OnChange>
+            <OnChange name="key">{clearError}</OnChange>
           </form>
         )}
       />

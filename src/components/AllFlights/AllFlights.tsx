@@ -3,14 +3,15 @@ import styled from "styled-components";
 import ReactTable from "react-table";
 import ModalWindow from "./../ModalWindow/ModalWindow";
 import { api } from "./../../helpers/apiHeler";
-import deleteSvg from './../../static/images/delete-blue.svg';
-import editSvg from './../../static/images/edit-blue.svg';
+import deleteSvg from "./../../static/images/delete-blue.svg";
+import editSvg from "./../../static/images/edit-blue.svg";
 import "react-table/react-table.css";
 
 const Container = styled.div`
-  .delete,.edit {
-    width:21px;
-    height:21px;
+  .delete,
+  .edit {
+    width: 21px;
+    height: 21px;
     font-size: 35px;
     background-color: Transparent;
     outline: none;
@@ -18,13 +19,13 @@ const Container = styled.div`
     cursor: pointer;
     color: #0c0663;
   }
-  .edit{
-    font-size:20px;
+  .edit {
+    font-size: 20px;
   }
   .ReactTable {
     margin: 20px;
-    margin-left:15px;
-    paddin-left:5px;
+    margin-left: 15px;
+    padding-left: 5px;
     border-radius: 12px;
     .rt-thead.-header {
       background-color: #82a1c3b3;
@@ -70,7 +71,7 @@ const Container = styled.div`
       font-size: 16px;
     }
     .ReactTable {
-      margin-left:5px;
+      margin-left: 5px;
       margin: 7px;
       .rt-td {
         padding: 10px 5px;
@@ -78,10 +79,10 @@ const Container = styled.div`
       }
       .-pagination {
         font-size: 15px;
-        }
       }
     }
   }
+
   @media (max-width: 465px) {
     .rt-resizable-header-content {
       padding-left: 10px;
@@ -184,34 +185,41 @@ const AllFlights = () => {
       Header: "",
       Cell: ({ row }) => (
         <img
-        src={deleteSvg} alt='delete-btn'
+          src={deleteSvg}
+          alt="delete-btn"
           className="delete"
           onClick={() => handleDeletion(row._original._id)}
-        >
-          
-        </img>
+        ></img>
       )
     },
     {
       Header: "",
       Cell: ({ row }) => (
-        <img className="edit"  src={editSvg} alt='edit-btn' onClick={() => handleEdit(row._original)}>          
-        </img>
+        <img
+          className="edit"
+          src={editSvg}
+          alt="edit-btn"
+          onClick={() => handleEdit(row._original)}
+        ></img>
       )
     }
   ];
+
+  const handleOpen = () => {
+    setOpen(false);
+  };
+
+  const handleUpdate = (flights: Array<IFight>) => {
+    setFlights(flights);
+  };
 
   return (
     <Container>
       <ModalWindow
         isOpen={open}
         data={edited}
-        close={() => {
-          setOpen(false);
-        }}
-        update={(flights: Array<IFight>) => {
-          setFlights(flights);
-        }}
+        close={handleOpen}
+        update={handleUpdate}
       ></ModalWindow>
       <ReactTable data={flights} columns={columns} defaultPageSize={10} />
     </Container>

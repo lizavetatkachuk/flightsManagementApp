@@ -24,6 +24,7 @@ const Register = props => {
       });
     });
   };
+
   return (
     <div className="register">
       <Form
@@ -116,6 +117,7 @@ const Register = props => {
     </div>
   );
 };
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -124,14 +126,17 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+
 const mapStateToProps = state => {
   return { register: state.register };
 };
+
 Register.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

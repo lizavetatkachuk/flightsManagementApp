@@ -16,7 +16,7 @@ const Container = styled.div`
     &__tab-list {
       font-size: 23px;
       border-bottom: none;
-      margin-left:15px;
+      margin-left: 15px;
     }
     &__tab--selected {
       background: #e2e91eab;
@@ -24,8 +24,8 @@ const Container = styled.div`
     }
   }
   @media (max-width: 1200px) {
-    .react-tabs__tab-list{
-      margin-left:7px;
+    .react-tabs__tab-list {
+      margin-left: 7px;
     }
   }
   @media (max-width: 768px) and (min-width: 465px) {
@@ -59,7 +59,7 @@ interface AdminProps {
   match: object;
 }
 
-function AdminPane(Props: AdminProps) {
+function AdminPane(props: AdminProps) {
   return (
     <Container>
       <Tabs>
