@@ -7,21 +7,18 @@ import deleteSvg from "./../../static/images/delete-blue.svg";
 import editSvg from "./../../static/images/edit-blue.svg";
 import "react-table/react-table.css";
 
+const Buttons = styled.img`
+  width: 21px;
+  height: 21px;
+  font-size: 35px;
+  background-color: Transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #0c0663;
+`;
+
 const Container = styled.div`
-  .delete,
-  .edit {
-    width: 21px;
-    height: 21px;
-    font-size: 35px;
-    background-color: Transparent;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    color: #0c0663;
-  }
-  .edit {
-    font-size: 20px;
-  }
   .ReactTable {
     margin: 20px;
     margin-left: 15px;
@@ -184,23 +181,21 @@ const AllFlights = () => {
     {
       Header: "",
       Cell: ({ row }) => (
-        <img
+        <Buttons
           src={deleteSvg}
           alt="delete-btn"
-          className="delete"
           onClick={() => handleDeletion(row._original._id)}
-        ></img>
+        ></Buttons>
       )
     },
     {
       Header: "",
       Cell: ({ row }) => (
-        <img
-          className="edit"
+        <Buttons
           src={editSvg}
           alt="edit-btn"
           onClick={() => handleEdit(row._original)}
-        ></img>
+        ></Buttons>
       )
     }
   ];

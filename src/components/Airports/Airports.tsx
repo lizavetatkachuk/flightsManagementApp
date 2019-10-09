@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
@@ -6,6 +6,10 @@ import SearchBar from "./../SearchBar/SearchBar";
 import deleteSvg from "./../../static/images/delete-yellow.svg";
 import editSvg from "./../../static/images/edit-yellow.svg";
 import { api } from "./../../helpers/apiHeler";
+
+const Container = styled.div`
+  text-align: right;
+`;
 
 const AddButton = styled.button`
   color: #0c0663;
@@ -46,168 +50,143 @@ const EditButton = styled.img`
     box-shadow: 3px 3px 3px #242222;
   }
 `;
+const AirportList = styled.div`
+  padding-right: 10px;
+  width: 100%;
+  margin: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 
-const Container = styled.div`
-  .form {
-    margin: 0px auto;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 40%;
-  }
-  .input-field {
-    margin-top: 20px;
-    margin-left: 10px;
-    border-radius: 8px;
-    height: 35px;
-    font-size: 20px;
-    color: #0c0663;
-    ::placeholder {
-      color: #0c0663;
-    }
-    background-color: #bdbec0;
-  }
-  .btn-container {
-    justify-self: flex-end;
-    display: flex;
-    flex-direction: row;
-  }
-  .airport-list {
-    padding-right: 10px;
-    width: 100%;
-    margin: 15px;
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    &__airport {
-      width: 20%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 25px;
-      margin: 10px;
-      color: #0c0663;
-      background-color: #82a1c3b3;
-      border-radius: 8px;
-      padding-left: 10px;
-      padding-right: 5px;
-    }
-  }
-  .error {
-    color: red;
-    height: 21px;
-    font-size: 18px;
-    position: absolute;
-    left: 45%;
-    top: 37%;
-    margin-block-end: 0em;
-    margin-block-start: 0em;
-  }
-  @media (max-width: 1200px) and (min-width: 768px) {
-    .airport-list {
-      &__airport {
-        width: 35%;
-        font-size: 23px;
-        margin: 8px;
-        height: 98px;
-      }
-    }
-    .error {
-      left: 40%;
-    }
-  }
   @media (max-width: 768px) and (min-width: 560px) {
-    .airport-list {
-      margin: 10px;
-      &__airport {
-        height: 98px;
-        width: 37%;
-        font-size: 20px;
-        margin: 8px;
-      }
-    }
-    .error {
-      left: 35%;
-    }
-    .error {
-      top: 38%;
-      left: 31%;
-    }
-    .input-field {
-      width: 80%;
-    }
-    .add {
-      font-size: 23px;
-    }
-    .form {
-      width: 54%;
-    }
+    margin: 10px;
   }
   @media (max-width: 560px) {
-    .form {
-      margin-top: 10px;
-      width: 60%;
-    }
-    .input-field {
-      margin: 0px;
-      font-size: 18px;
-      width: 100%;
-    }
-    .error {
-      top: 32%;
-      left: 30%;
-    }
-    .airport-list {
-      margin: 8px;
-      &__airport {
-        width: 60%;
-        height: 80px;
-        font-size: 20px;
-        margin: 3px;
-      }
-    }
-
-    .search-field {
-      position: absolute;
-      top: 15%;
-      right: 3%;
-      input {
-        color: #0c0663;
-        padding: 8px;
-        outline: none;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: 20px;
-        background-color: Transparent;
-      }
-    }
+    margin: 8px;
   }
   @media (max-width: 330px) {
-    .form {
-      margin-top: 10px;
-      width: 70%;
-    }
-    .input-field {
-      width: 100%;
-      margin: 0px;
-      font-size: 15px;
-    }
-    .error {
-      top: 35%;
-      left: 30%;
-    }
-    .airport-list {
-      margin: 8px;
-      &__airport {
-        width: 65%;
-        height: 80px;
-        font-size: 20px;
-        margin: 3px;
-      }
-    }
+    margin: 8px;
+  }
+`;
+const Airport = styled.div`
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  margin: 10px;
+  color: #0c0663;
+  background-color: #82a1c3b3;
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 5px;
+
+  @media (max-width: 1200px) and (min-width: 768px) {
+    width: 35%;
+    font-size: 23px;
+    margin: 8px;
+  }
+  @media (max-width: 768px) and (min-width: 560px) {
+    height: 98px;
+    width: 37%;
+    font-size: 20px;
+  }
+  @media (max-width: 560px) {
+    width: 60%;
+    height: 80px;
+    font-size: 20px;
+    margin: 3px;
+  }
+  @media (max-width: 330px) {
+    width: 65%;
+    height: 80px;
+    font-size: 20px;
+    margin: 3px;
+  }
+`;
+
+const AirportForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px auto;
+  margin-bottom: 40px;
+  width: 40%;
+
+  @media (max-width: 768px) and (min-width: 560px) {
+    width: 70%;
+  }
+  @media (max-width: 560px) {
+    margin-top: 10px;
+    width: 80%;
+  }
+  @media (max-width: 330px) {
+    margin-top: 10px;
+    width: 90%;
+  }
+`;
+
+const InputField = styled.input`
+  margin-top: 20px;
+  margin-left: 10px;
+  border-radius: 8px;
+  width: 60%;
+  height: 35px;
+  font-size: 20px;
+  background-color: #bdbec0;
+  color: #0c0663;
+  outline: none;
+  ::placeholder {
+    color: #0c0663;
+  }
+  @media (max-width: 1200px) and (min-width: 768px) {
+    width: 90%;
+  }
+  @media (max-width: 768px) and (min-width: 560px) {
+    width: 100%;
+  }
+  @media (max-width: 560px) {
+    margin: 0px;
+    font-size: 18px;
+    width: 100%;
+  }
+  @media (max-width: 330px) {
+    width: 100%;
+    margin: 0px;
+    font-size: 15px;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  justify-self: flex-end;
+  display: flex;
+  flex-direction: row;
+`;
+const Error = styled.p`
+  position: absolute;
+  left: 45%;
+  top: 35%;
+  height: 21px;
+  margin-block-end: 0em;
+  margin-block-start: 0em;
+  font-size: 18px;
+  color: red;
+
+  @media (max-width: 1200px) and (min-width: 768px) {
+    left: 40%;
+  }
+  @media (max-width: 768px) and (min-width: 560px) {
+    left: 35%;
+  }
+  @media (max-width: 560px) {
+    top: 32%;
+    left: 30%;
+  }
+  @media (max-width: 330px) {
+    top: 35%;
+    left: 30%;
   }
 `;
 
@@ -218,7 +197,7 @@ interface IAirport {
 
 function Airports() {
   const [airports, setAirports] = useState([]);
-  const [filtered, setFiltered] = useState([]);
+  const [filter, setFilter] = useState("");
   const [edited, setEdited] = useState(null);
   const [error, setError] = useState("");
 
@@ -264,25 +243,29 @@ function Airports() {
     setEdited(airport);
   };
 
-  const handleSearch = (airports: Array<IAirport>) => {
-    setFiltered(airports);
+  const handleSearch = (filter: string) => {
+    setFilter(filter);
   };
 
   useEffect(() => {
     api.get("/admin/airports").then(res => {
       setAirports(res.data);
-      setFiltered(res.data);
     });
   }, []);
 
-  useEffect(() => {}, [filtered]);
+  const filtered =
+    filter !== ""
+      ? airports.filter(airport => {
+          return airport.name.startsWith(filter);
+        })
+      : airports;
 
   const mappedAirports = filtered
     ? filtered.map((airport: IAirport) => {
         return (
-          <div className="airport-list__airport" key={airport.code}>
+          <Airport key={airport.code}>
             <p>{airport.name}</p>
-            <div className="btn-container">
+            <ButtonContainer>
               <EditButton
                 src={deleteSvg}
                 alt="delete-btn"
@@ -294,8 +277,8 @@ function Airports() {
                 className="edit"
                 onClick={() => handleEdit(airport)}
               ></EditButton>
-            </div>
-          </div>
+            </ButtonContainer>
+          </Airport>
         );
       })
     : null;
@@ -311,16 +294,12 @@ function Airports() {
         onSubmit={handleAddition}
         initialValues={edited}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
-          <form className="form" onSubmit={handleSubmit}>
+          <AirportForm onSubmit={handleSubmit}>
             <Field
               name="name"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  <input
-                    className="input-field"
-                    placeholder="Enter the airport name"
-                    {...input}
-                  />
+                  <InputField placeholder="Enter the airport name" {...input} />
                 </React.Fragment>
               )}
             />
@@ -328,11 +307,7 @@ function Airports() {
               name="code"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  <input
-                    className="input-field"
-                    placeholder="Enter the airport code"
-                    {...input}
-                  />
+                  <InputField placeholder="Enter the airport code" {...input} />
                 </React.Fragment>
               )}
             />
@@ -341,11 +316,11 @@ function Airports() {
             </AddButton>
             <OnChange name="name">{cleanError}</OnChange>
             <OnChange name="code">{cleanError}</OnChange>
-          </form>
+          </AirportForm>
         )}
       />
-      <p className="error">{error ? "The airport already exists" : " "}</p>
-      <div className="airport-list">{mappedAirports}</div>
+      <Error>{error ? "The airport already exists" : " "}</Error>
+      <AirportList>{mappedAirports}</AirportList>
     </Container>
   );
 }

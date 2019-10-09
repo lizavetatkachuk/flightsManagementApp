@@ -39,7 +39,6 @@ const EditButton = styled.img`
   font-size: 23px;
   border-radius: 7px;
   width: 37px;
-  height: 37px;
   box-shadow: 3px 3px 3px Transparent;
   outline: none;
   cursor: pointer;
@@ -47,147 +46,153 @@ const EditButton = styled.img`
     box-shadow: 3px 3px 3px #242222;
   }
 `;
-const Container = styled.div`
-  .form {
-    margin: 0 auto;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
+const PlaneList = styled.div`
+  padding-right: 10px;
+  width: 100%;
+  margin: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  @media (max-width: 768px) and (min-width: 560px) {
+    margin: 10px;
   }
-  .input-field {
-    margin-top: 20px;
-    margin-left: 10px;
-    border-radius: 8px;
-    height: 35px;
-    font-size: 20px;
-    font-size: 20px;
-    color: #0c0663;
-    ::placeholder {
-      color: #0c0663;
-    }
-    background-color: #bdbec0;
-  }
-  .btn-container {
-    justify-self: flex-end;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .list {
-    padding-right: 10px;
-    width: 100%;
-    margin: 15px;
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    &__plane {
-      padding: 10px;
-      width: 20%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      font-size: 25px;
-      margin: 10px;
-      color: #0c0663;
-      background-color: #82a1c3b3;
-      border-radius: 8px;
-      padding-left: 10px;
-      padding-right: 5px;
-    }
-  }
-  .error {
-    color: red;
-    height: 21px;
-    font-size: 18px;
-    position: absolute;
-    left: 45%;
-    top: 57%;
-    margin-block-end: 0em;
-    margin-block-start: 0em;
-  }
-  @media (max-width: 1200px) and (min-width: 768px) {
-    .error {
-      left: 40%;
-    }
-    .form {
-      width: 67%;
-    }
-    .input-field {
-      font-size: 19px;
-    }
-    .list {
-      &__plane {
-        padding: 10px;
-        width: 30%;
-        font-size: 20px;
-        margin: 8px;
-      }
-    }
-  }
-  @media (max-width: 768px) and (min-width: 465px) {
-    .form {
-      width: 82%;
-    }
-    .input-field {
-      font-size: 18px;
-    }
-    .error {
-      top: 57%;
-      left: 35%;
-    }
-    .list {
-      &__plane {
-        padding: 10px;
-        width: 47%;
-        font-size: 20px;
-        margin: 6px;
-      }
-    }
-  }
-  @media (max-width: 465px) {
-    .form {
-      width: 85%;
-    }
-    .input-field {
-      font-size: 15px;
-    }
-    .error {
-      top: 57%;
-      left: 30%;
-    }
-    .list {
-      &__plane {
-        padding: 8px;
-        width: 57%;
-        font-size: 18px;
-        margin: 5px;
-      }
-    }
+  @media (max-width: 560px) {
+    margin: 8px;
   }
   @media (max-width: 330px) {
-    .form {
-      width: 98%;
-    }
-    .input-field {
-      font-size: 15px;
-    }
-    .error {
-      top: 61%;
-      left: 28%;
-    }
-    .list {
-      &__plane {
-        padding: 8px;
-        width: 75%;
-        font-size: 18px;
-        margin: 5px;
-      }
-    }
+    margin: 8px;
   }
 `;
+const Plane = styled.div`
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  margin: 10px;
+  color: #0c0663;
+  background-color: #82a1c3b3;
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 5px;
+
+  @media (max-width: 1200px) and (min-width: 768px) {
+    width: 35%;
+    font-size: 23px;
+    margin: 8px;
+  }
+  @media (max-width: 768px) and (min-width: 560px) {
+    height: 98px;
+    width: 37%;
+    font-size: 20px;
+  }
+  @media (max-width: 560px) {
+    width: 60%;
+    height: 80px;
+    font-size: 20px;
+    margin: 3px;
+  }
+  @media (max-width: 330px) {
+    width: 65%;
+    height: 80px;
+    font-size: 20px;
+    margin: 3px;
+  }
+`;
+
+const PlaneForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px auto;
+  margin-bottom: 40px;
+  width: 60%;
+
+  @media (max-width: 768px) and (min-width: 560px) {
+    width: 70%;
+  }
+  @media (max-width: 560px) {
+    margin-top: 10px;
+    width: 80%;
+  }
+  @media (max-width: 330px) {
+    margin-top: 10px;
+    width: 95%;
+  }
+`;
+
+const Container = styled.div`
+  text-align: right;
+`;
+
+const InputField = styled.input`
+  margin-top: 20px;
+  margin-left: 10px;
+  border-radius: 8px;
+  padding-left: 5px;
+  width: 65%;
+  height: 35px;
+  font-size: 20px;
+  background-color: #bdbec0;
+  color: #0c0663;
+  outline: none;
+  ::placeholder {
+    color: #0c0663;
+  }
+  @media (max-width: 1200px) and (min-width: 768px) {
+    width: 85%;
+  }
+  @media (max-width: 768px) and (min-width: 560px) {
+    width: 95%;
+  }
+  @media (max-width: 560px) {
+    width: 100%;
+    margin: 0px;
+    font-size: 18px;
+  }
+
+  @media (max-width: 330px) {
+    width: 100%;
+    margin: 0px;
+    font-size: 15px;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  justify-self: flex-end;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Error = styled.p`
+  position: absolute;
+  left: 45%;
+  top: 35%;
+  height: 21px;
+  margin-block-end: 0em;
+  margin-block-start: 0em;
+  font-size: 18px;
+  color: red;
+
+  @media (max-width: 1200px) and (min-width: 768px) {
+    left: 40%;
+  }
+  @media (max-width: 768px) and (min-width: 560px) {
+    left: 35%;
+  }
+  @media (max-width: 560px) {
+    top: 32%;
+    left: 30%;
+  }
+  @media (max-width: 330px) {
+    top: 35%;
+    left: 30%;
+  }
+`;
+
 interface IPlane {
   name: string;
   key: string;
@@ -198,7 +203,7 @@ interface IPlane {
 
 function Planes() {
   const [planes, setPlanes] = useState([]);
-  const [filtered, setFiltered] = useState([]);
+  const [filter, setFilter] = useState("");
   const [edited, setEdited] = useState(null);
   const [error, setError] = useState("");
 
@@ -245,38 +250,40 @@ function Planes() {
   useEffect(() => {
     api.get("/admin/planes").then(res => {
       setPlanes(res.data);
-      setFiltered(res.data);
     });
   }, []);
 
-  useEffect(() => {}, [filtered]);
+  const filtered =
+    filter !== ""
+      ? planes.filter(plane => {
+          return plane.name.startsWith(filter);
+        })
+      : planes;
 
-  const mappedPlanes = planes
-    ? planes.map((plane: IPlane) => {
+  const mappedPlanes = filtered
+    ? filtered.map((plane: IPlane) => {
         return (
-          <div className="list__plane" key={plane.key}>
+          <Plane key={plane.key}>
             <p>{plane.name}</p>
-            <div className="btn-container">
+            <ButtonContainer>
               <EditButton
                 src={deleteSvg}
                 alt="delete-btn"
-                className="delete"
                 onClick={() => handleDeletion(plane.key)}
               ></EditButton>
               <EditButton
                 src={editSvg}
                 alt="edit-btn"
-                className="edit"
                 onClick={() => handleEdit(plane)}
               ></EditButton>
-            </div>
-          </div>
+            </ButtonContainer>
+          </Plane>
         );
       })
     : null;
 
-  const handleSearch = (x: Array<IPlane>) => {
-    setFiltered(x);
+  const handleSearch = (filter: string) => {
+    setFilter(filter);
   };
 
   const clearError = () => {
@@ -290,16 +297,12 @@ function Planes() {
         onSubmit={handleAddition}
         initialValues={edited}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
-          <form className="form" onSubmit={handleSubmit}>
+          <PlaneForm onSubmit={handleSubmit}>
             <Field
               name="name"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  <input
-                    className="input-field"
-                    placeholder="Enter the plane name"
-                    {...input}
-                  />
+                  <InputField placeholder="Enter the plane name" {...input} />
                 </React.Fragment>
               )}
             />
@@ -307,8 +310,7 @@ function Planes() {
               name="key"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  <input
-                    className="input-field"
+                  <InputField
                     placeholder="Enter the plane shorthand code"
                     {...input}
                   />
@@ -319,8 +321,7 @@ function Planes() {
               name="business"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  <input
-                    className="input-field"
+                  <InputField
                     placeholder="Enter the number of seats in business class"
                     {...input}
                   />
@@ -331,8 +332,7 @@ function Planes() {
               name="economy"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  <input
-                    className="input-field"
+                  <InputField
                     placeholder="Enter the number of seats in economy class"
                     {...input}
                   />
@@ -343,28 +343,23 @@ function Planes() {
               name="maxCargo"
               render={({ input, meta }) => (
                 <React.Fragment>
-                  <input
-                    className="input-field"
+                  <InputField
                     placeholder="Enter the maximum cargo capacity "
                     {...input}
                   />
                 </React.Fragment>
               )}
             />
-            <AddButton
-              type="submit"
-              className="add"
-              disabled={submitting || pristine}
-            >
+            <AddButton type="submit" disabled={submitting || pristine}>
               {edited ? "Edit" : "Add"} the plane
             </AddButton>
             <OnChange name="name">{clearError}</OnChange>
             <OnChange name="key">{clearError}</OnChange>
-          </form>
+          </PlaneForm>
         )}
       />
-      <p className="error">{error ? "The plane already exists" : " "}</p>
-      <div className="list">{mappedPlanes}</div>
+      <Error>{error ? "The plane already exists" : " "}</Error>
+      <PlaneList>{mappedPlanes}</PlaneList>
     </Container>
   );
 }
