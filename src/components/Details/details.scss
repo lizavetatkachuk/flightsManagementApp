@@ -49,6 +49,12 @@
     text-align: center;
     width: 100%;
   }
+  &__timer {
+    position: absolute;
+    top: 10%;
+    right: 1%;
+    font-size: $desktop-small;
+  }
 }
 .luggage,
 .cost {
@@ -67,12 +73,6 @@
 }
 .cost__label {
   margin-top: 0px;
-}
-.timer {
-  position: absolute;
-  top: 10%;
-  right: 1%;
-  font-size: $desktop-small;
 }
 .people {
   display: flex;
@@ -101,8 +101,16 @@
       font-size: $tablet-medium;
     }
   }
+  .options {
+    &__timer {
+      font-size: $tablet-small;
+    }
+  }
 }
 @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-small-screen) {
+  .luggage {
+    margin-top: 30px;
+  }
   .luggage,
   .cost {
     &__label {
@@ -117,11 +125,15 @@
   .options {
     &__label {
       font-size: $tablet-medium;
+      &__timer {
+        font-size: $tablet-small;
+      }
     }
   }
   .details {
     &__plane {
       margin: 7px;
+      margin-top: 30px;
     }
   }
 }
@@ -135,9 +147,14 @@
       rgba(189, 196, 212, 0.808) 100%
     );
   }
-
+  .luggage {
+    margin-top: 30px;
+  }
   .details,
   .options {
+    &__timer {
+      font-size: $tablet-small;
+    }
     &__label {
       font-size: $tablet-small;
     }
@@ -178,6 +195,7 @@
     &__plane {
       width: 38.5%;
       margin: 5px;
+      margin-top: 30px;
     }
   }
 }
@@ -197,6 +215,9 @@
     &__label {
       font-size: $phone-small;
     }
+    &__timer {
+      font-size: $se-medium;
+    }
   }
   .options {
     &__row {
@@ -206,10 +227,14 @@
     &__label {
       display: block;
       text-align: left;
+      width: 130%;
     }
   }
   .people {
     justify-content: flex-start;
+  }
+  .luggage {
+    margin-top: 20px;
   }
   .luggage,
   .cost {
@@ -236,6 +261,7 @@
     &__plane {
       width: 63%;
       margin: 3px;
+      margin-top: 20px;
     }
   }
   .row {

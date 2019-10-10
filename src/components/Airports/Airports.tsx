@@ -204,7 +204,7 @@ function Airports() {
   const handleDeletion = (code: string) => {
     api.post(`/admin/airports/${code}`).then(res => {
       let filtered = airports.filter(airport => {
-        return airport.code != code;
+        return airport.code !== code;
       });
       setAirports(filtered);
     });
@@ -218,7 +218,7 @@ function Airports() {
           })
           .then(res => {
             let filtered = airports.filter(airport => {
-              return airport.code != values.code;
+              return airport.code !== values.code;
             });
             setAirports([...filtered, values]);
             setEdited(null);

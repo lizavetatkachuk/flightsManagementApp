@@ -83,10 +83,6 @@ const Details = props => {
   const { history, match } = props;
   const token = getToken();
 
-  const businessSeats = state.seats.filter(
-    seat => seat.seatClass === "business"
-  );
-
   useEffect(() => {
     const values = { ...match.params };
     api.get(`/flight/${values.id}`).then(res => {
@@ -161,9 +157,6 @@ const Details = props => {
     } else history.push("/login");
   };
 
-  const cost =
-    state.seats.length * state.flight.price + businessSeats.length * 20;
-
   return (
     <div className="details">
       <div className="details__plane">
@@ -182,9 +175,9 @@ const Details = props => {
         <div className="options__row luggage">
           <p className="options__label">Choose your luggage</p>
           {state.finished ? (
-            <p className="timer">Your session has ended</p>
+            <p className="options__timer">Your session has ended</p>
           ) : (
-            <p className="timer">
+            <p className="options__timer">
               Your session ends in {moment(state.timeLeft).format("mm:ss")}
             </p>
           )}

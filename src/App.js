@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Layout from "./components/Header";
 import Register from "./components/Register/Register";
@@ -12,16 +12,6 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./app.scss";
 
 const App = () => {
-  const [isOpen, setOpen] = useState(0);
-
-  const onOpen = () => {
-    setOpen(1);
-  };
-
-  const onClose = () => {
-    setOpen(0);
-  };
-
   return (
     <Router>
       <div className="app">

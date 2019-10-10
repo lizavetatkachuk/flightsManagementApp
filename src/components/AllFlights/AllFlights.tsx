@@ -135,7 +135,7 @@ const AllFlights = () => {
   const handleDeletion = (id: string) => {
     api.post(`/admin/flights/${id}`).then(res => {
       let filtered = flights.filter(flight => {
-        return flight._id != id;
+        return flight._id !== id;
       });
       setFlights(filtered);
     });
