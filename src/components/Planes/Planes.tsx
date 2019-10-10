@@ -110,7 +110,10 @@ const PlaneForm = styled.form`
   margin: 0px auto;
   margin-bottom: 40px;
   width: 60%;
-
+  @media (max-width: 1200px) and (min-width: 768px) {
+    margin-top: 20px;
+    width: 70%;
+  }
   @media (max-width: 768px) and (min-width: 560px) {
     width: 70%;
   }

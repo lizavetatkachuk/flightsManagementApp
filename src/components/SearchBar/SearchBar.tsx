@@ -14,7 +14,8 @@ const SearchField = styled.input`
   background-color: Transparent;
 
   @media (max-width: 1200px) and (min-width: 768px) {
-    right: 2%;
+    top: 12%;
+    right: 1%;
   }
   @media (max-width: 768px) and (min-width: 560px) {
     position: static;

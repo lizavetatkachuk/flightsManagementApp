@@ -15,31 +15,34 @@ const Container = styled.div`
   height: 100vh;
   width: 100%;
   color: #0c0663;
-  .sidebar {
-    height: 100vh;
-    cursor: pointer;
-    margin: 0;
-    padding-top: 40px;
-    padding-left: 10px;
-    list-style-type: none;
-    width: 55%;
-    background-color: #e3e87ae6;
-    li {
-      margin: 20px;
-    }
-  }
   .open {
     transform: translateX(0);
   }
+`;
 
-  .close-btn {
-    cursor: pointer;
-    position: absolute;
-    height: 17px;
-    width: 17px;
-    right: 47%;
-    top: 1.5%;
-  }
+const SidePane = styled.ul`
+  height: 100vh;
+  width: 55%;
+  margin: 0;
+  padding-top: 40px;
+  padding-left: 10px;
+  list-style-type: none;
+  background-color: #e3e87ae6;
+`;
+
+const PaneElement = styled.li`
+  margin: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+`;
+
+const CloseButton = styled.img`
+  position: absolute;
+  right: 47%;
+  top: 1.5%;
+  height: 17px;
+  width: 17px;
+  cursor: pointer;
 `;
 
 function SideBar(props) {
@@ -51,40 +54,35 @@ function SideBar(props) {
 
   return (
     <Container theme={theme}>
-      <ul className="sidebar">
-        <li
+      <SidePane>
+        <PaneElement
           onClick={() => {
             onClick();
             history.push("/");
           }}
         >
           Search Flights
-        </li>
-        <li
+        </PaneElement>
+        <PaneElement
           onClick={() => {
             onClick();
             history.push("/orders");
           }}
         >
           My flights
-        </li>
+        </PaneElement>
         {role === "admin" ? (
-          <li
+          <PaneElement
             onClick={() => {
               onClick();
               history.push("/admin");
             }}
           >
             Admin Pane
-          </li>
+          </PaneElement>
         ) : null}
-        <img
-          alt="close-tab-btn"
-          src={pic}
-          className="close-btn"
-          onClick={onClick}
-        />
-      </ul>
+        <CloseButton alt="close-tab-btn" src={pic} onClick={onClick} />
+      </SidePane>
     </Container>
   );
 }

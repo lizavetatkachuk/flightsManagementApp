@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Form, Field } from "react-final-form";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Picker } from "./../Picker/Picker";
 import { api, post } from "./../../helpers/apiHeler";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Message = styled.div`
+type OpacityProps = {
+  opacity: 0 | 1;
+};
+
+const Message = styled.div<OpacityProps>`
   position: absolute;
   top: 12%;
   width: 100%;
@@ -14,17 +18,8 @@ const Message = styled.div`
   color: #0c0663;
   text-align: center;
   font-size: 23px;
-
-  .visible {
-    visibility: visible;
-    opacity: 0;
-    transition: opacity 2s linear;
-  }
-  .hidden {
-    visibility: hidden;
-    opacity: 1;
-    transition: visibility 0s 2s, opacity 2s linear;
-  }
+  transition: opacity 3s linear;
+  opacity: ${props => props.opacity};
 
   @media (max-width: 1200px) and (min-width: 768px) {
     top: 14%;
@@ -39,6 +34,7 @@ const Message = styled.div`
     font-size: 18px;
   }
 `;
+
 const Error = styled.span`
   margin-left: 10px;
   position: initial;
@@ -142,6 +138,7 @@ const Select = styled.select`
   border-radius: 8px;
   height: 35px;
   font-size: 20px;
+  outline: none;
   color: #0c0663;
   background-color: #f7f3f3bf;
 `;
@@ -165,6 +162,7 @@ const Container = styled.div`
     color: #0c0663;
   }
 `;
+
 interface IFlight {
   _id: string;
   from: string;
@@ -261,7 +259,7 @@ function AddFlight(props: IProps) {
 
   return (
     <Container>
-      <Message className={message ? "visible" : "hidden"}>{message}</Message>
+      <Message opacity={message ? 0 : 1}>{message}</Message>
       <Form
         onSubmit={handleAddition}
         initialValues={props.flight}
