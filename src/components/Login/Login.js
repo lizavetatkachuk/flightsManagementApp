@@ -64,7 +64,6 @@ const Login = props => {
                 <div className="field">
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
-                    />
                   </span>
                   <input className="input-field" {...input} type="password" />
                 </div>
