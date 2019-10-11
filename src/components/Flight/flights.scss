@@ -10,7 +10,7 @@
     background-color: rgba($font-color, 0.7);
     border-radius: 8px;
     height: auto;
-    width: auto;
+    width: 60%;
     padding: 12px;
     cursor: pointer;
     &:hover {
@@ -79,6 +79,9 @@
   .order {
     width: 95%;
   }
+  .flight__item {
+    width: 60%;
+  }
 }
 @media (max-width: $breakpoint-tablet) {
   .order {
@@ -89,6 +92,7 @@
   }
   .flight__item {
     font-size: $tablet-small;
+    width: 80%;
   }
   .items-list {
     margin-left: 3px;
@@ -106,6 +110,7 @@
   }
   .flight__item {
     font-size: $phone-small;
+    width: 80%;
   }
   .items-list {
     margin-left: 2px;

@@ -71,7 +71,7 @@ function SideBar(props) {
         >
           My flights
         </PaneElement>
-        {role === "admin" ? (
+        {role === "admin" && (
           <PaneElement
             onClick={() => {
               onClick();
@@ -80,7 +80,7 @@ function SideBar(props) {
           >
             Admin Pane
           </PaneElement>
-        ) : null}
+        )}
         <CloseButton alt="close-tab-btn" src={pic} onClick={onClick} />
       </SidePane>
     </Container>

@@ -168,7 +168,7 @@ const Details = props => {
             onClick={onClick}
             people={state.people}
             booked={state.flight.booked}
-          ></Plane>
+          />
         )}
       </div>
       <div className="details__options options">

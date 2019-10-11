@@ -6,6 +6,11 @@ import SearchBar from "./../SearchBar/SearchBar";
 import deleteSvg from "./../../static/images/delete-yellow.svg";
 import editSvg from "./../../static/images/edit-yellow.svg";
 import { api } from "../../helpers/apiHeler";
+import {
+  postPlane,
+  patchPlane,
+  deletePlane
+} from "./../../helpers/adminHelpers/planeHelper";
 
 const AddButton = styled.button`
   color: #0c0663;
@@ -46,6 +51,7 @@ const EditButton = styled.img`
     box-shadow: 3px 3px 3px #242222;
   }
 `;
+
 const PlaneList = styled.div`
   padding-right: 10px;
   width: 100%;
@@ -65,6 +71,7 @@ const PlaneList = styled.div`
     margin: 8px;
   }
 `;
+
 const Plane = styled.div`
   width: 20%;
   display: flex;
@@ -211,39 +218,23 @@ function Planes() {
   const [error, setError] = useState("");
 
   const handleDeletion = (code: string) => {
-    api.post(`/admin/planes/${code}`).then(res => {
-      api.get("/admin/planes").then(res => setPlanes(res.data));
-    });
+    deletePlane(code, x => setPlanes(x));
   };
 
   const handleAddition = (values: object) => {
     edited
-      ? api
-          .patch("/admin/planes", {
-            ...values
-          })
-          .then(res => {
-            api.get("/admin/planes").then(res => {
-              setPlanes(res.data);
-              setEdited(null);
-            });
-          })
-          .catch(err => {
-            setError(err);
-          })
-      : api
-          .post("/admin/planes/", {
-            ...values
-          })
-          .then(res => {
-            api.get("/admin/planes").then(res => {
-              setPlanes(res.data);
-              setEdited(null);
-            });
-          })
-          .catch(err => {
-            setError(err);
-          });
+      ? patchPlane(
+          values,
+          x => setPlanes(x),
+          y => setEdited(y),
+          e => setError(e)
+        )
+      : postPlane(
+          values,
+          x => setPlanes(x),
+          y => setEdited(y),
+          e => setError(e)
+        );
   };
 
   const handleEdit = (plane: object) => {

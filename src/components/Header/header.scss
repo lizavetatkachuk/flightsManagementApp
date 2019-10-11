@@ -56,8 +56,9 @@
     font-size: $desktop-medium;
     margin: 15px;
     margin-left: 0px;
-    padding: 5px;
+    padding: 12px;
     outline: none;
+
     &--selected {
       color: $font-color;
       border-bottom: 2px solid $font-color;
@@ -92,8 +93,7 @@
     width: 13%;
     &__btn {
       font-size: $tablet-small;
-      margin-right: 19px;
-      margin-left: 0px;
+      margin: 0px;
     }
   }
   .header {

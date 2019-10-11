@@ -6,6 +6,11 @@ import SearchBar from "./../SearchBar/SearchBar";
 import deleteSvg from "./../../static/images/delete-yellow.svg";
 import editSvg from "./../../static/images/edit-yellow.svg";
 import { api } from "./../../helpers/apiHeler";
+import {
+  patchAirport,
+  postAirport,
+  deleteAirport
+} from "../../helpers/adminHelpers/airportHelper";
 
 const Container = styled.div`
   text-align: right;
@@ -50,6 +55,7 @@ const EditButton = styled.img`
     box-shadow: 3px 3px 3px #242222;
   }
 `;
+
 const AirportList = styled.div`
   padding-right: 10px;
   width: 100%;
@@ -69,6 +75,7 @@ const AirportList = styled.div`
     margin: 8px;
   }
 `;
+
 const Airport = styled.div`
   width: 20%;
   display: flex;
@@ -164,6 +171,7 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
 const Error = styled.p`
   position: absolute;
   left: 45%;
@@ -202,41 +210,25 @@ function Airports() {
   const [error, setError] = useState("");
 
   const handleDeletion = (code: string) => {
-    api.post(`/admin/airports/${code}`).then(res => {
-      let filtered = airports.filter(airport => {
-        return airport.code !== code;
-      });
-      setAirports(filtered);
-    });
+    deleteAirport(code, airports, x => setAirports(x));
   };
 
   const handleAddition = (values: { code: string }) => {
     edited
-      ? api
-          .patch("/admin/airports/", {
-            ...values
-          })
-          .then(res => {
-            let filtered = airports.filter(airport => {
-              return airport.code !== values.code;
-            });
-            setAirports([...filtered, values]);
-            setEdited(null);
-          })
-          .catch(err => {
-            setError(err);
-          })
-      : api
-          .post("/admin/airports/", {
-            ...values
-          })
-          .then(res => {
-            setAirports([...airports, values]);
-            setEdited(null);
-          })
-          .catch(err => {
-            setError(err);
-          });
+      ? patchAirport(
+          values,
+          airports,
+          x => setAirports(x),
+          y => setEdited(y),
+          e => setError(e)
+        )
+      : postAirport(
+          values,
+          airports,
+          x => setAirports(x),
+          y => setEdited(y),
+          e => setError(e)
+        );
   };
 
   const handleEdit = (airport: object) => {
@@ -270,13 +262,13 @@ function Airports() {
                 src={deleteSvg}
                 alt="delete-btn"
                 onClick={() => handleDeletion(airport.code)}
-              ></EditButton>
+              />
               <EditButton
                 src={editSvg}
                 alt="edit-btn"
                 className="edit"
                 onClick={() => handleEdit(airport)}
-              ></EditButton>
+              />
             </ButtonContainer>
           </Airport>
         );

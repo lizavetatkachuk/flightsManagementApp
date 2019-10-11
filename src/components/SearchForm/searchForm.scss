@@ -237,6 +237,7 @@
     padding-bottom: 0px;
   }
   .shift-btn {
+    margin-top: 10px;
     width: 49px;
     height: 49px;
   }
@@ -251,7 +252,7 @@
     width: 29%;
     margin-left: 15px;
     label {
-      font-size: $phone-medium;
+      font-size: $phone-small;
     }
   }
   .input-container--vertical {
@@ -299,6 +300,7 @@
     }
   }
   .there-and-back {
+    font-size: $phone-small;
     flex-direction: row;
     justify-content: space-evenly;
     padding-left: 17px;

@@ -21,8 +21,7 @@ const Buttons = styled.img`
 const Container = styled.div`
   .ReactTable {
     margin: 20px;
-    margin-left: 15px;
-    padding-left: 5px;
+    margin-left: 32px;
     border-radius: 12px;
     .rt-thead.-header {
       background-color: #82a1c3b3;
@@ -215,7 +214,7 @@ const AllFlights = () => {
         data={edited}
         close={handleOpen}
         update={handleUpdate}
-      ></ModalWindow>
+      />
       <ReactTable data={flights} columns={columns} defaultPageSize={10} />
     </Container>
   );

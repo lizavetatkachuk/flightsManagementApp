@@ -64,6 +64,7 @@ const Login = props => {
                 <div className="field">
                   <span className="error">
                     {meta.error && meta.touched ? meta.error : ""}
+                    />
                   </span>
                   <input className="input-field" {...input} type="password" />
                 </div>
@@ -98,8 +99,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = state => {
-  const auth = { message: state.auth.message };
-  return auth;
+  return { auth: state.auth.message };
 };
 
 Login.propTypes = {
@@ -107,6 +107,7 @@ Login.propTypes = {
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

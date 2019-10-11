@@ -34,7 +34,7 @@ const Filter = props => {
                     value={value1}
                     {...input}
                   />
-                  <span className="radio-container__circle"></span>
+                  <span className="radio-container__circle" />
                 </label>
               </div>
             )}
@@ -53,7 +53,7 @@ const Filter = props => {
                     value={value2}
                     {...input}
                   />
-                  <span className="radio-container__circle"></span>
+                  <span className="radio-container__circle" />
                 </label>
               </div>
             )}

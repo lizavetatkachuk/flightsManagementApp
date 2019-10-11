@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { Form, Field } from "react-final-form";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Picker } from "./../Picker/Picker";
-import { api, post } from "./../../helpers/apiHeler";
+import { api } from "./../../helpers/apiHeler";
+import {
+  postFlight,
+  patchFlight
+} from "../../helpers/adminHelpers/flightHelper";
 import "react-datepicker/dist/react-datepicker.css";
 
 type OpacityProps = {
@@ -212,29 +216,8 @@ function AddFlight(props: IProps) {
 
   const handleAddition = (values: IFlight) => {
     props.flight
-      ? api.patch("/admin/flights", { ...values }).then(res => {
-          api.get("admin/flights").then(res => {
-            props.close();
-            props.update(res.data);
-          });
-        })
-      : post(
-          "/admin/flights/add",
-          {
-            ...values,
-            time: values.there,
-            booked: []
-          },
-          () => {
-            setMessage("Flight created");
-            setTimeout(() => {
-              setMessage("");
-            }, 2000);
-          },
-          err => {
-            setMessage("Invalid data");
-          }
-        );
+      ? patchFlight(values, props)
+      : postFlight(values, x => setMessage(x));
   };
 
   const destinations = airports ? (

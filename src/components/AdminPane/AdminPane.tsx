@@ -16,7 +16,7 @@ const Container = styled.div`
     &__tab-list {
       font-size: 23px;
       border-bottom: none;
-      margin-left: 15px;
+      margin-left: 20px;
     }
     &__tab--selected {
       background: #e2e91eab;
@@ -71,16 +71,16 @@ function AdminPane(props: AdminProps) {
         </TabList>
 
         <TabPanel>
-          <Airports></Airports>
+          <Airports />
         </TabPanel>
         <TabPanel>
-          <AllFlights></AllFlights>
+          <AllFlights />
         </TabPanel>
         <TabPanel>
-          <AddFlight></AddFlight>
+          <AddFlight />
         </TabPanel>
         <TabPanel>
-          <Planes></Planes>
+          <Planes />
         </TabPanel>
       </Tabs>
     </Container>

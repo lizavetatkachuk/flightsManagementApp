@@ -31,7 +31,7 @@ const Header = props => {
           className="mobile__menu"
           alt="mobile-menu-tab"
           onClick={onClick}
-        ></img>
+        />
         <NavLink
           exact
           to="/"
@@ -40,14 +40,16 @@ const Header = props => {
         >
           Search
         </NavLink>
-        <NavLink
-          to="/orders"
-          className="navigation__btn"
-          activeClassName="navigation__btn--selected"
-        >
-          Flights
-        </NavLink>
-        {role === "admin" ? (
+        {token && (
+          <NavLink
+            to="/orders"
+            className="navigation__btn"
+            activeClassName="navigation__btn--selected"
+          >
+            Flights
+          </NavLink>
+        )}
+        {role === "admin" && (
           <NavLink
             to="/admin"
             className="navigation__btn"
@@ -55,7 +57,7 @@ const Header = props => {
           >
             Admin
           </NavLink>
-        ) : null}
+        )}
       </nav>
       <Link to="/" className="header__title">
         EasyFly
@@ -75,21 +77,23 @@ const Header = props => {
               alt="mobile-logout-btn"
               src={logout}
               onClick={LogOut}
-            ></img>
+            />
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <NavLink to="/login" className="navigation__btn ">
-              <Button btntype="button" btnclass="navigation__btn">
-                Log In
-              </Button>
+            <NavLink
+              to="/login"
+              className="navigation__btn"
+              activeClassName="navigation__btn--selected"
+            >
+              Log In
             </NavLink>
             <img
               className="mobile__login"
               alt="mobile-logout-btn"
               src={login}
               onClick={redirect}
-            ></img>
+            />
           </React.Fragment>
         )}
       </div>
@@ -106,8 +110,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = state => {
-  const { auth } = state;
-  return auth;
+  return { auth: state.auth };
 };
 
 export default connect(
